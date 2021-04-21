@@ -1,0 +1,66 @@
+<tr>
+  <td class="text-right">
+    {{#if image}}
+      <img src="{{image}}" width="50" height="50" />
+    {{/if}}
+  </td>
+  <td wrap-3>
+    <h5>{{name}}</h5>
+    {{#if author}}
+      {{#if website}}
+        <a href="{{website}}" target="_blank">{{_ 'by %s' author}}</a>
+      {{else}}
+        <em>{{_ 'by %s' author}}</em>
+      {{/if}}
+    {{/if}}
+    {{#if description}}
+      <p class="mt-3">{{description}}</p>
+    {{/if}}
+  </td>
+  <td nowrap>{{version}}</td>
+  {{#if active}}
+    <td class="text-success">
+      {{_ 'Enabled'}}
+    </td>
+  {{else}}
+    <td class="text-muted">
+      {{_ 'Disabled'}}
+    </td>
+  {{/if}}
+  <td class="freeze-right text-center" nowrap>
+    {{#if locked}}
+      <i class="fas fa-fw fa-lock"></i>
+    {{else}}
+      {{#if active}}
+        <a
+          class="text-muted"
+          data-do="panel-mobile-open"
+          data-on="click"
+          data-template="/admin/spa/package/disable/{{@index}}"
+          href="javascript:void(0)"
+        >
+          <i class="fas fa-fw fa-times-circle"></i>
+        </a>
+      {{else}}
+        <a
+          class="text-success"
+          data-do="panel-mobile-open"
+          data-on="click"
+          data-template="/admin/spa/package/enable/{{@index}}"
+          href="javascript:void(0)"
+        >
+          <i class="fas fa-fw fa-check-circle"></i>
+        </a>
+      {{/if}}
+      <a
+        class="ml-3 text-danger"
+        data-do="panel-mobile-open"
+        data-on="click"
+        data-template="/admin/spa/package/uninstall/{{@index}}"
+        href="javascript:void(0)"
+      >
+        <i class="fas fa-fw fa-trash"></i>
+      </a>
+    {{/if}}
+  </td>
+</tr>
