@@ -1,0 +1,267 @@
+/* Component - Mobile Form
+------------------------------*/
+
+.form-mobile .form-group {
+  border-bottom: 1px solid #D3D3D3;
+  display: flex;
+  margin-top: 10px;
+  padding: 0 5px;
+}
+
+.form-mobile .form-group-code,
+.form-mobile .form-group-textarea,
+.form-mobile .form-group-markdown,
+.form-mobile .form-group-wysiwyg,
+.form-mobile .form-group-fieldset,
+.form-mobile .form-group.no-flex {
+  border-width: 0;
+  display: block;
+}
+
+.form-mobile .form-group-code > .form-field,
+.form-mobile .form-group-textarea > .form-field,
+.form-mobile .form-group-markdown > .form-field,
+.form-mobile .form-group-wysiwyg > .form-field {
+  border: 1px solid #CED4DA;
+}
+
+.form-mobile .form-group-code .form-control,
+.form-mobile .form-group-textarea .form-control,
+.form-mobile .form-group-markdown .form-control,
+.form-mobile .form-group-wysiwyg .form-control {
+  text-align: left;
+}
+
+.form-mobile .form-group-fieldset {
+  margin: 0;
+  padding: 0;
+}
+
+.form-mobile .form-group-fieldset .fieldset-row {
+  background-color: #FFFFFF;
+  border: 1px solid #CED4DA;
+  margin-bottom: 20px;
+  padding: 0 10px 10px;
+}
+
+.form-mobile .form-group-fieldset .fieldset-row[data-multiple] {
+  padding: 25px 10px 10px;
+}
+
+.form-mobile .form-group-fieldset .fieldset-row .fieldset-remove {
+  float: right;
+  margin-right: 5px;
+  margin-top: -15px;
+}
+
+.form-mobile .form-group-fieldset > .control-label {
+  margin-bottom: 5px;
+}
+
+.form-mobile .row {
+  padding: 0 5px;
+}
+
+.form-mobile .row .form-group {
+  overflow: hidden;
+  padding: 0;
+}
+
+.form-mobile textarea:focus,
+.form-mobile input:focus,
+.form-mobile select:focus {
+  border-color: inherit;
+  box-shadow: none;
+}
+
+.form-mobile select {
+  direction: rtl;
+}
+
+.form-mobile select option {
+  direction: ltr;
+}
+
+.form-mobile .control-label {
+  color: #717171;
+  font-weight: 600;
+  margin-bottom: 0;
+  margin-right: 10px;
+  margin-top: 8px;
+  white-space: nowrap;
+}
+
+.form-mobile .form-field {
+  flex: 1;
+}
+
+.form-mobile .form-control {
+  background: #FFFFFF;
+  border-radius: 0;
+  border-width: 0;
+  text-align: right;
+}
+
+.form-mobile .form-group.no-flex .form-control {
+  border-width: 1px;
+  text-align: left;
+}
+
+.form-mobile.setup-form .form-group.no-flex .form-control {
+  border-width: 0;
+  text-align: right;
+}
+
+.form-mobile .input-group-text {
+  border-radius: 0;
+}
+
+.form-mobile .input-group-text.transparent {
+  background-color: transparent;
+  border-width: 0;
+}
+
+.form-mobile .md-editor,
+.form-mobile .md-toolbar {
+  border-left-width: 0;
+  border-radius: 0;
+  border-right-width: 0;
+}
+
+.form-mobile .file-field {
+  border: 0;
+}
+
+.form-mobile .file-field thead {
+  display: none;
+}
+
+.form-mobile .file-field .file-field-name {
+  max-width: 30ch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.form-mobile .file-field input.form-control {
+  direction: ltr;
+  text-align: left;
+}
+
+.form-mobile .form-body {
+  background-color: #FFFFFF;
+  bottom: 50px;
+  left: 0;
+  overflow: auto;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.form-mobile .form-foot {
+  background-color: #FFFFFF;
+  bottom: 0;
+  left: 0;
+  padding: 5px;
+  position: absolute;
+  right: 0;
+}
+
+.form-mobile .help-text {
+  display: block;
+  margin-top: -1rem;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.form-mobile .tag-field {
+  border: 0;
+  box-shadow: none;
+}
+
+.form-mobile .tag-field .tag {
+  background-color: #E1E1E8;
+  border-radius: 0;
+}
+
+.form-mobile .tag-field .tag input[type="text"] {
+  color: #717171;
+}
+
+.form-mobile .tag-field .tag input[type="text"]::-webkit-input-placeholder {
+  color: #919191;
+}
+
+.form-mobile .tag-field .tag input[type="text"]::-moz-placeholder {
+  color: #919191;
+}
+
+.form-mobile .tag-field .tag input[type="text"]:-ms-input-placeholder {
+  color: #919191;
+}
+
+.form-mobile .tag-field .tag input[type="text"]input:-moz-placeholder {
+  color: #919191;
+}
+
+.form-mobile .tag-field .tag .remove {
+  color: #3B3A53;
+}
+
+.form-mobile .switch.switch-6 input:checked+span::before {
+  background-color: #3B86FF;
+}
+
+.form-mobile .select2-container {
+  margin-bottom: 2px;
+  margin-top: 3px;
+  text-align: right;
+  width: 100% !important;
+}
+
+.form-mobile .select2-container--default .select2-selection--single, .form-mobile .select2-container--default .select2-selection--multiple {
+  border-width: 0 !important;
+}
+
+.form-mobile .select-tree-field {
+  border-bottom: 1px solid #D3D3D3;
+  margin: 20px 0 10px;
+}
+
+.form-mobile .select-tree-field .select-tree-display {
+  padding: 0;
+}
+
+.form-mobile .select-tree-field .select-tree-display-label {
+  align-items: flex-start;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+}
+
+.form-mobile .select-tree-field .select-tree-display-label span {
+  flex: 1;
+}
+
+.form-mobile .select-tree-field .select-tree-display-label .fa-chevron-down,
+.form-mobile .select-tree-field .select-tree-display-label .fa-times {
+  margin-top: 4px;
+}
+
+.form-mobile .textlist-field .field-row {
+  border-bottom: 1px solid #D3D3D3;
+}
+
+.form-mobile .textlist-field .field-row .remove {
+  background-color: transparent;
+  border: 0;
+  color: #999999 !important;
+  font-size: 12px;
+}
+
+.form-mobile .textlist-field .field-row .form-control {
+  border-width: 0;
+}
+
+.form-mobile .textlist-field .field-row .remove:hover {
+  text-decoration: none;
+}

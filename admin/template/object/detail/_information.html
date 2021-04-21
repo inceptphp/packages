@@ -1,0 +1,12 @@
+<table class="table">
+  <tbody>
+    {{#each schema.fields}}
+      {{#format ../schema.name @key ../item 'detail'}}
+        <tr>
+          <th nowrap>{{label}}</th>
+          <td>{{{control}}}</td>
+        </tr>
+      {{/format}}
+    {{/each}}
+  </tbody>
+</table>

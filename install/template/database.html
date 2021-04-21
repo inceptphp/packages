@@ -1,0 +1,61 @@
+<section class="layout-panel no-sidebar-left no-sidebar-right">
+  {{> install_left}}
+  <section class="panel-main">
+    {{> install_head}}
+    <h3 class="panel-title">
+      <i class="fas fa-fas fa-database"></i>
+      {{_ 'Database Setup'}}
+    </h3>
+    <div class="panel-body">
+      <form class="row" method="post">
+        <div class="col-md-5">
+          {{#field name="host" type="text" required="required" placeholder="eg. 127.0.0.1" value=host}}
+            <div class="form-group form-group-{{type}}">
+              <label class="control-label">{{_ 'Host'}}</label>
+              <div class="form-field">
+                {{{control}}}
+              </div>
+            </div>
+          {{/field}}
+          {{#field name="port" type="text" required="required" placeholder="eg. 3306" value=port}}
+            <div class="form-group form-group-{{type}}">
+              <label class="control-label">{{_ 'Port'}}</label>
+              <div class="form-field">
+                {{{control}}}
+              </div>
+            </div>
+          {{/field}}
+          {{#field name="name" type="text" required="required" placeholder="eg. incept" value=name}}
+            <div class="form-group form-group-{{type}}">
+              <label class="control-label">{{_ 'Database Name'}}</label>
+              <div class="form-field">
+                {{{control}}}
+              </div>
+            </div>
+          {{/field}}
+          {{#field name="user" type="text" required="required" placeholder="eg. johndoe" value=user}}
+            <div class="form-group form-group-{{type}}">
+              <label class="control-label">{{_ 'Username'}}</label>
+              <div class="form-field">
+                {{{control}}}
+              </div>
+            </div>
+          {{/field}}
+          {{#field name="pass" type="password" placeholder="Database password" value=pass}}
+            <div class="form-group form-group-{{type}}">
+              <label class="control-label">{{_ 'Password'}}</label>
+              <div class="form-field">
+                {{{control}}}
+              </div>
+            </div>
+          {{/field}}
+          <div class="form-group form-group-submit">
+            <div class="form-field">
+              <button class="btn btn-secondary btn-block">{{_ 'Next'}}</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
+</section>

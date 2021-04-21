@@ -1,0 +1,125 @@
+<form
+  {{#when mode '===' 'create'}}
+    action="/admin/spa/system/fieldset/create"
+  {{else}}
+    action="/admin/spa/system/fieldset/update/{{item.name}}"
+  {{/when}}
+  autocomplete="off"
+  class="fieldset-form form-mobile"
+  data-do="fieldset-form"
+  data-on="submit"
+  data-after="reload"
+  method="post"
+>
+  <!-- START: Head -->
+  <header class="view-head">
+    <button
+      class="sidebar-hide"
+      data-do="panel-mobile-back"
+      data-on="click"
+      type="button"
+    >
+      <i class="fas fa-chevron-left"></i>
+    </button>
+    <h6 class="view-title">
+      {{#if item.icon.length}}
+        <i class="{{item.icon}} d-inline-block mr-2"></i>
+      {{/if}}
+      {{#when mode '===' 'create'}}
+        {{_ 'Add Fieldset'}}
+      {{else}}
+        {{_ 'Update %s Fieldset' item.name}}
+      {{/when}}
+    </h6>
+  </header>
+  <!-- END: Head -->
+  <!-- START: Body -->
+  <section class="view-body no-scroll with-foot{{#when mode '===' 'create'}}-1{{else}}-2{{/when}} fieldset-detail">
+    <!-- START: Tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+      <li class="nav-item">
+        <a
+          class="nav-link active"
+          data-toggle="tab"
+          href="#fieldset-form-content-{{uuid}}"
+          role="tab"
+        >
+          {{_ 'Content'}}
+        </a>
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          data-toggle="tab"
+          href="#fieldset-form-fields-{{uuid}}"
+          role="tab"
+        >
+          {{_ 'Fields'}}
+        </a>
+      </li>
+    </ul>
+    <!-- END: Tabs -->
+    <!-- START: Panes -->
+    <div class="tab-content m-2">
+      <!-- START: Content Pane -->
+      <div
+        class="tab-pane fade active show"
+        id="fieldset-form-content-{{uuid}}"
+        role="tabpanel"
+      >
+        {{> form_content}}
+      </div>
+      <!-- END: Content Pane -->
+      <!-- START: Fields Pane -->
+      <div
+        class="tab-pane fade"
+        id="fieldset-form-fields-{{uuid}}"
+        role="tabpanel"
+      >
+        {{> form_fields}}
+      </div>
+      <!-- END: Fields Pane -->
+    </div>
+    <!-- END: Panes -->
+  </section>
+  <!-- END: Body -->
+  <!-- START: Foot -->
+  <footer class="view-foot">
+    <button class="btn btn-secondary btn-block">
+      <i class="fas fa-check"></i> {{_ 'Publish'}}
+    </button>
+
+    {{#when mode '===' 'update'}}
+      <div class="row mt-1">
+        <div class="col">
+          <button
+            class="btn btn-outline-secondary btn-block text-small"
+            data-do="panel-mobile-forward"
+            data-on="click"
+            data-template="/admin/spa/system/fieldset/create/{{item.name}}"
+            type="button"
+          >
+            <i class="fas fa-copy"></i> {{_ 'Copy'}}
+          </button>
+        </div>
+
+        <div class="col">
+          <button
+            class="btn btn-outline-danger btn-block text-small"
+            data-do="panel-mobile-forward"
+            data-on="click"
+            data-template="/admin/spa/system/fieldset/remove/{{item.name}}"
+            type="button"
+          >
+            <i class="fas fa-times"></i> {{_ 'Remove'}}
+          </button>
+        </div>
+      </div>
+    {{/when}}
+  </footer>
+  <!-- END: Foot -->
+</form>
+
+<script id="field-row-template" type="text/x-template">
+  {{>> form_row}}
+</script>

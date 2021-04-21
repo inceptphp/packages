@@ -1,0 +1,66 @@
+<section class="layout-panel no-sidebar-left no-sidebar-right">
+  {{> install_left}}
+  <section class="panel-main">
+    {{> install_head}}
+    <h3 class="panel-title">
+      <i class="fas fa-fas fa-cogs"></i>
+      {{_ 'Installing'}}
+    </h3>
+    <div class="panel-body">
+      <form class="row" action="/admin">
+        <div class="col-md-8">
+          {{#if errors.length}}
+            {{#each errors}}
+              <div class="alert alert-danger">
+                <i class="fas fa-exclamation-triangle"></i>
+                <strong>{{_ 'Error:'}}</strong>
+                {{this}}
+              </div>
+            {{/each}}
+          {{else}}
+            <div class="bg-dark">
+              {{#each logs}}
+                {{#when type '===' 'info'}}
+                  <div class="p-2 text-info">
+                    <i class="fas fa-info-circle"></i>
+                    {{message}}
+                  </div>
+                {{/when}}
+                {{#when type '===' 'system'}}
+                  <div class="p-2 text-muted">
+                    <i class="fas fa-cog"></i>
+                    {{message}}
+                  </div>
+                {{/when}}
+                {{#when type '===' 'warning'}}
+                  <div class="p-2 text-warning">{{message}}</div>
+                {{/when}}
+                {{#when type '===' 'error'}}
+                  <div class="p-2 text-danger">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <strong>{{_ 'Error:'}}</strong>
+                    {{message}}
+                  </div>
+                {{/when}}
+                {{#when type '===' 'success'}}
+                  <div class="p-2 text-success">
+                    <i class="fas fa-check-circle"></i>
+                    {{message}}
+                  </div>
+                {{/when}}
+                {{#when type '===' 'general'}}
+                  <div class="p-2 text-light">{{message}}</div>
+                {{/when}}
+              {{/each}}
+            </div>
+            <div class="form-group form-group-submit mt-4">
+              <div class="form-field">
+                <button class="btn btn-secondary btn-block">{{_ 'Finish'}}</button>
+              </div>
+            </div>
+          {{/if}}
+        </div>
+      </form>
+    </div>
+  </section>
+</section>

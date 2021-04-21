@@ -1,0 +1,53 @@
+<div id="bulk-actions-{{schema.name}}-{{uuid}}" class="bulk-actions d-none mb-3">
+  <button
+    class="btn btn-large btn-outline-secondary"
+    data-do="panel-mobile-open"
+    data-on="click"
+    data-template="/admin/spa/system/collection/{{schema.name}}/update"
+    data-form="#table-form-{{schema.name}}-{{uuid}}"
+    type="button"
+  >
+    <i class="fas fa-fw fa-edit"></i>
+    {{_ 'Update'}}
+  </button>
+  {{#scope relation}}
+    <button
+      class="btn btn-large btn-outline-primary"
+      data-do="panel-mobile-open"
+      data-on="click"
+      data-template="/admin/spa/system/collection/{{schema.name}}/{{schema.id}}/unlink/{{name}}"
+      data-form="#table-form-{{name}}-{{../uuid}}"
+      type="button"
+    >
+      <i class="fas fa-fw fa-unlink"></i>
+      {{_ 'Unlink'}}
+    </button>
+  {{/scope}}
+  {{#if active}}
+    <button
+      class="btn btn-large btn-outline-danger"
+      data-do="panel-mobile-open"
+      data-on="click"
+      data-template="/admin/spa/system/collection/{{schema.name}}/remove"
+      data-form="#table-form-{{schema.name}}-{{uuid}}"
+      type="button"
+    >
+      <i class="fas fa-fw fa-trash-alt"></i>
+      {{_ 'Remove'}}
+    </button>
+  {{else}}
+    {{#if schema.restorable}}
+      <button
+        class="btn btn-large btn-outline-success"
+        data-do="panel-mobile-open"
+        data-on="click"
+        data-template="/admin/spa/system/collection/{{schema.name}}/restore"
+        data-form="#table-form-{{schema.name}}-{{uuid}}"
+        type="button"
+      >
+        <i class="fas fa-fw fa-trash-restore-alt"></i>
+        {{_ 'Restore'}}
+      </button>
+    {{/if}}
+  {{/if}}
+</div>

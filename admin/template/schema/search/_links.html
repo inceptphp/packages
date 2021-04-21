@@ -1,0 +1,27 @@
+<div class="search-links text-right mb-3">
+  <div class="import-export d-none d-md-inline-block">
+    <a
+      class="text-default d-inline-block mr-4"
+      data-do="panel-mobile-open"
+      data-on="click"
+      data-template="/admin/spa/system/schema/import"
+      href="javascript:void(0)"
+    >
+      <i class="fas fa-cloud-download-alt"></i> {{_ 'Import'}}
+    </a>
+
+    {{#if rows.length}}
+      <a class="text-default d-inline-block mr-4" href="export" target="_blank">
+        <i class="fas fa-cloud-upload-alt"></i> {{_ 'Export'}}
+      </a>
+    {{/if}}
+  </div>
+  <button
+    class="btn btn-large btn-outline-primary"
+    data-do="panel-mobile-open"
+    data-template="/admin/spa/system/schema/create"
+    data-on="click"
+  >
+    <i class="fas fa-plus"></i> {{_ 'Add Schema'}}
+  </button>
+</div>

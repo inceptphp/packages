@@ -1,0 +1,113 @@
+<!-- START: Head -->
+<header class="view-head">
+  <button
+    class="sidebar-hide"
+    data-do="panel-mobile-back"
+    data-on="click"
+    type="button"
+  >
+    <i class="fas fa-chevron-left"></i>
+  </button>
+  <h6 class="view-title">
+    <i class="{{schema.icon}} d-inline-block mr-2"></i>
+    {{suggestion}}
+  </h6>
+</header>
+<!-- END: Head -->
+<!-- START: Body -->
+<section class="view-body no-scroll with-foot-2 schema-detail">
+  {{> detail_relation_detail}}
+  <!-- START: Tabs -->
+  {{> detail_tabs}}
+  <!-- END: Tabs -->
+  <!-- START: Panes -->
+  <div class="tab-content m-2">
+    <!-- START: Information Pane -->
+    <div
+      class="tab-pane fade active show"
+      id="model-{{schema.name}}-info-{{uuid}}"
+      role="tabpanel"
+    >
+      {{> detail_information}}
+    </div>
+    <!-- END: Information Pane -->
+    {{#if relations.length}}
+      {{#each relations}}
+        {{#when many '>' 1}}
+          <div
+            class="tab-pane fade"
+            id="model-{{name}}-info-{{uuid}}"
+            role="tabpanel"
+          >
+            {{> detail_relation_search}}
+          </div>
+        {{/when}}
+      {{/each}}
+    {{/if}}
+  </div>
+  <!-- END: Panes -->
+
+</section>
+<!-- END: Body -->
+<!-- START: Foot -->
+<footer class="view-foot">
+  <button
+    class="btn btn-secondary btn-block text-small"
+    data-do="panel-mobile-forward"
+    data-on="click"
+    data-template="/admin/spa/system/object/{{schema.name}}/update/{{schema.id}}"
+    type="button"
+  >
+    <i class="fas fa-edit"></i> {{_ 'Update'}}
+  </button>
+  <div class="row mt-1">
+    <div class="col">
+      <button
+        class="btn btn-outline-secondary btn-block text-small"
+        data-do="panel-mobile-forward"
+        data-on="click"
+        data-template="/admin/spa/system/object/{{schema.name}}/create/{{schema.id}}"
+        type="button"
+      >
+        <i class="fas fa-copy"></i> {{_ 'Copy'}}
+      </button>
+    </div>
+    {{#scope relation}}
+      <div class="col">
+        <button
+          class="btn btn-outline-primary btn-block text-small"
+          data-do="panel-mobile-forward"
+          data-on="click"
+          data-template="/admin/spa/system/object/{{schema.name}}/{{schema.id}}/unlink/{{name}}/{{../id}}"
+          type="button"
+        >
+          <i class="fas fa-unlink"></i> {{_ 'Unlink'}}
+        </button>
+      </div>
+    {{/scope}}
+    <div class="col">
+      {{#if active}}
+        <button
+          class="btn btn-outline-danger btn-block text-small"
+          data-do="panel-mobile-forward"
+          data-on="click"
+          data-template="/admin/spa/system/object/{{schema.name}}/remove/{{schema.id}}"
+          type="button"
+        >
+          <i class="fas fa-trash-alt"></i> {{_ 'Remove'}}
+        </button>
+      {{else}}
+        <button
+          class="btn btn-outline-success btn-block text-small"
+          data-do="panel-mobile-forward"
+          data-on="click"
+          data-template="/admin/spa/system/object/{{schema.name}}/restore/{{schema.id}}"
+          type="button"
+        >
+          <i class="fas fa-trash-restore"></i> {{_ 'Restore'}}
+        </button>
+      {{/if}}
+    </div>
+  </div>
+</footer>
+<!-- END: Foot -->

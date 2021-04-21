@@ -1,0 +1,60 @@
+<form
+  class="form-mobile"
+  data-do="panel-form"
+  data-on="submit"
+  action="{{action}}"
+  data-after="{{after}}"
+>
+  <!-- START: Head -->
+  <header class="view-head">
+    <button
+      class="sidebar-hide"
+      data-do="panel-mobile-back"
+      data-on="click"
+      type="button"
+    >
+      <i class="fas fa-chevron-left"></i>
+    </button>
+    <h6 class="view-title">
+      <i class="{{schema.icon}} d-inline-block mr-2"></i>
+      {{title}}
+    </h6>
+  </header>
+  <!-- END: Head -->
+  <!-- START: Body -->
+  <section class="view-body with-foot-1 schema-detail">
+    <div class="form-group">
+      <label class="control-label">{{relation.singular}}</label>
+      <div class="form-field">
+        <input
+          autocomplete="off"
+          class="form-control suggestion-label-{{name}} system-form-control"
+          placeholder="{{_ 'Enter %s' relation.singular}}"
+          type="text"
+        />
+        <input
+          class="suggestion-value-{{name}}"
+          name="{{relation.primary}}"
+          type="hidden"
+        />
+        <div
+          class="input-suggestion d-none"
+          data-do="suggestion-field"
+          data-format="{{relation.suggestion}}"
+          data-target-label="input.suggestion-label-{{name}}"
+          data-target-value="input.suggestion-value-{{name}}"
+          data-url="/admin/system/object/{{relation.name}}/search?q={QUERY}&render=false"
+          data-value="{{relation.primary}}"
+        ></div>
+      </div>
+    </div>
+  </section>
+  <!-- END: Body -->
+  <!-- START: Foot -->
+  <footer class="view-foot">
+    <button class="btn btn-secondary btn-block text-small">
+      <i class="fas fa-edit"></i> {{_ 'Submit'}}
+    </button>
+  </footer>
+  <!-- END: Foot -->
+</form>

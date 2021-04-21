@@ -1,0 +1,16 @@
+<input
+  class="irs-hidden-input system-form-control"
+  data-do="multirange-field"
+  {{#if name}}
+    name="filter[{{name}}]"
+  {{/if}}
+  {{#not_empty value}}
+    value="{{value}}"
+  {{/not_empty}}
+  tabindex="-1"
+  type="hidden"
+  value="{{scope ../filter @key}}"
+  {{#each field.attributes}}
+    {{@key}}="{{this}}"
+  {{/each}}
+/>

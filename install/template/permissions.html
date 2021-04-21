@@ -1,0 +1,28 @@
+<section class="layout-panel no-sidebar-left no-sidebar-right">
+  {{> install_left}}
+  <section class="panel-main">
+    {{> install_head}}
+    <h3 class="panel-title">
+      <i class="fas fa-fas fa-lock"></i>
+      {{_ 'Permission'}}
+    </h3>
+    <div class="panel-body">
+      <form class="row" method="get">
+        <div class="col-md-5">
+          {{#each errors}}
+            <div class="alert alert-danger">
+              <i class="fas fa-exclamation-triangle"></i>
+              <strong>{{_ 'Permissions Error:'}}</strong>
+              {{this}}
+            </div>
+          {{/each}}
+          <div class="form-group form-group-submit">
+            <div class="form-field">
+              <button class="btn btn-secondary btn-block">{{_ 'Try Again'}}</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
+</section>

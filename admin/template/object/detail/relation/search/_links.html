@@ -1,0 +1,20 @@
+<div id="detail-actions-{{name}}-{{uuid}}" class="tab-head">
+  <button
+    class="btn btn-block btn-outline-secondary mr-1"
+    data-do="panel-mobile-forward"
+    data-template="/admin/spa/system/object/{{schema.name}}/{{schema.id}}/link/{{name}}"
+    data-on="click"
+  >
+    <i class="fas fa-link"></i>
+    {{_ 'Link %s' singular}}
+  </button>
+  <button
+    class="btn btn-block btn-outline-primary ml-1"
+    data-do="panel-mobile-forward"
+    data-template="/admin/spa/system/object/{{schema.name}}/{{schema.id}}/create/{{name}}"
+    data-on="click"
+  >
+    <i class="fas fa-plus"></i>
+    {{_ 'Create %s' singular}}
+  </button>
+</div>

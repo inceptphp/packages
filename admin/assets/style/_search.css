@@ -1,0 +1,137 @@
+/* Component - Table Freeze and Wrap
+------------------------------*/
+.table .freeze-left {
+  position: -webkit-sticky;
+  position: sticky;
+  left: 0;
+  z-index: 1;
+}
+
+.table .freeze-left-2 {
+  position: -webkit-sticky;
+  position: sticky;
+  left: 41px;
+  z-index: 1;
+}
+
+.table .freeze-right {
+  position: -webkit-sticky;
+  position: sticky;
+  right: 0;
+  z-index: 1;
+}
+
+.table .freeze-top {
+  border-top: 0;
+  position: -webkit-sticky;
+  position: sticky;
+  top: -2px;
+  z-index: 2;
+}
+
+.table .freeze-top.freeze-left,
+.table .freeze-top.freeze-left-2,
+.table .freeze-top.freeze-right {
+  z-index: 3;
+}
+
+.table td[wrap],
+.table td[wrap-1],
+.table td[wrap-2],
+.table td[wrap-3],
+.table td[wrap-4],
+.table td[wrap-5] {
+  width: 1px;
+}
+
+.table td[wrap]::after,
+.table td[wrap-1]::after,
+.table td[wrap-2]::after,
+.table td[wrap-3]::after,
+.table td[wrap-4]::after,
+.table td[wrap-5]::after {
+  content: "";
+  display: block;
+  height: 1px;
+  overflow: hidden;
+  visibility: hidden;
+}
+
+.table td[wrap]::after,
+.table td[wrap-1]::after {
+  width: 100px;
+}
+
+.table td[wrap-2]::after {
+  width: 200px;
+}
+
+.table td[wrap-3]::after {
+  width: 300px;
+}
+
+.table td[wrap-4]::after {
+  width: 400px;
+}
+
+.table td[wrap-5]::after {
+  width: 500px;
+}
+
+/* Component - Search Table
+------------------------------*/
+
+.search-table .table-scroll {
+  overflow: auto;
+  flex-grow: 1;
+}
+
+.search-table .table-scroll .table {
+  position: relative;
+}
+
+.search-table .table .checkall {
+  position: relative;
+}
+
+.search-table .pagination {
+  margin-top: 20px;
+}
+
+@media (max-width: 767px) {
+  .search-table .search-links {
+    text-align: center !important;
+  }
+
+  .search-table .search-links .import-export {
+    margin-bottom: 10px;
+    width: 100%;
+  }
+
+  .search-table .search-links .import-export a {
+    padding: 10px 0;
+  }
+
+  .search-table .search-links button {
+    margin: 0px !important;
+    width: 100%;
+  }
+
+  .search-table .search-links a {
+    display: block;
+    margin: 0px !important;
+    width: 100%;
+  }
+
+  .search-table form {
+    margin-bottom: 10px;
+  }
+
+  .search-table .bulk-form {
+    margin-bottom: 10px;
+  }
+
+  .search-table .bulk-form button {
+    width: 100%;
+  }
+}

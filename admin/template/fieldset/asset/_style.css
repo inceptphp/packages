@@ -1,0 +1,22 @@
+body.dragging, body.dragging * {
+  cursor: move !important;
+}
+
+.table-sortable tr {
+  position: relative;
+}
+
+.table-sortable .dragged {
+  position: absolute;
+  opacity: 0.5;
+  z-index: 2000;
+}
+
+.table-sortable .placeholder {
+  border-top: 5px solid #F99462;
+  display: block;
+}
+
+.table-sortable .drag-handle {
+  cursor: pointer;
+}

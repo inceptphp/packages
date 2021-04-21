@@ -1,0 +1,23 @@
+{{#if relations.length}}
+  <table class="table">
+    <tbody>
+      {{#each relations}}
+        {{#when many '==' 1}}
+          <tr>
+            <th nowrap>{{singular}}</th>
+            <td>
+              <a
+                data-do="panel-mobile-forward"
+                data-on="click"
+                data-template="/admin/spa/system/object/{{name}}/detail/{{primary}}"
+                href="javascript:void(0)"
+              >
+                {{{suggestion name ../item}}}
+              </a>
+            </td>
+          </tr>
+        {{/when}}
+      {{/each}}
+    </tbody>
+  </table>
+{{/if}}

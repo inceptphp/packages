@@ -1,0 +1,51 @@
+<div class="search-links text-right mb-3">
+  <div class="import-export d-none d-md-inline-block">
+    <a
+      class="text-default d-inline-block mr-4"
+      data-do="import"
+      data-on="click"
+      {{#scope relation}}
+        data-url="/admin/system/collection/{{name}}/import?{{schema.primary}}={{schema.id}}"
+      {{else}}
+        data-url="/admin/system/collection/{{schema.name}}/import"
+      {{/scope}}
+      href="javascript:void(0)"
+    >
+      <i class="fas fa-cloud-upload-alt"></i>
+      {{_ 'Import'}}
+    </a>
+    {{#if rows.length}}
+      <a
+        class="text-default d-inline-block mr-4"
+        data-do="panel-mobile-open"
+        data-on="click"
+        data-template="/admin/spa/system/collection/{{schema.name}}/export?{{build_query filters}}"
+        href="javascript:void(0)"
+      >
+        <i class="fas fa-cloud-download-alt"></i>
+        {{_ 'Export'}}
+      </a>
+    {{/if}}
+  </div>
+  {{#scope relation}}
+    <button
+      class="btn btn-large btn-outline-primary"
+      data-do="panel-mobile-open"
+      data-template="/admin/spa/system/object/{{schema.name}}/{{id}}/create/{{name}}?after=reload"
+      data-on="click"
+    >
+      <i class="fas fa-plus"></i>
+      {{_ 'Create %s' singular}}
+    </button>
+  {{else}}
+    <button
+      class="btn btn-large btn-outline-primary"
+      data-do="panel-mobile-open"
+      data-template="/admin/spa/system/object/{{schema.name}}/create"
+      data-on="click"
+    >
+      <i class="fas fa-plus"></i>
+      {{_ 'Create %s' schema.singular}}
+    </button>
+  {{/scope}}
+</div>

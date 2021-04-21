@@ -1,0 +1,91 @@
+<h3 class="panel-title">
+  <span class="font-weight-normal">
+    <i class="fas fa-home fa-fw"></i>
+    <a href="/admin">{{_ 'Admin'}}</a>
+  </span>
+
+  {{#scope relation}}
+    <i class="fas fa-chevron-right fa-fw text-gray"></i>
+
+    <span class="font-weight-normal">
+      <i class="fa-fw {{schema.icon}}"></i>
+      <a href="/admin/system/object/{{schema.name}}/search">
+        {{schema.plural}}
+      </a>
+    </span>
+
+    <i class="fas fa-chevron-right fa-fw text-gray"></i>
+
+    <span class="font-weight-normal">
+      <i class="fa-fw {{schema.icon}}"></i>
+      <a
+        data-do="panel-mobile-open"
+        data-on="click"
+        data-template="/admin/spa/system/object/{{schema.name}}/detail/{{schema.id}}"
+        href="javascript:void(0)"
+      >
+        {{suggestion}}
+      </a>
+    </span>
+  {{/scope}}
+
+  <i class="fas fa-chevron-right fa-fw text-gray"></i>
+
+  <i class="fas fa-{{schema.icon}}"></i>
+  {{schema.plural}}
+</h3>
+
+<div class="panel-body search-table">
+  <div class="row">
+    <div class="col-12 col-md-6">
+      <h3 class="text-uppercase text-center text-md-left">
+        {{#when total '===' 1}}
+          {{total}} {{schema.singular}}
+        {{else}}
+          {{total}} {{schema.plural}}
+        {{/when}}
+      </h3>
+    </div>
+    <div class="col-12 col-md-6">
+      {{> search_links}}
+    </div>
+  </div>
+
+  {{> search_form}}
+  {{#if rows.length}}
+    {{> search_bulk}}
+
+    <form
+      id="table-form-{{schema.name}}-{{uuid}}"
+      class="table-form table-scroll"
+    >
+      <table class="table table-striped">
+        <thead>
+          {{> search_head schema}}
+        </thead>
+        <tbody>
+          {{#admin_tbody schema.name rows}}
+            {{> search_row}}
+          {{/admin_tbody}}
+        </tbody>
+      </table>
+    </form>
+
+    <ul class="pagination">
+      {{#pager total range}}
+        <li class="page-item{{#if active}} active{{/if}}">
+          <a class="page-link" href="?{{href}}">{{page}}</a>
+        </li>
+      {{/pager}}
+    </ul>
+  {{else}}
+    <div class="alert alert-info mt-4">
+      <i class="fas fa-info-circle"></i>
+      {{_ 'No results found.'}}
+    </div>
+  {{/if}}
+</div>
+
+<script id="template-filters" type="text/x-template">
+  {{> search_filters}}
+</script>

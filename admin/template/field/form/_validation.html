@@ -1,0 +1,50 @@
+<div class="form-group form-group-validation">
+  <label class="control-label">{{_ 'Validation'}}</label>
+  <div>
+    {{#each validation}}
+      <div class="validation-row" data-index="{{@index}}" data-do="field-validation-row">
+        <div class="input-group mt-2">
+          <select
+            class="form-control validation-method"
+            name="validation[{{@index}}][method]"
+          >
+            {{> options_validation ../config}}
+          </select>
+          <div class="input-group-append">
+            <a
+              class="input-group-text text-danger remove"
+              href="javascript:void(0)"
+            >
+              <i class="fas fa-times"></i>
+            </a>
+          </div>
+        </div>
+
+        {{#if config.fieldset.length}}
+          <div class="fieldset-validation mt-2">
+            {{#each config.fieldset~}}
+              {{{this}}}
+            {{~/each~}}
+          </div>
+        {{/if}}
+
+        <input
+          name="validation[{{@index}}][message]"
+          class="form-control validation-message mt-2"
+          placeholder="{{_ 'Error Message'}}"
+          type="text"
+          value="{{message}}"
+        />
+      </div>
+    {{/each}}
+    <button
+      class="btn btn-block btn-outline-danger validation-add mt-2"
+      data-do="field-validation-add"
+      data-on="click"
+      type="button"
+    >
+      <i class="fas fa-plus"></i>
+      {{_ 'Add Validation'}}
+    </button>
+  </div>
+</div>

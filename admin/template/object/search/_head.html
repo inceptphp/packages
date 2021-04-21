@@ -1,0 +1,31 @@
+<tr>
+  <th class="table-bulk-checkbox freeze-top freeze-left">
+    <label class="checkbox checkbox-1">
+      <input
+        data-do="table-checkall"
+        data-table="#table-form-{{../schema.name}}-{{../uuid}} tbody"
+        data-toggle-hide="#search-form-{{../schema.name}}-{{../uuid}}"
+        data-toggle-show="#bulk-actions-{{../schema.name}}-{{../uuid}}"
+        type="checkbox"
+      />
+      <span></span>
+    </label>
+  </th>
+  {{#admin_thead name}}
+    {{#if sortable}}
+      <th class="freeze-top{{#if is_id}} freeze-left-2{{/if}}" nowrap>
+        <a href="?{{sorturl 'order' name}}">
+          {{label}}
+          {{{sortcaret 'order' name}}}
+        </a>
+      </th>
+    {{else}}
+      <th class="freeze-top{{#if is_id}} freeze-left-2{{/if}}" nowrap>
+        {{label}}
+      </th>
+    {{/if}}
+  {{/admin_thead}}
+  <th class="freeze-top freeze-right text-center">
+    {{_ 'Action'}}
+  </th>
+</tr>

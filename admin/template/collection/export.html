@@ -1,0 +1,76 @@
+<form
+  class="form-mobile"
+  method="post"
+  action="/admin/system/collection/{{schema.name}}/export?{{build_query filters}}"
+  target="_blank"
+>
+  <!-- START: Head -->
+  <header class="view-head">
+    <button
+      class="sidebar-hide"
+      data-do="panel-mobile-back"
+      data-on="click"
+      type="button"
+    >
+      <i class="fas fa-chevron-left"></i>
+    </button>
+    <h6 class="view-title">
+      <i class="{{schema.icon}} d-inline-block mr-2"></i>
+      {{_ 'Export %s' schema.singular}}
+    </h6>
+  </header>
+  <!-- END: Head -->
+  <!-- START: Body -->
+  <section class="view-body with-foot-1 schema-detail">
+    <!-- START: Type -->
+    <div class="form-group form-group-select">
+      <label class="control-label">{{_ 'Type'}}</label>
+      <div class="form-field">
+        <select class="form-control system-form-control" name="type">
+          <option value="csv">Excel CSV</option>
+          <option value="json">JSON</option>
+          <option value="xml">XML</option>
+        </select>
+      </div>
+    </div>
+    <!-- END: Type -->
+    <!-- START: Start -->
+    <div class="form-group form-group-select">
+      <label class="control-label">{{_ 'Start'}}</label>
+      <div class="form-field">
+        <input
+          class="form-control system-form-control"
+          type="number"
+          step="1"
+          min="0"
+          name="start"
+          value="0"
+        />
+      </div>
+    </div>
+    <!-- END: Start -->
+    <!-- START: Range -->
+    <div class="form-group form-group-select">
+      <label class="control-label">{{_ 'Range'}}</label>
+      <div class="form-field">
+        <input
+          class="form-control system-form-control"
+          type="number"
+          step="1"
+          min="0"
+          name="range"
+          placeholder="{{_ 'All'}}"
+        />
+      </div>
+    </div>
+    <!-- END: Range -->
+  </section>
+  <!-- END: Body -->
+  <!-- START: Foot -->
+  <footer class="view-foot">
+    <button class="btn btn-primary btn-block text-small">
+      <i class="fas fa-edit"></i> {{_ 'Export'}}
+    </button>
+  </footer>
+  <!-- END: Foot -->
+</form>

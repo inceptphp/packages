@@ -1,0 +1,30 @@
+<!-- START: Head -->
+<header class="view-head">
+  <button
+    class="sidebar-hide"
+    data-do="panel-mobile-back"
+    data-on="click"
+    type="button"
+  >
+    <i class="fas fa-chevron-left"></i>
+  </button>
+  <h6 class="view-title">{{_ 'Invalid Request'}}</h6>
+</header>
+<!-- END: Head -->
+<!-- START: Body -->
+<section class="view-body">
+  <div class="m-3 alert alert-danger">
+    <i class="fas fa-exclamation-triangle"></i>
+    {{message}}
+    {{#if validation.length}}
+      <ul>
+        {{#each validation}}
+          {{#is_scalar this}}
+            <li><strong>{{@key}}</strong> - {{this}}</li>
+          {{/is_scalar}}
+        {{/each}}
+      </ul>
+    {{/if}}
+  </div>
+</section>
+<!-- END: Body -->

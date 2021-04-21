@@ -1,0 +1,37 @@
+<div class="tab-fixed">
+  {{> detail_relation_search_links}}
+  {{> detail_relation_search_bulk}}
+  <div class="tab-body">
+    {{#if rows.length}}
+      <form
+        id="table-form-{{name}}-{{uuid}}"
+        class="table-form table-scroll"
+      >
+        <table class="table">
+          <thead>
+            {{> detail_relation_search_head this}}
+          </thead>
+          <tbody>
+            {{#admin_tbody name rows}}
+              {{> detail_relation_search_row}}
+            {{/admin_tbody}}
+          </tbody>
+        </table>
+      </form>
+    {{else}}
+      <div class="alert alert-info">
+        <i class="fas fa-info-circle"></i>
+        {{_ 'No results found.'}}
+      </div>
+    {{/if}}
+  </div>
+  <div class="tab-foot">
+    <a
+      class="btn btn-block btn-outline-secondary"
+      href="/admin/system/object/{{schema.name}}/{{schema.id}}/search/{{name}}"
+    >
+      <i class="fas fa-fw fa-eye"></i>
+      {{_ 'See All'}}
+    </a>
+  </div>
+</div>

@@ -1,0 +1,39 @@
+<div class="tab-fixed">
+  <div class="tab-head">
+    <a
+      class="btn btn-outline-secondary btn-block"
+      data-do="panel-mobile-forward"
+      data-on="click"
+      data-method="post"
+      data-template="/admin/spa/system/fieldset/field"
+      href="javascript:void(0)"
+    >
+      <i class="fas fa-plus"></i> {{_ 'Add Field'}}
+    </a>
+  </div>
+  <div class="tab-body">
+    <table
+      class="table table-fields table-sortable"
+      data-do="table-sortable"
+      data-handle="td.drag-handle"
+    >
+      <thead>
+        <tr>
+          <th class="freeze-top">&nbsp;</th>
+          <th class="freeze-top">{{_ 'Name'}}</th>
+          <th class="freeze-top">{{_ 'Format'}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each item.fields}}
+          {{> form_row}}
+        {{/each}}
+      </tbody>
+    </table>
+
+    <div class="alert alert-info alert-table-fields-empty{{#if item.fields.length}} d-none{{/if}}">
+      <i class="fas fa-fw fa-info-circle"></i>
+      {{_ 'No Fields Defined'}}
+    </div>
+  </div>
+</div>

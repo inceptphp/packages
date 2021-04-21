@@ -1,0 +1,29 @@
+<div class="form-row">
+  <input
+    aria-haspopup="true"
+    aria-expanded="false"
+    class="form-control time"
+    data-do="time-field"
+    name="span[{{name}}][0]"
+    type="text"
+    value="{{value.0}}"
+    placeholder="{{_ 'Start Time'}}"
+    {{#each field.attributes}}
+      {{@key}}="{{this}}"
+    {{/each}}
+  />
+  <span>&mdash;</span>
+  <input
+    aria-haspopup="true"
+    aria-expanded="false"
+    class="form-control time"
+    data-do="time-field"
+    name="span[{{name}}][1]"
+    type="text"
+    value="{{value.1}}"
+    placeholder="{{_ 'End Time'}}"
+    {{#each field.attributes}}
+      {{@key}}="{{this}}"
+    {{/each}}
+  />
+</div>

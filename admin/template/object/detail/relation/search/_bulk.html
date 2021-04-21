@@ -1,0 +1,24 @@
+<div id="bulk-actions-{{name}}-{{uuid}}" class="tab-head d-none">
+  <button
+    class="btn btn-block btn-outline-primary mr-1"
+    data-do="panel-mobile-forward"
+    data-on="click"
+    data-template="/admin/spa/system/collection/{{schema.name}}/{{schema.id}}/unlink/{{name}}"
+    data-form="#table-form-{{name}}-{{uuid}}"
+    type="button"
+  >
+    <i class="fas fa-fw fa-unlink"></i>
+    {{_ 'Unlink'}}
+  </button>
+  <button
+    class="btn btn-block btn-outline-danger ml-1"
+    data-do="panel-mobile-forward"
+    data-on="click"
+    data-template="/admin/spa/system/collection/{{name}}/remove"
+    data-form="#table-form-{{name}}-{{uuid}}"
+    type="button"
+  >
+    <i class="fas fa-fw fa-times"></i>
+    {{_ 'Remove'}}
+  </button>
+</div>

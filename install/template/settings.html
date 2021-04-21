@@ -1,0 +1,88 @@
+<section class="layout-panel no-sidebar-left no-sidebar-right">
+  {{> install_left}}
+  <section class="panel-main">
+    {{> install_head}}
+    <h3 class="panel-title">
+      <i class="fas fa-fas fa-cog"></i>
+      {{_ 'Settings'}}
+    </h3>
+    <div class="panel-body">
+      <form class="row" method="post">
+        <div class="col-md-5">
+          {{#field name="name" type="text" required="required" placeholder="eg. My Site" value=name}}
+            <div class="form-group form-group-{{type}}">
+              <label class="control-label">{{_ 'Site Title'}}</label>
+              <div class="form-field">
+                {{{control}}}
+              </div>
+            </div>
+          {{/field}}
+          {{#field name="email" type="email" placeholder="eg. john@doe.com" value=email}}
+            <div class="form-group form-group-{{type}}">
+              <label class="control-label">{{_ 'Email Address'}}</label>
+              <div class="form-field">
+                {{{control}}}
+              </div>
+              <div class="help-text">
+                <strong>{{_ 'Note:'}}</strong>
+                {{_ 'The system will send logs and errors to this email. Leave blank if you do not want to be notified.'}}
+              </div>
+            </div>
+          {{/field}}
+          <div class="form-group form-group-select">
+            <label class="control-label">{{_ 'Timezone'}}</label>
+            <div class="form-field">
+              <select
+                class="form-control system-form-control"
+                data-do="select-field"
+                data-use-select2="1"
+                data-value="{{./timezone}}"
+                name="timezone"
+              >
+                {{#timezones}}
+                  <option value="{{name}}">{{time_now}} ({{gmt}}) - {{name}}</option>
+                {{/timezones}}
+              </select>
+            </div>
+          </div>
+          <div class="form-group form-group-select">
+            <label class="control-label">{{_ 'Default Language'}}</label>
+            <div class="form-field">
+              <select
+                class="form-control system-form-control"
+                data-do="select-field"
+                data-use-select2="1"
+                data-value="{{language}}"
+                name="language"
+              >
+                <option value="en_US">English</option>
+                <option value="es_ES">Spanish</option>
+                <option value="fr_FR">French</option>
+                <option value="th_TH">Thai</option>
+                <option value="cmn_CN">Chinese</option>
+                <option value="tl_PH">Tagalog</option>
+              </select>
+            </div>
+          </div>
+          {{#field name="currency" type="currency" required="required" value=currency}}
+            <div class="form-group form-group-{{type}}">
+              <label class="control-label">{{_ 'Default Currency'}}</label>
+              <div class="form-field">
+                {{{control}}}
+              </div>
+            </div>
+          {{/field}}
+          <div class="form-group form-group-submit">
+            <div class="form-field">
+              <button class="btn btn-secondary btn-block">{{_ 'Next'}}</button>
+            </div>
+            <div class="help-text">
+              <strong>{{_ 'Note:'}}</strong>
+              {{_ 'You can always change these settings later.'}}
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
+</section>

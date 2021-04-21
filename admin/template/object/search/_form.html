@@ -1,0 +1,48 @@
+<form id="search-form-{{schema.name}}-{{uuid}}" method="get" class="search-form mb-3">
+  <div class="input-group">
+    <div class="input-group-prepend">
+      <button
+        class="btn btn-large btn-outline-secondary"
+        type="button"
+        data-do="panel-mobile-open"
+        data-on="click"
+        data-template="#template-filters"
+      >
+          <i class="fas fa-filter"></i>
+      </button>
+    </div>
+    <input
+      type="text"
+      class="form-control"
+      name="q"
+      placeholder="{{_ 'Enter Keyword'}}"
+      value="{{q}}"
+    />
+    <div class="input-group-append">
+      <button class="btn btn-large btn-outline-primary" type="submit">
+        <i class="fas fa-search"></i>
+      </button>
+    </div>
+  </div>
+  {{#if schema.restorable}}
+    {{#unless active}}
+      <a class="btn btn-outline-secondary mt-3" href="?{{query 'filter'}}">
+        <i class="fas fa-times text-danger"></i>
+        <strong>{{_ 'Inactive'}}</strong>
+      </a>
+    {{/if}}
+  {{/if}}
+  {{#admin_filter schema.name filters}}
+    {{#if value}}
+      <a class="btn btn-outline-secondary mt-3" href="?{{query path}}">
+        <i class="fas fa-times text-danger"></i>
+        <strong>{{label}}</strong>:
+        {{#is_array value}}
+          {{join value ' - '}}
+        {{else}}
+          {{value}}
+        {{/is_array}}
+      </a>
+    {{/if}}
+  {{/admin_filter}}
+</form>

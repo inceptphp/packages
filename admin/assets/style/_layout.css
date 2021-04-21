@@ -1,0 +1,240 @@
+/* Flex Frame
+------------------------------*/
+
+.flex-frame {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+}
+
+/* Layout Panel
+------------------------------*/
+
+.layout-panel {
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Layout Panel - Main
+------------------------------*/
+
+.layout-panel .panel-main {
+  bottom: 0;
+  overflow: hidden;
+  position: absolute;
+  left: 220px;
+  right: 0;
+  top: 0;
+  transition: 1s;
+  overflow-y: scroll;
+}
+
+.layout-panel .panel-main .sidebar-show {
+  display: none;
+}
+
+.layout-panel .panel-main .panel-head .nav-notifications > .nav-link::after {
+  display: none;
+}
+
+.layout-panel .panel-main .panel-body {
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  left: 0;
+  overflow: hidden;
+  padding: 20px;
+  position: absolute;
+  right: 0;
+  top: 87px;
+}
+
+.layout-panel .panel-main .panel-title {
+  border-bottom: 1px solid rgba(0,0,0,.12);
+  color: #666666;
+  font-size: 14px;
+  font-weight: normal;
+  padding: 10px;
+}
+
+/* Layout Panel - Left Sidebar
+------------------------------*/
+
+.layout-panel .panel-sidebar-left {
+  bottom: 0;
+  overflow: hidden;
+  position: absolute;
+  left: 0;
+  top: 0;
+  transition: 1s;
+  width: 220px;
+  z-index: 100;
+}
+
+.layout-panel .panel-sidebar-left .panel-head {
+  padding: 14px;
+}
+
+.layout-panel .panel-sidebar-left .panel-head .sidebar-hide {
+  background-color: transparent;
+  border-width: 0;
+  display: none;
+  float: right;
+}
+
+.layout-panel .panel-sidebar-left .panel-head .panel-title {
+  color: #FFFFFF;
+  font-weight: 600;
+}
+
+.layout-panel .panel-sidebar-left .panel-head .panel-title img {
+  margin-right: 5px;
+  margin-top: -3px;
+}
+
+.layout-panel .panel-sidebar-left .nav-link .nav-right {
+  color: #FFFFFF;
+  float: right;
+}
+
+.layout-panel .panel-sidebar-left .nav-link {
+  color: #FFFFFF;
+  font-size: 13px;
+  line-height: 60px;
+  padding: 0 16px 0 7px;
+  text-decoration: none;
+  text-shadow: none;
+}
+
+.layout-panel .panel-sidebar-left .nav-link > i:first-child {
+  display: inline-block;
+  font-size: 18px;
+  margin-right: 2px;
+  min-width: 30px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.layout-panel .panel-sidebar-left .nav-opt {
+  color: #FFFFFF;
+  font-size: 13px;
+  height: 38px;
+  line-height: 36px;
+  padding: 0 16px 0 7px;
+  text-decoration: none;
+  text-shadow: none;
+}
+
+.layout-panel .panel-sidebar-left .nav-cat > i:first-child {
+  display: inline-block;
+  font-size: 18px;
+  margin-right: 2px;
+  min-width: 30px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.layout-panel .panel-sidebar-left .nav-link-sub {
+  color: #FFFFFF;
+  font-size: 13px;
+  height: 38px;
+  line-height: 36px;
+  padding: 0 16px 0 56px;
+  text-decoration: none;
+  text-shadow: none;
+}
+
+.layout-panel .panel-sidebar-left .nav-link-sub > i:first-child {
+  display: inline-block;
+  font-size: 18px;
+  margin-right: 2px;
+  min-width: 30px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.layout-panel .panel-sidebar-left .nav .nav .nav-link {
+  padding-left: 20px;
+}
+
+.layout-panel .panel-sidebar-left .nav .nav .nav-link-sub {
+  padding-left: 35px;
+}
+
+.layout-panel .panel-sidebar-left .nav-item.active,
+.layout-panel .panel-sidebar-left .nav-item-sub.active  {
+  font-weight: bold;
+  position: relative;
+}
+
+.layout-panel .panel-sidebar-left .nav-item.active::before,
+.layout-panel .panel-sidebar-left .nav-item-sub.active::before {
+  bottom: 0;
+  left: 0;
+  content: " ";
+  position: absolute;
+  top: 0;
+  width: 5px;
+}
+
+/* Layout Panel - Right Sidebar
+------------------------------*/
+
+.layout-panel .panel-sidebar-right {
+  align-items: flex-start;
+  bottom: 0;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  overflow: hidden;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: 1s;
+  width: 550px;
+  z-index: 99;
+}
+
+.layout-panel .panel-sidebar-right .panel-head {
+  padding: 10px;
+}
+
+.layout-panel.no-sidebar-right .panel-sidebar-right {
+  right: -550px;
+}
+
+@media(max-width: 992px) {
+  .layout-panel .panel-main {
+    left: 0 !important;
+  }
+  .layout-panel .panel-main .sidebar-show {
+    display: inline-block;
+  }
+  .layout-panel .panel-sidebar-left .panel-head .sidebar-hide {
+    display: inline-block;
+  }
+  .layout-panel.no-sidebar-left .panel-main {
+    left: 0px;
+  }
+  .layout-panel.no-sidebar-left .panel-sidebar-left {
+    left: -220px;
+  }
+}
+
+@media(max-width: 600px) {
+  .layout-panel .panel-sidebar-right {
+    width: 100%;
+  }
+
+  .layout-panel.no-sidebar-right .panel-sidebar-right {
+    right: -100%;
+  }
+
+  .layout-panel .panel-main .panel-body {
+    margin: 0;
+    padding: 10px;
+    top: 87px;
+  }
+}

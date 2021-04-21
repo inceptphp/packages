@@ -1,0 +1,38 @@
+<aside class="panel-sidebar-left">
+  <header class="panel-head">
+    <button
+      class="sidebar-hide"
+      data-do="add-class"
+      data-name="no-sidebar-left"
+      data-on="click"
+      data-selector="section.layout-panel"
+      type="button"
+    >
+      <i class="fas fa-chevron-left"></i>
+    </button>
+    <a class="panel-title" href="/">
+      {{config 'settings' 'name'}}
+    </a>
+  </header>
+
+  <ul class="nav flex-column">
+    {{#response 'page'}}
+      {{#each install_steps}}
+        <li class="nav-item{{#if active}} active{{/if}}">
+          <a class="nav-link" href="{{path}}">
+            {{#if passed}}
+              <i class="fa fa-fas text-success fa-check-circle"></i>
+            {{else}}
+              {{#if active}}
+                <i class="fa fa-fas fa-check-circle"></i>
+              {{else}}
+                <i class="fa fa-fas {{icon}}"></i>
+              {{/if}}
+            {{/if}}
+            <span>{{label}}</span>
+          </a>
+        </li>
+      {{/each}}
+    {{/response}}
+  </ul>
+</aside>

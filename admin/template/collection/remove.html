@@ -1,0 +1,49 @@
+<!-- START: Head -->
+<header class="view-head">
+  <button
+    class="sidebar-hide"
+    data-do="panel-mobile-back"
+    data-on="click"
+    type="button"
+  >
+    <i class="fas fa-chevron-left"></i>
+  </button>
+  <h6 class="view-title">{{_ 'Remove %s' schema.plural}}</h6>
+</header>
+<!-- END: Head -->
+<!-- START: Body -->
+<section class="view-body no-scroll">
+  <div class="jumbotron m-2">
+    <p class="lead">
+      {{_ 'Are you sure you want to remove %s ?' schema.plural}}
+    </p>
+    <hr class="my-4" />
+    <form
+      class="bulk-form"
+      action="/admin/spa/system/collection/{{schema.name}}/remove/confirmed"
+      method="post"
+      data-do="panel-form"
+      data-on="submit"
+      data-after="reload"
+    >
+      {{#each ids}}
+        <input type="hidden" name="{{../schema.primary}}[]" value="{{this}}" />
+      {{/each}}
+      <button class="btn btn-secondary btn-lg">
+        <i class="fas fa-check"></i>
+        {{_ 'Confirmed'}}
+      </button>
+      <button
+        class="btn btn-outline-danger btn-lg"
+        data-do="panel-mobile-back"
+        data-on="click"
+        role="button"
+        type="button"
+      >
+        <i class="fas fa-ban"></i>
+        {{_ 'Cancel'}}
+      </button>
+    </form>
+  </div>
+</section>
+<!-- END: Body -->

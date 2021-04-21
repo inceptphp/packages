@@ -1,0 +1,55 @@
+<style>
+  {{> asset_style}}
+</style>
+<h3 class="panel-title">
+  <span class="font-weight-normal">
+    <i class="fas fa-home fa-fw"></i>
+    <a href="/admin">{{_ 'Admin'}}</a>
+  </span>
+
+  <i class="fas fa-chevron-right fa-fw text-gray"></i>
+
+  <i class="fas fa-database fa-fw"></i>
+  {{_ title}}
+</h3>
+<div class="panel-body search-table">
+  <div class="row">
+    <div class="col-12 col-md-6">
+      <h3 class="text-uppercase text-center text-md-left">
+        {{#when total '===' 1}}
+          {{_ '%s Fieldset' total}}
+        {{else}}
+          {{_ '%s Fieldsets' total}}
+        {{/when}}
+      </h3>
+    </div>
+    <div class="col-12 col-md-6">
+      {{> search_links}}
+    </div>
+  </div>
+  {{> search_tabs}}
+  {{#if rows.length}}
+    <form class="table-form table-scroll">
+      <table class="table table-striped">
+        <thead>
+          {{> search_head}}
+        </thead>
+        <tbody>
+          {{#each rows}}
+            {{> search_row}}
+          {{/each}}
+        </tbody>
+      </table>
+    </form>
+  {{else}}
+    <div class="alert alert-info mt-4">
+      <i class="fas fa-info-circle"></i>
+      {{_ 'No results found.'}}
+    </div>
+  {{/if}}
+</div>
+
+<script type="text/javascript">
+  {{> asset_script}}
+  {{> field_script}}
+</script>
