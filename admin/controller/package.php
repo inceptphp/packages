@@ -23,6 +23,32 @@ $this('http')->get('/admin/package/search', function(
   // 1. Prepare Data
   $data['rows'] = $this('config')->get('packages');
 
+  foreach ($data['rows'] as $i => $row) {
+    //get the real path
+    $path = $this($row['name'])->getPackagePath();
+    //if no path
+    if (!$path) {
+      //skip
+      continue;
+    }
+
+    //make the file name
+    $file = sprintf('%s/.incept.json', $path);
+    //if file does not exists
+    if (!file_exists($file)) {
+      //try another file name
+      $file = sprintf('%s/composer.json', $path);
+    }
+
+    //if file exists
+    if (file_exists($file)) {
+      //parse the file
+      $info = json_decode(file_get_contents($file), true);
+      //add to rows
+      $data['rows'][$i]['info'] = $info;
+    }
+  }
+
   //----------------------------//
   // 2. Render Template
   $data['title'] = $this('lang')->translate('Packages');

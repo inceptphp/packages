@@ -1,0 +1,9 @@
+{
+  "name": "Incept Commandline",
+  "description": "Commandline tools for developers",
+  "author": "The Incept Team",
+  "website": "https://www.incept.asia/",
+  "image": "https://www.incept.asia/images/logo/incept-logo-square-1.png",
+  "path": "inceptphp/packages/developer",
+  "version": "0.0.0"
+}

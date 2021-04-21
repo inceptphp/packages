@@ -177,7 +177,7 @@ $this('http')->post('/install', function(
     //get all the packages
     $packages = $config->get('packages');
     foreach ($packages as $i => $package) {
-      if ($package['path'] === 'inceptphp/packages/install') {
+      if ($package['name'] === 'inceptphp/packages/install') {
         $packages[$i]['active'] = false;
       }
     }

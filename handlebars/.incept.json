@@ -1,0 +1,9 @@
+{
+  "name": "Handlebars",
+  "description": "Handlebars integration",
+  "author": "PHP Usergroup Philippines",
+  "website": "https://github.com/phpugph",
+  "image": "https://i0.wp.com/blog.fossasia.org/wp-content/uploads/2017/07/handlebars-js.png",
+  "path": "inceptphp/packages/handlebars",
+  "version": "0.0.0"
+}
