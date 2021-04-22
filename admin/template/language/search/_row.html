@@ -4,12 +4,22 @@
   </td>
   <td class="freeze-right text-center">
     <a
+      class="mr-3"
       data-do="panel-mobile-open"
       data-on="click"
-      data-template="/admin/spa/language/translate/{{this}}"
+      data-template="/admin/spa/language/update/{{this}}"
       href="javascript:void(0)"
     >
-      <i class="fas fa-fw fa-eye"></i>
+      <i class="fas fa-fw fa-edit"></i>
+    </a>
+    <a
+      class="text-danger"
+      data-do="panel-mobile-open"
+      data-on="click"
+      data-template="/admin/spa/language/remove/{{this}}"
+      href="javascript:void(0)"
+    >
+      <i class="fas fa-fw fa-times"></i>
     </a>
   </td>
 </tr>

@@ -9,6 +9,9 @@
 use UGComponents\IO\Request\RequestInterface;
 use UGComponents\IO\Response\ResponseInterface;
 
+/* Search Routes
+-------------------------------- */
+
 /**
  * Manages installed packages
  *
@@ -79,6 +82,9 @@ $this('http')->get('/admin/package/search', function(
   $this('admin')->render($request, $response);
 });
 
+/* Confirm Routes
+-------------------------------- */
+
 /**
  * Renders package disable screen
  *
@@ -126,7 +132,7 @@ $this('http')->get('/admin/spa/package/enable/:index', function (
 
   //----------------------------//
   // 2. Render Template
-  $template = dirname(__DIR__) . '/template/package';
+  $template = dirname(__DIR__) . '/template/object';
   if (is_dir($response->getPage('template_root'))) {
     $template = $response->getPage('template_root');
   }
@@ -212,7 +218,7 @@ $this('http')->get('/admin/spa/package/disable/:index', function (
 
   //----------------------------//
   // 2. Render Template
-  $template = dirname(__DIR__) . '/template/package';
+  $template = dirname(__DIR__) . '/template/object';
   if (is_dir($response->getPage('template_root'))) {
     $template = $response->getPage('template_root');
   }
@@ -298,7 +304,7 @@ $this('http')->get('/admin/spa/package/uninstall/:index', function (
 
   //----------------------------//
   // 2. Render Template
-  $template = dirname(__DIR__) . '/template/package';
+  $template = dirname(__DIR__) . '/template/object';
   if (is_dir($response->getPage('template_root'))) {
     $template = $response->getPage('template_root');
   }

@@ -14,27 +14,27 @@
         class="meta-input key form-control system-form-control"
         type="text"
         placeholder="{{../attributes.data-placeholder-key}}"
-        value="{{@key}}"
+        value="{{{@key}}}"
       />
       {{#when ../attributes.data-field '===' 'input'}}
         <input
           class="meta-input value form-control system-form-control"
           type="text"
           placeholder="{{../attributes.data-placeholder-value}}"
-          value="{{thhis}}"
+          value="{{{this}}}"
         />
       {{else}}
         <textarea
           class="meta-input value form-control system-form-control"
           placeholder="{{../attributes.data-placeholder-value}}"
           rows="1"
-        >{{this}}</textarea>
+        >{{{this}}}</textarea>
       {{/when}}
       <input
         class="system-form-control"
         type="hidden"
-        name="{{../name}}[{{@key}}]"
-        value="{{this}}"
+        name="{{../name}}[{{{@key}}}]"
+        value="{{{this}}}"
       />
       <div class="input-group-append">
         <a
