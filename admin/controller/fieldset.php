@@ -77,8 +77,8 @@ $this('http')->get('/admin/system/fieldset/search', function (
 
   //set content
   $response
-    ->setPage('title', $data['title'])
-    ->setPage('class', $class)
+    ->set('page', 'title', $data['title'])
+    ->set('page', 'class', $class)
     ->setContent($body);
 
   //render page
@@ -340,7 +340,7 @@ $this('http')->get('/admin/system/fieldset/export', function(
   //check if ZipArchive is installed
   if (!class_exists('ZipArchive')) {
     //add a flash
-    $request->setSession('flash', [
+    $response->setSession('flash', [
       'message' => $this('lang')->translate('ZipArchive module not found'),
       'type' => 'error'
     ]);
@@ -356,7 +356,7 @@ $this('http')->get('/admin/system/fieldset/export', function(
   //try to open
   if (!$zip->open($tmp, ZipArchive::CREATE | ZipArchive::OVERWRITE)) {
     //add a flash
-    $request->setSession('flash', [
+    $response->setSession('flash', [
       'message' => $this('lang')->translate('Failed to create archive'),
       'type' => 'error'
     ]);
@@ -384,7 +384,7 @@ $this('http')->get('/admin/system/fieldset/export', function(
   //check if file exists
   if (!file_exists($tmp)) {
     //add a flash
-    $request->setSession('flash', [
+    $response->setSession('flash', [
       'message' => $this('lang')->translate('Failed to create archive'),
       'type' => 'error'
     ]);
@@ -430,7 +430,7 @@ $this('http')->get('/admin/system/fieldset/export/:name', function(
   //file does not exists?
   if (!file_exists($file)) {
     //add a flash
-    $request->setSession('flash', [
+    $response->setSession('flash', [
       'message' => $this('lang')->translate('Not Found'),
       'type' => 'error'
     ]);
@@ -551,7 +551,7 @@ $this('http')->post('/admin/spa/system/fieldset/import', function(
     );
 
     //add a flash
-    $request->setSession('flash', [
+    $response->setSession('flash', [
       'message' => $this('lang')->translate('System Fieldset was Imported'),
       'type' => 'success'
     ]);
@@ -640,7 +640,7 @@ $this('http')->post('/admin/spa/system/fieldset/import', function(
 
   //it was good
   //add a flash
-  $request->setSession('flash', [
+  $response->setSession('flash', [
     'message' => $this('lang')->translate('System Fieldset was Imported'),
     'type' => 'success'
   ]);

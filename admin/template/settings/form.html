@@ -1,0 +1,177 @@
+<h3 class="panel-title">
+  <span class="font-weight-normal">
+    <i class="fas fa-home fa-fw"></i>
+    <a href="/admin">{{_ 'Admin'}}</a>
+  </span>
+
+  <i class="fas fa-chevron-right fa-fw text-gray"></i>
+
+  <i class="fas fa-fas fa-cog"></i>
+  {{_ 'Settings'}}
+</h3>
+<div class="panel-body overflow-auto">
+  <form class="row" method="post">
+    <div class="col-md-5">
+      <div class="form-group form-group-text">
+        <label class="control-label">{{_ 'Site Title'}}</label>
+        <div class="form-field">
+          {{{field name="name" type="text" required="required" placeholder="eg. My Site" value=name}}}
+        </div>
+      </div>
+      <div class="form-group form-group-email">
+        <label class="control-label">{{_ 'Email Address'}}</label>
+        <div class="form-field">
+          {{{field name="email" type="email" placeholder="eg. john@doe.com" value=email}}}
+        </div>
+        <div class="help-text">
+          <strong>{{_ 'Note:'}}</strong>
+          {{_ 'The system will send logs and errors to this email. Leave blank if you do not want to be notified.'}}
+        </div>
+      </div>
+      <div class="form-group form-group-select">
+        <label class="control-label">{{_ 'Timezone'}}</label>
+        <div class="form-field">
+          <select
+            class="form-control system-form-control"
+            data-do="select-field"
+            data-use-select2="1"
+            data-value="{{./timezone}}"
+            name="timezone"
+          >
+            {{#timezones}}
+              <option value="{{name}}">{{time_now}} ({{gmt}}) - {{name}}</option>
+            {{/timezones}}
+          </select>
+        </div>
+      </div>
+      <div class="form-group form-group-select">
+        <label class="control-label">{{_ 'Default Language'}}</label>
+        <div class="form-field">
+          <select
+            class="form-control system-form-control"
+            data-do="select-field"
+            data-use-select2="1"
+            data-value="{{language}}"
+            name="language"
+          >
+            <option value="en_US">English</option>
+            <option value="es_ES">Spanish</option>
+            <option value="fr_FR">French</option>
+            <option value="th_TH">Thai</option>
+            <option value="cmn_CN">Chinese</option>
+            <option value="tl_PH">Tagalog</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group form-group-select">
+        <label class="control-label">{{_ 'Default Currency'}}</label>
+        <div class="form-field">
+          {{{field name="currency" type="currency" required="required" value=currency}}}
+        </div>
+      </div>
+      <div class="form-group form-group-text">
+        <label class="control-label">{{_ 'Homepage Path'}}</label>
+        <div class="form-field">
+          {{{field name="home" type="text" required="required" placeholder="eg. /my/path" value=home}}}
+        </div>
+        <div class="help-text">
+          <strong>{{_ 'Note:'}}</strong>
+          {{_ 'This will be the first page a user will see.'}}
+        </div>
+      </div>
+      <div class="form-group form-group-switch">
+        <label class="control-label">{{_ 'Force HTTPS'}}</label>
+        <div class="form-field">
+          {{{field name="https" type="switch" value=https}}}
+        </div>
+      </div>
+      <div class="form-group form-group-select">
+        <label class="control-label">{{_ 'Environment'}}</label>
+        <div class="form-field">
+          <select
+            class="form-control system-form-control"
+            data-do="select-field"
+            data-use-select2="1"
+            data-value="{{environment}}"
+            name="environment"
+          >
+            <option value="dev">Development</option>
+            <option value="live">Live</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group form-group-select">
+        <label class="control-label">{{_ 'Error Reporting'}}</label>
+        <div class="form-field">
+          <select
+            class="form-control system-form-control"
+            data-do="select-field"
+            data-use-select2="1"
+            data-value="{{debug_mode}}"
+            name="debug_mode"
+          >
+            {{#when debug_mode '==' 0}}
+              <option value="0" selected>
+                {{_ 'Hide all kinds of errors'}}
+              </option>
+            {{else}}
+              <option value="0">
+                {{_ 'Hide all kinds of errors'}}
+              </option>
+            {{/when}}
+            {{#when debug_mode '==' 1}}
+              <option value="1" selected>
+                {{_ 'Show fatal run-time errors only'}}
+              </option>
+            {{else}}
+              <option value="1">
+                {{_ 'Show fatal run-time errors only'}}
+              </option>
+            {{/when}}
+            {{#when debug_mode '==' 2}}
+              <option value="2" selected>
+                {{_ 'Show warnings only'}}
+              </option>
+            {{else}}
+              <option value="2">
+                {{_ 'Show warnings only'}}
+              </option>
+            {{/when}}
+            {{#when debug_mode '==' 4}}
+              <option value="4" selected>
+                {{_ 'Show parse errors only'}}
+              </option>
+            {{else}}
+              <option value="4">
+                {{_ 'Show parse errors only'}}
+              </option>
+            {{/when}}
+            {{#when debug_mode '==' 8}}
+              <option value="8" selected>
+                {{_ 'Show notices only'}}
+              </option>
+            {{else}}
+              <option value="8">
+                {{_ 'Show notices only'}}
+              </option>
+            {{/when}}
+            {{#when debug_mode '==' 32767}}
+              <option value="32767" selected>
+                {{_ 'Show all kinds of errors'}}
+              </option>
+            {{else}}
+              <option value="32767">
+                {{_ 'Show all kinds of errors'}}
+              </option>
+            {{/when}}
+          </select>
+        </div>
+      </div>
+      <div class="form-group form-group-submit">
+        <div class="form-field">
+          <button class="btn btn-secondary btn-block">{{_ 'Save'}}</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

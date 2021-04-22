@@ -19,8 +19,10 @@ $this->register('admin')->package('admin')
     ResponseInterface $response,
     string $layout = 'app'
   ): string {
+    //this is the same as incept()
     $handler = $this->getPackageHandler();
 
+    //determine the menu
     $menu = $response->get('menu');
     if (!is_array($menu)) {
       $menu = $handler('config')->get('menu');
@@ -53,8 +55,15 @@ $this->register('admin')->package('admin')
       }
     }
 
+    //deal with flash messages
+    if ($request->hasSession('flash')) {
+      $flash = $request->getSession('flash');
+      $response->set('page', 'flash', $flash);
+      $response->removeSession('flash');
+    }
+
     $data = [
-      'page' => $response->getPage(),
+      'page' => $response->get('page'),
       'results' => $response->getResults(),
       'content' => $response->getContent(),
       'i18n' => $request->getSession('i18n'),

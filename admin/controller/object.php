@@ -106,8 +106,8 @@ $this('http')->get('/admin/system/object/:schema/search', function (
 
   //set content
   $response
-    ->setPage('title', $data['title'])
-    ->setPage('class', 'page-admin-system-object-search page-admin')
+    ->set('page', 'title', $data['title'])
+    ->set('page', 'class', 'page-admin-system-object-search page-admin')
     ->setContent($body);
 
   //if we only want the body

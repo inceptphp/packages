@@ -66,8 +66,8 @@ $this('http')->get('/admin/package/search', function(
 
   //set content
   $response
-    ->setPage('title', $data['title'])
-    ->setPage('class', 'page-admin-package-search page-admin')
+    ->set('page', 'title', $data['title'])
+    ->set('page', 'class', 'page-admin-package-search page-admin')
     ->setContent($body);
 
   //if we only want the body

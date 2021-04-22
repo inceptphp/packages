@@ -17,7 +17,7 @@
     {{#when value '==' 1}}
       checked
     {{/when}}
-    {{#each.attributes}}
+    {{#each attributes}}
       {{#when @key '!==' 'placeholder'}}
         {{@key}}="{{this}}"
       {{/when}}

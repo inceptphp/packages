@@ -9,8 +9,8 @@ require_once __DIR__ . '/controller/field.php';
 require_once __DIR__ . '/controller/fieldset.php';
 require_once __DIR__ . '/controller/object.php';
 require_once __DIR__ . '/controller/package.php';
+require_once __DIR__ . '/controller/settings.php';
 
 require_once __DIR__ . '/boot/methods.php';
 require_once __DIR__ . '/boot/helpers.php';
-
-require_once __DIR__ . '/errors.php';
+require_once __DIR__ . '/boot/errors.php';
