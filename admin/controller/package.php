@@ -28,7 +28,21 @@ $this('http')->get('/admin/package/search', function(
 
   foreach ($data['rows'] as $i => $row) {
     //get the real path
-    $path = $this($row['name'])->getPackagePath();
+    if ($row['active']) {
+      $path = $this($row['name'])->getPackagePath();
+    } else {
+      $path = null;
+      //if it starts with / like /foo/bar
+      if (strpos($row['name'], '/') === 0) {
+        //it's a root package
+        $path = INCEPT_CWD . $row['name'];
+      //if theres a slash like foo/bar
+      } else if (strpos($row['name'], '/') !== false) {
+        //it's vendor package
+        $path = sprintf('%s/vendor/%s', INCEPT_CWD, $row['name']);
+      }
+    }
+
     //if no path
     if (!$path) {
       //skip
