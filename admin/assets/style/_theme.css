@@ -120,6 +120,11 @@ a:visited {
   box-shadow: none;
 }
 
+.card {
+  background-color: transparent;
+  border-color: #929AAD;
+}
+
 .input-group .input-group-text {
   background-color: #373D49;
   border: 1px solid #272C36;

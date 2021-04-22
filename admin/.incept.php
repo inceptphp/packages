@@ -11,7 +11,19 @@ require_once __DIR__ . '/controller/object.php';
 require_once __DIR__ . '/controller/package.php';
 require_once __DIR__ . '/controller/settings.php';
 require_once __DIR__ . '/controller/language.php';
+require_once __DIR__ . '/controller/view.php';
 
-require_once __DIR__ . '/boot/methods.php';
-require_once __DIR__ . '/boot/helpers.php';
-require_once __DIR__ . '/boot/errors.php';
+require_once __DIR__ . '/helpers.php';
+
+use Incept\Package\Admin\AdminPackage;
+
+$this
+  //Register a pseudo package admin
+  ->register('admin')
+  //then load the package
+  ->package('admin')
+  //map the package with the event package class methods
+  ->mapPackageMethods($this('resolver')->resolve(AdminPackage::class, $this));
+
+//set an error handler
+$this->error([$this('admin'), 'error']);

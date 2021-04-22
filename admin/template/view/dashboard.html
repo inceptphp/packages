@@ -1,0 +1,105 @@
+<h3 class="panel-title">
+  <span class="font-weight-normal">
+    <i class="fas fa-home fa-fw"></i>
+    <a href="/admin">{{_ 'Admin'}}</a>
+  </span>
+
+  <i class="fas fa-chevron-right fa-fw text-gray"></i>
+
+  <i class="fas fa-fas fa-chart-line"></i>
+  {{_ 'Dashboard'}}
+</h3>
+<div class="panel-body overflow-auto">
+  <h3 class="text-uppercase text-center text-md-left">
+    <i class="fas fa-fas fa-chart-line"></i>
+    {{_ 'Dashboard'}}
+  </h3>
+  <div class="row my-4">
+    <div class="col-md-4">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="card-title">{{_ 'Get Started'}}</h5>
+          <hr class="border-secondary" />
+          <a
+            href="https://www.inceptful.tech/docs/installation.html"
+            class="btn btn-block btn-default btn-lg"
+            target="_blank"
+          >
+            <i class="fas fa-book"></i>
+            {{_ 'View Docs'}}
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="card-title">{{_ 'Next Steps'}}</h5>
+          <hr class="border-secondary" />
+          <ul class="list-unstyled">
+            <li class="pb-2">
+              <i class="fas fa-database fa-fw"></i>
+              <a href="/admin/system/schema/search">
+                {{_ 'Create a Schema'}}
+              </a>
+            </li>
+            <li>
+              <i class="fas fa-clipboard fa-fw"></i>
+              <a href="/admin/system/fieldset/search">
+                {{_ 'Create a Fieldset'}}
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="card-title">{{_ 'More Actions'}}</h5>
+          <hr class="border-secondary" />
+          <ul class="list-unstyled">
+            <li class="pb-2">
+              <i class="fas fa-cog fa-fw"></i>
+              <a href="/admin/settings">
+                {{_ 'Update Settings'}}
+              </a>
+            </li>
+            <li class="pb-2">
+              <i class="fas fa-cubes fa-fw"></i>
+              <a href="/admin/package/search">
+                {{_ 'Manage Packages'}}
+              </a>
+            </li>
+            <li>
+              <i class="fas fa-language fa-fw"></i>
+              <a href="/admin/language/search">
+                {{_ 'Manage Translations'}}
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">
+        <i class="fas fa-newspaper"></i>
+        {{_ 'Content'}}
+      </h5>
+      <hr class="border-secondary" />
+      <div class="row">
+        {{#each schemas}}
+          <div class="col-md-6 py-1">
+            <span class="counter font-weight-bold">
+              {{numshort records 1}}
+            </span>
+            <a href="{{path}}">{{label}}</a>
+          </div>
+        {{/each}}
+      </div>
+    </div>
+  </div>
+</div>

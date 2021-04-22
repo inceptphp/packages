@@ -18,6 +18,7 @@
       "Incept\\Package\\Validator\\": "validators/",
       "Incept\\Package\\Formatter\\": "formatters/",
       "Incept\\Package\\Handlebars\\": "handlebars/",
+      "Incept\\Package\\Admin\\": "admin/",
       "Incept\\Package\\Storm\\": "storm/"
     }
   }
