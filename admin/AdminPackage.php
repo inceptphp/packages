@@ -199,28 +199,7 @@ class AdminPackage
       $menu = [];
     }
 
-    $host = $host->all();
-    foreach ($menu as $i => $item) {
-      if (isset($item['submenu']) && is_array($item['submenu'])) {
-        $active = false;
-        foreach ($item['submenu'] as $j => $subitem) {
-          if (isset($subitem['path']) && strpos($subitem['path'], $host['path']) === 0) {
-            $menu[$i]['submenu'][$j]['active'] = true;
-            $active = true;
-          }
-        }
-
-        if ($active) {
-          $menu[$i]['active'] = true;
-        }
-
-        continue;
-      }
-
-      if (strpos($item['path'], $host['path']) === 0) {
-        $menu[$i]['active'] = true;
-      }
-    }
+    $menu = $this->buildMenu($menu, $host->all());
 
     //deal with flash messages
     if ($request->hasSession('flash')) {
@@ -327,6 +306,41 @@ class AdminPackage
 
     //get the contents
     return $this->toXml($rows, new SimpleXMLElement($root))->asXML();
+  }
+
+  /**
+   * Helper to build the admin menu
+   *
+   * @param *array $menu
+   * @param *array $host
+   *
+   * @return array
+   */
+  protected function buildMenu(array $menu, array $host): array
+  {
+    foreach ($menu as $i => $item) {
+      if (isset($item['submenu']) && is_array($item['submenu'])) {
+        $active = false;
+        foreach ($item['submenu'] as $j => $subitem) {
+          if (isset($subitem['path']) && $subitem['path'] === $host['path']) {
+            $menu[$i]['submenu'][$j]['active'] = true;
+            $active = true;
+          }
+        }
+
+        if ($active) {
+          $menu[$i]['active'] = true;
+        }
+
+        continue;
+      }
+
+      if ($item['path'] === $host['path']) {
+        $menu[$i]['active'] = true;
+      }
+    }
+
+    return $menu;
   }
 
   /**
