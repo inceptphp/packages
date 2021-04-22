@@ -6,8 +6,8 @@
 
   <i class="fas fa-chevron-right fa-fw text-gray"></i>
 
-  <i class="fas fa-cubes"></i>
-  {{_ 'Packages'}}
+  <i class="fas fa-language"></i>
+  {{_ 'Languages'}}
 </h3>
 
 <div class="panel-body search-table">
@@ -15,11 +15,14 @@
     <div class="col-12 col-md-6">
       <h3 class="text-uppercase text-center text-md-left">
         {{#when row.length '===' 1}}
-          {{rows.length}} {{_ 'Package'}}
+          {{rows.length}} {{_ 'Language'}}
         {{else}}
-          {{rows.length}} {{_ 'Packages'}}
+          {{rows.length}} {{_ 'Languages'}}
         {{/when}}
       </h3>
+    </div>
+    <div class="col-12 col-md-6">
+      {{> search_links}}
     </div>
   </div>
   {{#if rows.length}}

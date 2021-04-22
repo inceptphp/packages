@@ -41,7 +41,7 @@ $this('http')->get('/admin/settings', function(
 
   //set content
   $response
-    ->set('page', 'title', $this('lang')->translate('Install - Settings'))
+    ->set('page', 'title', $this('lang')->translate('Settings'))
     ->set('page', 'class', 'page-admin-settings page-admin')
     ->setContent($body);
 

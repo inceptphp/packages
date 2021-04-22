@@ -1,0 +1,52 @@
+<form
+  class="form-mobile"
+  data-do="panel-form"
+  data-on="submit"
+  action="{{action}}"
+  data-after="{{after}}"
+  autocomplete="off"
+>
+  <!-- START: Head -->
+  <header class="view-head">
+    <button
+      class="sidebar-hide"
+      data-do="panel-mobile-back"
+      data-on="click"
+      type="button"
+    >
+      <i class="fas fa-chevron-left"></i>
+    </button>
+    <h6 class="view-title">
+      <i class="{{schema.icon}} d-inline-block mr-2"></i>
+      {{title}}
+    </h6>
+  </header>
+  <!-- END: Head -->
+  <!-- START: Body -->
+  <section class="view-body with-foot-1 schema-detail">
+    <!-- START: Language Code -->
+    <div class="form-group form-group-text">
+      <label class="control-label">{{_ 'Language Code'}}</label>
+      <div class="form-field">
+        {{{field name="filename" type="text" required="required" placeholder="eg. en_US" value=item.filename}}}
+      </div>
+    </div>
+    <!-- END: Language Code -->
+    <!-- START: Translations -->
+    <div class="form-group form-group-textarealist no-flex">
+      <label class="control-label">{{_ 'Translations'}}</label>
+      <div class="form-field mt-3">
+        {{{field name="translations" type="meta" data-placeholder-value="Translation" data-label-add="Add Translation" value=item.translations}}}
+      </div>
+    </div>
+    <!-- END: Translations -->
+  </section>
+  <!-- END: Body -->
+  <!-- START: Foot -->
+  <footer class="view-foot">
+    <button class="btn btn-secondary btn-block text-small">
+      <i class="fas fa-edit"></i> {{_ 'Submit'}}
+    </button>
+  </footer>
+  <!-- END: Foot -->
+</form>

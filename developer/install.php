@@ -121,39 +121,22 @@ $this('event')->on('install-mkdir', function (
   //load some packages
   $terminal = $this('terminal');
 
-  if (!is_dir(INCEPT_CWD . '/cache')) {
-    $terminal->system('Making ' . INCEPT_CWD . '/cache');
-    mkdir(INCEPT_CWD . '/cache', 0777);
-  }
+  $folders = [
+    INCEPT_CWD . '/cache',
+    INCEPT_CWD . '/cache/compiled',
+    INCEPT_CWD . '/cache/log',
+    INCEPT_CWD . '/config',
+    INCEPT_CWD . '/config/language',
+    INCEPT_CWD . '/config/schema',
+    INCEPT_CWD . '/config/fieldset',
+    INCEPT_CWD . '/public/upload'
+  ];
 
-  if (!is_dir(INCEPT_CWD . '/cache/compiled')) {
-    $terminal->system('Making ' . INCEPT_CWD . '/cache/compiled');
-    mkdir(INCEPT_CWD . '/cache/compiled', 0777);
-  }
-
-  if (!is_dir(INCEPT_CWD . '/cache/log')) {
-    $terminal->system('Making ' . INCEPT_CWD . '/cache/log');
-    mkdir(INCEPT_CWD . '/cache/log', 0777);
-  }
-
-  if (!is_dir(INCEPT_CWD . '/config')) {
-    $terminal->system('Making ' . INCEPT_CWD . '/config');
-    mkdir(INCEPT_CWD . '/config', 0777);
-  }
-
-  if (!is_dir(INCEPT_CWD . '/config/schema')) {
-    $terminal->system('Making ' . INCEPT_CWD . '/config/schema');
-    mkdir(INCEPT_CWD . '/config/schema', 0777);
-  }
-
-  if (!is_dir(INCEPT_CWD . '/config/fieldset')) {
-    $terminal->system('Making ' . INCEPT_CWD . '/config/fieldset');
-    mkdir(INCEPT_CWD . '/config/fieldset', 0777);
-  }
-
-  if (!is_dir(INCEPT_CWD . '/public/upload')) {
-    $terminal->system('Making ' . INCEPT_CWD . '/public/upload');
-    mkdir(INCEPT_CWD . '/public/upload', 0777);
+  foreach ($folders as $folder) {
+    if (!is_dir($folder)) {
+      $terminal->system(sprintf('Making %s', $folder));
+      mkdir($folder, 0777);
+    }
   }
 });
 
@@ -175,6 +158,7 @@ $this('event')->on('install-chmod', function (
     INCEPT_CWD . '/cache/compiled',
     INCEPT_CWD . '/cache/log',
     INCEPT_CWD . '/config',
+    INCEPT_CWD . '/config/language',
     INCEPT_CWD . '/config/schema',
     INCEPT_CWD . '/config/fieldset',
     INCEPT_CWD . '/public/upload'

@@ -23,7 +23,7 @@ use UGComponents\IO\Response\ResponseInterface;
  * @param RequestInterface $request
  * @param ResponseInterface $response
  */
-$this('event')->on('package-inceptphp/incept-storm-install', function (
+$this('event')->on('package-inceptphp/packages/storm-install', function (
   RequestInterface $request,
   ResponseInterface $response
 ) {
