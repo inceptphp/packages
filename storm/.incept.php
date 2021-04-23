@@ -10,11 +10,10 @@ require_once __DIR__ . '/events/storm/schema.php';
 require_once __DIR__ . '/events/storm/table.php';
 require_once __DIR__ . '/events/system/schema.php';
 require_once __DIR__ . '/events/system/table.php';
-require_once __DIR__ . '/events/cli.php';
-require_once __DIR__ . '/events/cli/build.php';
-require_once __DIR__ . '/events/cli/flush.php';
-require_once __DIR__ . '/events/cli/help.php';
-require_once __DIR__ . '/events/cli/install.php';
+require_once __DIR__ . '/package.php';
+require_once __DIR__ . '/package/build.php';
+require_once __DIR__ . '/package/flush.php';
+require_once __DIR__ . '/package/install.php';
 
 use Incept\Package\Storm\StormPackage;
 

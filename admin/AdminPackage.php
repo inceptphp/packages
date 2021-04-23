@@ -13,6 +13,8 @@ use Incept\Framework\Framework;
 use UGComponents\IO\Request\RequestInterface;
 use UGComponents\IO\Response\ResponseInterface;
 
+use Incept\Package\PackageTrait;
+
 use Throwable;
 use SimpleXMLElement;
 
@@ -25,14 +27,56 @@ use SimpleXMLElement;
  */
 class AdminPackage
 {
+  use PackageTrait;
+
+  /**
+   * @var *PackageHandler $handler
+   */
+  protected $handler;
+
   /**
    * Add handler for scope when routing
    *
-   * @param *Framework $handler
+   * @param *PackageHandler $handler
    */
   public function __construct(Framework $handler)
   {
     $this->handler = $handler;
+  }
+
+  /**
+   * Helper to build the admin menu
+   *
+   * @param *array $menu
+   * @param *array $host
+   *
+   * @return array
+   */
+  protected function buildMenu(array $menu, array $host): array
+  {
+    foreach ($menu as $i => $item) {
+      if (isset($item['submenu']) && is_array($item['submenu'])) {
+        $active = false;
+        foreach ($item['submenu'] as $j => $subitem) {
+          if (isset($subitem['path']) && $subitem['path'] === $host['path']) {
+            $menu[$i]['submenu'][$j]['active'] = true;
+            $active = true;
+          }
+        }
+
+        if ($active) {
+          $menu[$i]['active'] = true;
+        }
+
+        continue;
+      }
+
+      if ($item['path'] === $host['path']) {
+        $menu[$i]['active'] = true;
+      }
+    }
+
+    return $menu;
   }
 
   /**
@@ -147,6 +191,29 @@ class AdminPackage
     $this->sendMail($from, $to, $subject, $body);
 
     return true;
+  }
+
+  /**
+   * Flattens a multidimensional row into a singular one
+   *
+   * @param *array  $row
+   * @param *string $path
+   *
+   * @return array
+   */
+  protected function flattenRow(array $row, string $path = ''): array
+  {
+    $flat = [];
+    foreach($row as $key => $value) {
+      if (is_array($value)) {
+        $flat = array_merge($flat, $this->flattenRow($value, $path . $key . '/'));
+        continue;
+      }
+
+      $flat[$path . $key] = $row[$key];
+    }
+
+    return $flat;
   }
 
   /**
@@ -309,61 +376,34 @@ class AdminPackage
   }
 
   /**
-   * Helper to build the admin menu
+   * Helper to send mail
    *
-   * @param *array $menu
-   * @param *array $host
-   *
-   * @return array
+   * @param *array  $from
+   * @param *string $to
+   * @param *string $subject
+   * @param *string $body
    */
-  protected function buildMenu(array $menu, array $host): array
-  {
-    foreach ($menu as $i => $item) {
-      if (isset($item['submenu']) && is_array($item['submenu'])) {
-        $active = false;
-        foreach ($item['submenu'] as $j => $subitem) {
-          if (isset($subitem['path']) && $subitem['path'] === $host['path']) {
-            $menu[$i]['submenu'][$j]['active'] = true;
-            $active = true;
-          }
-        }
-
-        if ($active) {
-          $menu[$i]['active'] = true;
-        }
-
-        continue;
-      }
-
-      if ($item['path'] === $host['path']) {
-        $menu[$i]['active'] = true;
-      }
-    }
-
-    return $menu;
-  }
-
-  /**
-   * Flattens a multidimensional row into a singular one
-   *
-   * @param *array  $row
-   * @param *string $path
-   *
-   * @return array
-   */
-  protected function flattenRow(array $row, string $path = ''): array
-  {
-    $flat = [];
-    foreach($row as $key => $value) {
-      if (is_array($value)) {
-        $flat = array_merge($flat, $this->flattenRow($value, $path . $key . '/'));
-        continue;
-      }
-
-      $flat[$path . $key] = $row[$key];
-    }
-
-    return $flat;
+  protected function sendMail(
+    array $from,
+    string $to,
+    string $subject,
+    string $body
+  ) {
+    //load some packages
+    $http = $this->handler->package('http');
+    //send it eventually
+    $http->postprocess(function() use ($from, $to, $subject, $body) {
+      $this->package('event')->call('email-send', [
+        'to' => [
+          [
+            'address' => $to
+          ]
+        ],
+        'from' => $from,
+        'subject' => $subject,
+        'plain' => $body
+      ]);
+    });
   }
 
   /**
@@ -402,36 +442,5 @@ class AdminPackage
     }
 
     return $xml;
-  }
-
-  /**
-   * Helper to send mail
-   *
-   * @param *array  $from
-   * @param *string $to
-   * @param *string $subject
-   * @param *string $body
-   */
-  protected function sendMail(
-    array $from,
-    string $to,
-    string $subject,
-    string $body
-  ) {
-    //load some packages
-    $http = $this->handler->package('http');
-    //send it eventually
-    $http->postprocess(function() use ($from, $to, $subject, $body) {
-      $this->package('event')->call('email-send', [
-        'to' => [
-          [
-            'address' => $to
-          ]
-        ],
-        'from' => $from,
-        'subject' => $subject,
-        'plain' => $body
-      ]);
-    });
   }
 }

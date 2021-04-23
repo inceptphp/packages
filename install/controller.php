@@ -133,7 +133,7 @@ $this('http')->post('/install', function(
   //dont ask questions
   $request->setStage('force', 1);
   //set database settings
-  $request->setStage(0, $services[$settings['pdo']]['name']);
+  $request->setStage('name', $services[$settings['pdo']]['name']);
   $request->setStage('host', $services[$settings['pdo']]['host']);
   $request->setStage('user', $services[$settings['pdo']]['user']);
   $request->setStage('pass', $services[$settings['pdo']]['pass']);

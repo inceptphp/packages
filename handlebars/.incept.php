@@ -6,7 +6,17 @@
  * distributed with this package.
  */
 
+require_once __DIR__ . '/package.php';
+
 use Incept\Package\Handlebars\HandlebarsPackage;
+
+$this
+  //then load the package
+  ->package('inceptphp/packages/handlebars')
+  //map the package with the event package class methods
+  ->mapPackageMethods($this('resolver')->resolve(HandlebarsPackage::class))
+  //use one global resolver
+  ->setResolverHandler($this('resolver')->getResolverHandler());
 
 $this
   //first register the package storm

@@ -14,8 +14,15 @@ require_once __DIR__ . '/controller/language.php';
 require_once __DIR__ . '/controller/view.php';
 
 require_once __DIR__ . '/helpers.php';
+require_once __DIR__ . '/package.php';
 
 use Incept\Package\Admin\AdminPackage;
+
+$this
+  //then load the package
+  ->package('inceptphp/packages/admin')
+  //map the package with the event package class methods
+  ->mapPackageMethods($this('resolver')->resolve(AdminPackage::class, $this));
 
 $this
   //Register a pseudo package admin

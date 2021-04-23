@@ -7,5 +7,14 @@
  */
 
 require_once __DIR__ . '/controller.php';
+require_once __DIR__ . '/package.php';
+
+use Incept\Package\Install\InstallPackage;
+
+$this
+  //then load the package
+  ->package('inceptphp/packages/install')
+  //map the package with the event package class methods
+  ->mapPackageMethods($this('resolver')->resolve(InstallPackage::class, $this));
 
 $this->preprocess(include __DIR__ . '/boot.php');

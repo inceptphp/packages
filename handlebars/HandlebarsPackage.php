@@ -8,6 +8,8 @@
 
 namespace Incept\Package\Handlebars;
 
+use Incept\Package\PackageTrait;
+use Incept\Framework\Framework;
 use Handlebars\HandlebarsHandler;
 
 /**
@@ -19,6 +21,8 @@ use Handlebars\HandlebarsHandler;
  */
 class HandlebarsPackage extends HandlebarsHandler
 {
+  use PackageTrait;
+
   /**
    * @var string path
    */

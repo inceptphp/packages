@@ -17,6 +17,8 @@ use Storm\SqlFactory;
 use Incept\Framework\Framework;
 use Incept\Framework\Package\PDO\PDOPackage;
 
+use Incept\Package\PackageTrait;
+
 /**
  * Storm Package
  *
@@ -26,10 +28,17 @@ use Incept\Framework\Package\PDO\PDOPackage;
  */
 class StormPackage
 {
+  use PackageTrait;
+
   /**
    * @var *array $connections
    */
   protected array $connections = [];
+
+  /**
+   * @var *PackageHandler $handler
+   */
+  protected $handler;
 
   /**
    * Add handler for scope when routing
