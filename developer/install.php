@@ -209,17 +209,10 @@ $this('event')->on('install-packages', function (
   $emitter = $this('event');
   $terminal = $this('terminal');
 
-  // get the packages
-  $packages = $this('config')->get('packages');
-
-  if (!is_array($packages)) {
-    return;
-  }
-
-  // on each packages
-  foreach ($packages as $package) {
-    $terminal->info(sprintf('Installing %s', $package['name']));
-    $event = sprintf('package-%s-install', $package['name']);
+  //for each packages
+  foreach ($this->getPackages() as $name => $package) {
+    $terminal->info(sprintf('Installing %s', $name));
+    $event = sprintf('package-%s-install', $name);
     $emitter->emit($event, $request, $response);
   }
 });

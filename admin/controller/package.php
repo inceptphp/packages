@@ -26,20 +26,20 @@ $this('http')->get('/admin/package/search', function(
   // 1. Prepare Data
   $data['rows'] = $this('config')->get('packages');
 
-  foreach ($data['rows'] as $i => $row) {
+  foreach ($data['rows'] as $name => $row) {
     //get the real path
     if ($row['active']) {
-      $path = $this($row['name'])->getPackagePath();
+      $path = $this($name)->getPackagePath();
     } else {
       $path = null;
       //if it starts with / like /foo/bar
-      if (strpos($row['name'], '/') === 0) {
+      if (strpos($name, '/') === 0) {
         //it's a root package
-        $path = INCEPT_CWD . $row['name'];
+        $path = INCEPT_CWD . $name;
       //if theres a slash like foo/bar
-      } else if (strpos($row['name'], '/') !== false) {
+      } else if (strpos($name, '/') !== false) {
         //it's vendor package
-        $path = sprintf('%s/vendor/%s', INCEPT_CWD, $row['name']);
+        $path = sprintf('%s/vendor/%s', INCEPT_CWD, $name);
       }
     }
 
@@ -62,7 +62,7 @@ $this('http')->get('/admin/package/search', function(
       //parse the file
       $info = json_decode(file_get_contents($file), true);
       //add to rows
-      $data['rows'][$i]['info'] = $info;
+      $data['rows'][$name]['info'] = $info;
     }
   }
 
@@ -105,7 +105,7 @@ $this('http')->get('/admin/package/search', function(
  * @param RequestInterface $request
  * @param ResponseInterface $response
  */
-$this('http')->get('/admin/spa/package/enable/:index', function (
+$this('http')->get('/admin/spa/package/enable/**', function (
   RequestInterface $request,
   ResponseInterface $response
 ) {
@@ -113,31 +113,67 @@ $this('http')->get('/admin/spa/package/enable/:index', function (
   // 1. Prepare Data
   $data = $request->getStage();
 
-  $index = $data['index'];
-  $packages = $this('config')->get('packages');
+  $name = implode('/', $request->get('route', 'variables'));
+  $package = $this('config')->get('packages', $name);
 
-  if (!isset($packages[$index])) {
+  if (!$package) {
     $response->setError(true, 'Invalid Package ID');
     return $this('admin')->invalid($response);
   }
 
+  //get the real path
+  if ($package['active']) {
+    $path = $this($name)->getPackagePath();
+  } else {
+    $path = null;
+    //if it starts with / like /foo/bar
+    if (strpos($name, '/') === 0) {
+      //it's a root package
+      $path = INCEPT_CWD . $name;
+    //if theres a slash like foo/bar
+    } else if (strpos($name, '/') !== false) {
+      //it's vendor package
+      $path = sprintf('%s/vendor/%s', INCEPT_CWD, $name);
+    }
+  }
+
+  //determine the label
+  $label = $name;
+
+  //if path
+  if ($path) {
+    //make the file name
+    $file = sprintf('%s/.incept.json', $path);
+    //if file does not exists
+    if (!file_exists($file)) {
+      //try another file name
+      $file = sprintf('%s/composer.json', $path);
+    }
+
+    //if file exists
+    if (file_exists($file)) {
+      //parse the file
+      $info = json_decode(file_get_contents($file), true);
+      if (isset($info['name'])) {
+        $label = $info['name'];
+      }
+    }
+  }
+
   //set title
   if (!isset($data['title'])) {
-    $data['title'] = $this('lang')->translate(
-      'Disable %s',
-      $packages[$index]['name']
-    );
+    $data['title'] = $this('lang')->translate('Disable %s', $label);
   }
   //set message
   if (!isset($data['message'])) {
     $data['message'] = $this('lang')->translate(
       'Are you sure you want to enable %s ?',
-      $packages[$index]['name']
+      $label
     );
   }
   //set the action
   if (!isset($data['action'])) {
-    $data['action'] = sprintf('/admin/spa/package/enable/%s/confirmed', $index);
+    $data['action'] = sprintf('/admin/spa/package/enable/%s', $name);
   }
   //after submit what then?
   if (!isset($data['after'])) {
@@ -165,23 +201,22 @@ $this('http')->get('/admin/spa/package/enable/:index', function (
  * @param RequestInterface $request
  * @param ResponseInterface $response
  */
-$this('http')->post('/admin/spa/package/enable/:index/confirmed', function (
+$this('http')->post('/admin/spa/package/enable/**', function (
   RequestInterface $request,
   ResponseInterface $response
 ) {
   //----------------------------//
   // 1. Prepare Data
-  $index = $request->getStage('index');
-  $packages = $this('config')->get('packages');
+  $name = implode('/', $request->get('route', 'variables'));
+  $package = $this('config')->get('packages', $name);
 
-  if (!isset($packages[$index])) {
+  if (!$package) {
     return $response->setError(true, 'Invalid Package ID');
   }
 
   //----------------------------//
   // 2. Process Request
-  $packages[$index]['active'] = true;
-  $this('config')->set('packages', $packages);
+  $this('config')->set('packages', $name, 'active', true);
   $response->setError(false);
 });
 
@@ -191,7 +226,7 @@ $this('http')->post('/admin/spa/package/enable/:index/confirmed', function (
  * @param RequestInterface $request
  * @param ResponseInterface $response
  */
-$this('http')->get('/admin/spa/package/disable/:index', function (
+$this('http')->get('/admin/spa/package/disable/**', function (
   RequestInterface $request,
   ResponseInterface $response
 ) {
@@ -199,31 +234,67 @@ $this('http')->get('/admin/spa/package/disable/:index', function (
   // 1. Prepare Data
   $data = $request->getStage();
 
-  $index = $data['index'];
-  $packages = $this('config')->get('packages');
+  $name = implode('/', $request->get('route', 'variables'));
+  $package = $this('config')->get('packages', $name);
 
-  if (!isset($packages[$index])) {
+  if (!$package) {
     $response->setError(true, 'Invalid Package ID');
     return $this('admin')->invalid($response);
   }
 
+  //get the real path
+  if ($package['active']) {
+    $path = $this($name)->getPackagePath();
+  } else {
+    $path = null;
+    //if it starts with / like /foo/bar
+    if (strpos($name, '/') === 0) {
+      //it's a root package
+      $path = INCEPT_CWD . $name;
+    //if theres a slash like foo/bar
+    } else if (strpos($name, '/') !== false) {
+      //it's vendor package
+      $path = sprintf('%s/vendor/%s', INCEPT_CWD, $name);
+    }
+  }
+
+  //determine the label
+  $label = $name;
+
+  //if path
+  if ($path) {
+    //make the file name
+    $file = sprintf('%s/.incept.json', $path);
+    //if file does not exists
+    if (!file_exists($file)) {
+      //try another file name
+      $file = sprintf('%s/composer.json', $path);
+    }
+
+    //if file exists
+    if (file_exists($file)) {
+      //parse the file
+      $info = json_decode(file_get_contents($file), true);
+      if (isset($info['name'])) {
+        $label = $info['name'];
+      }
+    }
+  }
+
   //set title
   if (!isset($data['title'])) {
-    $data['title'] = $this('lang')->translate(
-      'Disable %s',
-      $packages[$index]['name']
-    );
+    $data['title'] = $this('lang')->translate('Disable %s', $label);
   }
   //set message
   if (!isset($data['message'])) {
     $data['message'] = $this('lang')->translate(
-      'Are you sure you want to disable %s ?',
-      $packages[$index]['name']
+      'Are you sure you want to disable "%s"?',
+      $label
     );
   }
   //set the action
   if (!isset($data['action'])) {
-    $data['action'] = sprintf('/admin/spa/package/disable/%s/confirmed', $index);
+    $data['action'] = sprintf('/admin/spa/package/disable/%s', $name);
   }
   //after submit what then?
   if (!isset($data['after'])) {
@@ -251,23 +322,22 @@ $this('http')->get('/admin/spa/package/disable/:index', function (
  * @param RequestInterface $request
  * @param ResponseInterface $response
  */
-$this('http')->post('/admin/spa/package/disable/:index/confirmed', function (
+$this('http')->post('/admin/spa/package/disable/**', function (
   RequestInterface $request,
   ResponseInterface $response
 ) {
   //----------------------------//
   // 1. Prepare Data
-  $index = $request->getStage('index');
-  $packages = $this('config')->get('packages');
+  $name = implode('/', $request->get('route', 'variables'));
+  $package = $this('config')->get('packages', $name);
 
-  if (!isset($packages[$index])) {
+  if (!$package) {
     return $response->setError(true, 'Invalid Package ID');
   }
 
   //----------------------------//
   // 2. Process Request
-  $packages[$index]['active'] = false;
-  $this('config')->set('packages', $packages);
+  $this('config')->set('packages', $name, 'active', false);
   $response->setError(false);
 });
 
@@ -277,7 +347,7 @@ $this('http')->post('/admin/spa/package/disable/:index/confirmed', function (
  * @param RequestInterface $request
  * @param ResponseInterface $response
  */
-$this('http')->get('/admin/spa/package/uninstall/:index', function (
+$this('http')->get('/admin/spa/package/uninstall/**', function (
   RequestInterface $request,
   ResponseInterface $response
 ) {
@@ -285,31 +355,67 @@ $this('http')->get('/admin/spa/package/uninstall/:index', function (
   // 1. Prepare Data
   $data = $request->getStage();
 
-  $index = $data['index'];
-  $packages = $this('config')->get('packages');
+  $name = implode('/', $request->get('route', 'variables'));
+  $package = $this('config')->get('packages', $name);
 
-  if (!isset($packages[$index])) {
+  if (!$package) {
     $response->setError(true, 'Invalid Package ID');
     return $this('admin')->invalid($response);
   }
 
+  //get the real path
+  if ($package['active']) {
+    $path = $this($name)->getPackagePath();
+  } else {
+    $path = null;
+    //if it starts with / like /foo/bar
+    if (strpos($name, '/') === 0) {
+      //it's a root package
+      $path = INCEPT_CWD . $name;
+    //if theres a slash like foo/bar
+    } else if (strpos($name, '/') !== false) {
+      //it's vendor package
+      $path = sprintf('%s/vendor/%s', INCEPT_CWD, $name);
+    }
+  }
+
+  //determine the label
+  $label = $name;
+
+  //if path
+  if ($path) {
+    //make the file name
+    $file = sprintf('%s/.incept.json', $path);
+    //if file does not exists
+    if (!file_exists($file)) {
+      //try another file name
+      $file = sprintf('%s/composer.json', $path);
+    }
+
+    //if file exists
+    if (file_exists($file)) {
+      //parse the file
+      $info = json_decode(file_get_contents($file), true);
+      if (isset($info['name'])) {
+        $label = $info['name'];
+      }
+    }
+  }
+
   //set title
   if (!isset($data['title'])) {
-    $data['title'] = $this('lang')->translate(
-      'Uninstall %s',
-      $packages[$index]['name']
-    );
+    $data['title'] = $this('lang')->translate('Uninstall %s', $label);
   }
   //set message
   if (!isset($data['message'])) {
     $data['message'] = $this('lang')->translate(
       'Are you sure you want to uninstall %s ? This cannot be undone.',
-      $packages[$index]['name']
+      $label
     );
   }
   //set the action
   if (!isset($data['action'])) {
-    $data['action'] = sprintf('/admin/spa/package/uninstall/%s/confirmed', $index);
+    $data['action'] = sprintf('/admin/spa/package/uninstall/%s', $name);
   }
   //after submit what then?
   if (!isset($data['after'])) {
@@ -337,22 +443,22 @@ $this('http')->get('/admin/spa/package/uninstall/:index', function (
  * @param RequestInterface $request
  * @param ResponseInterface $response
  */
-$this('http')->post('/admin/spa/package/uninstall/:index/confirmed', function (
+$this('http')->post('/admin/spa/package/uninstall/**', function (
   RequestInterface $request,
   ResponseInterface $response
 ) {
   //----------------------------//
   // 1. Prepare Data
-  $index = $request->getStage('index');
+  $name = implode('/', $request->get('route', 'variables'));
   $packages = $this('config')->get('packages');
 
-  if (!isset($packages[$index])) {
+  if (!isset($packages[$name])) {
     return $response->setError(true, 'Invalid Package ID');
   }
 
   //----------------------------//
   // 2. Process Request
-  unset($packages[$index]);
-  $this('config')->set('packages', array_values($packages));
+  unset($packages[$name]);
+  $this('config')->set('packages', $packages);
   $response->setError(false);
 });
