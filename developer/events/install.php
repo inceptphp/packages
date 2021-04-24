@@ -261,7 +261,7 @@ $this('event')->on('install-packages', function (
 
     $terminal->info(sprintf('Installing %s', $name));
     $event = sprintf('%s-install', $name);
-    $emitter->emit($event, $request, $response);
+    $emitter->emit($event, $request->clone(), $response);
   }
 });
 

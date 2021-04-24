@@ -11,10 +11,7 @@ return [
     [
       'label' => 'First Name',
       'name' => 'first_name',
-      'field' => [
-        'type' => 'input',
-        'attributes' => [ 'type' => 'text' ]
-      ],
+      'field' => [ 'type' => 'text' ],
       'validation' => [
         [
           'method' => 'required',
@@ -31,10 +28,7 @@ return [
     [
       'label' => 'Last Name',
       'name' => 'last_name',
-      'field' => [
-        'type' => 'input',
-        'attributes' => [ 'type' => 'text' ]
-      ],
+      'field' => [ 'type' => 'text' ],
       'validation' => [
         [
           'method' => 'required',

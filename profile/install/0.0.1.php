@@ -51,10 +51,12 @@ incept(function() {
     if (!$payload['response']->isError()) {
       $terminal->system(sprintf(' - Schema %s was created', $data['name']));
       continue;
+    } else {
+      $terminal->error($payload['response']->getMessage(), false);
     }
 
     //for each error
-    foreach($payload['response']->getValidation() as $key => $message) {
+    foreach($payload['response']->getValidation() ?? [] as $key => $message) {
       //report error
       $terminal->error(sprintf('%s - %s', $data['name'], $message), false);
     }
