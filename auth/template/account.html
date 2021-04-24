@@ -1,0 +1,64 @@
+<!-- START: Auth Account Page -->
+<div class="auth-form container">
+  <!-- START: Auth Account Card -->
+  <div class="card" >
+    <!-- START: Panel Body -->
+    <div class="panel-body">
+      <!-- START: Card Title -->
+      <h5 class="card-title">{{_ 'Account Settings'}}</h5>
+      <!-- END: Card Title -->
+      <!-- START: Auth Signup Form -->
+      <form method="post">
+        <!-- START: Profile Required Fields -->
+        {{#format 'field' 'profile' item}}
+          {{#each formats}}
+            {{#in ../../profile_schema.required @key}}
+              {{> form_fieldset}}
+            {{/in}}
+          {{/each}}
+        {{/format}}
+        <!-- END: Profile Required Fields -->
+        <!-- START: Auth Required Fields -->
+        {{#format 'field' 'auth' item}}
+          {{#each formats}}
+            {{#in ../../auth_schema.required @key}}
+              {{> form_fieldset}}
+            {{/in}}
+            {{#when @key '===' 'auth_password'}}
+              <div class="form-group mt-2{{#if errors.confirm}} has-error{{/if}}">
+                <label class="control-label">{{_ 'Confirm'}}</label>
+                <div
+                  class="form-password system-form-field"
+                  data-name="confirm"
+                >
+                  <input
+                    autocomplete="off"
+                    type="password"
+                    name="confirm"
+                    placeholder="{{_ 'Confirm'}}"
+                    class="form-control"
+                    value=""
+                  />
+                  {{#if errors.confirm}}
+                    <span class="help-text">{{errors.confirm}}</span>
+                  {{/if}}
+                </div>
+              </div>
+            {{/when}}
+          {{/each}}
+        {{/format}}
+        <!-- END: Auth Required Fields -->
+        <!-- START: Form Submit -->
+        <div class="form-group">
+          <input type="hidden" name="csrf" value="{{csrf}}" />
+          <button class="btn btn-info btn-submit">{{_ 'Update'}}</button>
+        </div>
+        <!-- END: Form Submit -->
+      </form>
+      <!-- END: Auth Signup Form -->
+    </div>
+    <!-- END: Panel Body -->
+  </div>
+  <!-- END: Auth Account Panel -->
+</div>
+<!-- END: Auth Account Page -->

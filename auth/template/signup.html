@@ -1,0 +1,173 @@
+<!-- START: Auth Signup Page -->
+<div class="layout-auth-form">
+  <!-- START: Auth Signup Card -->
+  <div class="card" >
+    <!-- START: Panel Body -->
+    <div class="card-body">
+      <!-- START: Card Title -->
+      <h5 class="card-title">
+        {{#when type '===' 'email'}}
+          {{_ 'Email Sign up'}}
+        {{/when}}
+        {{#when type '===' 'phone'}}
+          {{_ 'Mobile Sign up'}}
+        {{/when}}
+      </h5>
+      <!-- END: Card Title -->
+      <!-- START: Auth Signup Form -->
+      <form class="text-left" method="post">
+        <!-- START: First & Last Name -->
+        <div class="form-group mt-2{{#if errors.profile_first_name}} has-error{{/if}}{{#if errors.profile_last_name}} has-error{{/if}}">
+          <div class="form-field">
+            <div class="input-group">
+              {{{field
+                type="text"
+                name="profile_first_name"
+                value=item.profile_first_name
+                placeholder="First Name"
+                required="required"
+              }}}
+              {{{field
+                type="text"
+                name="profile_last_name"
+                value=item.profile_last_name
+                placeholder="Last Name"
+                required="required"
+              }}}
+            </div>
+            {{#if errors.profile_first_name}}
+              <span class="help-text">{{errors.profile_first_name}}</span>
+            {{/if}}
+            {{#if errors.profile_last_name}}
+              <span class="help-text">{{errors.profile_last_name}}</span>
+            {{/if}}
+          </div>
+        </div>
+        <!-- END: First & Last Name -->
+        {{#when type '===' 'email'}}
+          <!-- START: Email -->
+          <div class="form-group mt-2{{#if errors.auth_email}} has-error{{/if}}}">
+            <div class="form-field">
+              <div class="input-group">
+                {{{field
+                  type="email"
+                  name="auth_email"
+                  value=item.auth_email
+                  placeholder="Email Address"
+                  required="required"
+                }}}
+              </div>
+              {{#if errors.auth_email}}
+                <span class="help-text">{{errors.auth_email}}</span>
+              {{/if}}
+            </div>
+          </div>
+          <!-- END: Email -->
+        {{/when}}
+        {{#when type '===' 'phone'}}
+          <!-- START: Email -->
+          <div class="form-group mt-2{{#if errors.auth_phone}} has-error{{/if}}}">
+            <div class="form-field">
+              <div class="input-group">
+                {{{field
+                  type="phone"
+                  name="auth_phone"
+                  value=item.auth_phone
+                  placeholder="Phone Number"
+                  required="required"
+                }}}
+              </div>
+              {{#if errors.auth_phone}}
+                <span class="help-text">{{errors.auth_phone}}</span>
+              {{/if}}
+            </div>
+          </div>
+          <!-- END: Email -->
+        {{/when}}
+        <!-- START: Username -->
+        <div class="form-group mt-2{{#if errors.auth_username}} has-error{{/if}}">
+          <div
+            class="form-password system-form-field"
+            data-name="confirm"
+          >
+            {{{field
+              type="text"
+              name="auth_username"
+              value=item.auth_username
+              placeholder="Username"
+              required="required"
+            }}}
+            {{#if errors.auth_username}}
+              <span class="help-text">{{errors.auth_username}}</span>
+            {{/if}}
+          </div>
+        </div>
+        <!-- END: Username -->
+        <!-- START: Password -->
+        <div class="form-group mt-2{{#if errors.auth_password}} has-error{{/if}}">
+          <div
+            class="form-password system-form-field"
+            data-name="confirm"
+          >
+            {{{field
+              type="password"
+              name="auth_password"
+              value=item.auth_password
+              placeholder="Password"
+              required="required"
+            }}}
+            {{#if errors.auth_password}}
+              <span class="help-text">{{errors.auth_password}}</span>
+            {{/if}}
+          </div>
+        </div>
+        <!-- END: Password -->
+        {{#if captcha}}
+          <!-- START: Captcha -->
+          <div class="form-group{{#if errors.captcha}} has-error{{/if}}">
+            <script src="https://www.google.com/recaptcha/api.js"></script>
+            <div class="g-recaptcha" data-sitekey="{{captcha}}"></div>
+            {{#if errors.captcha}}
+            <span class="help-text">{{errors.captcha}}</span>
+            {{/if}}
+          </div>
+          <!-- END: Captcha -->
+        {{/if}}
+        <!-- START: Form Submit -->
+        <div class="form-group">
+          <input type="hidden" name="csrf" value="{{csrf}}" />
+          <button
+            class="btn btn-block btn-primary"
+            data-do="submit-once"
+            data-on="click"
+            role="submit"
+          >{{_ 'Create Account'}}</button>
+          <p class="font-italic text-center mt-2">
+            By signing up, it means you that have read and agreed to our
+            <a href="/Terms-And-Conditions" target="_blank">Terms and Conditions</a>
+            and our <a href="/Privacy-Policy" target="_blank">Privacy Policy</a>.
+          </p>
+        </div>
+        <!-- END: Form Submit -->
+      </form>
+      <!-- END: Auth Signup Form -->
+
+      <!-- START: Login With Facebook Option -->
+      <div class="form-group">
+        <p class="text-center or-text"><span>{{_ 'or'}}</span></p>
+      </div>
+      <!-- END: Login With Facebook Option -->
+      <!-- START: Login Option -->
+      <div class="form-group">
+        <p class="text-muted text-center">{{_ 'Have an existing account?'}}
+          <a title="Sign Up" class="brand-text" href="/auth/login?{{query}}">{{_ 'Login Here'}}</a>
+        </p>
+      </div>
+      <!-- END: Login Option -->
+
+    </div>
+    <!-- END: Panel Body -->
+  </div>
+  <!-- END: Auth Signup Panel -->
+</div>
+<!-- END: Auth Signup Page -->

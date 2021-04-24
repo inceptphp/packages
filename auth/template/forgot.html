@@ -1,0 +1,72 @@
+<!-- START: Auth Forgot Page -->
+<div class="layout-auth-form">
+  <!-- START: Auth Forgot Card -->
+  <div class="card" >
+    <!-- START: Panel Body -->
+    <div class="card-body">
+      <img src="/images/logo/logo.png" />
+      <!-- START: Card Title -->
+      <h5 class="card-title">{{_ 'Forgot Password'}}</h5>
+      <!-- END: Card Title -->
+      <!-- START: Auth Forgot Form -->
+      <form method="post">
+        <p class="mb-4">{{_ "We'll SMS you with a link to reset your password. Please enter the mobile phone you used to register with this site and we'll contact you shortly."}}</p>
+        <!-- START: Auth Slug -->
+        <div class="form-group{{#if errors.auth_slug}} has-error{{/if}}">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <i class = "fas fa-phone"></i>
+              </div>
+            </div>
+            <input
+              autocomplete="phone"
+              type="text"
+              name="auth_slug"
+              data-do="mask-field"
+              data-format="+63 (\999) 999-9999"
+              placeholder="{{_ 'Mobile Phone No.'}}"
+              class="form-control"
+              value="{{item.auth_slug}}"
+            />
+          </div>
+          {{#if errors.auth_slug}}
+            <span class="help-text">{{errors.auth_slug}}</span>
+          {{/if}}
+        </div>
+        <!-- END: Auth Slug -->
+        <!-- START: Login -->
+        <div class="form-group">
+          <a title="Login" href="/auth/login?{{query}}">{{_ 'Wait, I Remember It Now.'}}</a>
+        </div>
+        <!-- END: Login -->
+        {{#if captcha}}
+          <!-- START: Captcha -->
+          <div class="form-group{{#if errors.captcha}} has-error{{/if}}">
+            <script src="https://www.google.com/recaptcha/api.js"></script>
+            <div class="g-recaptcha" data-sitekey="{{captcha}}"></div>
+            {{#if errors.captcha}}
+            <span class="help-text">{{errors.captcha}}</span>
+            {{/if}}
+          </div>
+          <!-- END: Captcha -->
+        {{/if}}
+        <!-- START: Form Submit -->
+        <div class="form-group">
+          <input type="hidden" name="csrf" value="{{csrf}}" />
+          <button
+            class="btn btn-block btn-primary"
+            data-do="submit-once"
+            data-on="click"
+            role="submit"
+          >{{_ 'Submit'}}</button>
+        </div>
+        <!-- END: Form Submit -->
+      </form>
+      <!-- END: Auth Forgot Form -->
+    </div>
+    <!-- END: Panel Body -->
+  </div>
+  <!-- END: Auth Forgot Panel -->
+</div>
+<!-- END: Auth Forgot Page -->
