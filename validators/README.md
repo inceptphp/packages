@@ -1,2 +1,0 @@
-# system-validators
-Validator Pack

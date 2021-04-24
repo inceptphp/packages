@@ -280,7 +280,7 @@ class AdminPackage
       'results' => $response->getResults(),
       'content' => $response->getContent(),
       'i18n' => $request->getSession('i18n'),
-      'host' => $host,
+      'host' => $host->all(),
       'menu' => $menu
     ];
 

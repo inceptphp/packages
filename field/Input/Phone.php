@@ -8,31 +8,32 @@
 
 namespace Incept\Package\Field\Input;
 
+use Incept\Framework\Field\FieldInterface;
 use Incept\Framework\Format\FormatTypes;
 
 /**
- * Color Field
+ * Phone Field
  *
  * @vendor   Incept
  * @package  System
  * @standard PSR-2
  */
-class Color extends Input
+class Phone extends Text
 {
   /**
    * @const string NAME Config name
    */
-  const NAME = 'color';
+  const NAME = 'phone';
 
   /**
    * @const string LABEL Config label
    */
-  const LABEL = 'Color Field';
+  const LABEL = 'Phone Field';
 
   /**
    * @const string INPUT_TYPE HTML input field type
    */
-  const INPUT_TYPE = 'color';
+  const INPUT_TYPE = 'tel';
 
   /**
    * @const array FORMATS List of possible formats
@@ -40,26 +41,26 @@ class Color extends Input
   const FORMATS = [
     FormatTypes::TYPE_GENERAL,
     FormatTypes::TYPE_STRING,
-    FormatTypes::TYPE_NUMBER,
     FormatTypes::TYPE_HTML,
     FormatTypes::TYPE_CUSTOM
   ];
 
   /**
-   * Validation check
-   *
-   * @param ?mixed  $value
-   * @param ?string $name  name of the column in the row
-   * @param ?array  $row   the row submitted with the value
-   *
-   * @return bool
+   * @var array $attributes Hash of attributes to consider when rendering
    */
-  public function valid(
-    $value = null,
-    string $name = null,
-    array $row = []
-  ): bool
+  protected $attributes = ['data-do' => 'phone-field'];
+
+  /**
+   * Sets the attributes that will be
+   * considered when rendering the template
+   *
+   * @param *array $attributes
+   *
+   * @return FieldConfigInterface
+   */
+  public function setAttributes(array $attributes): FieldInterface
   {
-    return preg_match('/^[0-9a-fA-F]{6}$/', $value);
+    $attributes['data-do'] = 'phone-field';
+    return parent::setAttributes($attributes);
   }
 }

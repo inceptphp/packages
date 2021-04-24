@@ -1464,6 +1464,22 @@
   });
 
   /**
+   * Phone Field
+   */
+  $(window).on('phone-field-init', function(e, target) {
+    $.require(
+      [
+        'components/intl-tel-input/build/css/intlTelInput.min.css',
+        'components/intl-tel-input/build/js/intlTelInput-jquery.min.js'
+      ],
+      function() {
+        var format = $(target).attr('data-format');
+        $(target).intlTelInput();
+      }
+    );
+  });
+
+  /**
    * Password
    */
   $(window).on('password-field-init', function(e, target) {

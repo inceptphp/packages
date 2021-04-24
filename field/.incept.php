@@ -28,6 +28,8 @@ FieldRegistry::register(Incept\Package\Field\Input\Color::class);
 
 FieldRegistry::register(Incept\Package\Field\Input\Email::class);
 
+FieldRegistry::register(Incept\Package\Field\Input\Phone::class);
+
 FieldRegistry::register(Incept\Package\Field\Input\Url::class);
 
 FieldRegistry::register(Incept\Package\Field\Input\Slug::class);
