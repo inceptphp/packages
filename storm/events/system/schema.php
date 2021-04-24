@@ -208,7 +208,12 @@ $this('event')->on('system-store-create', function (
 
     if (in_array('required', $field['types'])) {
       $columns[$name]['required'] = true;
-    } else {
+    } else if (!isset($field['default'])
+      || (
+        !is_numeric($field['default'])
+        && !trim($field['default'])
+      )
+    ) {
       $columns[$name]['null'] = true;
     }
 
@@ -216,6 +221,14 @@ $this('event')->on('system-store-create', function (
       $columns[$name]['unique'] = true;
     } else if (in_array('indexable', $field['types'])) {
       $columns[$name]['index'] = true;
+    }
+
+    if (isset($field['default'])) {
+      if (is_numeric($field['default']) || trim($field['default'])) {
+        $columns[$name]['default'] = $field['default'];
+      } else if (is_bool($field['default'])) {
+        $columns[$name]['default'] = $field['default'] ? 1: 0;
+      }
     }
   }
 

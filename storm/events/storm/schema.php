@@ -278,6 +278,8 @@ $this('event')->on('storm-create', function (
 
     if (isset($column['default']) && strlen($column['default'])) {
       $attributes['default'] = $column['default'];
+    } else if (isset($column['default']) && is_numeric($column['default'])) {
+      $attributes['default'] = $column['default'];
     } else if (!isset($column['required']) || !$column['required']) {
       $attributes['null'] = true;
     }
