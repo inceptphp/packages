@@ -93,12 +93,6 @@ class AdminPackage
     ResponseInterface $response,
     Throwable $error
   ) {
-    //load some packages
-    $host = $this->handler->package('host');
-    $config = $this->handler->package('config');
-    $language = $this->handler->package('lang');
-    $handlebars = $this->handler->package('handlebars');
-
     //get the path
     $path = $request->getPath('string');
     //if not an admin path
@@ -115,46 +109,98 @@ class AdminPackage
     $type = $response->getHeaders('Content-Type');
     if (strpos($type, 'html') === false) {
       //don't make it pretty
-      return;
+      return $this->errorDebug($request, $response, $error);
     }
 
     //get the code
     $code = $response->getCode();
-    //set the template root
-    $template = __DIR__ . '/template';
 
     if ($code === 404) {
-      $body = $handlebars
-        ->setTemplateFolder($template)
-        ->renderFromFolder('404');
-
-      //set content
-      $response
-        ->setPage('title', $language->translate('Oops...'))
-        ->setPage('class', 'page-404 page-error')
-        ->setContent($body);
-
-      //render page
-      $this->render($request, $response);
-
-      return true;
+      return $this->error404($request, $response, $error);
     }
 
     //get config settings
-    $config = $config->get('settings');
+    $settings = $this->handler->package('config')->get('settings');
 
     //if no environment
-    if (!isset($config['environment'])
-      //or the environment is not production
-      || $config['environment'] !== 'production'
+    if (!isset($settings['environment'])
+      //or the environment is not live
+      || $settings['environment'] !== 'live'
       //or it's not a 500 error
       || $code !== 500
     ) {
       //don't make it pretty
-      return;
+      return $this->errorDebug($request, $response, $error);
     }
 
     //okay make it pretty...
+    $this->error500($request, $response, $error);
+
+    if (!isset($settings['email'])) {
+      return true;
+    }
+
+    return $this->errorEmail($request, $response, $error);
+  }
+
+  /**
+   * 404 Error Processor
+   *
+   * @param *RequestInterface  $request
+   * @param *ResponseInterface $response
+   * @param *Throwable          $error
+   *
+   * @return bool
+   */
+  protected function error404(
+    RequestInterface $request,
+    ResponseInterface $response,
+    Throwable $error
+  ): bool {
+    //load some packages
+    $language = $this->handler->package('lang');
+    $handlebars = $this->handler->package('handlebars');
+
+    //set the template root
+    $template = __DIR__ . '/template';
+
+    $body = $handlebars
+      ->setTemplateFolder($template)
+      ->renderFromFolder('404');
+
+    //set content
+    $response
+      ->setPage('title', $language->translate('Oops...'))
+      ->setPage('class', 'page-404 page-error')
+      ->setContent($body);
+
+    //render page
+    $this->render($request, $response);
+
+    return true;
+  }
+
+  /**
+   * 500 Error Processor
+   *
+   * @param *RequestInterface  $request
+   * @param *ResponseInterface $response
+   * @param *Throwable          $error
+   *
+   * @return bool
+   */
+  protected function error500(
+    RequestInterface $request,
+    ResponseInterface $response,
+    Throwable $error
+  ): bool {
+    //load some packages
+    $language = $this->handler->package('lang');
+    $handlebars = $this->handler->package('handlebars');
+
+    //set the template root
+    $template = __DIR__ . '/template';
+
     $body = $handlebars
       ->setTemplateFolder($template)
       ->renderFromFolder('500');
@@ -167,18 +213,43 @@ class AdminPackage
 
     //render page
     $this->render($request, $response);
+    return true;
+  }
 
-    if (!isset($config['email'])) {
-      return true;
-    }
+  /**
+   * Email Error
+   *
+   * @param *RequestInterface  $request
+   * @param *ResponseInterface $response
+   * @param *Throwable          $error
+   *
+   * @return bool
+   */
+  protected function errorEmail(
+    RequestInterface $request,
+    ResponseInterface $response,
+    Throwable $error
+  ) {
+    //load some packages
+    $host = $this->handler->package('host');
+    $config = $this->handler->package('config');
+    $language = $this->handler->package('lang');
+
+    //set the template root
+    $template = __DIR__ . '/template';
+    //get config settings
+    $settings = $config->get('settings');
 
     //build the email elements
-    $to = $config['email'];
+    $to = $settings['email'];
+
     $from = [
-      'name' => $config['name'],
+      'name' => $settings['name'],
       'address' => sprintf('error@%s', $host->domain())
     ];
-    $subject = sprintf('%s - Error', $config['name']);
+
+    $subject = sprintf('%s - Error', $settings['name']);
+
     $body = sprintf(
       "%s thrown: %s\n%s(%s)\n\n%s",
       get_class($error),
@@ -187,9 +258,177 @@ class AdminPackage
       $error->getLine(),
       $error->getTraceAsString()
     );
+
     //send mail eventually
     $this->sendMail($from, $to, $subject, $body);
+    return true;
+  }
 
+  /**
+   * Debug Error Processor
+   *
+   * @param *RequestInterface  $request
+   * @param *ResponseInterface $response
+   * @param *Throwable          $error
+   *
+   * @return bool
+   */
+  protected function errorDebug(
+    RequestInterface $request,
+    ResponseInterface $response,
+    Throwable $error
+  ) {
+    //load some packages
+    $host = $this->handler->package('host');
+    $language = $this->handler->package('lang');
+    $handlebars = $this->handler->package('handlebars');
+
+    //set a snippet range
+    $range = 10;
+
+    $data = [
+      'message' => $error->getMessage(),
+      'class' => get_class($error),
+      'file' => $error->getFile(),
+      'line' => $error->getLine(),
+      'stack' => []
+    ];
+
+    //shorten file
+    $data['short_file'] = basename($data['file']);
+    if (strpos($data['file'], INCEPT_CWD) === 0) {
+      $data['short_file'] = substr($data['file'], strlen(INCEPT_CWD));
+    }
+
+    //determine the source code snippet
+    $file = file($data['file']);
+    $data['start'] = max($data['line'] - $range, 1);
+    $data['end'] = min($data['line'] + $range, count($file));
+    //build the snippet (preserve the keys) instead of:
+    //$data['snippet'] = array_slice($file, $data['start'], $data['end'] - $data['start']);
+    $data['snippet'] = [];
+    for ($i = $data['start']; $i <= $data['end']; $i++) {
+      if (isset($file[$i - 1])) {
+        $data['snippet'][$i] = $file[$i - 1];
+      }
+    }
+
+    $stack = $error->getTrace();
+    $count = count($stack);
+
+    foreach ($stack as $i => $trace) {
+      if (!isset($trace['file']) || !file_exists($trace['file'])) {
+        continue;
+      }
+
+      //shorten file
+      $trace['short_file'] = basename($trace['file']);
+      if (strpos($data['file'], INCEPT_CWD) === 0) {
+        $trace['short_file'] = substr($trace['file'], strlen(INCEPT_CWD) + 1);
+      }
+
+      //determine the source code snippet
+      $file = file($trace['file']);
+      $trace['step'] = $count - $i;
+      $trace['start'] = max($trace['line'] - $range, 1);
+      $trace['end'] = min($trace['line'] + $range, count($file));
+      //build the snippet (preserve the keys) instead of:
+      //$trace['snippet'] = array_slice($file, $trace['start'], $trace['end'] - $trace['start']);
+      $trace['snippet'] = [];
+      for ($j = $trace['start']; $j <= $trace['end']; $j++) {
+        if (isset($file[$j - 1])) {
+          $trace['snippet'][$j] = $file[$j - 1];
+        }
+      }
+
+      //unset($trace['args']);
+      //determine arguments, prevent big objects and arrays
+      if (isset($trace['args'])) {
+        foreach ($trace['args'] as $i => $arg) {
+          //if it's a string
+          if (is_string($arg)) {
+            //get the original length
+            $length = strlen($arg);
+            //get the snippet
+            $arg = substr($arg, 0, 100);
+            //if the original length does not equal the new length
+            if ($length !== strlen($arg)) {
+              //add an etc...
+              $arg .= '...';
+            }
+            //change new lines to spaces
+            $arg = str_replace(PHP_EOL, ' ', $arg);
+            //save it back
+            $trace['args'][$i] = '"' . $arg . '"';
+            continue;
+          }
+
+          if (is_null($arg)) {
+            $trace['args'][$i] = 'NULL';
+            continue;
+          }
+
+          if (is_bool($arg)) {
+            $trace['args'][$i] = $arg ? 'TRUE': 'FALSE';
+            continue;
+          }
+
+          //nothing wrong with scalar nulls
+          if (is_scalar($arg) || is_null($arg)) {
+            continue;
+          }
+
+          if (is_resource($arg)) {
+            $trace['args'][$i] = (string) $arg;
+            continue;
+          }
+
+          if (is_object($arg)) {
+            $trace['args'][$i] = get_class($arg);
+            if (method_exists($arg, '__traceName')) {
+              $trace['args'][$i] = $arg->__traceName();
+            }
+            continue;
+          }
+
+          //if it's an array
+          if (is_array($arg)) {
+            $arg = print_r($this->printArray($arg), true);
+            $arg = str_replace('Array ( ', 'Array(', $arg);
+            //get the original length
+            $length = strlen($arg);
+            //get the snippet
+            $arg = substr($arg, 0, 100);
+            //if the original length does not equal the new length
+            if ($length !== strlen($arg)) {
+              //add an etc... then close the array
+              $arg .= '...)';
+            }
+
+            $trace['args'][$i] = $arg;
+            continue;
+          }
+        }
+      }
+
+      $data['stack'][] = $trace;
+    }
+
+    //set the template root
+    $template = __DIR__ . '/template';
+
+    $body = $handlebars
+      ->setTemplateFolder($template)
+      ->renderFromFolder('error', $data);
+
+    //set content
+    $response
+      ->setPage('title', $language->translate('Oops...'))
+      ->setPage('class', 'page-error')
+      ->setContent($body);
+
+    //render page
+    $this->render($request, $response, 'blank');
     return true;
   }
 
@@ -235,6 +474,86 @@ class AdminPackage
 
     $response->setContent($body);
     return $body;
+  }
+
+  /**
+   * Print R for arrays
+   *
+   * @param *array $array
+   *
+   * @return bool
+   */
+  protected function printArray(
+    array $array,
+    int $level = 0,
+    int $range = 10
+  ): array {
+    $count = 0;
+    $printed = [];
+    foreach ($array as $key => $value) {
+      //if we are at the range, stop
+      if (($count++) >= $range) {
+        break;
+      }
+
+      //if it's a string
+      if (is_string($value)) {
+        //get the original length
+        $length = strlen($value);
+        //get the snippet
+        $value = substr($value, 0, 100);
+        //if the original length does not equal the new length
+        if ($length !== strlen($value)) {
+          //add an etc...
+          $value .= '...';
+        }
+        //change new lines to spaces
+        $value = str_replace(PHP_EOL, ' ', $value);
+        //save it back
+        $printed[$key] = '"' . $value . '"';
+        continue;
+      }
+
+      if (is_null($value)) {
+        $printed[$key] = 'NULL';
+        continue;
+      }
+
+      if (is_bool($value)) {
+        $printed[$key] = $value ? 'TRUE': 'FALSE';
+        continue;
+      }
+
+      if (is_numeric($value)) {
+        $printed[$key] = (string) $value;
+      }
+
+      if (is_resource($value)) {
+        $printed[$key] = (string) $value;
+        continue;
+      }
+
+      if (is_object($value)) {
+        $printed[$key] = get_class($value);
+        if (method_exists($value, '__traceName')) {
+          $printed[$key] = $value->__traceName();
+        }
+        continue;
+      }
+
+      //if it's an array
+      if (is_array($value)) {
+        if ($level === 3) {
+          $printed[$key] = 'Array(...)';
+        } else {
+          $printed[$key] = $this->printArray($value, $level + 1, $range);
+        }
+
+        continue;
+      }
+    }
+
+    return $printed;
   }
 
   /**

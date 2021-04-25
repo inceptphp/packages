@@ -118,10 +118,11 @@ $this('http')->post('/auth/signup/:type', function (
   //----------------------------//
   // 2. Setup Overrides
   //determine route
-  $route = $request->getStage('route') ?? '/auth/signup';
+  $type = $request->getStage('type');
+  $route = $request->getStage('route') ?? sprintf('/auth/signup/%s', $type);
 
   //determine redirect
-  $redirect = $request->getStage('redirect_uri') ?? '/auth/login';
+  $redirect = $request->getStage('redirect_uri') ?? '/auth/signin';
 
   //----------------------------//
   // 2. Security Checks
