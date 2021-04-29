@@ -1,0 +1,9 @@
+{
+  "name": "Incept Queue Packagge",
+  "description": "AMQ compatible support for Incept",
+  "author": "The Incept Team",
+  "website": "https://www.incept.asia/",
+  "image": "https://www.incept.asia/images/logo/incept-logo-square-1.png",
+  "path": "inceptphp/packages/queue",
+  "version": "0.0.0"
+}
