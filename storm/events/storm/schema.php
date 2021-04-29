@@ -17,7 +17,7 @@ $this('event')->on('storm-alter', function (
 ) {
   //----------------------------//
   // 0. Abort on Errors
-  if ($response->isError() || $response->hasResults()) {
+  if ($response->isError()) {
     return;
   }
 
@@ -201,7 +201,7 @@ $this('event')->on('storm-create', function (
 ) {
   //----------------------------//
   // 0. Abort on Errors
-  if ($response->isError() || $response->hasResults()) {
+  if ($response->isError()) {
     return;
   }
 
@@ -351,7 +351,7 @@ $this('event')->on('storm-drop', function (
 ) {
   //----------------------------//
   // 0. Abort on Errors
-  if ($response->isError() || $response->hasResults()) {
+  if ($response->isError()) {
     return;
   }
 
@@ -401,7 +401,7 @@ $this('event')->on('storm-rename', function (
 ) {
   //----------------------------//
   // 0. Abort on Errors
-  if ($response->isError() || $response->hasResults()) {
+  if ($response->isError()) {
     return;
   }
 

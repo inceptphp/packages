@@ -15,7 +15,7 @@ $this('event')->on('storm-insert', function (
 ) {
   //----------------------------//
   // 0. Abort on Errors
-  if ($response->isError() || $response->hasResults()) {
+  if ($response->isError()) {
     return;
   }
 
@@ -110,7 +110,7 @@ $this('event')->on('storm-delete', function (
 ) {
   //----------------------------//
   // 0. Abort on Errors
-  if ($response->isError() || $response->hasResults()) {
+  if ($response->isError()) {
     return;
   }
 
@@ -205,7 +205,7 @@ $this('event')->on('storm-search', function (
 ) {
   //----------------------------//
   // 0. Abort on Errors
-  if ($response->isError() || $response->hasResults()) {
+  if ($response->isError()) {
     return;
   }
 
@@ -352,7 +352,7 @@ $this('event')->on('storm-update', function (
 ) {
   //----------------------------//
   // 0. Abort on Errors
-  if ($response->isError() || $response->hasResults()) {
+  if ($response->isError()) {
     return;
   }
 
