@@ -1,5 +1,5 @@
 <!-- START: Auth Signup Page -->
-<div class="layout-auth-form">
+<div class="layout-blank layout-auth-form">
   <!-- START: Auth Signup Card -->
   <div class="card" >
     <!-- START: Panel Body -->
@@ -65,7 +65,7 @@
           <!-- END: Email -->
         {{/when}}
         {{#when type '===' 'phone'}}
-          <!-- START: Email -->
+          <!-- START: Phone -->
           <div class="form-group mt-2{{#if errors.auth_phone}} has-error{{/if}}">
             <div class="form-field">
               <div class="input-group">
@@ -82,7 +82,7 @@
               {{/if}}
             </div>
           </div>
-          <!-- END: Email -->
+          <!-- END: Phone -->
         {{/when}}
         <!-- START: Username -->
         <div class="form-group mt-2{{#if errors.auth_username}} has-error{{/if}}">
@@ -160,7 +160,7 @@
       <!-- START: Login Option -->
       <div class="form-group">
         <p class="text-muted text-center">{{_ 'Have an existing account?'}}
-          <a title="Sign Up" class="brand-text" href="/auth/login?{{query}}">{{_ 'Login Here'}}</a>
+          <a title="Sign Up" class="brand-text" href="/auth/signin?{{query}}">{{_ 'Login Here'}}</a>
         </p>
       </div>
       <!-- END: Login Option -->

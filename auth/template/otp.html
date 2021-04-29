@@ -1,18 +1,28 @@
-<!-- START: Auth Verify Page -->
-<div class="layout-auth-form">
-  <!-- START: Auth Verify Card -->
+<!-- START: OTP Page -->
+<div class="layout-blank layout-otp">
+  <!-- START: Card -->
   <div class="card" >
     <!-- START: Panel Body -->
     <div class="card-body">
-      <img src="/images/logo/logo.png" />
       <!-- START: Card Title -->
-      <h5 class="card-title">{{_ 'Verify Account'}}</h5>
+      <h5 class="card-title">
+        {{#when type '===' 'email'}}
+          {{_ 'Verify Email'}}
+        {{/when}}
+        {{#when type '===' 'phone'}}
+          {{_ 'Verify Phone'}}
+        {{/when}}
+      </h5>
       <!-- END: Card Title -->
-      <!-- START: Auth Verify Form -->
+      <!-- START: OTP Form -->
       <form method="post">
-        <p class="mb-4">{{_ "Please enter the verification code sent to your phone."}}</p>
-        <!-- TODO TMP REMOVE -->
-        <!-- START: Auth Slug -->
+        {{#when type '===' 'email'}}
+          <p class="mb-4">{{_ 'Please enter the verification code sent to your email address.'}}</p>
+        {{/when}}
+        {{#when type '===' 'phone'}}
+          <p class="mb-4">{{_ 'Please enter the verification code sent to your mobile phone.'}}</p>
+        {{/when}}
+        <!-- START: OTP Field -->
         <div class="form-group">
           <div class="field-otp">
             <div class="otp-frame">
@@ -26,7 +36,7 @@
             </div>
           </div>
         </div>
-        <!-- END: Auth Slug -->
+        <!-- END: OTP Field -->
         <!-- START: Form Submit -->
         <div class="form-group">
           <input type="hidden" name="csrf" value="{{csrf}}" />
@@ -41,14 +51,20 @@
         <!-- END: Form Submit -->
         <!-- START: Form Option -->
         <div class="form-group text-center">
-          <a title="Verify Account" class="brand-text" href="/auth/verify?{{query}}">{{_ 'Resend Verification'}}</a>
+          <a
+            title="Verify Account"
+            class="brand-text"
+            href="/auth/verify/{{type}}"
+          >
+            {{_ 'Resend Verification'}}
+          </a>
         </div>
         <!-- END: Form Option -->
       </form>
-      <!-- END: Auth Verify Form -->
+      <!-- END: OTP Form -->
     </div>
     <!-- END: Panel Body -->
   </div>
-  <!-- END: Auth Verify Panel -->
+  <!-- END: Card -->
 </div>
-<!-- END: Auth Verify Page -->
+<!-- END: OTP Page -->

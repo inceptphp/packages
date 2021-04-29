@@ -62,16 +62,25 @@ return [
     [
       'label' => 'Password',
       'name' => 'password',
-      'field' => [
-        'type' => 'input',
-        'attributes' => [ 'type' => 'password' ],
-      ],
+      'field' => [ 'type' => 'password' ],
       'validation' => [
         [
           'method' => 'required',
           'message' => 'Password is required'
         ]
       ],
+      'list' => [ 'format' => 'hide' ],
+      'detail' => [ 'format' => 'hide' ],
+      'default' => null,
+      'searchable' => 0,
+      'filterable' => 0,
+      'sortable' => 0
+    ],
+    [
+      'label' => '2FA Key',
+      'name' => '2fa_key',
+      'field' => [ 'type' => 'text' ],
+      'validation' => [],
       'list' => [ 'format' => 'hide' ],
       'detail' => [ 'format' => 'hide' ],
       'default' => null,

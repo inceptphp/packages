@@ -1,0 +1,54 @@
+<!-- START: Auth 2FA Page -->
+<div class="layout-blank layout-auth-form">
+  <!-- START: Auth 2FA Card -->
+  <div class="card" >
+    <!-- START: Panel Body -->
+    <div class="card-body">
+      <!-- START: Card Title -->
+      <h5 class="card-title">{{_ 'Multi Factor Authentication'}}</h5>
+      <!-- END: Card Title -->
+      <p>
+        {{#_ 'Step 1. Please make sure you have downloaded the %s.'}}
+          <a
+            href="https://support.google.com/accounts/answer/1066447?hl=en"
+            target="_blank"
+          >
+            {{_ 'Google Authenticator App'}}
+          </a>
+        {{/_}}
+      </p>
+      <h5>{{_ 'Step 2. Scan Me'}}</h5>
+      <img src="{{item.qr_code}}" />
+      <!-- START: Auth 2FA Form -->
+      <form method="post">
+        <!-- START: QR Code -->
+        <div class="form-group{{#if errors.qr_code}} has-error{{/if}}">
+          {{{field
+            type="text"
+            name="qr_code"
+            placeholder="Step 3. Enter code from the app"
+          }}}
+          {{#if errors.qr_code}}
+            <div class="help-text d-block text-left">{{errors.qr_code}}</div>
+          {{/if}}
+        </div>
+        <!-- END: QR Code -->
+        <!-- START: Form Submit -->
+        <div class="form-group">
+          <input type="hidden" name="qr_secret" value="{{item.qr_secret}}" />
+          <button
+            class="btn btn-block btn-primary"
+            data-do="submit-once"
+            data-on="click"
+            role="submit"
+          >{{_ 'Submit'}}</button>
+        </div>
+        <!-- END: Form Submit -->
+      </form>
+      <!-- END: Auth 2FA Form -->
+    </div>
+    <!-- END: Panel Body -->
+  </div>
+  <!-- END: Auth 2FA Panel -->
+</div>
+<!-- END: Auth 2FA Page -->

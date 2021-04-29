@@ -1,71 +1,47 @@
 <!-- START: Auth Login Page -->
-<div class="layout-auth-form">
+<div class="layout-blank layout-auth-form">
   <!-- START: Auth Login Card -->
   <div class="card">
     <!-- START: Card Body -->
     <div class="card-body" >
-      <img src="/images/logo/logo.png" />
       <!-- START: Card Title -->
-      <h5 class="card-title">{{_ 'Candidate Login'}}</h5>
+      <h5 class="card-title">{{_ 'Sign In'}}</h5>
       <!-- END: Card Title -->
       <!-- START: Auth Login Form -->
       <form method="post">
         <!-- START: Auth Slug -->
         <div class="form-group{{#if errors.auth_slug}} has-error{{/if}}">
-          <div class="input-group">
-            <div class="input-group-prepend">
-              <div class="input-group-text">
-                <i class = "fas fa-phone"></i>
-              </div>
-            </div>
-            <input
-              autocomplete="phone"
-              data-do="mask-field"
-              data-format="+63 (\999) 999-9999"
-              type="text"
-              name="auth_slug"
-              placeholder="{{_ 'Mobile Phone No.'}}"
-              class="form-control"
-              value="{{item.auth_slug}}"
-            />
-          </div>
+          {{{field
+            type="text"
+            name="auth_slug"
+            placeholder="Username, email address or phone number"
+            value=item.auth_slug
+          }}}
           {{#if errors.auth_slug}}
-            <span class="help-text">{{errors.auth_slug}}</span>
+            <div class="help-text text-left">{{errors.auth_slug}}</div>
           {{/if}}
         </div>
         <!-- END: Auth Slug -->
         <!-- START: Auth Password -->
         <div class="form-group{{#if errors.auth_password}} has-error{{/if}}">
-          <div class="input-group">
-            <div class="input-group-prepend">
-              <div class="input-group-text">
-                <i class = "fas fa-lock"></i>
-              </div>
-            </div>
-            <input
-              autocomplete="off"
-              type="password"
-              name="auth_password"
-              placeholder="{{_ 'Password'}}"
-              class="form-control"
-              value=""
-            />
-          </div>
+          {{{field
+            type="password"
+            name="auth_password"
+            placeholder="Password"
+            value=item.auth_password
+          }}}
           {{#if errors.auth_password}}
-            <span class="help-text">{{errors.auth_password}}</span>
+            <div class="help-text text-left">{{errors.auth_password}}</div>
           {{/if}}
         </div>
         <!-- END: Auth Password -->
         <!-- START: Forgot Password -->
         <div class="form-group text-left">
-          <div class="float-right">
+          <div class="text-right">
             <a title="{{_ 'Verify Account'}}" href="/auth/verify?{{query}}">{{_ 'Verify Account'}}</a>
             &nbsp;&nbsp;&nbsp;
             <a title="{{_ 'Forgot Password'}}" href="/auth/forgot?{{query}}">{{_ 'Forgot Password'}}</a>
           </div>
-          <a title="{{_ 'I am an Employer'}}" href="{{#services 'jobayan-employer'}}{{root}}{{/services}}/auth/login">
-            {{_ 'I am an Employer'}}
-          </a>
         </div>
         <!-- END: Forgot Password -->
 
@@ -104,7 +80,15 @@
       <div class="form-group">
         <p class="text-muted text-center">
           {{_ "Don't have an account?"}}
-          <a title="Sign Up" class="brand-text" href="/auth/signup?{{query}}">{{_ 'Sign Up Here'}}</a>
+          <span class="d-block mt-2">
+            <a title="Sign Up" href="/auth/signup/email?{{query}}">
+              {{_ 'Sign Up via Email'}}
+            </a>
+            &nbsp;|&nbsp;
+            <a title="Sign Up" href="/auth/signup/phone?{{query}}">
+              {{_ 'Sign Up via Phone'}}
+            </a>
+          </span>
         </p>
       </div>
       <!-- END: Signup Option -->

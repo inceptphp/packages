@@ -7,8 +7,11 @@ incept(function() {
   $emitter = $this('event');
   $terminal = $this('terminal');
 
+  //copy config
+  copy(dirname(__DIR__) . '/config.php', INCEPT_CWD . '/config/auth.php');
+
   //scan through each file
-  foreach (scandir(__DIR__ . '/../schema') as $file) {
+  foreach (scandir(dirname(__DIR__) . '/schema') as $file) {
     //if it's not a php file
     if(substr($file, -4) !== '.php') {
       //skip

@@ -1,0 +1,38 @@
+<!-- START: Auth 2FA Page -->
+<div class="layout-blank layout-auth-form">
+  <!-- START: Auth 2FA Card -->
+  <div class="card" >
+    <!-- START: Panel Body -->
+    <div class="card-body">
+      <!-- START: Card Title -->
+      <h5 class="card-title">{{_ 'Multi Factor Authentication'}}</h5>
+      <!-- END: Card Title -->
+      <p>{{_ 'Enter the six digit code from the registered authenticator application.'}}</p>
+      <!-- START: Auth 2FA Form -->
+      <form method="post" action="/auth/signin/2fa?{{query}}">
+        <!-- START: QR Code -->
+        <div class="form-group{{#if errors.qr_code}} has-error{{/if}}">
+          {{{field type="text" name="qr_code"}}}
+          {{#if errors.qr_code}}
+            <div class="help-text d-block text-left">{{errors.qr_code}}</div>
+          {{/if}}
+        </div>
+        <!-- END: QR Code -->
+        <!-- START: Form Submit -->
+        <div class="form-group">
+          <button
+            class="btn btn-block btn-primary"
+            data-do="submit-once"
+            data-on="click"
+            role="submit"
+          >{{_ 'Submit'}}</button>
+        </div>
+        <!-- END: Form Submit -->
+      </form>
+      <!-- END: Auth 2FA Form -->
+    </div>
+    <!-- END: Panel Body -->
+  </div>
+  <!-- END: Auth 2FA Panel -->
+</div>
+<!-- END: Auth 2FA Page -->

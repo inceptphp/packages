@@ -74,13 +74,13 @@ $this('http')->get('/admin/system/model/auth/settings', function (
   $title = $this->package('global')->translate('Authentication Settings');
 
   $template = dirname(__DIR__) . '/template';
-  if (is_dir($response->getPage('template_root'))) {
-    $template = $response->getPage('template_root');
+  if (is_dir($response->get('page', 'template_root'))) {
+    $template = $response->get('page', 'template_root');
   }
 
   $partials = dirname(__DIR__) . '/template';
-  if (is_dir($response->getPage('partials_root'))) {
-    $partials = $response->getPage('partials_root');
+  if (is_dir($response->get('page', 'partials_root'))) {
+    $partials = $response->get('page', 'partials_root');
   }
 
   $body = $this
@@ -95,8 +95,8 @@ $this('http')->get('/admin/system/model/auth/settings', function (
 
   //Set Content
   $response
-    ->setPage('title', $title)
-    ->setPage('class', $class)
+    ->set('page', 'title', $title)
+    ->set('page', 'class', $class)
     ->setContent($body);
 
   //if we only want the body
