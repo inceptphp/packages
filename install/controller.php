@@ -24,7 +24,7 @@ $this('http')->get('/install', function(
   //there could be no active step
   $activeStep = -1;
   //get all the install steps so we can configure the state for each
-  $steps = array_values($response->getPage('install_steps'));
+  $steps = array_values($response->get('page', 'install_steps'));
   //for each step
   foreach($steps as $i => $step) {
     //if this is the path
@@ -49,7 +49,7 @@ $this('http')->get('/install', function(
   }
 
   //save the updated install steps
-  $response->setPage('install_steps', $steps);
+  $response->set('page', 'install_steps', $steps);
 
   $redirect = '/admin';
   if (isset($steps[$data['step'] + 1]['path'])) {
@@ -81,8 +81,8 @@ $this('http')->get('/install', function(
   //----------------------------//
   // 2. Render Template
   $template = __DIR__ . '/template';
-  if (is_dir($response->getPage('template_root'))) {
-    $template = $response->getPage('template_root');
+  if (is_dir($response->get('page', 'template_root'))) {
+    $template = $response->get('page', 'template_root');
   }
 
   $body = $this('handlebars')
@@ -98,8 +98,8 @@ $this('http')->get('/install', function(
 
   //set content
   $response
-    ->setPage('title', $this('lang')->translate('Install - Permission Check'))
-    ->setPage('class', 'page-install')
+    ->set('page', 'title', $this('lang')->translate('Install - Permission Check'))
+    ->set('page', 'class', 'page-install')
     ->setContent($body);
 
   //render page
@@ -139,7 +139,7 @@ $this('http')->post('/install', function(
   $request->setStage('pass', $services[$settings['pdo']]['pass']);
 
   //get all the install steps so we can configure the state for each
-  $steps = array_values($response->getPage('install_steps'));
+  $steps = array_values($response->get('page', 'install_steps'));
 
   //for each step
   foreach($steps as $i => $step) {
@@ -148,7 +148,7 @@ $this('http')->post('/install', function(
   }
 
   //save the updated install steps
-  $response->setPage('install_steps', $steps);
+  $response->set('page', 'install_steps', $steps);
 
   //----------------------------//
   // 2. Process Data
@@ -189,8 +189,8 @@ $this('http')->post('/install', function(
   //----------------------------//
   // 3. Render Template
   $template = __DIR__ . '/template';
-  if (is_dir($response->getPage('template_root'))) {
-    $template = $response->getPage('template_root');
+  if (is_dir($response->get('page', 'template_root'))) {
+    $template = $response->get('page', 'template_root');
   }
 
   $body = $this('handlebars')
@@ -204,8 +204,8 @@ $this('http')->post('/install', function(
 
   //set content
   $response
-    ->setPage('title', $this('lang')->translate('Install'))
-    ->setPage('class', 'page-install')
+    ->set('page', 'title', $this('lang')->translate('Install'))
+    ->set('page', 'class', 'page-install')
     ->setContent($body);
 
   //render page
@@ -227,7 +227,7 @@ $this('http')->get('/install/database', function(
   //there could be no active step
   $activeStep = -1;
   //get all the install steps so we can configure the state for each
-  $steps = array_values($response->getPage('install_steps'));
+  $steps = array_values($response->get('page', 'install_steps'));
   //for each step
   foreach($steps as $i => $step) {
     //if this is the path
@@ -252,7 +252,7 @@ $this('http')->get('/install/database', function(
   }
 
   //save the updated install steps
-  $response->setPage('install_steps', $steps);
+  $response->set('page', 'install_steps', $steps);
 
   $data = [
     'host' => '127.0.0.1',
@@ -296,8 +296,8 @@ $this('http')->get('/install/database', function(
   //----------------------------//
   // 2. Render Template
   $template = __DIR__ . '/template';
-  if (is_dir($response->getPage('template_root'))) {
-    $template = $response->getPage('template_root');
+  if (is_dir($response->get('page', 'template_root'))) {
+    $template = $response->get('page', 'template_root');
   }
 
   $body = $this('handlebars')
@@ -311,8 +311,8 @@ $this('http')->get('/install/database', function(
 
   //set content
   $response
-    ->setPage('title', $this('lang')->translate('Install - Database Setup'))
-    ->setPage('class', 'page-install-database page-install')
+    ->set('page', 'title', $this('lang')->translate('Install - Database Setup'))
+    ->set('page', 'class', 'page-install-database page-install')
     ->setContent($body);
 
   //render page
@@ -354,7 +354,7 @@ $this('http')->post('/install/database', function(
   //there could be no active step
   $activeStep = -1;
   //get all the install steps so we can figure out where to redirect after
-  $steps = array_values($response->getPage('install_steps'));
+  $steps = array_values($response->get('page', 'install_steps'));
   //for each step
   foreach($steps as $i => $step) {
     //if this is the path
@@ -387,7 +387,7 @@ $this('http')->get('/install/settings', function(
   //there could be no active step
   $activeStep = -1;
   //get all the install steps so we can configure the state for each
-  $steps = array_values($response->getPage('install_steps'));
+  $steps = array_values($response->get('page', 'install_steps'));
   //for each step
   foreach($steps as $i => $step) {
     //if this is the path
@@ -412,15 +412,15 @@ $this('http')->get('/install/settings', function(
   }
 
   //save the updated install steps
-  $response->setPage('install_steps', $steps);
+  $response->set('page', 'install_steps', $steps);
 
   $data = $this('config')->get('settings');
 
   //----------------------------//
   // 2. Render Template
   $template = __DIR__ . '/template';
-  if (is_dir($response->getPage('template_root'))) {
-    $template = $response->getPage('template_root');
+  if (is_dir($response->get('page', 'template_root'))) {
+    $template = $response->get('page', 'template_root');
   }
 
   $body = $this('handlebars')
@@ -434,8 +434,8 @@ $this('http')->get('/install/settings', function(
 
   //set content
   $response
-    ->setPage('title', $this('lang')->translate('Install - Settings'))
-    ->setPage('class', 'page-install-settings page-install')
+    ->set('page', 'title', $this('lang')->translate('Install - Settings'))
+    ->set('page', 'class', 'page-install-settings page-install')
     ->setContent($body);
 
   //render page
@@ -471,7 +471,7 @@ $this('http')->post('/install/settings', function(
   //there could be no active step
   $activeStep = -1;
   //get all the install steps so we can figure out where to redirect after
-  $steps = array_values($response->getPage('install_steps'));
+  $steps = array_values($response->get('page', 'install_steps'));
   //for each step
   foreach($steps as $i => $step) {
     //if this is the path

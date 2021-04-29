@@ -11,7 +11,7 @@ use UGComponents\IO\Response\ResponseInterface;
 
 return function(RequestInterface $request, ResponseInterface $response) {
   //set the initial steps
-  $response->setPage('install_steps', [
+  $response->set('page', 'install_steps', [
     'permissions' => [
       'label' => 'Permissions',
       'icon' => 'fa-lock',

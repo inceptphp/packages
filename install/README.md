@@ -5,7 +5,7 @@
  1. Add this to a preprocessor and customize
 
 ```php
-$res->setPage('install_steps', 'your_step', [
+$res->set('page', 'install_steps', 'your_step', [
   'label' => 'Custom',
   'icon' => 'fa-user',
   'path' => '/install/custom'
@@ -19,7 +19,7 @@ $this('http')->get('/install/database', function($req, $res) {
   //there could be no active step
   $activeStep = -1;
   //get all the install steps so we can configure the state for each
-  $steps = array_values($res->getPage('install_steps'));
+  $steps = array_values($res->get('page', 'install_steps'));
   //for each step
   foreach($steps as $i => $step) {
     //if this is the path
@@ -44,7 +44,7 @@ $this('http')->get('/install/database', function($req, $res) {
   }
 
   //save the updated install steps
-  $res->setPage('install_steps', $steps);
+  $res->set('page', 'install_steps', $steps);
 
   //... YOUR LOGIC ....
 });
