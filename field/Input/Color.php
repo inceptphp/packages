@@ -60,6 +60,6 @@ class Color extends Input
     array $row = []
   ): bool
   {
-    return preg_match('/^[0-9a-fA-F]{6}$/', $value);
+    return is_null($value) || preg_match('/^[0-9a-fA-F]{6}$/', $value);
   }
 }

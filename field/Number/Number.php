@@ -96,7 +96,7 @@ class Number extends Input
     array $row = []
   ): bool
   {
-    return is_numeric($value)
+    return is_null($value) || (is_numeric($value)
       && (
         !isset($this->attributes['min'])
         || !is_numeric($this->attributes['min'])
@@ -106,6 +106,6 @@ class Number extends Input
         !isset($this->attributes['max'])
         || !is_numeric($this->attributes['max'])
         || $this->attributes['max'] >= $value
-      );
+      ));
   }
 }
