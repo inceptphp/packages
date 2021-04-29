@@ -170,8 +170,8 @@ class AdminPackage
 
     //set content
     $response
-      ->setPage('title', $language->translate('Oops...'))
-      ->setPage('class', 'page-404 page-error')
+      ->set('page', 'title', $language->translate('Oops...'))
+      ->set('page', 'class', 'page-404 page-error')
       ->setContent($body);
 
     //render page
@@ -207,8 +207,8 @@ class AdminPackage
 
     //set content
     $response
-      ->setPage('title', $language->translate('Oops...'))
-      ->setPage('class', 'page-500 page-error')
+      ->set('page', 'title', $language->translate('Oops...'))
+      ->set('page', 'class', 'page-500 page-error')
       ->setContent($body);
 
     //render page
@@ -232,7 +232,6 @@ class AdminPackage
   ) {
     //load some packages
     $host = $this->handler->package('host');
-    $config = $this->handler->package('config');
     $language = $this->handler->package('lang');
 
     //set the template root
@@ -242,11 +241,6 @@ class AdminPackage
 
     //build the email elements
     $to = $settings['email'];
-
-    $from = [
-      'name' => $settings['name'],
-      'address' => sprintf('error@%s', $host->domain())
-    ];
 
     $subject = sprintf('%s - Error', $settings['name']);
 
@@ -259,8 +253,30 @@ class AdminPackage
       $error->getTraceAsString()
     );
 
-    //send mail eventually
-    $this->sendMail($from, $to, $subject, $body);
+    ['request' => $request, 'response' => $response] = $this->handler->makePayload();
+
+    //set to
+    $request->setStage('to', $to);
+    //set event
+    $request->setStage(0, 'email-send');
+    //set subject
+    $request->setStage('subject', $subject);
+    //set the text
+    $request->setStage('text', $body);
+    //set the html
+    $request->setStage('html', $body);
+
+    $this->handler->package('event')->emit('queue', $request, $response);
+
+    //if we werent able to queue
+    if ($response->isError()) {
+      $data = $request->getStage();
+      //send manually after the connection
+      $this->postprocess(function ($request, $response) use ($data) {
+        $this('event')->call('email-send', $data);
+      });
+    }
+
     return true;
   }
 
@@ -423,8 +439,8 @@ class AdminPackage
 
     //set content
     $response
-      ->setPage('title', $language->translate('Oops...'))
-      ->setPage('class', 'page-error')
+      ->set('page', 'title', $language->translate('Oops...'))
+      ->set('page', 'class', 'page-error')
       ->setContent($body);
 
     //render page
@@ -692,37 +708,6 @@ class AdminPackage
 
     //get the contents
     return $this->toXml($rows, new SimpleXMLElement($root))->asXML();
-  }
-
-  /**
-   * Helper to send mail
-   *
-   * @param *array  $from
-   * @param *string $to
-   * @param *string $subject
-   * @param *string $body
-   */
-  protected function sendMail(
-    array $from,
-    string $to,
-    string $subject,
-    string $body
-  ) {
-    //load some packages
-    $http = $this->handler->package('http');
-    //send it eventually
-    $http->postprocess(function() use ($from, $to, $subject, $body) {
-      $this->package('event')->call('email-send', [
-        'to' => [
-          [
-            'address' => $to
-          ]
-        ],
-        'from' => $from,
-        'subject' => $subject,
-        'plain' => $body
-      ]);
-    });
   }
 
   /**

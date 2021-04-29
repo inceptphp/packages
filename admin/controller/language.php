@@ -35,8 +35,8 @@ $this('http')->get('/admin/language/search', function(
   //----------------------------//
   // 2. Render Template
   $template = dirname(__DIR__) . '/template/language';
-  if (is_dir($response->getPage('template_root'))) {
-    $template = $response->getPage('template_root');
+  if (is_dir($response->get('page', 'template_root'))) {
+    $template = $response->get('page', 'template_root');
   }
 
   $body = $this('handlebars')
@@ -143,8 +143,8 @@ $this('http')->get('/admin/spa/language/create', function (
   //----------------------------//
   // 2. Render Template
   $template = dirname(__DIR__) . '/template/language';
-  if (is_dir($response->getPage('template_root'))) {
-    $template = $response->getPage('template_root');
+  if (is_dir($response->get('page', 'template_root'))) {
+    $template = $response->get('page', 'template_root');
   }
 
   //render the body
@@ -293,8 +293,8 @@ $this('http')->get('/admin/spa/language/update/:filename', function (
   //----------------------------//
   // 2. Render Template
   $template = dirname(__DIR__) . '/template/language';
-  if (is_dir($response->getPage('template_root'))) {
-    $template = $response->getPage('template_root');
+  if (is_dir($response->get('page', 'template_root'))) {
+    $template = $response->get('page', 'template_root');
   }
 
   //render the body
@@ -394,8 +394,8 @@ $this('http')->get('/admin/spa/language/remove/:filename', function (
   //----------------------------//
   // 2. Render Template
   $template = dirname(__DIR__) . '/template/object';
-  if (is_dir($response->getPage('template_root'))) {
-    $template = $response->getPage('template_root');
+  if (is_dir($response->get('page', 'template_root'))) {
+    $template = $response->get('page', 'template_root');
   }
 
   $body = $this('handlebars')

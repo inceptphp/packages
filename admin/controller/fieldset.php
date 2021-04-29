@@ -53,8 +53,8 @@ $this('http')->get('/admin/system/fieldset/search', function (
   $data['title'] = $this('lang')->translate('Fieldsets');
 
   $template = dirname(__DIR__) . '/template/fieldset';
-  if (is_dir($response->getPage('template_root'))) {
-    $template = $response->getPage('template_root');
+  if (is_dir($response->get('page', 'template_root'))) {
+    $template = $response->get('page', 'template_root');
   }
 
   $fieldScript = dirname(__DIR__) . '/template/field/assets/_script.js';
@@ -113,8 +113,8 @@ $this('http')->get('/admin/spa/system/fieldset/create', function(
   //----------------------------//
   // 2. Render Template
   $template = dirname(__DIR__) . '/template/fieldset';
-  if (is_dir($response->getPage('template_root'))) {
-    $template = $response->getPage('template_root');
+  if (is_dir($response->get('page', 'template_root'))) {
+    $template = $response->get('page', 'template_root');
   }
 
   $body = $this('handlebars')
@@ -238,8 +238,8 @@ $this('http')->post('/admin/spa/system/fieldset/field', function(
   //----------------------------//
   // 2. Render Template
   $template = dirname(__DIR__) . '/template/fieldset';
-  if (is_dir($response->getPage('template_root'))) {
-    $template = $response->getPage('template_root');
+  if (is_dir($response->get('page', 'template_root'))) {
+    $template = $response->get('page', 'template_root');
   }
 
   $field = dirname(__DIR__) . '/template/field';
@@ -302,8 +302,8 @@ $this('http')->post('/admin/spa/system/fieldset/field/save', function(
   //----------------------------//
   // 2. Process Data
   $template = dirname(__DIR__) . '/template/fieldset';
-  if (is_dir($response->getPage('template_root'))) {
-    $template = $response->getPage('template_root');
+  if (is_dir($response->get('page', 'template_root'))) {
+    $template = $response->get('page', 'template_root');
   }
 
   $body = $this('handlebars')
@@ -469,8 +469,8 @@ $this('http')->get('/admin/spa/system/fieldset/import', function(
   //----------------------------//
   // 2. Render Template
   $template = dirname(__DIR__) . '/template/fieldset';
-  if (is_dir($response->getPage('template_root'))) {
-    $template = $response->getPage('template_root');
+  if (is_dir($response->get('page', 'template_root'))) {
+    $template = $response->get('page', 'template_root');
   }
 
   $body = $this('handlebars')
@@ -682,8 +682,8 @@ $this('http')->get('/admin/spa/system/fieldset/remove/:name', function(
   //----------------------------//
   // 2. Render Template
   $template = dirname(__DIR__) . '/template/fieldset';
-  if (is_dir($response->getPage('template_root'))) {
-    $template = $response->getPage('template_root');
+  if (is_dir($response->get('page', 'template_root'))) {
+    $template = $response->get('page', 'template_root');
   }
 
   $body = $this('handlebars')
@@ -755,8 +755,8 @@ $this('http')->get('/admin/spa/system/fieldset/restore/:name', function(
   //----------------------------//
   // 2. Render Template
   $template = dirname(__DIR__) . '/template/fieldset';
-  if (is_dir($response->getPage('template_root'))) {
-    $template = $response->getPage('template_root');
+  if (is_dir($response->get('page', 'template_root'))) {
+    $template = $response->get('page', 'template_root');
   }
 
   $body = $this('handlebars')
@@ -838,8 +838,8 @@ $this('http')->get('/admin/spa/system/fieldset/update/:name', function(
   //----------------------------//
   // 2. Render Template
   $template = dirname(__DIR__) . '/template/fieldset';
-  if (is_dir($response->getPage('template_root'))) {
-    $template = $response->getPage('template_root');
+  if (is_dir($response->get('page', 'template_root'))) {
+    $template = $response->get('page', 'template_root');
   }
 
   $body = $this('handlebars')

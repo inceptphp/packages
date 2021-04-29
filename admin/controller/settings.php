@@ -26,8 +26,8 @@ $this('http')->get('/admin/settings', function(
   //----------------------------//
   // 2. Render Template
   $template = dirname(__DIR__) . '/template/settings';
-  if (is_dir($response->getPage('template_root'))) {
-    $template = $response->getPage('template_root');
+  if (is_dir($response->get('page', 'template_root'))) {
+    $template = $response->get('page', 'template_root');
   }
 
   $body = $this('handlebars')

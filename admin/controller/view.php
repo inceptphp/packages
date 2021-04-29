@@ -75,8 +75,8 @@ $this('http')->get('/admin', function ($request, $response) {
   //----------------------------//
   // 2. Render Template
   $template = dirname(__DIR__) . '/template/view';
-  if (is_dir($response->getPage('template_root'))) {
-    $template = $response->getPage('template_root');
+  if (is_dir($response->get('page', 'template_root'))) {
+    $template = $response->get('page', 'template_root');
   }
 
   $body = $this('handlebars')

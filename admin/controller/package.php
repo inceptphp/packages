@@ -71,8 +71,8 @@ $this('http')->get('/admin/package/search', function(
   $data['title'] = $this('lang')->translate('Packages');
 
   $template = dirname(__DIR__) . '/template/package';
-  if (is_dir($response->getPage('template_root'))) {
-    $template = $response->getPage('template_root');
+  if (is_dir($response->get('page', 'template_root'))) {
+    $template = $response->get('page', 'template_root');
   }
 
   $body = $this('handlebars')
@@ -183,8 +183,8 @@ $this('http')->get('/admin/spa/package/enable/**', function (
   //----------------------------//
   // 2. Render Template
   $template = dirname(__DIR__) . '/template/object';
-  if (is_dir($response->getPage('template_root'))) {
-    $template = $response->getPage('template_root');
+  if (is_dir($response->get('page', 'template_root'))) {
+    $template = $response->get('page', 'template_root');
   }
 
   $body = $this('handlebars')
@@ -304,8 +304,8 @@ $this('http')->get('/admin/spa/package/disable/**', function (
   //----------------------------//
   // 2. Render Template
   $template = dirname(__DIR__) . '/template/object';
-  if (is_dir($response->getPage('template_root'))) {
-    $template = $response->getPage('template_root');
+  if (is_dir($response->get('page', 'template_root'))) {
+    $template = $response->get('page', 'template_root');
   }
 
   $body = $this('handlebars')
@@ -425,8 +425,8 @@ $this('http')->get('/admin/spa/package/uninstall/**', function (
   //----------------------------//
   // 2. Render Template
   $template = dirname(__DIR__) . '/template/object';
-  if (is_dir($response->getPage('template_root'))) {
-    $template = $response->getPage('template_root');
+  if (is_dir($response->get('page', 'template_root'))) {
+    $template = $response->get('page', 'template_root');
   }
 
   $body = $this('handlebars')

@@ -71,8 +71,8 @@ $this('http')->get('/admin/system/schema/search', function (
   $data['title'] = $this('lang')->translate('Schemas');
 
   $template = dirname(__DIR__) . '/template/schema';
-  if (is_dir($response->getPage('template_root'))) {
-    $template = $response->getPage('template_root');
+  if (is_dir($response->get('page', 'template_root'))) {
+    $template = $response->get('page', 'template_root');
   }
 
   $fieldScript = dirname(__DIR__) . '/template/field/assets/_script.js';
@@ -133,8 +133,8 @@ $this('http')->get('/admin/spa/system/schema/create', function(
   //----------------------------//
   // 2. Render Template
   $template = dirname(__DIR__) . '/template/schema';
-  if (is_dir($response->getPage('template_root'))) {
-    $template = $response->getPage('template_root');
+  if (is_dir($response->get('page', 'template_root'))) {
+    $template = $response->get('page', 'template_root');
   }
 
   $body = $this('handlebars')
@@ -259,8 +259,8 @@ $this('http')->post('/admin/spa/system/schema/field', function(
   //----------------------------//
   // 2. Render Template
   $template = dirname(__DIR__) . '/template/schema';
-  if (is_dir($response->getPage('template_root'))) {
-    $template = $response->getPage('template_root');
+  if (is_dir($response->get('page', 'template_root'))) {
+    $template = $response->get('page', 'template_root');
   }
 
   $field = dirname(__DIR__) . '/template/field';
@@ -323,8 +323,8 @@ $this('http')->post('/admin/spa/system/schema/field/save', function(
   //----------------------------//
   // 2. Process Data
   $template = dirname(__DIR__) . '/template/fieldset';
-  if (is_dir($response->getPage('template_root'))) {
-    $template = $response->getPage('template_root');
+  if (is_dir($response->get('page', 'template_root'))) {
+    $template = $response->get('page', 'template_root');
   }
 
   $body = $this('handlebars')
@@ -490,8 +490,8 @@ $this('http')->get('/admin/spa/system/schema/import', function(
   //----------------------------//
   // 2. Render Template
   $template = dirname(__DIR__) . '/template/schema';
-  if (is_dir($response->getPage('template_root'))) {
-    $template = $response->getPage('template_root');
+  if (is_dir($response->get('page', 'template_root'))) {
+    $template = $response->get('page', 'template_root');
   }
 
   $body = $this('handlebars')
@@ -703,8 +703,8 @@ $this('http')->get('/admin/spa/system/schema/remove/:name', function(
   //----------------------------//
   // 2. Render Template
   $template = dirname(__DIR__) . '/template/schema';
-  if (is_dir($response->getPage('template_root'))) {
-    $template = $response->getPage('template_root');
+  if (is_dir($response->get('page', 'template_root'))) {
+    $template = $response->get('page', 'template_root');
   }
 
   $body = $this('handlebars')
@@ -776,8 +776,8 @@ $this('http')->get('/admin/spa/system/schema/restore/:name', function(
   //----------------------------//
   // 2. Render Template
   $template = dirname(__DIR__) . '/template/schema';
-  if (is_dir($response->getPage('template_root'))) {
-    $template = $response->getPage('template_root');
+  if (is_dir($response->get('page', 'template_root'))) {
+    $template = $response->get('page', 'template_root');
   }
 
   $body = $this('handlebars')
@@ -859,8 +859,8 @@ $this('http')->get('/admin/spa/system/schema/update/:name', function(
   //----------------------------//
   // 2. Render Template
   $template = dirname(__DIR__) . '/template/schema';
-  if (is_dir($response->getPage('template_root'))) {
-    $template = $response->getPage('template_root');
+  if (is_dir($response->get('page', 'template_root'))) {
+    $template = $response->get('page', 'template_root');
   }
 
   $body = $this('handlebars')
