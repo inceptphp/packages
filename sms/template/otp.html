@@ -1,0 +1,52 @@
+<!-- START: OTP Page -->
+<div class="layout-otp">
+  <!-- START: Card -->
+  <div class="card" >
+    <!-- START: Panel Body -->
+    <div class="card-body">
+      <!-- START: Card Title -->
+      <h5 class="card-title">{{_ 'Verify Mobile Phone'}}</h5>
+      <!-- END: Card Title -->
+      <!-- START: OTP Form -->
+      <form method="post">
+        <p class="mb-4">{{_ 'Please enter the verification code sent to your mobile phone.'}}</p>
+        <!-- START: OTP Field -->
+        <div class="form-group">
+          <div class="field-otp">
+            <div class="otp-frame">
+              <input
+                autocomplete="off"
+                type="text"
+                name="otp"
+                maxlength="4"
+                onKeyPress="if(this.value.length==4) return false;"
+              />
+            </div>
+          </div>
+        </div>
+        <!-- END: OTP Field -->
+        <!-- START: Form Submit -->
+        <div class="form-group">
+          <input type="hidden" name="csrf" value="{{csrf}}" />
+          <button
+            class="btn btn-block btn-primary"
+            role="submit"
+            data-do="submit-once"
+            data-on="click"
+            role="submit"
+          >{{_ 'Submit'}}</button>
+        </div>
+        <!-- END: Form Submit -->
+        <!-- START: Form Option -->
+        <div class="form-group text-center">
+          <a title="Verify Account" class="brand-text" href="/sms/otp/send?{{query}}">{{_ 'Resend Verification'}}</a>
+        </div>
+        <!-- END: Form Option -->
+      </form>
+      <!-- END: OTP Form -->
+    </div>
+    <!-- END: Panel Body -->
+  </div>
+  <!-- END: Card -->
+</div>
+<!-- END: OTP Page -->
