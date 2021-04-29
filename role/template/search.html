@@ -1,0 +1,424 @@
+<style>
+  .permission-list,
+  .menu-builder-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .permission-list .form-control,
+  .menu-builder-list .form-control {
+    direction: ltr;
+    text-align: left;
+    border-width: 1px;
+  }
+
+  .permission-list li,
+  .menu-builder-list  li {
+    margin-top: 10px;
+  }
+
+  .menu-builder-list .menu-builder-list {
+    padding-left: 40px;
+  }
+
+  .permission-list .permission-input {
+    margin-top: 10px;
+  }
+
+  .menu-builder {
+    margin-top: 10px;
+  }
+
+  .menu-builder > .btn {
+    margin-bottom: 10px;
+  }
+
+  .menu-builder-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .menu-builder-list .menu-builder-list {
+    padding-left: 36px;
+  }
+
+  .menu-builder-item {
+    width: 100%;
+  }
+
+  .menu-builder-input {
+    margin-bottom: 10px;
+  }
+
+  body.dragging, body.dragging * {
+    cursor: move !important;
+  }
+
+  .menu-builder .menu-builder-item.dragged {
+    position: absolute;
+    opacity: 0.5;
+    z-index: 2000;
+  }
+
+  .menu-builder li.placeholder {
+    height:0;
+    padding:0;
+    position: relative;
+    width: 100%;
+  }
+
+  .menu-builder li.placeholder:before {
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 10px solid #DF0000;
+    content: " ";
+    height: 0;
+    left: 0;
+    opacity: 0.8;
+    position: absolute;
+    top:-15px;
+    width: 0;
+    z-index: 1000;
+  }
+</style>
+
+<h3 class="panel-title">
+  <span class="font-weight-normal">
+    <i class="fas fa-home fa-fw"></i>
+    <a href="/admin">{{_ 'Admin'}}</a>
+  </span>
+
+  {{#scope relation}}
+    <i class="fas fa-chevron-right fa-fw text-gray"></i>
+
+    <span class="font-weight-normal">
+      <i class="fa-fw {{schema.icon}}"></i>
+      <a href="/admin/system/object/{{schema.name}}/search">
+        {{schema.plural}}
+      </a>
+    </span>
+
+    <i class="fas fa-chevron-right fa-fw text-gray"></i>
+
+    <span class="font-weight-normal">
+      <i class="fa-fw {{schema.icon}}"></i>
+      <a
+        data-do="panel-mobile-open"
+        data-on="click"
+        data-template="/admin/spa/system/object/{{schema.name}}/detail/{{schema.id}}"
+        href="javascript:void(0)"
+      >
+        {{suggestion}}
+      </a>
+    </span>
+  {{/scope}}
+
+  <i class="fas fa-chevron-right fa-fw text-gray"></i>
+
+  <i class="fas fa-{{schema.icon}}"></i>
+  {{schema.plural}}
+</h3>
+
+<div class="panel-body search-table">
+  <div class="row">
+    <div class="col-12 col-md-6">
+      <h3 class="text-uppercase text-center text-md-left">
+        {{#when total '===' 1}}
+          {{total}} {{schema.singular}}
+        {{else}}
+          {{total}} {{schema.plural}}
+        {{/when}}
+      </h3>
+    </div>
+    <div class="col-12 col-md-6">
+      {{> search_links}}
+    </div>
+  </div>
+
+  {{> search_form}}
+  {{#if rows.length}}
+    {{> search_bulk}}
+
+    <form
+      id="table-form-{{schema.name}}-{{uuid}}"
+      class="table-form table-scroll"
+    >
+      <table class="table table-striped">
+        <thead>
+          {{> search_head schema}}
+        </thead>
+        <tbody>
+          {{#admin_tbody schema.name rows}}
+            {{> search_row}}
+          {{/admin_tbody}}
+        </tbody>
+      </table>
+    </form>
+
+    <ul class="pagination">
+      {{#pager total range}}
+        <li class="page-item{{#if active}} active{{/if}}">
+          <a class="page-link" href="?{{href}}">{{page}}</a>
+        </li>
+      {{/pager}}
+    </ul>
+  {{else}}
+    <div class="alert alert-info mt-4">
+      <i class="fas fa-info-circle"></i>
+      {{_ 'No results found.'}}
+    </div>
+  {{/if}}
+</div>
+
+<script id="template-filters" type="text/x-template">
+  {{> search_filters}}
+</script>
+
+<script type="text/html" id="menu-item">
+  <li class="menu-builder-item" data-level="{LEVEL}">
+    <div class="menu-builder-input input-group">
+      <div class="input-group-prepend">
+        <button class="menu-builder-handle btn btn-light" type="button">
+          <i class="fas fa-arrows-alt fa-fw"></i>
+        </button>
+        <button class="menu-builder-handle btn btn-default" type="button">
+          <i
+            class="fas fa-question fa-fw"
+            data-do="icon-field"
+            data-target-parent="3"
+          ></i>
+          <input
+            class="form-control"
+            data-name="icon"
+            type="hidden"
+          />
+        </button>
+      </div>
+      <input
+        class="form-control"
+        data-name="label"
+        placeholder="Menu Title"
+        type="text"
+      />
+      <input
+        class="form-control"
+        data-name="path"
+        placeholder="/some/path"
+        type="text"
+      />
+      <div class="input-group-append">
+        {ACTION_ADD}
+        <button class="btn btn-danger menu-builder-action-remove" type="button">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+    </div>
+    <ol class="menu-builder-list"></ol>
+  </li>
+</script>
+
+<script type="text/javascript">
+  $(window).on('role-menu-builder-init', function(e, target) {
+    var itemTemplate = $('#menu-item').html();
+
+    var addTemplate =
+      '<button class="btn btn-success menu-builder-action-add" type="button">'
+        + '<i class="fas fa-plus"></i>'
+      + '</button>';
+
+    var name = $(target).attr('data-name') || 'menu';
+    var depth = $(target).attr('data-depth') || 9;
+    var message = $(target).attr('data-error') || 'Some items were empty';
+
+    var reindex = function(list, level, path) {
+      path = (path || 'menu') + '[{INDEX}]';
+      $(list).children('li.menu-builder-item').each(function(i) {
+        var newPath = path.replace('{INDEX}', i);
+        $('div.menu-builder-input:first', this).find('input').each(function() {
+          var name = $(this).attr('data-name');
+          if (!name || !name.length) {
+            return;
+          }
+
+          $(this).attr('name', newPath + '[' + name + ']');
+        });
+        $('div.menu-builder-input:first', this).find('select').each(function() {
+          var name = $(this).attr('data-name');
+          var multiple = $(this).attr('multiple');
+
+          if(!name || !name.length) {
+            return;
+          }
+
+          if (multiple == 'multiple') {
+            $(this).attr('name', newPath + '[' + name + '][]');
+          } else {
+            $(this).attr('name', newPath + '[' + name + ']');
+          }
+        });
+
+        reindex($('ol.menu-builder-list:first', this), level + 1, newPath + '[children]');
+      });
+    };
+
+    var listen = function(item, level) {
+      //by default level 1
+      level = level || 1;
+      item = $(item);
+
+      //on button add click
+      $('button.menu-builder-action-add:first', item).click(function() {
+        //do we need the add action?
+        var add = '';
+        if(level < depth) {
+          add = addTemplate;
+        }
+
+        //make the template
+        var newItem = $(
+          itemTemplate
+            .replace('{LEVEL}', level)
+            .replace('{ACTION_ADD}', add)
+        ).doon();
+
+        //append the template
+        $('ol.menu-builder-list:first', item).append(newItem);
+
+        //reindex the names
+        reindex($('ol.menu-builder-list:first', target), level, name);
+
+        //listen to the item
+        listen(newItem, level + 1);
+      });
+
+      //on button remove click
+      $('button.menu-builder-action-remove:first', item).click(function() {
+        $(this).closest('li.menu-builder-item').remove();
+
+        //reindex the names
+        reindex($('ol.menu-builder-list:first', target), level, name);
+      });
+
+      return item;
+    };
+
+    var checkForm = function(e) {
+      var errors = false;
+      $('input[data-name="label"]', target).each(function() {
+        if(!$(this).val().trim().length) {
+          $(this).parent().addClass('has-error');
+          errors = true;
+        }
+      });
+
+      $('input[data-name="path"]', target).each(function() {
+        if(!$(this).val().trim().length) {
+          $(this).parent().addClass('has-error');
+          errors = true;
+        }
+      });
+
+      if(errors) {
+        $('span.help-text', target).html(message);
+        e.preventDefault();
+        return false;
+      }
+    };
+
+    //listen to the root
+    listen(target)
+      .submit(checkForm)
+      //find all the current elements
+      .find('li.menu-builder-item')
+      .each(function() {
+        listen(this).doon();
+      });
+
+    $.require('components/jquery-sortable/source/js/jquery-sortable-min.js', function() {
+      var root = $('ol.menu-builder-list:first');
+
+      root.sortable({
+        onDrop: function ($item, container, _super, event) {
+          $item.removeClass(container.group.options.draggedClass).removeAttr('style');
+          $('body').removeClass(container.group.options.bodyClass);
+
+          setTimeout(function() {
+            reindex(root, 1, name);
+          }, 10);
+        }
+      });
+
+      reindex(root, 1, name);
+    });
+  });
+</script>
+
+<script id="access-row" type="text/x-template">
+  <li class="permission-item">
+    <div class="permission-input input-group">
+      <input
+        class="form-control field-label"
+        placeholder="Label"
+        type="text"
+      />
+      <select class="form-control field-method">
+        <option value="all">ALL</option>
+        <option value="get">GET</option>
+        <option value="post">POST</option>
+        <option value="put">PUT</option>
+        <option value="delete">DELETE</option>
+      </select>
+      <input
+        class="form-control field-path"
+        placeholder="/some/path"
+        type="text"
+      />
+      <div class="input-group-append">
+        <button class="btn btn-danger permission-remove" type="button">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+    </div>
+  </li>
+</script>
+
+<script type="text/javascript">
+  $(window).on('permissions-init', function(e, target) {
+    var name = $(target).data('row-name');
+    var template = $($(target).data('row-template')).html();
+    var container = $('ul.permission-list', target);
+
+    container.children('li.permission-item').each(function() {
+      //on button remove click
+      $('button.permission-remove', this).click(function() {
+        $(this).closest('li.permission-item').remove();
+        reindex(container);
+      });
+    });
+
+    $('button.permission-add', target).click(function() {
+      var index = container.children('li.permission-item').length;
+      var row = $(template);
+
+      $('input.field-label', row).attr('name', name + '[' + index + '][label]');
+      $('select.field-method', row).attr('name', name + '[' + index + '][method]');
+      $('input.field-path', row).attr('name', name + '[' + index + '][path]');
+
+      container.append(row);
+
+      //on button remove click
+      $('button.permission-remove', row).click(function() {
+        $(this).closest('li.permission-item').remove();
+        reindex(container);
+      });
+    });
+
+    var reindex = function(list, path) {
+      container.children('li.permission-item').each(function(index) {
+        $('input.field-label', this).attr('name', name + '[' + index + '][label]');
+        $('select.field-method', this).attr('name', name + '[' + index + '][method]');
+        $('input.field-path', this).attr('name', name + '[' + index + '][path]');
+      });
+    };
+  });
+</script>

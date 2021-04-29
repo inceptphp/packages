@@ -1,0 +1,24 @@
+<div class="search-links text-right mb-3">
+  <div class="import-export d-none d-md-inline-block"></div>
+  {{#scope relation}}
+    <button
+      class="btn btn-large btn-outline-primary"
+      data-do="panel-mobile-open"
+      data-template="/admin/spa/system/object/{{schema.name}}/{{id}}/create/{{name}}?after=reload"
+      data-on="click"
+    >
+      <i class="fas fa-plus"></i>
+      {{_ 'Create %s' singular}}
+    </button>
+  {{else}}
+    <button
+      class="btn btn-large btn-outline-primary"
+      data-do="panel-mobile-open"
+      data-template="/admin/spa/system/object/{{schema.name}}/create"
+      data-on="click"
+    >
+      <i class="fas fa-plus"></i>
+      {{_ 'Create %s' schema.singular}}
+    </button>
+  {{/scope}}
+</div>

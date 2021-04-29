@@ -1,0 +1,57 @@
+<div
+  class="p-2"
+  data-do="permissions"
+  data-row-name="role_permissions"
+  data-row-template="#access-row"
+>
+  <button type="button" class="btn btn-block btn-outline-secondary permission-add">
+    <i class="fas fa-plus"></i>
+    {{_ 'Add Permission'}}
+  </button>
+  <ul class="permission-list m-0" >
+    {{#each item.role_permissions}}
+      <li class="permission-item">
+        <div class="permission-input input-group{{#has ../errors.permissions @index}} has-error{{/has}}">
+          <input
+            class="form-control field-label"
+            name="role_permissions[{{@index}}][label]"
+            placeholder="Label"
+            type="text"
+            value="{{label}}"
+          />
+          <select
+            class="form-control field-method"
+            name="role_permissions[{{@index}}][method]"
+          >
+            <option value="all" {{#when method '==' 'all'}}selected="selected"{{/when}}>ALL</option>
+            <option value="get" {{#when method '==' 'get'}}selected="selected"{{/when}}>GET</option>
+            <option value="post" {{#when method '==' 'post'}}selected="selected"{{/when}}>POST</option>
+            <option value="put" {{#when method '==' 'put'}}selected="selected"{{/when}}>PUT</option>
+            <option value="delete" {{#when method '==' 'delete'}}selected="selected"{{/when}}>DELETE</option>
+          </select>
+          <input
+            class="form-control field-path"
+            name="role_permissions[{{@index}}][path]"
+            placeholder="/some/path"
+            type="text"
+            value="{{path}}"
+          />
+          <div class="input-group-append">
+            <button class="btn btn-danger permission-remove" type="button">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+        </div>
+        {{#scope ../errors.permissions @index}}
+          {{#if path}}<span class="help-text text-danger">{{path}}</span>{{/if}}
+          {{#if label}}<span class="help-text text-danger">{{label}}</span>{{/if}}
+        {{/scope}}
+      </li>
+    {{/each}}
+  </ul>
+</div>
+{{#if errors.role_permissions}}
+  <div class="invalid-feedback">
+    {{errors.role_permissions}}
+  </div>
+{{/if}}

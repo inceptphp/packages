@@ -938,11 +938,7 @@ $this('handlebars')
    *
    * @return ?string
    */
-  ->registerHelper('has', function (
-    array $array,
-    $key,
-    array $options
-  ): ?string {
+  ->registerHelper('has', function ($array, $key, array $options): ?string {
     if (!is_array($array)) {
       return $options['inverse']();
     }
@@ -1025,7 +1021,7 @@ $this('handlebars')
    * @return ?string
    */
   ->registerHelper('notin', function (
-    array $array,
+    array|string $array,
     $value,
     array $options
   ): ?string {

@@ -1,0 +1,53 @@
+<h4>
+  <i class="fab fa-twitter"></i>
+  {{_ 'Twitter Settings'}}
+</h4>
+<p>
+  {{#_ 'See: %s for more information on how to get these tokens.'}}
+    <a href="https://developer.twitter.com/en/docs" target="_blank">
+      https://developer.twitter.com/en/docs
+    </a>
+  {{/_}}
+</p>
+<!-- START: Twitter active -->
+<div class="form-group form-group-switch">
+  <label class="control-label">{{_ 'Enable Twitter'}}</label>
+  <div class="form-field">
+    {{{field
+      name="service[twitter][active]"
+      type="switch"
+      value=item.service.twitter.active
+    }}}
+  </div>
+</div>
+<!-- END: Twitter active -->
+<!-- START: Twitter Key -->
+<div class="form-group form-group-text{{#if errors.service.twitter.token}} has-error{{/if}}">
+  <label class="control-label">{{_ 'Twitter Token'}}</label>
+  <div class="form-field">
+    {{{field
+      name="service[twitter][token]"
+      type="text"
+      value=item.service.twitter.token
+    }}}
+    {{#if errors.service.twitter.token}}
+      <span class="help-text">{{errors.service.twitter.token}}</span>
+    {{/if}}
+  </div>
+</div>
+<!-- END: Twitter token -->
+<!-- START: Twitter secret -->
+<div class="form-group form-group-text{{#if errors.service.twitter.secret}} has-error{{/if}}">
+  <label class="control-label">{{_ 'Twitter Secret'}}</label>
+  <div class="form-field">
+    {{{field
+      name="service[twitter][secret]"
+      type="text"
+      value=item.service.twitter.secret
+    }}}
+    {{#if errors.service.twitter.secret}}
+      <span class="help-text">{{errors.service.twitter.secret}}</span>
+    {{/if}}
+  </div>
+</div>
+<!-- END: Twitter secret -->

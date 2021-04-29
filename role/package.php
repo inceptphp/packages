@@ -10,12 +10,12 @@ use UGComponents\IO\Request\RequestInterface;
 use UGComponents\IO\Response\ResponseInterface;
 
 /**
- * $ incept inceptphp/packages/auth ...
+ * $ incept inceptphp/packages/role ...
  *
  * @param RequestInterface $request
  * @param ResponseInterface $response
  */
-$this('event')->on('inceptphp/packages/auth', function (
+$this('event')->on('inceptphp/packages/role', function (
   RequestInterface $request,
   ResponseInterface $response
 ) {
@@ -42,19 +42,19 @@ $this('event')->on('inceptphp/packages/auth', function (
     $request->setStage($data);
   }
 
-  $name = 'inceptphp/packages/auth';
+  $name = 'inceptphp/packages/role';
   $event = sprintf('%s-%s', $name, $event);
 
   $this('event')->emit($event, $request, $response);
 });
 
 /**
- * $ incept inceptphp/packages/auth help
+ * $ incept inceptphp/packages/role help
  *
  * @param RequestInterface $request
  * @param ResponseInterface $response
  */
-$this('event')->on('inceptphp/packages/auth-help', function (
+$this('event')->on('inceptphp/packages/role-help', function (
   RequestInterface $request,
   ResponseInterface $response
 ) {
@@ -63,87 +63,87 @@ $this('event')->on('inceptphp/packages/auth-help', function (
 
     ->output(PHP_EOL)
 
-    ->success('incept inceptphp/packages/auth install')
+    ->success('incept inceptphp/packages/role install')
     ->info(' Installs this package')
 
     ->output(PHP_EOL)
 
-    ->success('incept inceptphp/packages/auth update')
+    ->success('incept inceptphp/packages/role update')
     ->info(' Updates this package')
 
     ->output(PHP_EOL)
 
-    ->success('incept inceptphp/packages/auth uninstall')
+    ->success('incept inceptphp/packages/role uninstall')
     ->info(' Removes this package')
 
     ->output(PHP_EOL)
 
-    ->success('incept inceptphp/packages/auth populate')
-    ->info(' Populates the first row with the admin account. (admin/admin)')
+    ->success('incept inceptphp/packages/role populate')
+    ->info(' Populates the first set of roles (developer, admin, guest)')
 
     ->output(PHP_EOL);
 });
 
 /**
- * $ incept inceptphp/packages/auth install
+ * $ incept inceptphp/packages/role install
  *
  * @param RequestInterface $request
  * @param ResponseInterface $response
  */
-$this('event')->on('inceptphp/packages/auth-install', function (
+$this('event')->on('inceptphp/packages/role-install', function (
   RequestInterface $request,
   ResponseInterface $response
 ) {
   $request
-    ->setStage('name', 'inceptphp/packages/auth')
+    ->setStage('name', 'inceptphp/packages/role')
     ->setStage('install', __DIR__ . '/install');
   //just do the default installer
   $this('event')->emit('inceptphp/packages-install', $request, $response);
 
-  $response->setResults('recommended', 'auth', 'bin/incept inceptphp/packages/auth populate');
+  $response->setResults('recommended', 'role', 'bin/incept inceptphp/packages/role populate');
 });
 
 /**
- * $ incept inceptphp/packages/auth update
+ * $ incept inceptphp/packages/role update
  *
  * @param RequestInterface $request
  * @param ResponseInterface $response
  */
-$this('event')->on('inceptphp/packages/auth-update', function (
+$this('event')->on('inceptphp/packages/role-update', function (
   RequestInterface $request,
   ResponseInterface $response
 ) {
   $request
-    ->setStage('name', 'inceptphp/packages/auth')
+    ->setStage('name', 'inceptphp/packages/role')
     ->setStage('install', __DIR__ . '/install');
   //just do the default installer
   $this('event')->emit('inceptphp/packages-update', $request, $response);
 });
 
 /**
- * $ incept inceptphp/packages/auth uninstall
+ * $ incept inceptphp/packages/role uninstall
  *
  * @param RequestInterface $request
  * @param ResponseInterface $response
  */
-$this('event')->on('inceptphp/packages/auth-uninstall', function (
+$this('event')->on('inceptphp/packages/role-uninstall', function (
   RequestInterface $request,
   ResponseInterface $response
 ) {
   $request
-    ->setStage('name', 'inceptphp/packages/auth')
+    ->setStage('name', 'inceptphp/packages/role')
     ->setStage('schema', __DIR__ . '/schema');
   //just do the default installer
   $this('event')->emit('inceptphp/packages-uninstall', $request, $response);
 });
 
 /**
- * $ incept inceptphp/packages/auth populate
+ * $ incept inceptphp/packages/role populate
  *
  * @param RequestInterface $request
  * @param ResponseInterface $response
  */
-$this('event')->on('inceptphp/packages/auth-populate', function (
+$this('event')->on('inceptphp/packages/role-populate', function (
   RequestInterface $request,
   ResponseInterface $response
 ) {
@@ -174,7 +174,7 @@ $this('event')->on('inceptphp/packages/auth-populate', function (
         ->setStage($fixture)
         ->setStage('schema', $data['name']);
 
-      $emitter->call('auth-create', $payload);
+      $emitter->call('system-object-create', $payload);
     }
   }
 });

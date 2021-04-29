@@ -56,12 +56,6 @@ $this('event')->on('sql-install', function (
   //no errors here
   //build the database
   $emitter->call('sql-build', $payload['request'], $response);
-
-  if ($response->isError()) {
-    return;
-  }
-
-  $response->setResults('recommended', 'storm', 'bin/incept sql populate');
 });
 
 /**

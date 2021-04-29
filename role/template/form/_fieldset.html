@@ -1,0 +1,15 @@
+<!-- START: Fieldset Pane -->
+<div
+  class="tab-pane fade"
+  id="model-form-{{fieldset.name}}-{{uuid}}"
+  role="tabpanel"
+>
+  {{#field name=@key row=../item schema=../schema.name}}
+    <div class="form-group form-group-{{type}}">
+      <div class="form-field">
+        {{{control}}}
+      </div>
+    </div>
+  {{/field}}
+</div>
+<!-- END: Fieldset Pane -->

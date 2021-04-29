@@ -1,0 +1,53 @@
+<h4>
+  <i class="fab fa-linkedin"></i>
+  {{_ 'LinkedIn Settings'}}
+</h4>
+<p>
+  {{#_ 'See: %s for more information on how to get these tokens.'}}
+  <a href="https://developer.linkedin.com/docs" target="_blank">
+    https://developer.linkedin.com/docs
+  </a>
+  {{/_}}
+</p>
+<!-- START: LinkedIn active -->
+<div class="form-group form-group-switch">
+  <label class="control-label">{{_ 'Enable LinkedIn'}}</label>
+  <div class="form-field">
+    {{{field
+      name="service[linkedin][active]"
+      type="switch"
+      value=item.service.linkedin.active
+    }}}
+  </div>
+</div>
+<!-- END: LinkedIn active -->
+<!-- START: LinkedIn Key -->
+<div class="form-group form-group-text{{#if errors.service.linkedin.token}} has-error{{/if}}">
+  <label class="control-label">{{_ 'LinkedIn Token'}}</label>
+  <div class="form-field">
+    {{{field
+      name="service[linkedin][token]"
+      type="text"
+      value=item.service.linkedin.token
+    }}}
+    {{#if errors.service.linkedin.token}}
+      <span class="help-text">{{errors.service.linkedin.token}}</span>
+    {{/if}}
+  </div>
+</div>
+<!-- END: LinkedIn token -->
+<!-- START: LinkedIn secret -->
+<div class="form-group form-group-text{{#if errors.service.linkedin.secret}} has-error{{/if}}">
+  <label class="control-label">{{_ 'LinkedIn Secret'}}</label>
+  <div class="form-field">
+    {{{field
+      name="service[linkedin][secret]"
+      type="text"
+      value=item.service.linkedin.secret
+    }}}
+    {{#if errors.service.linkedin.secret}}
+      <span class="help-text">{{errors.service.linkedin.secret}}</span>
+    {{/if}}
+  </div>
+</div>
+<!-- END: LinkedIn secret -->

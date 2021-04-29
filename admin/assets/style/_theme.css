@@ -125,6 +125,26 @@ a:visited {
   border-color: #929AAD;
 }
 
+.dropdown-menu {
+  background-color: #373D49;
+  border-color: #272C36;
+  color: #929AAD;
+}
+
+.dropdown-toggle,
+.dropdown-menu a {
+  color: #929AAD !important;
+}
+
+.dropdown-divider {
+  border-color: #272C36;
+}
+
+.dropdown-item:focus,
+.dropdown-item:hover {
+  background-color: #272C36;
+}
+
 .input-group .input-group-text {
   background-color: #373D49;
   border: 1px solid #272C36;

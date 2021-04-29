@@ -1,0 +1,8 @@
+<li class="menu-builder-item">
+  {{> form_menu_input}}
+  <ol class="menu-builder-list">
+    {{#each submenu}}
+      {{{partial 'form_menu_item' this}}}
+    {{/each}}
+  </ol>
+</li>

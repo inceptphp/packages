@@ -35,7 +35,7 @@ $this('event')->on('sql-flush', function (
 
   $terminal->system('Flushing SQL...');
 
-  $config = $this('config')->get('sql-main');
+  $config = $this('config')->get('services', 'sql-main');
   $database = SqlFactory::load($config);
 
   //truncate all tables

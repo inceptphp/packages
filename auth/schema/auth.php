@@ -113,6 +113,18 @@ return [
       'sortable' => 0
     ],
     [
+      'label' => 'Role',
+      'name' => 'role',
+      'field' =>  [ 'type' => 'text' ],
+      'validation' => [],
+      'list' => [ 'format' => 'none' ],
+      'detail' => [ 'format' => 'none' ],
+      'default' => 'guest',
+      'searchable' => 0,
+      'filterable' => 1,
+      'sortable' => 0
+    ],
+    [
       'label' => 'Active',
       'name' => 'active',
       'field' => [ 'type' => 'active' ],
@@ -153,6 +165,16 @@ return [
     [
       'name' => 'profile',
       'many' => 1
+    ]
+  ],
+  'fixtures' => [
+    [
+      'profile_first_name' => 'Super',
+      'profile_last_name' => 'Admin',
+      'auth_username' => 'admin',
+      'auth_password' => 'admin',
+      'auth_role' => 'developer',
+      'auth_active' => 1
     ]
   ]
 ];

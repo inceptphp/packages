@@ -93,6 +93,11 @@ class AdminPackage
     ResponseInterface $response,
     Throwable $error
   ) {
+    //prevent starting session in cli mode
+    if (php_sapi_name() === 'cli') {
+      return;
+    }
+
     //get the path
     $path = $request->getPath('string');
     //if not an admin path
@@ -592,15 +597,7 @@ class AdminPackage
     $handlebars = $this->handler->package('handlebars');
 
     //determine the menu
-    $menu = $response->get('menu');
-    if (!is_array($menu)) {
-      $menu = $config->get('menu');
-    }
-
-    if (!is_array($menu)) {
-      $menu = [];
-    }
-
+    $menu = $response->get('admin_menu') ?? [];
     $menu = $this->buildMenu($menu, $host->all());
 
     //deal with flash messages

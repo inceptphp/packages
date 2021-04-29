@@ -223,6 +223,8 @@ $this('http')->post('/auth/signin', function (
   // 7. Interpret Results
   //it was good
   $auth->clearAttempts($request);
+  //remove password
+  $response->removeResults('auth_password');
 
   if ($response->getResults('auth_2fa_key')) {
     //store to session
@@ -234,8 +236,11 @@ $this('http')->post('/auth/signin', function (
     ));
   }
 
+
   //store to session
-  $response->setSession('me', $response->getResults());
+  $response
+    ->removeSession('2fa')
+    ->setSession('me', $response->getResults());
 
   //if we dont want to redirect
   if ($redirect === 'false') {

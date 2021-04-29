@@ -14,7 +14,7 @@ use Incept\Framework\Framework;
 use UGComponents\IO\Request\RequestInterface;
 
 /**
- * Profile package methods
+ * Auth package methods
  *
  * @vendor   Incept
  * @package  Package

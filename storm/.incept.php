@@ -25,3 +25,6 @@ $this
   ->package('storm')
   //map the package with the event package class methods
   ->mapPackageMethods($this('resolver')->resolve(StormPackage::class, $this));
+
+//then preprocess the loader
+$this->preprocess(include __DIR__ . '/boot.php');

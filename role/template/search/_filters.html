@@ -1,0 +1,68 @@
+<form class="form-mobile">
+  <!-- START: Head -->
+  <header class="view-head">
+    <button
+      class="sidebar-hide"
+      data-do="panel-mobile-back"
+      data-on="click"
+      type="button"
+    >
+      <i class="fas fa-chevron-left"></i>
+    </button>
+    <h6 class="view-title">
+      <i class="{{schema.icon}} d-inline-block mr-2"></i>
+      {{_ 'Filter %s' schema.plural}}
+    </h6>
+  </header>
+  <!-- END: Head -->
+  <!-- START: Body -->
+  <section class="view-body with-foot-1 schema-detail">
+    <div class="form-group">
+      <label class="control-label">{{_ 'Search'}}</label>
+      <div class="form-field">
+        <input
+          type="text"
+          class="form-control"
+          name="q"
+          placeholder="{{_ 'Enter Keyword'}}"
+          value="{{q}}"
+        />
+      </div>
+    </div>
+    {{#admin_filter schema.name filters}}
+      <div class="form-group form-group-{{type}}">
+        <label class="control-label">{{label}}</label>
+        <div class="form-field">
+          {{{control}}}
+        </div>
+      </div>
+    {{/admin_filter}}
+    {{#if schema.restorable}}
+      <div class="form-group">
+        <label class="control-label">{{_ 'Active'}}</label>
+        <div class="form-field">
+          <select
+            class="form-control system-form-control"
+            name="filter[{{schema.active}}]"
+          >
+            {{#if active}}
+              <option value="1" selected>{{_ 'Yes'}}</option>
+              <option value="0">{{_ 'No'}}</option>
+            {{else}}
+              <option value="1">{{_ 'Yes'}}</option>
+              <option value="0" selected>{{_ 'No'}}</option>
+            {{/if}}
+          </select>
+        </div>
+      </div>
+    {{/if}}
+  </section>
+  <!-- END: Body -->
+  <!-- START: Foot -->
+  <footer class="view-foot">
+    <button class="btn btn-secondary btn-block text-small">
+      <i class="fas fa-edit"></i> {{_ 'Submit'}}
+    </button>
+  </footer>
+  <!-- END: Foot -->
+</form>

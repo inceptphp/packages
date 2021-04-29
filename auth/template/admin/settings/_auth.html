@@ -1,0 +1,54 @@
+<h4>{{_ 'Submission Settings'}}</h4>
+
+<!-- START: Attempts CAPTCHA -->
+<div class="form-group form-group-number{{#if errors.submission.captcha}} has-error{{/if}}">
+  <label class="control-label">{{_ 'Attempts Before Captcha'}}</label>
+  <div class="form-field">
+    {{{field
+      name="submission[captcha]"
+      type="number"
+      min="0"
+      step="1"
+      value=item.submission.captcha
+    }}}
+    {{#if errors.submission.captcha}}
+      <span class="help-text">{{errors.submission.captcha}}</span>
+    {{/if}}
+  </div>
+</div>
+<!-- END: Attempts CAPTCHA -->
+<!-- START: Attempts lockout -->
+<div class="form-group form-group-number{{#if errors.submission.lockout}} has-error{{/if}}">
+  <label class="control-label">{{_ 'Attempts Before Lockout'}}</label>
+  <div class="form-field">
+    {{{field
+      name="submission[lockout]"
+      type="number"
+      min="0"
+      step="1"
+      value=item.submission.lockout
+    }}}
+    {{#if errors.submission.lockout}}
+      <span class="help-text">{{errors.submission.lockout}}</span>
+    {{/if}}
+  </div>
+</div>
+<!-- END: Attempts lockout -->
+<!-- START: Attempts wait -->
+<div class="form-group form-group-number{{#if errors.submission.wait}} has-error{{/if}}">
+  <label class="control-label">{{_ 'Wait Time After Lock Out, Before Trying Again'}}</label>
+  <div class="form-field">
+    {{{field
+      name="submission[wait]"
+      type="number"
+      min="0"
+      step="1"
+      placeholder="in minutes"
+      value=item.submission.wait
+    }}}
+    {{#if errors.submission.wait}}
+      <span class="help-text">{{errors.submission.wait}}</span>
+    {{/if}}
+  </div>
+</div>
+<!-- END: Attempts wait -->

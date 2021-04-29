@@ -1,0 +1,53 @@
+<h4>
+  <i class="fab fa-facebook"></i>
+  {{_ 'Facebook Settings'}}
+</h4>
+<p>
+  {{#_ 'See: %s for more information on how to get these tokens.'}}
+    <a href="https://developers.facebook.com/docs" target="_blank">
+      https://developers.facebook.com/docs
+    </a>
+  {{/_}}
+</p>
+<!-- START: Facebook active -->
+<div class="form-group form-group-switch">
+  <label class="control-label">{{_ 'Enable Facebook'}}</label>
+  <div class="form-field">
+    {{{field
+      name="service[facebook][active]"
+      type="switch"
+      value=item.service.facebook.active
+    }}}
+  </div>
+</div>
+<!-- END: Facebook active -->
+<!-- START: Facebook Key -->
+<div class="form-group form-group-text{{#if errors.service.facebook.token}} has-error{{/if}}">
+  <label class="control-label">{{_ 'Facebook Token'}}</label>
+  <div class="form-field">
+    {{{field
+      name="service[facebook][token]"
+      type="text"
+      value=item.service.facebook.token
+    }}}
+    {{#if errors.service.facebook.token}}
+      <span class="help-text">{{errors.service.facebook.token}}</span>
+    {{/if}}
+  </div>
+</div>
+<!-- END: Facebook token -->
+<!-- START: Facebook secret -->
+<div class="form-group form-group-text{{#if errors.service.facebook.secret}} has-error{{/if}}">
+  <label class="control-label">{{_ 'Facebook Secret'}}</label>
+  <div class="form-field">
+    {{{field
+      name="service[facebook][secret]"
+      type="text"
+      value=item.service.facebook.secret
+    }}}
+    {{#if errors.service.facebook.secret}}
+      <span class="help-text">{{errors.service.facebook.secret}}</span>
+    {{/if}}
+  </div>
+</div>
+<!-- END: Facebook secret -->

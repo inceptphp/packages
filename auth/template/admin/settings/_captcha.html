@@ -1,0 +1,53 @@
+<h4>
+  <i class="fab fa-google"></i>
+  {{_ 'Captcha Settings'}}
+</h4>
+<p>
+  {{#_ 'See: %s for more information on how to get these tokens.'}}
+    <a href="https://www.google.com/recaptcha/intro/v3.html" target="_blank">
+      https://www.google.com/recaptcha/intro/v3.html
+    </a>
+  {{/_}}
+</p>
+<!-- START: Captcha active -->
+<div class="form-group form-group-switch">
+  <label class="control-label">{{_ 'Enable Captcha'}}</label>
+  <div class="form-field">
+    {{{field
+      name="service[captcha][active]"
+      type="switch"
+      value=item.service.captcha.active
+    }}}
+  </div>
+</div>
+<!-- END: Captcha active -->
+<!-- START: Captcha Key -->
+<div class="form-group form-group-text{{#if errors.service.captcha.token}} has-error{{/if}}">
+  <label class="control-label">{{_ 'Captcha Token'}}</label>
+  <div class="form-field">
+    {{{field
+      name="service[captcha][token]"
+      type="text"
+      value=item.service.captcha.token
+    }}}
+    {{#if errors.service.captcha.token}}
+      <span class="help-text">{{errors.service.captcha.token}}</span>
+    {{/if}}
+  </div>
+</div>
+<!-- END: Captcha token -->
+<!-- START: Captcha secret -->
+<div class="form-group form-group-text{{#if errors.service.captcha.secret}} has-error{{/if}}">
+  <label class="control-label">{{_ 'Captcha Secret'}}</label>
+  <div class="form-field">
+    {{{field
+      name="service[captcha][secret]"
+      type="text"
+      value=item.service.captcha.secret
+    }}}
+    {{#if errors.service.captcha.secret}}
+      <span class="help-text">{{errors.service.captcha.secret}}</span>
+    {{/if}}
+  </div>
+</div>
+<!-- END: Captcha secret -->

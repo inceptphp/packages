@@ -349,7 +349,7 @@ $this('http')->post('/auth/signin/2fa', function (
 
   //----------------------------//
   // 6. Process Request
-  $response->setSession('me', $session);
+  $response->removeSession('2fa')->setSession('me', $session);
 
   //----------------------------//
   // 7. Interpret Results
