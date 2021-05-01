@@ -114,6 +114,46 @@ class AuthPackage
   }
 
   /**
+   * Transform a title to a URL slug
+   *
+   * @param *string $string
+   * @param string  $string
+   *
+   * @return string
+   */
+  public function slugger(string $string, string $suffix = null): string
+  {
+    // replace space with +
+    $slug = preg_replace('/\s+/is', '+', $string);
+
+    // replace non letter or digits by -
+    $slug = preg_replace('~[^\pL\d\+]+~u', '-', $slug);
+
+    // transliterate
+    $slug = iconv('utf-8', 'us-ascii//TRANSLIT', $slug);
+
+    // remove unwanted characters
+    $slug = preg_replace('~[^-\w\+]+~', '', $slug);
+
+    // trim
+    $slug = trim($slug, '-');
+
+    // remove duplicate -
+    $slug = preg_replace('~-+~', '-', $slug);
+
+    if (strlen($slug) > 100) {
+      $slug = substr($slug, 0, 100);
+    }
+
+    if (is_string($suffix)) {
+      return strtolower($slug . '-' . $suffix);
+    }
+
+    // lowercase
+    return strtolower($slug);
+  }
+
+  /**
   * Returns how long someone should wait before logging in again
   *
   * @param RequestInterface $request

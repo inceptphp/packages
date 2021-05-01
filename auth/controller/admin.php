@@ -37,22 +37,16 @@ $this('http')->get('/admin/auth/settings', function (
   $data = ['item' => $request->getPost()];
 
   if (empty($data['item'])) {
-    $item['service']['facebook'] = $config->get('services', 'facebook-main');
-    $item['service']['twitter'] = $config->get('services', 'twitter-main');
-    $item['service']['linkedin'] = $config->get('services', 'linkedin-main');
-    $item['service']['google'] = $config->get('services', 'google-main');
-    $item['service']['captcha'] = $config->get('services', 'captcha-main');
-    $item['submission'] = $config->get('auth', 'submission');
+    $data['item']['captcha'] = $config->get('services', 'captcha-main') ?? [];
+    $data['item']['submission'] = $config->get('auth', 'submission') ?? [];
 
-    foreach ($item['service'] as $service => $setting) {
-      if (!is_array($setting)) {
-        continue;
+    foreach ($config->get('services') ?? [] as $service) {
+      if (isset($service['type'])
+        && ($service['type'] === 'oauth1' || $service['type'] === 'oauth2')
+      ) {
+        $data['item']['services'][] = $service;
       }
-
-      $item['service'][$service] = $setting;
     }
-
-    $data['item'] = $item;
   }
 
   if ($response->isError()) {
@@ -63,6 +57,11 @@ $this('http')->get('/admin/auth/settings', function (
     ]);
 
     $data['errors'] = $response->getValidation();
+    if (isset($data['errors']['service']) && is_array($data['errors']['service'])) {
+      foreach ($data['errors']['service'] as $i => $errors) {
+        $data['item']['services'][$i]['errors'] = $errors;
+      }
+    }
   }
 
   //----------------------------//
@@ -76,10 +75,7 @@ $this('http')->get('/admin/auth/settings', function (
     ->setTemplateFolder($template)
     ->registerPartialFromFolder('settings_auth')
     ->registerPartialFromFolder('settings_captcha')
-    ->registerPartialFromFolder('settings_facebook')
-    ->registerPartialFromFolder('settings_google')
-    ->registerPartialFromFolder('settings_linkedin')
-    ->registerPartialFromFolder('settings_twitter')
+    ->registerPartialFromFolder('settings_services')
     ->renderFromFolder('settings', $data);
 
   //if we only want the body
@@ -117,26 +113,59 @@ $this('http')->post('/admin/auth/settings', function (
   //----------------------------//
   // 2. Prepare Data
   $services = $config->get('services');
-  $data['services'] = $request->getStage('service') ?? [];
+  $data['captcha'] = $request->getStage('captcha') ?? [];
+  $data['services'] = $request->getStage('services') ?? [];
   $data['submission'] = $request->getStage('submission') ?? [];
 
   //----------------------------//
   // 3. Validate Data
-  //----------------------------//
-  // 4. Process Request
-  foreach ($data['services'] as $name => $service) {
-    foreach ($service as $key => $value) {
-      if ($key === 'active') {
-        $service[$key] = (bool) $service[$key];
-        continue;
-      }
-      if (!trim($value)) {
-        $service[$key] = sprintf('<%s %s>', strtoupper($name), strtoupper($key));
-      }
+  foreach ($data['services'] as $i => $service) {
+    if (!isset($service['name']) || !trim($service['name'])) {
+      $response->invalidate('service', $i, 'name', 'Name is required');
     }
 
-    $services[$name . '-main'] = $service;
+    if (!isset($service['active'])) {
+      $response->invalidate('service', $i, 'active', 'Active is required');
+    }
+
+    if (!isset($service['client_id']) || !trim($service['client_id'])) {
+      $response->invalidate('service', $i, 'client_id', 'Client ID is required');
+    }
+
+    if (!isset($service['client_secret']) || !trim($service['client_secret'])) {
+      $response->invalidate('service', $i, 'client_secret', 'Client Secret is required');
+    }
+
+    if (!isset($service['url_authorize']) || !trim($service['url_authorize'])) {
+      $response->invalidate('service', $i, 'url_authorize', 'Authorize URL is required');
+    }
+
+    if (!isset($service['url_access_token']) || !trim($service['url_access_token'])) {
+      $response->invalidate('service', $i, 'url_access_token', 'Access Token URL is required');
+    }
+
+    if (!isset($service['url_resource']) || !trim($service['url_resource'])) {
+      $response->invalidate('service', $i, 'url_resource', 'Resource URL is required');
+    }
   }
+
+  if (!$response->isValid()) {
+    $response->setError(true, 'Invalid parameters');
+    return $http->routeTo('get', '/admin/auth/settings', $request, $response);
+  }
+
+  //----------------------------//
+  // 4. Process Request
+  foreach ($data['services'] as $service) {
+    $key = $this('auth')->slugger($service['name'], 'main');
+    $service['active'] = (bool) $service['active'];
+    $service['type'] = 'oauth2';
+    $services[$key] = $service;
+  }
+
+  $services['captcha-main']['active'] = (bool) $data['captcha']['active'];
+  $services['captcha-main']['token'] = $data['captcha']['token'] ?? null;
+  $services['captcha-main']['secret'] = $data['captcha']['token'] ?? null;
 
   $config->set('services', $services);
 
@@ -154,7 +183,7 @@ $this('http')->post('/admin/auth/settings', function (
   //----------------------------//
   // 5. Interpret Results
   //redirect
-  $redirect = $request->getStage('redirect_uri') ?? '/admin/system/object/auth/settings';
+  $redirect = $request->getStage('redirect_uri') ?? '/admin/auth/settings';
 
   //if we dont want to redirect
   if ($redirect === 'false') {

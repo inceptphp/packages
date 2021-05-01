@@ -1,0 +1,331 @@
+<style>
+  .fieldset-note,
+  .fieldset-row {
+    border: 1px solid #373D49;
+    padding: 10px;
+  }
+</style>
+
+<fieldset
+  class="fieldset"
+  data-do="fieldset"
+  data-fieldset="service"
+  data-name="service"
+  data-label="OAuth Service {INDEX_0}"
+  data-template="#service-template"
+>
+  <div class="fieldset-note mb-4" data-multiple="1">
+    <h5>OAuth 2 Notes:</h5>
+    <div class="row">
+      <div class="col-md-6">
+        <a class="d-block" href="https://developers.facebook.com/docs" target="_blank">
+          Facebook Documentation
+        </a>
+        <a class="d-block" href="https://developer.twitter.com/en/docs" target="_blank">
+          Twitter Documentation
+        </a>
+      </div>
+      <div class="col-md-6">
+        <a class="d-block" href="https://developer.linkedin.com/docs" target="_blank">
+          LinkedIn Documentation
+        </a>
+        <a class="d-block" href="https://developers.google.com/identity/protocols/OAuth2" target="_blank">
+          Google Documentation
+        </a>
+      </div>
+    </div>
+  </div>
+  {{#each item.services}}
+    <div class="fieldset-row mb-4" data-multiple="1">
+      <a class="fieldset-remove float-right" href="javscript:void(0)">
+        <i class="fa fa-times text-danger"></i>
+      </a>
+      <h6 class="fieldset-label font-weight-bold">OAuth Service {{@index}}</h6>
+      <!-- START: Active -->
+      <div class="form-group form-group-switch">
+        <label class="control-label">{{_ 'Enable'}}</label>
+        <div class="form-field" data-name="services[{INDEX_0}][active]">
+          {{{field
+            name="services[{{@index}}][active]"
+            type="switch"
+            value=active
+            data-value=active
+          }}}
+        </div>
+      </div>
+      <!-- END: Active -->
+      <div class="row">
+        <div class="col-md-6">
+          <!-- START: Name -->
+          <div class="form-group form-group-text{{#if errors.name}} has-error{{/if}}">
+            <label class="control-label">{{_ 'Name'}}</label>
+            <div class="form-field" data-name="services[{INDEX_0}][name]">
+              {{{field
+                name="services[{{@index}}][name]"
+                type="text"
+                placeholder="eg. Facebook"
+                value=name
+              }}}
+            </div>
+            {{#if errors.name}}
+              <div class="help-text">{{errors.name}}</div>
+            {{/if}}
+            <p>{{_ 'NOTE: The token key is provided by your service.'}}</p>
+          </div>
+          <!-- END: Name -->
+          <!-- START: Authorize URL -->
+          <div class="form-group form-group-text{{#if errors.url_authorize}} has-error{{/if}}">
+            <label class="control-label">{{_ 'Authorize URL'}}</label>
+            <div class="form-field" data-name="services[{INDEX_0}][url_authorize]">
+              {{{field
+                name="services[{{@index}}][url_authorize]"
+                type="text"
+                value=url_authorize
+              }}}
+            </div>
+            {{#if errors.url_authorize}}
+              <div class="help-text">{{errors.url_authorize}}</div>
+            {{/if}}
+            <p>{{_ 'NOTE: This is the OAuth login URL.'}}</p>
+          </div>
+          <!-- END: Authorize URL -->
+          <!-- START: Access Token URL -->
+          <div class="form-group form-group-text{{#if errors.url_access_token}} has-error{{/if}}">
+            <label class="control-label">{{_ 'Access Token URL'}}</label>
+            <div class="form-field" data-name="services[{INDEX_0}][url_access_token]">
+              {{{field
+                name="services[{{@index}}][url_access_token]"
+                type="text"
+                value=url_access_token
+              }}}
+            </div>
+            {{#if errors.url_access_token}}
+              <div class="help-text">{{errors.url_access_token}}</div>
+            {{/if}}
+            <p>{{_ 'NOTE: This is the URL to get an access code.'}}</p>
+          </div>
+          <!-- END: Access Token URL -->
+          <!-- START: Resource URL -->
+          <div class="form-group form-group-text{{#if errors.url_resource}} has-error{{/if}}">
+            <label class="control-label">{{_ 'Resource URL'}}</label>
+            <div class="form-field" data-name="services[{INDEX_0}][url_resource]">
+              {{{field
+                name="services[{{@index}}][url_resource]"
+                type="text"
+                value=url_resource
+              }}}
+            </div>
+            {{#if errors.url_resource}}
+              <div class="help-text">{{errors.url_resource}}</div>
+            {{/if}}
+            <p>{{_ 'NOTE: This is the URL to get the user information after authorizing.'}}</p>
+          </div>
+          <!-- END: Resource URL -->
+        </div>
+        <div class="col-md-6">
+          <!-- START: Client ID -->
+          <div class="form-group form-group-text{{#if errors.client_id}} has-error{{/if}}">
+            <label class="control-label">{{_ 'Client ID'}}</label>
+            <div class="form-field" data-name="services[{INDEX_0}][client_id]">
+              {{{field
+                name="services[{{@index}}][client_id]"
+                type="text"
+                value=client_id
+              }}}
+            </div>
+            {{#if errors.client_id}}
+              <div class="help-text">{{errors.client_id}}</div>
+            {{/if}}
+            <p>{{_ 'NOTE: The Client ID key is provided by your service.'}}</p>
+          </div>
+          <!-- END: Client ID -->
+          <!-- START: Client Secret -->
+          <div class="form-group form-group-text{{#if errors.client_secret}} has-error{{/if}}">
+            <label class="control-label">{{_ 'Client Secret'}}</label>
+            <div class="form-field" data-name="services[{INDEX_0}][client_secret]">
+              {{{field
+                name="services[{{@index}}][client_secret]"
+                type="text"
+                value=client_secret
+              }}}
+            </div>
+            {{#if errors.client_secret}}
+              <div class="help-text">{{errors.client_secret}}</div>
+            {{/if}}
+            <p>{{_ 'NOTE: The client secret key is provided by your service.'}}</p>
+          </div>
+          <!-- END: Client Secret -->
+          <!-- START: Icon -->
+          <div class="form-group form-group-icon{{#if errors.icon}} has-error{{/if}}">
+            <label class="control-label">{{_ 'Button Icon'}}</label>
+            <div class="form-field" data-name="services[{INDEX_0}][url_authorize]">
+              <div class="input-group">
+                {{{field
+                  data-do="icon-field"
+                  data-target-parent="1"
+                  name="services[{{@index}}][icon]"
+                  placeholder="fas fa-question"
+                  type="text"
+                  value=icon
+                }}}
+                <div class="input-group-append input-preview">
+                  <div class="input-group-text">
+                    {{#if icon}}
+                      <i class="{{icon}} fa-fw"></i>
+                    {{else}}
+                      <i class="fas fa-question fa-fw"></i>
+                    {{/if}}
+                  </div>
+                </div>
+              </div>
+            </div>
+            {{#if errors.icon}}
+              <div class="help-text">{{errors.icon}}</div>
+            {{/if}}
+            <p>{{_ 'NOTE: This is the icon for the button.'}}</p>
+          </div>
+          <!-- END: Icon -->
+          <!-- START: Color -->
+          <div class="form-group form-group-text{{#if errors.color}} has-error{{/if}}">
+            <label class="control-label">{{_ 'Color'}}</label>
+            <div class="form-field" data-name="services[{INDEX_0}][color]">
+              {{{field
+                name="services[{{@index}}][color]"
+                type="color"
+                value=color
+              }}}
+            </div>
+            {{#if errors.color}}
+              <div class="help-text">{{errors.color}}</div>
+            {{/if}}
+            <p>{{_ 'NOTE: This is the color of the button.'}}</p>
+          </div>
+          <!-- END: Color -->
+        </div>
+      </div>
+    </div>
+  {{/each}}
+
+  <a
+    class="btn btn-outline-secondary btn-block mb-4 fieldset-add"
+    href="javascript:void(0)"
+  >
+    <i class="fas fa-plus"></i>
+    {{_ 'Add OAuth 2 Service'}}
+  </a>
+</fieldset>
+
+<script id="service-template" type="text/x-template">
+  <div class="fieldset-row mb-4" data-multiple="1">
+    <a class="fieldset-remove float-right" href="javscript:void(0)">
+      <i class="fa fa-times text-danger"></i>
+    </a>
+    <h6 class="fieldset-label font-weight-bold"></h6>
+    <!-- START: Active -->
+    <div class="form-group form-group-switch">
+      <label class="control-label">{{_ 'Enable'}}</label>
+      <div class="form-field" data-name="services[{INDEX_0}][active]">
+        {{{field
+          name="services[{INDEX_0}][active]"
+          type="switch"
+        }}}
+      </div>
+    </div>
+    <!-- END: Active -->
+    <div class="row">
+      <div class="col-md-6">
+        <!-- START: Name -->
+        <div class="form-group form-group-text">
+          <label class="control-label">{{_ 'Name'}}</label>
+          <div class="form-field" data-name="services[{INDEX_0}][name]">
+            {{{field
+              name="services[{INDEX_0}][name]"
+              type="text"
+              placeholder="eg. Facebook"
+            }}}
+          </div>
+          <p>{{_ 'NOTE: The token key is provided by your service.'}}</p>
+        </div>
+        <!-- END: Name -->
+        <!-- START: Authorize URL -->
+        <div class="form-group form-group-text">
+          <label class="control-label">{{_ 'Authorize URL'}}</label>
+          <div class="form-field" data-name="services[{INDEX_0}][url_authorize]">
+            {{{field name="services[{INDEX_0}][url_authorize]" type="text"}}}
+          </div>
+          <p>{{_ 'NOTE: This is the OAuth login URL.'}}</p>
+        </div>
+        <!-- END: Authorize URL -->
+        <!-- START: Access Token URL -->
+        <div class="form-group form-group-text">
+          <label class="control-label">{{_ 'Access Token URL'}}</label>
+          <div class="form-field" data-name="services[{INDEX_0}][url_access_token]">
+            {{{field name="services[{INDEX_0}][url_access_token]" type="text"}}}
+          </div>
+          <p>{{_ 'NOTE: This is the URL to get an access code.'}}</p>
+        </div>
+        <!-- END: Access Token URL -->
+        <!-- START: Resource URL -->
+        <div class="form-group form-group-text">
+          <label class="control-label">{{_ 'Resource URL'}}</label>
+          <div class="form-field" data-name="services[{INDEX_0}][url_resource]">
+            {{{field name="services[{INDEX_0}][url_resource]" type="text"}}}
+          </div>
+          <p>{{_ 'NOTE: This is the URL to get the user information after authorizing.'}}</p>
+        </div>
+        <!-- END: Resource URL -->
+      </div>
+      <div class="col-md-6">
+        <!-- START: Client ID -->
+        <div class="form-group form-group-text">
+          <label class="control-label">{{_ 'Client ID'}}</label>
+          <div class="form-field" data-name="services[{INDEX_0}][client_id]">
+            {{{field name="services[{INDEX_0}][client_id]" type="text"}}}
+          </div>
+          <p>{{_ 'NOTE: The Client ID key is provided by your service.'}}</p>
+        </div>
+        <!-- END: Client ID -->
+        <!-- START: Client Secret -->
+        <div class="form-group form-group-text">
+          <label class="control-label">{{_ 'Client Secret'}}</label>
+          <div class="form-field" data-name="services[{INDEX_0}][client_secret]">
+            {{{field name="services[{INDEX_0}][client_secret]" type="text"}}}
+          </div>
+          <p>{{_ 'NOTE: The client secret key is provided by your service.'}}</p>
+        </div>
+        <!-- END: Client Secret -->
+        <!-- START: Icon -->
+        <div class="form-group form-group-icon">
+          <label class="control-label">{{_ 'Button Icon'}}</label>
+          <div class="form-field" data-name="services[{INDEX_0}][icon]">
+            <div class="input-group">
+              {{{field
+                data-do="icon-field"
+                data-target-parent="1"
+                name="services[{INDEX_0}][icon]"
+                placeholder="fas fa-question"
+                type="text"
+              }}}
+              <div class="input-group-append input-preview">
+                <div class="input-group-text">
+                  <i class="fas fa-question fa-fw"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+          <p>{{_ 'NOTE: This is the icon for the button.'}}</p>
+        </div>
+        <!-- END: Icon -->
+        <!-- START: Color -->
+        <div class="form-group form-group-text">
+          <label class="control-label">{{_ 'Button Color'}}</label>
+          <div class="form-field" data-name="services[{INDEX_0}][color]">
+            {{{field name="services[{INDEX_0}][color]" type="color"}}}
+          </div>
+          <p>{{_ 'NOTE: This is the color of the button.'}}</p>
+        </div>
+        <!-- END: Color -->
+      </div>
+    </div>
+  </div>
+</script>

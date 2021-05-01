@@ -10,44 +10,38 @@
   {{/_}}
 </p>
 <!-- START: Captcha active -->
-<div class="form-group form-group-switch">
+<div class="form-group form-group-switch mb-4">
   <label class="control-label">{{_ 'Enable Captcha'}}</label>
   <div class="form-field">
     {{{field
-      name="service[captcha][active]"
+      name="captcha[active]"
       type="switch"
-      value=item.service.captcha.active
+      value=item.captcha.active
     }}}
   </div>
 </div>
 <!-- END: Captcha active -->
 <!-- START: Captcha Key -->
-<div class="form-group form-group-text{{#if errors.service.captcha.token}} has-error{{/if}}">
+<div class="form-group form-group-text">
   <label class="control-label">{{_ 'Captcha Token'}}</label>
   <div class="form-field">
     {{{field
-      name="service[captcha][token]"
+      name="captcha[token]"
       type="text"
-      value=item.service.captcha.token
+      value=item.captcha.token
     }}}
-    {{#if errors.service.captcha.token}}
-      <span class="help-text">{{errors.service.captcha.token}}</span>
-    {{/if}}
   </div>
 </div>
 <!-- END: Captcha token -->
 <!-- START: Captcha secret -->
-<div class="form-group form-group-text{{#if errors.service.captcha.secret}} has-error{{/if}}">
+<div class="form-group form-group-text">
   <label class="control-label">{{_ 'Captcha Secret'}}</label>
   <div class="form-field">
     {{{field
-      name="service[captcha][secret]"
+      name="captcha[secret]"
       type="text"
-      value=item.service.captcha.secret
+      value=item.captcha.secret
     }}}
-    {{#if errors.service.captcha.secret}}
-      <span class="help-text">{{errors.service.captcha.secret}}</span>
-    {{/if}}
   </div>
 </div>
 <!-- END: Captcha secret -->

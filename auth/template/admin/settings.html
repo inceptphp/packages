@@ -11,23 +11,19 @@
 </h3>
 
 <div class="panel-body overflow-auto">
-  <form class="row" method="post">
-    <div class="col-md-5">
-      {{> settings_facebook}}
-      <hr />
-      {{> settings_twitter}}
-      <hr />
-      {{> settings_linkedin}}
-      <hr />
-      {{> settings_google}}
-      <hr />
-      {{> settings_captcha}}
-      <hr />
-      {{> settings_auth}}
-      <div class="form-group form-group-submit">
-        <div class="form-field">
-          <button class="btn btn-secondary btn-block">{{_ 'Save'}}</button>
-        </div>
+  <form method="post">
+    <div class="row">
+      <div class="col-md-6">
+        {{> settings_auth}}
+      </div>
+      <div class="col-md-6">
+        {{> settings_captcha}}
+      </div>
+    </div>
+    {{> settings_services}}
+    <div class="form-group form-group-submit">
+      <div class="form-field">
+        <button class="btn btn-secondary btn-block">{{_ 'Save'}}</button>
       </div>
     </div>
   </form>

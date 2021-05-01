@@ -70,6 +70,18 @@ $this('http')->get('/auth/signin', function (
     $data['errors'] = $response->getValidation();
   }
 
+  //add oauth services
+  foreach ($config->get('services') ?? [] as $key => $service) {
+    if (isset($service['type'])
+      && $service['type'] === 'oauth2'
+      && isset($service['active'])
+      && $service['active']
+    ) {
+      $service['key'] = $key;
+      $data['oauth'][] = $service;
+    }
+  }
+
   //----------------------------//
   // 5. Render Template
   $template = dirname(__DIR__) . '/template';

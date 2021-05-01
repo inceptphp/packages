@@ -31,19 +31,20 @@ $this('http')->get('/auth/sso/signin/oauth2/:name', function (
 
   //----------------------------//
   // 2. Prepare Overrides
+  $name = $request->getStage('name');
   //determine route
-  $route = $request->getStage('route') ?? '/auth/account';
+  $route = $request->getStage('route') ?? sprintf(
+    '/auth/sso/signin/oauth2/%s',
+    $name
+  );
 
   //determine redirect
-  $redirect = $request->getStage('redirect_uri')
-    ?? $config->get('settings', 'home')
-    ?? '/';
+  $redirect = $request->getStage('redirect_uri') ?? '/auth/signin';
 
   //----------------------------//
   // 2. Prepare Data
-  $name = $request->getStage('name');
   // get config
-  $oauth = $config->get('services', 'oauth2-' . $name);
+  $oauth = $config->get('services', $name);
 
   if (!$oauth
     || !isset($oauth['client_id'])

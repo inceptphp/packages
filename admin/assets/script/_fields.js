@@ -2070,7 +2070,7 @@
         labelTemplate = labelTemplate.replace(index, indexes[index] + 1);
       }
 
-      $('h3.fieldset-label', row).html(labelTemplate);
+      $('.fieldset-label', row).html(labelTemplate);
 
       //insert and activate scripts
       $(this).before(row);

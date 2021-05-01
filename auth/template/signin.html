@@ -74,6 +74,18 @@
       <!-- START: Login With Facebook Option -->
       <div class="form-group">
         <p class="text-center or-text"><span>{{_ 'or'}}</span></p>
+        {{#each oauth}}
+          <a
+            class="btn btn-block text-light"
+            {{#if color}}
+              style="background-color: {{color}}"
+            {{/if}}
+            href="/auth/sso/signin/oauth2/{{key}}"
+          >
+            {{#if icon}}<i class="{{icon}}"></i>{{/if}}
+            {{_ 'Sign In with %s' name}}
+          </a>
+        {{/each}}
       </div>
       <!-- END: Login With Facebook Option -->
       <!-- START: Signup Option -->
