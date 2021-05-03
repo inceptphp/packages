@@ -213,14 +213,14 @@ $this('http')->post('/admin/spa/system/field', function(
 
   $body = $this('handlebars')
     ->setTemplateFolder($template)
-    ->registerPartialFromFolder('form_detail')
-    ->registerPartialFromFolder('form_list')
-    ->registerPartialFromFolder('form_type')
-    ->registerPartialFromFolder('form_templates')
-    ->registerPartialFromFolder('form_validation')
-    ->registerPartialFromFolder('options_format')
-    ->registerPartialFromFolder('options_type')
-    ->registerPartialFromFolder('options_validation')
+    ->registerPartialFromFolder('form_detail', 'html', true)
+    ->registerPartialFromFolder('form_list', 'html', true)
+    ->registerPartialFromFolder('form_type', 'html', true)
+    ->registerPartialFromFolder('form_templates', 'html', true)
+    ->registerPartialFromFolder('form_validation', 'html', true)
+    ->registerPartialFromFolder('options_format', 'html', true)
+    ->registerPartialFromFolder('options_type', 'html', true)
+    ->registerPartialFromFolder('options_validation', 'html', true)
     ->renderFromFolder('form', $data);
 
   //set content

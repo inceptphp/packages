@@ -81,7 +81,6 @@ $this('http')->get('/admin', function ($request, $response) {
 
   $body = $this('handlebars')
     ->setTemplateFolder($template)
-    //->registerPartialFromFolder('search_row')
     ->renderFromFolder('dashboard', $data);
 
   //if we only want the body

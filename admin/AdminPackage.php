@@ -322,7 +322,7 @@ class AdminPackage
     }
 
     //determine the source code snippet
-    $file = file($data['file']);
+    $file = file($data['file']) ?? [];
     $data['start'] = max($data['line'] - $range, 1);
     $data['end'] = min($data['line'] + $range, count($file));
     //build the snippet (preserve the keys) instead of:
@@ -487,7 +487,7 @@ class AdminPackage
   {
     $handlebars = $this->handler->package('handlebars');
 
-    $template = dirname(__DIR__) . '/template';
+    $template = __DIR__ . '/template';
     $body = $handlebars->renderFromFile(
       sprintf('%s/invalid.html', $template),
       $response->get('json')

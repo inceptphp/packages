@@ -36,12 +36,12 @@ $this('http')->get('/scripts/admin.js', function (
 ) {
   $body = $this('handlebars')
     ->setTemplateFolder(dirname(__DIR__) . '/assets')
-    ->registerPartialFromFolder('script_app', 'js')
-    ->registerPartialFromFolder('script_fields', 'js')
-    ->registerPartialFromFolder('script_form', 'js')
-    ->registerPartialFromFolder('script_misc', 'js')
-    ->registerPartialFromFolder('script_jquery', 'js')
-    ->registerPartialFromFolder('script_search', 'js')
+    ->registerPartialFromFolder('script_app', 'js', true)
+    ->registerPartialFromFolder('script_fields', 'js', true)
+    ->registerPartialFromFolder('script_form', 'js', true)
+    ->registerPartialFromFolder('script_misc', 'js', true)
+    ->registerPartialFromFolder('script_jquery', 'js', true)
+    ->registerPartialFromFolder('script_search', 'js', true)
     ->renderFromFolder('admin', [], 'js');
 
   $response->addHeader('Content-Type', 'text/javascript');
@@ -60,17 +60,17 @@ $this('http')->get('/styles/admin.css', function (
 ) {
   $body = $this('handlebars')
     ->setTemplateFolder(dirname(__DIR__) . '/assets')
-    ->registerPartialFromFolder('style_auth', 'css')
-    ->registerPartialFromFolder('style_components', 'css')
-    ->registerPartialFromFolder('style_error', 'css')
-    ->registerPartialFromFolder('style_fields', 'css')
-    ->registerPartialFromFolder('style_form', 'css')
-    ->registerPartialFromFolder('style_layout', 'css')
-    ->registerPartialFromFolder('style_reset', 'css')
-    ->registerPartialFromFolder('style_search', 'css')
-    ->registerPartialFromFolder('style_theme', 'css')
-    ->registerPartialFromFolder('style_twbs', 'css')
-    ->registerPartialFromFolder('style_view', 'css')
+    ->registerPartialFromFolder('style_auth', 'css', true)
+    ->registerPartialFromFolder('style_components', 'css', true)
+    ->registerPartialFromFolder('style_error', 'css', true)
+    ->registerPartialFromFolder('style_fields', 'css', true)
+    ->registerPartialFromFolder('style_form', 'css', true)
+    ->registerPartialFromFolder('style_layout', 'css', true)
+    ->registerPartialFromFolder('style_reset', 'css', true)
+    ->registerPartialFromFolder('style_search', 'css', true)
+    ->registerPartialFromFolder('style_theme', 'css', true)
+    ->registerPartialFromFolder('style_twbs', 'css', true)
+    ->registerPartialFromFolder('style_view', 'css', true)
     ->renderFromFolder('admin', [], 'css');
 
   $response->addHeader('Content-Type', 'text/css');

@@ -41,9 +41,9 @@ $this('http')->get('/admin/language/search', function(
 
   $body = $this('handlebars')
     ->setTemplateFolder($template)
-    ->registerPartialFromFolder('search_head')
-    ->registerPartialFromFolder('search_links')
-    ->registerPartialFromFolder('search_row')
+    ->registerPartialFromFolder('search_head', 'html', true)
+    ->registerPartialFromFolder('search_links', 'html', true)
+    ->registerPartialFromFolder('search_row', 'html', true)
     ->renderFromFolder('search', $data);
 
   //if we only want the body
@@ -150,7 +150,6 @@ $this('http')->get('/admin/spa/language/create', function (
   //render the body
   $body = $this('handlebars')
     ->setTemplateFolder($template)
-    //->registerPartialFromFolder('form_tabs')
     ->renderFromFolder('form', $data);
 
   //set content

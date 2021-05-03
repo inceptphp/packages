@@ -7,52 +7,13 @@
   autocomplete="off"
 >
   <!-- START: Head -->
-  <header class="view-head">
-    <button
-      class="sidebar-hide"
-      data-do="panel-mobile-back"
-      data-on="click"
-      type="button"
-    >
-      <i class="fas fa-chevron-left"></i>
-    </button>
-    <h6 class="view-title">
-      <i class="{{schema.icon}} d-inline-block mr-2"></i>
-      {{title}}
-    </h6>
-  </header>
+  {{> form_head}}
   <!-- END: Head -->
   <!-- START: Body -->
-  <section class="view-body with-foot-1 schema-detail">
-    {{#if schema.fieldsets.length}}
-      <!-- START: Tabs -->
-      {{> form_tabs}}
-      <!-- END: Tabs -->
-    {{/if}}
-    <!-- START: Panes -->
-    <div class="tab-content{{#if schema.fieldsets.length}} m-2{{/if}}">
-      <!-- START: Content Pane -->
-      <div
-        class="tab-pane fade active show"
-        id="model-form-information-{{uuid}}"
-        role="tabpanel"
-      >
-        {{> form_information}}
-      </div>
-      <!-- END: Content Pane -->
-      {{#each schema.fieldsets}}
-        {{> form_fieldset}}
-      {{/each}}
-    </div>
-    <!-- END: Panes -->
-  </section>
+  {{> form_body}}
   <!-- END: Body -->
   <!-- START: Foot -->
-  <footer class="view-foot">
-    <button class="btn btn-secondary btn-block text-small">
-      <i class="fas fa-edit"></i> {{_ 'Submit'}}
-    </button>
-  </footer>
+  {{> form_foot}}
   <!-- END: Foot -->
   {{#each ids}}
     <input type="hidden" name="{{../schema.primary}}[]" value="{{this}}" />

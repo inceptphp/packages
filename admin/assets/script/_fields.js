@@ -1435,7 +1435,7 @@
         .replace(/^-+/, '')       // Trim - from start of text
         .replace(/-+$/, '');
 
-      if (upper != 0) {
+      if (upper) {
         slug = slug.replace(
           /(^([a-zA-Z\p{M}]))|([ -][a-zA-Z\p{M}])/g,
           function(s) {

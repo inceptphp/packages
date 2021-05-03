@@ -9,6 +9,7 @@
 }
 
 .form-mobile .form-group-code,
+.form-mobile .form-group-rawjson,
 .form-mobile .form-group-textarea,
 .form-mobile .form-group-markdown,
 .form-mobile .form-group-wysiwyg,
@@ -18,8 +19,19 @@
   display: block;
 }
 
+.form-mobile .form-group-code .control-label,
+.form-mobile .form-group-rawjson .control-label,
+.form-mobile .form-group-textarea .control-label,
+.form-mobile .form-group-markdown .control-label,
+.form-mobile .form-group-wysiwyg .control-label,
+.form-mobile .form-group-fieldset .control-label,
+.form-mobile .form-group.no-flex .control-label {
+  margin-bottom: 5px;
+}
+
 .form-mobile .form-group-code > .form-field,
 .form-mobile .form-group-textarea > .form-field,
+.form-mobile .form-group-rawjson > .form-field,
 .form-mobile .form-group-markdown > .form-field,
 .form-mobile .form-group-wysiwyg > .form-field {
   border: 1px solid #CED4DA;
@@ -27,6 +39,7 @@
 
 .form-mobile .form-group-code .form-control,
 .form-mobile .form-group-textarea .form-control,
+.form-mobile .form-group-rawjson .form-control,
 .form-mobile .form-group-markdown .form-control,
 .form-mobile .form-group-wysiwyg .form-control {
   text-align: left;

@@ -400,6 +400,7 @@ a:visited {
 
 .form-mobile .form-group-code > .form-field,
 .form-mobile .form-group-textarea > .form-field,
+.form-mobile .form-group-rawjson > .form-field,
 .form-mobile .form-group-markdown > .form-field,
 .form-mobile .form-group-wysiwyg > .form-field {
   border-color: #272C36;
@@ -481,4 +482,21 @@ a:visited {
 
 .select2-results__option[aria-selected] {
   color: #929AAD;
+}
+
+.form-mobile .md-editor,
+.form-mobile .md-toolbar {
+  background-color: transparent;
+  border-width: 0;
+  color: #929AAD;
+}
+
+.form-mobile .ace-tm .ace_gutter {
+  border-bottom: 1px solid #272C36;
+  background-color: #272C36;
+  color: #929AAD;
+}
+
+.form-mobile .ace-tm .ace_gutter-active-line {
+  background-color: #000000;
 }

@@ -77,8 +77,8 @@ $this('http')->get('/admin/package/search', function(
 
   $body = $this('handlebars')
     ->setTemplateFolder($template)
-    ->registerPartialFromFolder('search_head')
-    ->registerPartialFromFolder('search_row')
+    ->registerPartialFromFolder('search_head', 'html', true)
+    ->registerPartialFromFolder('search_row', 'html', true)
     ->renderFromFolder('search', $data);
 
   //set content

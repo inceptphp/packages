@@ -380,9 +380,9 @@ $this('http')->get('/admin/spa/system/collection/:schema/update', function (
   //render the body
   $body = $this('handlebars')
     ->setTemplateFolder($template)
-    ->registerPartialFromFolder('form_fieldset')
-    ->registerPartialFromFolder('form_information')
-    ->registerPartialFromFolder('form_tabs')
+    ->registerPartialFromFolder('form_fieldset', 'html', true)
+    ->registerPartialFromFolder('form_information', 'html', true)
+    ->registerPartialFromFolder('form_tabs', 'html', true)
     ->renderFromFolder('form', $data);
 
   //set content

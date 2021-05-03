@@ -79,14 +79,14 @@ $this('http')->get('/admin/system/schema/search', function (
 
   $body = $this('handlebars')
     ->setTemplateFolder($template)
-    ->registerPartialFromFolder('asset_style', 'css')
-    ->registerPartialFromFolder('asset_script', 'js')
-    ->registerPartialFromFolder('asset_script_form', 'js')
-    ->registerPartialFromFolder('asset_script_relation', 'js')
-    ->registerPartialFromFolder('search_head')
-    ->registerPartialFromFolder('search_links')
-    ->registerPartialFromFolder('search_row')
-    ->registerPartialFromFolder('search_tabs')
+    ->registerPartialFromFolder('asset_style', 'css', true)
+    ->registerPartialFromFolder('asset_script', 'js', true)
+    ->registerPartialFromFolder('asset_script_form', 'js', true)
+    ->registerPartialFromFolder('asset_script_relation', 'js', true)
+    ->registerPartialFromFolder('search_head', 'html', true)
+    ->registerPartialFromFolder('search_links', 'html', true)
+    ->registerPartialFromFolder('search_row', 'html', true)
+    ->registerPartialFromFolder('search_tabs', 'html', true)
     ->registerPartialFromFile('field_script', $fieldScript)
     ->renderFromFolder('search', $data);
 
@@ -139,10 +139,10 @@ $this('http')->get('/admin/spa/system/schema/create', function(
 
   $body = $this('handlebars')
     ->setTemplateFolder($template)
-    ->registerPartialFromFolder('form_content')
-    ->registerPartialFromFolder('form_fields')
-    ->registerPartialFromFolder('form_relations')
-    ->registerPartialFromFolder('form_row')
+    ->registerPartialFromFolder('form_content', 'html', true)
+    ->registerPartialFromFolder('form_fields', 'html', true)
+    ->registerPartialFromFolder('form_relations', 'html', true)
+    ->registerPartialFromFolder('form_row', 'html', true)
     ->renderFromFolder('form', $data);
 
   //set content
@@ -865,10 +865,10 @@ $this('http')->get('/admin/spa/system/schema/update/:name', function(
 
   $body = $this('handlebars')
     ->setTemplateFolder($template)
-    ->registerPartialFromFolder('form_content')
-    ->registerPartialFromFolder('form_fields')
-    ->registerPartialFromFolder('form_relations')
-    ->registerPartialFromFolder('form_row')
+    ->registerPartialFromFolder('form_content', 'html', true)
+    ->registerPartialFromFolder('form_fields', 'html', true)
+    ->registerPartialFromFolder('form_relations', 'html', true)
+    ->registerPartialFromFolder('form_row', 'html', true)
     ->renderFromFolder('form', $data);
 
   //set content

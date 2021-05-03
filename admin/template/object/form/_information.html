@@ -8,7 +8,7 @@
         name="__{{name}}"
         placeholder="{{_ 'Enter %s' singular}}"
         type="text"
-        value="{{suggested}}"
+        value="{{{compile suggestion ../item}}}"
       />
       <input
         class="suggestion-value-{{name}}"
@@ -23,7 +23,7 @@
         data-target-label="input.suggestion-label-{{name}}"
         data-target-value="input.suggestion-value-{{name}}"
         data-url="/admin/system/object/{{name}}/search?q={QUERY}&render=false"
-        data-value="{{name}}.{{primary}}"
+        data-value="{{primary}}"
       ></div>
     </div>
   </div>

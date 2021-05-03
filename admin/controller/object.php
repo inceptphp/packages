@@ -96,12 +96,12 @@ $this('http')->get('/admin/system/object/:schema/search', function (
 
   $body = $this('handlebars')
     ->setTemplateFolder($template)
-    ->registerPartialFromFolder('search_bulk')
-    ->registerPartialFromFolder('search_filters')
-    ->registerPartialFromFolder('search_form')
-    ->registerPartialFromFolder('search_head')
-    ->registerPartialFromFolder('search_links')
-    ->registerPartialFromFolder('search_row')
+    ->registerPartialFromFolder('search_bulk', 'html', true)
+    ->registerPartialFromFolder('search_filters', 'html', true)
+    ->registerPartialFromFolder('search_form', 'html', true)
+    ->registerPartialFromFolder('search_head', 'html', true)
+    ->registerPartialFromFolder('search_links', 'html', true)
+    ->registerPartialFromFolder('search_row', 'html', true)
     ->renderFromFolder('search', $data);
 
   //set content
@@ -155,10 +155,11 @@ $this('http')->get('/admin/system/object/:schema1/:id/search/:schema2', function
 
   if (empty($relation)) {
     //add a flash and redirect
-    $global = $this->package('global');
-    $message = $this('lang')->translate('Cannot find a valid relation.');
-    $global->flash($message, 'error');
-    return $global->redirect($redirect);
+    $response->setSession('flash', [
+      'message' => $this('lang')->translate('Cannot find a valid relation.'),
+      'type' => 'error'
+    ]);
+    return $this('http')->redirect($redirect);
   }
 
   //results will look like [profile_product => object]
@@ -311,14 +312,17 @@ $this('http')->get('/admin/spa/system/object/:schema/detail/:id', function (
 
   $body = $this('handlebars')
     ->setTemplateFolder($template)
-    ->registerPartialFromFolder('detail_information')
-    ->registerPartialFromFolder('detail_relation_detail')
-    ->registerPartialFromFolder('detail_relation_search')
-    ->registerPartialFromFolder('detail_relation_search_bulk')
-    ->registerPartialFromFolder('detail_relation_search_head')
-    ->registerPartialFromFolder('detail_relation_search_links')
-    ->registerPartialFromFolder('detail_relation_search_row')
-    ->registerPartialFromFolder('detail_tabs')
+    ->registerPartialFromFolder('detail_body', 'html', true)
+    ->registerPartialFromFolder('detail_foot', 'html', true)
+    ->registerPartialFromFolder('detail_head', 'html', true)
+    ->registerPartialFromFolder('detail_information', 'html', true)
+    ->registerPartialFromFolder('detail_relation_detail', 'html', true)
+    ->registerPartialFromFolder('detail_relation_search', 'html', true)
+    ->registerPartialFromFolder('detail_relation_search_bulk', 'html', true)
+    ->registerPartialFromFolder('detail_relation_search_head', 'html', true)
+    ->registerPartialFromFolder('detail_relation_search_links', 'html', true)
+    ->registerPartialFromFolder('detail_relation_search_row', 'html', true)
+    ->registerPartialFromFolder('detail_tabs', 'html', true)
     ->renderFromFolder('detail', $data);
 
   //set content
@@ -499,9 +503,12 @@ $this('http')->get('/admin/spa/system/object/:schema/create', function (
   //render the body
   $body = $this('handlebars')
     ->setTemplateFolder($template)
-    ->registerPartialFromFolder('form_fieldset')
-    ->registerPartialFromFolder('form_information')
-    ->registerPartialFromFolder('form_tabs')
+    ->registerPartialFromFolder('form_body', 'html', true)
+    ->registerPartialFromFolder('form_fieldset', 'html', true)
+    ->registerPartialFromFolder('form_foot', 'html', true)
+    ->registerPartialFromFolder('form_head', 'html', true)
+    ->registerPartialFromFolder('form_information', 'html', true)
+    ->registerPartialFromFolder('form_tabs', 'html', true)
     ->renderFromFolder('form', $data);
 
   //set content
@@ -599,9 +606,12 @@ $this('http')->get('/admin/spa/system/object/:schema/create/:id', function (
 
   $body = $this('handlebars')
     ->setTemplateFolder($template)
-    ->registerPartialFromFolder('form_fieldset')
-    ->registerPartialFromFolder('form_information')
-    ->registerPartialFromFolder('form_tabs')
+    ->registerPartialFromFolder('form_body', 'html', true)
+    ->registerPartialFromFolder('form_fieldset', 'html', true)
+    ->registerPartialFromFolder('form_foot', 'html', true)
+    ->registerPartialFromFolder('form_head', 'html', true)
+    ->registerPartialFromFolder('form_information', 'html', true)
+    ->registerPartialFromFolder('form_tabs', 'html', true)
     ->renderFromFolder('form', $data);
 
   //set content
@@ -691,7 +701,7 @@ $this('http')->get('/admin/spa/system/object/:schema1/:id/create/:schema2', func
   //now let the original search take over
   $route = sprintf(
     '/admin/spa/system/object/%s/create',
-    $relation->get('singular')
+    $relation->get('name')
   );
   $this('http')->routeTo('get', $route, $request, $response);
 });
@@ -1112,9 +1122,12 @@ $this('http')->get('/admin/spa/system/object/:schema/update/:id', function (
 
   $body = $this('handlebars')
     ->setTemplateFolder($template)
-    ->registerPartialFromFolder('form_fieldset')
-    ->registerPartialFromFolder('form_information')
-    ->registerPartialFromFolder('form_tabs')
+    ->registerPartialFromFolder('form_body', 'html', true)
+    ->registerPartialFromFolder('form_fieldset', 'html', true)
+    ->registerPartialFromFolder('form_foot', 'html', true)
+    ->registerPartialFromFolder('form_head', 'html', true)
+    ->registerPartialFromFolder('form_information', 'html', true)
+    ->registerPartialFromFolder('form_tabs', 'html', true)
     ->renderFromFolder('form', $data);
 
   //set content

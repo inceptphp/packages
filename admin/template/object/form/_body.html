@@ -1,0 +1,23 @@
+<section class="view-body with-foot-1 schema-detail">
+  {{#if schema.fieldsets.length}}
+    <!-- START: Tabs -->
+    {{> form_tabs}}
+    <!-- END: Tabs -->
+  {{/if}}
+  <!-- START: Panes -->
+  <div class="tab-content{{#if schema.fieldsets.length}} m-2{{/if}}">
+    <!-- START: Content Pane -->
+    <div
+      class="tab-pane fade active show"
+      id="model-form-information-{{uuid}}"
+      role="tabpanel"
+    >
+      {{> form_information}}
+    </div>
+    <!-- END: Content Pane -->
+    {{#each schema.fieldsets}}
+      {{> form_fieldset}}
+    {{/each}}
+  </div>
+  <!-- END: Panes -->
+</section>
