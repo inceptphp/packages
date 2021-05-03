@@ -1,0 +1,5 @@
+{{~#each fields~}}
+  {{~#in ../required @key~}}
+    {{> docs_schema_parameter}}&amp;
+  {{~/in~}}
+{{~/each~}}

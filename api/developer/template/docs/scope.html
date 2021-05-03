@@ -1,0 +1,114 @@
+<link rel="stylesheet" type="text/css" href="/styles/docs.css" />
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb panel-title">
+    <li class="breadcrumb-item">
+      <a href="/developer/docs">
+        <i class="fas fa-code"></i> {{_ 'API Documentation'}}
+      </a>
+    </li>
+    <li class="breadcrumb-item">
+      <a href="/developer/docs/scope">
+        <i class="fas fa-{{schema.icon}}"></i> {{_ schema.plural}}
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">
+      {{_ scope_name}}
+    </li>
+  </ol>
+</nav>
+<div class="panel-body d-block overflow-auto">
+  <h1>
+    <strong>
+      <i class="fas fa-{{schema.icon}}"></i>
+      {{_ scope_name}}
+    </strong>
+  </h1>
+
+  {{{markdown scope_detail}}}
+
+  <h3>
+    <strong>
+      <i class="fas fa-info-circle"></i>
+      {{_ 'Scope Information'}}
+    </strong>
+  </h3>
+
+  <p>{{_ 'The following information outlines how and where this scope can be used.'}}</p>
+
+  <table class="table table-striped">
+    <tbody>
+      <tr>
+        <td width="150">
+          <strong>{{_ 'Scope Name'}}</strong>
+        </td>
+        <td>
+          {{scope_slug}}
+        </td>
+      </tr>
+      <tr>
+        <td width="150">
+          <strong>{{_ 'User Approval'}}</strong>
+        </td>
+        <td>
+          {{#when scope_type '===' 'user'}}
+            {{_ 'Yes'}}
+          {{else}}
+            {{_ 'No'}}
+          {{/when}}
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <strong>{{_ 'Special Approval'}}</strong>
+        </td>
+        <td>
+          {{#if scope_special_approval}}
+            {{_ 'Yes'}}
+          {{else}}
+            {{_ 'No'}}
+          {{/if}}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>
+    <strong>
+      <i class="fas fa-flask"></i>
+      {{_ 'REST Calls'}}
+    </strong>
+  </h3>
+
+  <p>{{_ 'The following API call are assigned to this scope.'}}</p>
+
+  {{#if rest.length}}
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>{{_ 'Name'}}</th>
+          <th>{{_ 'Method'}}</th>
+          <th>{{_ 'URL'}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each rest}}
+          <tr>
+            <td><strong>{{_ rest_title}}</strong></td>
+            <td>{{upper rest_method}}</td>
+            <td>
+              <a href="/developer/docs/calls/{{rest_id}}">
+                /rest{{ rest_path}}
+              </a>
+            </td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  {{/if}}
+</div>
+
+<script type="text/javascript">
+  $('pre').addClass('prettyprint linenums');
+  $(window).trigger('prettify-init');
+</script>

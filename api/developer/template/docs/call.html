@@ -1,0 +1,104 @@
+<link rel="stylesheet" type="text/css" href="/styles/docs.css" />
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb panel-title">
+    <li class="breadcrumb-item">
+      <a href="/developer/docs">
+        <i class="fas fa-code"></i> {{_ 'API Documentation'}}
+      </a>
+    </li>
+    <li class="breadcrumb-item">
+      <a href="/developer/docs/calls">
+        <i class="fas fa-{{schema.icon}}"></i> {{_ schema.plural}}
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">
+        {{rest_title}}
+    </li>
+  </ol>
+</nav>
+<div class="panel-body d-block overflow-auto">
+  <h1>
+    <strong>
+      <i class="fas fa-{{schema.icon}}"></i>
+      {{rest_title}}
+    </strong>
+  </h1>
+
+  <h3>
+    <strong>
+      <i class="fas fa-globe"></i>
+      {{_ 'Resource URL'}}
+    </strong>
+  </h3>
+
+  <pre><code>{{upper rest_method}} https://{{request 'server' 'HTTP_HOST'}}/org/[org-id]/rest{{rest_path}}</code></pre>
+
+  <h3>
+    <strong>
+      <i class="fas fa-info-circle"></i>
+      {{_ 'Resource Information'}}
+    </strong>
+  </h3>
+
+  {{#when rest_type '===' 'app'}}
+    <p>{{_ 'This resource is for app authors, or otherwise known as (2-legged). You need to create an app in order to use this resource. You should pass app tokens to the following parameters.'}}</p>
+
+    {{#when rest_method '===' 'get'}}
+      <pre><code>https://{{request 'server' 'HTTP_HOST'}}/rest{{rest_path}}?client_id=<strong>app_token</strong></code></pre>
+    {{else}}
+      <pre><code>https://{{request 'server' 'HTTP_HOST'}}/rest{{rest_path}}?client_id=<strong>app_token</strong>&client_secret=<strong>app_secret</strong></code></pre>
+    {{/when}}
+  {{/when}}
+  {{#when rest_type '===' 'user'}}
+    <p>{{_ 'This resource is for app authors (2-legged) and for users of apps (3-legged). If you are an app author, you need to create an app in order to use this resource. You should use pass app tokens to the following parameters.'}}</p>
+
+    {{#when rest_method '===' 'get'}}
+      <pre><code>https://{{request 'server' 'HTTP_HOST'}}/rest{{rest_path}}?client_id=<strong>app_token</strong></code></pre>
+    {{else}}
+      <pre><code>https://{{request 'server' 'HTTP_HOST'}}/rest{{rest_path}}?client_id=<strong>app_token</strong>&client_secret=<strong>app_secret</strong></code></pre>
+    {{/when}}
+
+    <p>{{_ 'If you are going to use this resource for your app users, you should pass the access tokens to the following parameters.'}}</p>
+
+    {{#when rest_method '===' 'get'}}
+      <pre><code>https://{{request 'server' 'HTTP_HOST'}}/rest{{rest_path}}?access_token=<strong>access_token</strong></code></pre>
+    {{else}}
+      <pre><code>https://{{request 'server' 'HTTP_HOST'}}/rest{{rest_path}}?access_token=<strong>access_token</strong>&access_secret=<strong>access_secret</strong></code></pre>
+    {{/when}}
+  {{/when}}
+  {{#when rest_type '===' 'public'}}
+    <p>{{_ 'This resource is publicly available and requires no authentication or tokens.'}}</p>
+  {{/when}}
+
+  {{{markdown rest_detail}}}
+
+  {{#if rest_sample_request}}
+    <h3>
+      <strong>
+        <i class="fas fa-comment"></i>
+        {{_ 'Example Request'}}
+      </strong>
+    </h3>
+    {{{markdown rest_sample_request}}}
+  {{/if}}
+
+  {{#if rest_sample_response}}
+    <h3>
+      <strong>
+        <i class="fas fa-comments"></i>
+        {{_ 'Example Response'}}
+      </strong>
+    </h3>
+    {{{markdown rest_sample_response}}}
+  {{/if}}
+</div>
+
+<script type="text/javascript">
+  jQuery(() => {
+    setTimeout(() => {
+      $('pre').addClass('prettyprint');
+      $(window).trigger('prettify-init');
+    }, 1000)
+  })
+</script>

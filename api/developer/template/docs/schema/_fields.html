@@ -1,0 +1,50 @@
+<table class="table table-striped">
+  <thead class="thead-light">
+    <th>{{_ 'Name'}}</th>
+    <th>{{_ 'Type'}}</th>
+    <th>{{_ 'Detail'}}</th>
+    <th>{{_ 'Validation'}}</th>
+    <th>{{_ 'Default'}}</th>
+    <th>{{_ 'Example'}}</th>
+  </thead>
+  <tbody>
+    {{#each fields}}
+      {{#notin 'active,created,updated' name}}
+        {{#unless field.attributes.readonly}}
+          {{#unless field.attributes.disabled}}
+            <tr>
+              <td>{{@key}}</td>
+              <td>{{> docs_schema_type}}</td>
+              <td>{{> docs_schema_detail}}</td>
+              <td>{{> docs_schema_validation}}</td>
+              {{#if default.length}}
+                <td>{{default}}</td>
+              {{else}}
+                <td><em>{{_ 'None'}}</em></td>
+              {{/if}}
+              {{#if field.attributes.placeholder}}
+                <td>{{field.attributes.placeholder}}</td>
+              {{else}}
+                <td><em>{{_ 'None'}}</em></td>
+              {{/if}}
+            </tr>
+          {{/unless}}
+        {{/unless}}
+      {{/notin}}
+    {{/each}}
+    {{#each relations}}
+      <tr>
+        <td>{{primary2}}</td>
+        <td>integer</td>
+        <td>{{_ 'Links to %s' singular}}</td>
+        {{#when many '==' 1}}
+          <td><ul><li>{{_ 'Required'}}</li></ul></td>
+        {{else}}
+          <td><ul><li>{{_ 'Optional'}}</li></ul></td>
+        {{/when}}
+        <td><em>{{_ 'None'}}</em></td>
+        <td>1, 2, 3, etc.</td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>

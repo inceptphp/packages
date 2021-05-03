@@ -1,0 +1,51 @@
+<table class="table">
+  <tbody>
+    {{#each schema.fields}}
+      {{#format ../schema.name @key ../item 'detail'}}
+        <tr>
+          <th nowrap>{{label}}</th>
+          <td>
+            {{{control}}}
+            {{#when ../@key '===' 'app_token'}}
+              &nbsp;&nbsp;
+              <a
+                data-do="panel-mobile-forward"
+                data-on="click"
+                data-template="/admin/spa/system/object/{{../../schema.name}}/refresh/{{../../schema.id}}"
+                href="javascript:void(0)"
+              >
+                <i class="fas fa-sync"></i> {{_ 'Refresh'}}
+              </a>
+            {{/when}}
+            {{#when ../@key '===' 'app_secret'}}
+              &nbsp;&nbsp;
+              <a
+                data-do="panel-mobile-forward"
+                data-on="click"
+                data-template="/admin/spa/system/object/{{../../schema.name}}/refresh/{{../../schema.id}}"
+                href="javascript:void(0)"
+              >
+                <i class="fas fa-sync"></i> {{_ 'Refresh'}}
+              </a>
+            {{/when}}
+          </td>
+        </tr>
+      {{/format}}
+    {{/each}}
+    <tr>
+      <th nowrap>
+        <i class="fa fa-flask"></i>
+        {{_ 'OAuth URL'}}
+      </th>
+      <td>
+        <a
+          href="/dialog/request?client_id={{item.app_token}}&redirect_uri=/admin/system/object/app/search"
+          target="_blank"
+          title="{{_ 'OAuth Test'}}"
+        >
+            {{hostname}}/dialog/request?client_id={{item.app_token}}&redirect_uri=/admin/system/object/app/search
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>

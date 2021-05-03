@@ -1,0 +1,63 @@
+<link rel="stylesheet" type="text/css" href="/styles/docs.css" />
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb panel-title">
+    <li class="breadcrumb-item">
+      <a href="/developer/docs">
+        <i class="fas fa-code"></i> {{_ 'API Documentation'}}
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">
+      <i class="fas fa-{{schema.icon}}"></i> {{_ schema.plural}}
+    </li>
+  </ol>
+</nav>
+<div class="panel-body d-block overflow-auto">
+  <h1>
+    <strong>
+      <i class="fas fa-{{schema.icon}}"></i>
+      {{_ schema.plural}}
+    </strong>
+  </h1>
+
+  <p>{{_ 'The following scopes are available for consumption.'}}</p>
+
+  {{#if rows.length}}
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>{{_ 'Name'}}</th>
+          <th>{{_ 'Permission Name'}}</th>
+          <th>{{_ 'User Approval'}}</th>
+          <th>{{_ 'Special Approval'}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each rows}}
+          <tr>
+            <td><strong>{{_ scope_name}}</strong></td>
+            <td>
+              <a href="/developer/docs/scopes/{{scope_slug}}">
+                {{scope_slug}}
+              </a>
+            </td>
+            <td>
+              {{#when scope_type '===' 'user'}}
+                {{_ 'Yes'}}
+              {{else}}
+                {{_ 'No'}}
+              {{/when}}
+            </td>
+            <td>
+              {{#if scope_special_approval}}
+                {{_ 'Yes'}}
+              {{else}}
+                {{_ 'No'}}
+              {{/if}}
+            </td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  {{/if}}
+</div>

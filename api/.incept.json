@@ -1,0 +1,9 @@
+{
+  "name": "Incept API Package",
+  "description": "Manage API calls with Incept",
+  "author": "The Incept Team",
+  "website": "https://www.incept.asia/",
+  "image": "https://www.incept.asia/images/logo/incept-logo-square-1.png",
+  "path": "inceptphp/packages/role",
+  "version": "0.0.0"
+}

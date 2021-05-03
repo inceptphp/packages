@@ -1,0 +1,166 @@
+{{~#when field.type '===' 'text'~}}
+  {{~#when name 'like' 'reference'~}}
+    {{@key}}=1234567890
+  {{~else~}}
+    {{~#when name 'like' 'title'~}}
+      {{@key}}=Sample+Text
+    {{~else~}}
+      {{~#when name 'like' 'currency'~}}
+        {{@key}}=PHP
+      {{~else~}}
+        {{@key}}=sample
+      {{~/when~}}
+    {{~/when~}}
+  {{/when~}}
+{{~/when~}}
+{{~#when field.type '===' 'email'~}}
+  {{@key}}=jane@doe.com
+{{~/when~}}
+{{~#when field.type '===' 'password'~}}
+  {{@key}}=password123
+{{~/when~}}
+{{~#when field.type '===' 'search'~}}
+  {{@key}}=iphone
+{{~/when~}}
+{{~#when field.type '===' 'url'~}}
+  {{@key}}=https%3A%2F%2Fiamawesome.com%2F
+{{~/when~}}
+{{~#when field.type '===' 'color'~}}
+  {{@key}}=%23FFEE99
+{{~/when~}}
+{{~#when field.type '===' 'mask'~}}
+  {{@key}}=555-2424
+{{~/when~}}
+{{~#when field.type '===' 'slug'~}}
+  {{@key}}=some-product-100
+{{~/when~}}
+{{~#when field.type '===' 'textarea'~}}
+  {{@key}}=A+long+Text
+{{~/when~}}
+{{~#when field.type '===' 'wysiwyg'~}}
+  {{@key}}=A+long+Text
+{{~/when~}}
+{{~#when field.type '===' 'markdown'~}}
+  {{@key}}=A+long+Text
+{{~/when~}}
+{{~#when field.type '===' 'code'~}}
+  {{@key}}=A+long+Text
+{{~/when~}}
+{{~#when field.type '===' 'number'~}}
+  {{~#when step '>' 0~}}
+    {{~#when step '<' 1~}}
+      {{@key}}=1.01
+    {{~else~}}
+      {{@key}}=10
+    {{~/when~}}
+  {{~else~}}
+    {{@key}}=10
+  {{~/when~}}
+{{~/when~}}
+{{~#when field.type '===' 'small'~}}
+  {{@key}}=1
+{{~/when~}}
+{{~#when field.type '===' 'range'~}}
+  {{~#when step '>' 0~}}
+    {{~#when step '<' 1~}}
+      {{@key}}=1.01
+    {{~else~}}
+      {{@key}}=10
+    {{~/when~}}
+  {{~else~}}
+    {{@key}}=10
+  {{~/when~}}
+{{~/when~}}
+{{~#when field.type '===' 'float'~}}
+  {{@key}}=1.01
+{{~/when~}}
+{{~#when field.type '===' 'price'~}}
+  {{@key}}=1.01
+{{~/when~}}
+{{~#when field.type '===' 'stars'~}}
+  {{~#when step '>' 0~}}
+    {{~#when step '<' 1~}}
+      {{@key}}=1.5
+    {{~else~}}
+      {{@key}}=5
+    {{~/when~}}
+  {{~else~}}
+    {{@key}}=3
+  {{~/when~}}
+{{~/when~}}
+{{~#when field.type '===' 'date'~}}
+  {{@key}}=2020-01-01
+{{~/when~}}
+{{~#when field.type '===' 'time'~}}
+  {{@key}}=10%3A42%3A31
+{{~/when~}}
+{{~#when field.type '===' 'datetime'~}}
+  {{@key}}=2020-01-01+10%3A42%3A31
+{{~/when~}}
+{{~#when field.type '===' 'week'~}}
+  {{@key}}=10
+{{~/when~}}
+{{~#when field.type '===' 'month'~}}
+  {{@key}}=4
+{{~/when~}}
+{{~#when field.type '===' 'checkbox'~}}
+  {{@key}}=1
+{{~/when~}}
+{{~#when field.type '===' 'switch'~}}
+  {{@key}}=1
+{{~/when~}}
+{{~#when field.type '===' 'knob'~}}
+{{~/when~}}
+{{~#when field.type '===' 'select'~}}
+  {{@key}}={{#each field.options}}{{#when @index '==' 0}}{{@key}}{{~/when~}}{{/each}}
+{{~/when~}}
+{{~#when field.type '===' 'multiselect'~}}
+  {{@key}}[]={{#each field.options}}{{#when @index '==' 0}}{{@key}}{{~/when~}}{{/each}}
+{{~/when~}}
+{{~#when field.type '===' 'checkboxes'~}}
+  {{@key}}[]={{#each field.options}}{{#when @index '==' 0}}{{@key}}{{~/when~}}{{/each}}
+{{~/when~}}
+{{~#when field.type '===' 'radios'~}}
+  {{@key}}={{#each field.options}}{{#when @index '==' 0}}{{@key}}{{~/when~}}{{/each}}
+{{~/when~}}
+{{~#when field.type '===' 'countrylist'~}}
+  {{@key}}=US
+{{~/when~}}
+{{~#when field.type '===' 'file'~}}
+  {{@key}}=https%3A%2F%2Fiamawesome.com%2Ffile.pdf
+{{~/when~}}
+{{~#when field.type '===' 'filelist'~}}
+  {{@key}}[]=https%3A%2F%2Fiamawesome.com%2Ffile-1.pdf&amp;{{@key}}[]=https%3A%2F%2Fiamawesome.com%2Ffile-2.pdf
+{{~/when~}}
+{{~#when field.type '===' 'image'~}}
+  {{@key}}=https%3A%2F%2Fiamawesome.com%2Fimage.jpg
+{{~/when~}}
+{{~#when field.type '===' 'imagelist'~}}
+  {{@key}}[]=https%3A%2F%2Fiamawesome.com%2Fimage-1.jpg&amp;{{@key}}[]=https%3A%2F%2Fiamawesome.com%2Fimage-1.jpg
+{{~/when~}}
+{{~#when field.type '===' 'tag'~}}
+  {{@key}}[]=sale&amp;{{@key}}[]=discount
+{{~/when~}}
+{{~#when field.type '===' 'textlist'~}}
+  {{@key}}[]=Sample+Text+1&amp;{{@key}}[]=Sample+Text+2
+{{~/when~}}
+{{~#when field.type '===' 'textarealist'~}}
+  {{@key}}[]=Long+Text+1&amp;{{@key}}[]=Long+Text+2
+{{~/when~}}
+{{~#when field.type '===' 'wysiwyglist'~}}
+  {{@key}}[]=Long+Text+1&amp;{{@key}}[]=Long+Text+2
+{{~/when~}}
+{{~#when field.type '===' 'meta'~}}
+  {{@key}}[sku]=123456&amp;{{@key}}[stock]=34
+{{~/when~}}
+{{~#when field.type '===' 'table'~}}
+  {{@key}}[0][sku]=123456&amp;{{@key}}[0][stock]=34
+{{~/when~}}
+{{~#when field.type '===' 'fieldset'~}}
+{{~/when~}}
+{{~#when field.type '===' 'multirange'~}}
+{{~/when~}}
+{{~#when field.type '===' 'latlng'~}}
+{{~/when~}}
+{{~#when field.type '===' 'rawjson'~}}
+{{~/when~}}

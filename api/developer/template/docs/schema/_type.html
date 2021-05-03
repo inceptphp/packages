@@ -1,0 +1,163 @@
+{{#when field.type '===' 'text'}}
+  string
+{{/when}}
+{{#when field.type '===' 'email'}}
+  email
+{{/when}}
+{{#when field.type '===' 'password'}}
+  string
+{{/when}}
+{{#when field.type '===' 'search'}}
+  string
+{{/when}}
+{{#when field.type '===' 'url'}}
+  url
+{{/when}}
+{{#when field.type '===' 'color'}}
+  hex
+{{/when}}
+{{#when field.type '===' 'mask'}}
+  string
+{{/when}}
+{{#when field.type '===' 'slug'}}
+  string
+{{/when}}
+{{#when field.type '===' 'textarea'}}
+  text
+{{/when}}
+{{#when field.type '===' 'wysiwyg'}}
+  text
+{{/when}}
+{{#when field.type '===' 'markdown'}}
+  text
+{{/when}}
+{{#when field.type '===' 'code'}}
+  text
+{{/when}}
+{{#when field.type '===' 'number'}}
+  {{#when step '>' 0}}
+    {{#when step '<' 1}}
+      float
+    {{else}}
+      integer
+    {{/when}}
+  {{else}}
+    integer
+  {{/when}}
+{{/when}}
+{{#when field.type '===' 'small'}}
+  integer
+{{/when}}
+{{#when field.type '===' 'range'}}
+  {{#when step '>' 0}}
+    {{#when step '<' 1}}
+      float
+    {{else}}
+      integer
+    {{/when}}
+  {{else}}
+    integer
+  {{/when}}
+{{/when}}
+{{#when field.type '===' 'float'}}
+  float
+{{/when}}
+{{#when field.type '===' 'price'}}
+  float
+{{/when}}
+{{#when field.type '===' 'stars'}}
+  {{#when step '>' 0}}
+    {{#when step '<' 1}}
+      float
+    {{else}}
+      integer
+    {{/when}}
+  {{else}}
+    integer
+  {{/when}}
+{{/when}}
+{{#when field.type '===' 'date'}}
+  date
+{{/when}}
+{{#when field.type '===' 'time'}}
+  time
+{{/when}}
+{{#when field.type '===' 'datetime'}}
+  datetime
+{{/when}}
+{{#when field.type '===' 'week'}}
+  integer
+{{/when}}
+{{#when field.type '===' 'month'}}
+  integer
+{{/when}}
+{{#when field.type '===' 'checkbox'}}
+  integer
+{{/when}}
+{{#when field.type '===' 'switch'}}
+  integer
+{{/when}}
+{{#when field.type '===' 'knob'}}
+{{/when}}
+{{#when field.type '===' 'select'}}
+  string
+{{/when}}
+{{#when field.type '===' 'multiselect'}}
+  string[]
+{{/when}}
+{{#when field.type '===' 'checkboxes'}}
+  string[]
+{{/when}}
+{{#when field.type '===' 'radios'}}
+  string
+{{/when}}
+{{#when field.type '===' 'countrylist'}}
+  string
+{{/when}}
+{{#when field.type '===' 'file'}}
+  url
+{{/when}}
+{{#when field.type '===' 'filelist'}}
+  url[]
+{{/when}}
+{{#when field.type '===' 'image'}}
+  url
+{{/when}}
+{{#when field.type '===' 'imagelist'}}
+  url[]
+{{/when}}
+{{#when field.type '===' 'tag'}}
+  string[]
+{{/when}}
+{{#when field.type '===' 'textlist'}}
+  text[]
+{{/when}}
+{{#when field.type '===' 'textarealist'}}
+  text[]
+{{/when}}
+{{#when field.type '===' 'wysiwyglist'}}
+  text[]
+{{/when}}
+{{#when field.type '===' 'meta'}}
+  hash
+{{/when}}
+{{#when field.type '===' 'table'}}
+  hash[]
+{{/when}}
+{{#when field.type '===' 'fieldset'}}
+  {{~#scope field.attributes 'data-multiple'~}}
+    {{~#when this '===' 0~}}
+      fieldset
+    {{~else~}}
+      fieldset[]
+    {{~/when~}}
+  {{~else~}}
+    fieldset[]
+  {{~/scope~}}
+{{/when}}
+{{#when field.type '===' 'multirange'}}
+{{/when}}
+{{#when field.type '===' 'latlng'}}
+{{/when}}
+{{#when field.type '===' 'rawjson'}}
+{{/when}}

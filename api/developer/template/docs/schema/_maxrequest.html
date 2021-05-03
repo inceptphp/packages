@@ -1,0 +1,9 @@
+{{~#each fields~}}
+  {{~#notin 'active,created,updated' name~}}
+    {{~#unless field.attributes.readonly~}}
+      {{~#unless field.attributes.disabled~}}
+        {{> docs_schema_parameter}}&amp;
+      {{~/unless~}}
+    {{~/unless~}}
+  {{~/notin~}}
+{{~/each~}}

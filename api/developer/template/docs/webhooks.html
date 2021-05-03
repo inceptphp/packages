@@ -1,0 +1,48 @@
+<link rel="stylesheet" type="text/css" href="/styles/docs.css" />
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb panel-title">
+    <li class="breadcrumb-item">
+      <a href="/developer/docs">
+        <i class="fas fa-code"></i> {{_ 'API Documentation'}}
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">
+      <i class="fas fa-{{schema.icon}}"></i> {{_ schema.plural}}
+    </li>
+  </ol>
+</nav>
+<div class="panel-body d-block overflow-auto">
+  <h1>
+    <strong><i class="fas fa-{{schema.icon}}"></i> {{_ schema.plural}}</strong>
+  </h1>
+
+  <p>{{_ 'The following webhooks are available for consumption.'}}</p>
+
+  {{#if rows.length}}
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>{{_ 'Name'}}</th>
+          <th>{{_ 'Event'}}</th>
+          <th>{{_ 'Method'}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each rows}}
+          <tr>
+            <td><strong>{{_ webhook_title}}</strong></td>
+            <td>
+              <a href="/developer/docs/webhooks/{{webhook_id}}">
+                {{webhook_event}}
+              </a>
+            </td>
+            <td>
+              {{upper webhook_method}}
+            </td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  {{/if}}
+</div>

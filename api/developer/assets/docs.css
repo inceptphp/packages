@@ -1,0 +1,48 @@
+.page-developer .panel-main .breadcrumb {
+  font-weight: 400;
+  font-size: 13px;
+}
+
+.page-developer .panel-main .breadcrumb .active {
+  font-weight: 600;
+}
+
+.page-developer .panel-body {
+  font-size: 12px;
+}
+
+.page-developer .panel-body h1 {
+  font-size: 23px;
+  margin-bottom: 40px;
+}
+
+.page-developer .panel-body h2 {
+  font-size: 21px;
+}
+
+.page-developer .panel-body h3 {
+  font-size: 19px;
+  margin-top: 40px;
+}
+
+.page-developer .panel-body h4 {
+  font-size: 17px;
+}
+
+.page-developer .panel-body h5 {
+  font-size: 15px;
+}
+
+.page-developer .panel-body h6 {
+  font-size: 13px;
+}
+
+.page-developer .panel-body ul,
+.page-developer .panel-body ol {
+  padding-left: 16px;
+}
+
+.page-developer .panel-body pre.prettyprint {
+  padding: 10px;
+  border-color: #CCCCCC;
+}

@@ -1,0 +1,36 @@
+<link rel="stylesheet" type="text/css" href="/styles/docs.css" />
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb panel-title">
+    <li class="breadcrumb-item">
+      <a href="/developer/docs">
+        <i class="fas fa-code"></i> {{_ 'API Documentation'}}
+      </a>
+    </li>
+    <li class="breadcrumb-item">
+      <i class="fas fa-database"></i> Schemas
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">
+      {{schema.singular}}
+    </li>
+  </ol>
+</nav>
+<div class="panel-body d-block overflow-auto">
+  <h1>
+    <strong>
+      <i class="fas fa-database"></i>
+      {{schema.singular}}
+    </strong>
+  </h1>
+
+  {{{markdown schema.detail}}}
+
+  <h3><strong>{{_ '%s Fields' schema.singular}}</strong></h3>
+
+  {{> docs_schema_fields schema}}
+
+  {{#each fieldsets}}
+    <a name="fieldset-{{@key}}"></a>
+    <h4><strong>{{_ '%s Fields' singular}}</strong></h4>
+    {{> docs_schema_fields this}}
+  {{/each}}

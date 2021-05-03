@@ -1,0 +1,78 @@
+<link rel="stylesheet" type="text/css" href="/styles/docs.css" />
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb panel-title">
+    <li class="breadcrumb-item">
+      <a href="/developer/docs">
+        <i class="fas fa-code"></i> {{_ 'API Documentation'}}
+      </a>
+    </li>
+    <li class="breadcrumb-item">
+      <a href="/developer/docs/webhook">
+        <i class="fas fa-{{schema.icon}}"></i> {{_ schema.plural}}
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">
+      {{_ webhook_title}}
+    </li>
+  </ol>
+</nav>
+<div class="panel-body d-block overflow-auto">
+  <h1>
+    <strong>
+      <i class="fas fa-{{schema.icon}}"></i>
+      {{_ webhook_title}}
+    </strong>
+  </h1>
+
+  {{{markdown webhook_detail}}}
+
+  <h3>
+    <strong>
+      <i class="fas fa-info-circle"></i>
+      {{_ 'Scope Information'}}
+    </strong>
+  </h3>
+
+  <p>{{_ 'The following information outlines how this event will call each hook.'}}</p>
+
+  <table class="table table-striped">
+    <tbody>
+      <tr>
+        <td width="200"><strong>{{_ 'Event Sent'}}</strong></td>
+        <td>{{webhook_action}}</td>
+      </tr>
+      <tr>
+        <td><strong>{{_ 'Call Method Used'}}</strong></td>
+        <td>{{upper webhook_method}}</td>
+      </tr>
+      <tr>
+        <td><strong>{{_ 'Trigger Rules'}}</strong></td>
+        {{#when webhook_type '===' 'user'}}
+          <td>{{_ 'The app owner should own this object'}}</td>
+        {{else}}
+          <td>{{_ 'Anytime the event occurs'}}</td>
+        {{/when}}
+      </tr>
+    </tbody>
+  </table>
+
+  {{#if webhook_sample_response}}
+    <h3>
+      <strong>
+        <i class="fas fa-comment"></i>
+        {{_ 'Example Response'}}
+      </strong>
+    </h3>
+    {{{markdown webhook_sample_response}}}
+  {{/if}}
+</div>
+
+<script type="text/javascript">
+  jQuery(() => {
+    setTimeout(() => {
+      $('pre').addClass('prettyprint');
+      $(window).trigger('prettify-init');
+    }, 1000)
+  })
+</script>

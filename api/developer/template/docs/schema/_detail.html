@@ -1,0 +1,160 @@
+{{#when field.type '===' 'text'}}
+  Less than 255 character string
+{{/when}}
+{{#when field.type '===' 'email'}}
+  Any valid email address
+{{/when}}
+{{#when field.type '===' 'password'}}
+  Less than 255 character string (this will automatically be hashed)
+{{/when}}
+{{#when field.type '===' 'search'}}
+  Less than 255 character string
+{{/when}}
+{{#when field.type '===' 'url'}}
+  Any valid website URL address
+{{/when}}
+{{#when field.type '===' 'color'}}
+  6 character hexidecimal prefixed with #
+{{/when}}
+{{#when field.type '===' 'mask'}}
+  String following the format {{#scope field.attributes 'data-format'}}{{this}}{{/scope}}
+{{/when}}
+{{#when field.type '===' 'slug'}}
+  A URL friendly string with only lowercase letters, numbers, underscores and dashes
+{{/when}}
+{{#when field.type '===' 'textarea'}}
+  A string of any length
+{{/when}}
+{{#when field.type '===' 'wysiwyg'}}
+  An HTML string of any length
+{{/when}}
+{{#when field.type '===' 'markdown'}}
+  A markdown string of any length
+{{/when}}
+{{#when field.type '===' 'code'}}
+  Any HTML code, can have scripts and styles
+{{/when}}
+{{#when field.type '===' 'number'}}
+  Any number.
+  {{#if field.attributes.length}}
+    {{#each field.attributes}}
+      {{#in 'min,max,step' @key}}
+        {{@key}}: {{this}}
+      {{/in}}
+    {{/each}}
+  {{/if}}
+{{/when}}
+{{#when field.type '===' 'small'}}
+  A number between 0 to 9
+{{/when}}
+{{#when field.type '===' 'range'}}
+  A number between {{field.attributes.min}} to {{field.attributes.max}}
+  {{#if field.attributes.step}}(step: {{field.attributes.step}}){{/if}}
+{{/when}}
+{{#when field.type '===' 'float'}}
+  Any floating number.
+  {{#if field.attributes.length}}
+    {{#each field.attributes}}
+      {{#in 'min,max,step' @key}}
+        {{@key}}: {{this}}
+      {{/in}}
+    {{/each}}
+  {{/if}}
+{{/when}}
+{{#when field.type '===' 'price'}}
+  A price formatted number with 2 decimal places.
+  {{#if field.attributes.length}}
+    {{#each field.attributes}}
+      {{#in 'min,max' @key}}
+        {{@key}}: {{this}}
+      {{/in}}
+    {{/each}}
+  {{/if}}
+{{/when}}
+{{#when field.type '===' 'stars'}}
+  Any number.
+  {{#if field.attributes.length}}
+    {{#each field.attributes}}
+      {{#in 'min,max,step' @key}}
+        {{@key}}: {{this}}
+      {{/in}}
+    {{/each}}
+  {{/if}}
+{{/when}}
+{{#when field.type '===' 'date'}}
+  A valid date format 'YYYY-MM-DD'
+{{/when}}
+{{#when field.type '===' 'time'}}
+  A valid time format 'HH:MM:SS'
+{{/when}}
+{{#when field.type '===' 'datetime'}}
+  A valid datetime format 'YYYY-MM-DD HH:MM:SS'
+{{/when}}
+{{#when field.type '===' 'week'}}
+  A valid week number in the year between 1 to 52
+{{/when}}
+{{#when field.type '===' 'month'}}
+  A valid month number in the year between 1 to 12
+{{/when}}
+{{#when field.type '===' 'checkbox'}}
+  0 or 1
+{{/when}}
+{{#when field.type '===' 'switch'}}
+  0 or 1
+{{/when}}
+{{#when field.type '===' 'knob'}}
+{{/when}}
+{{#when field.type '===' 'select'}}
+  A string value from one of the given options
+{{/when}}
+{{#when field.type '===' 'multiselect'}}
+  An array list of strings where each string should be of the given options
+{{/when}}
+{{#when field.type '===' 'checkboxes'}}
+  An array list of strings where each string should be of the given options
+{{/when}}
+{{#when field.type '===' 'radios'}}
+  A string value from one of the given options
+{{/when}}
+{{#when field.type '===' 'countrylist'}}
+  Any valid 2 letter country abbreviatiion
+{{/when}}
+{{#when field.type '===' 'file'}}
+  A URL file location
+{{/when}}
+{{#when field.type '===' 'filelist'}}
+  An array list of URL file locations
+{{/when}}
+{{#when field.type '===' 'image'}}
+  A URL image location
+{{/when}}
+{{#when field.type '===' 'imagelist'}}
+  An array list of URL image locations
+{{/when}}
+{{#when field.type '===' 'tag'}}
+  A array list of strings under 255 characters each
+{{/when}}
+{{#when field.type '===' 'textlist'}}
+  A array list of strings under 255 characters each
+{{/when}}
+{{#when field.type '===' 'textarealist'}}
+  A array list of strings of any length
+{{/when}}
+{{#when field.type '===' 'wysiwyglist'}}
+  A array list of HTML strings of any length
+{{/when}}
+{{#when field.type '===' 'meta'}}
+  An array key/value hash. Both keys and values are arbitrary
+{{/when}}
+{{#when field.type '===' 'table'}}
+  An array of key/value hashes (Multidimensional). Both keys and values are arbitrary
+{{/when}}
+{{#when field.type '===' 'multirange'}}
+{{/when}}
+{{#when field.type '===' 'latlng'}}
+{{/when}}
+{{#when field.type '===' 'rawjson'}}
+{{/when}}
+{{#when field.type '===' 'fieldset'}}
+  see: <a href="#fieldset-{{field.parameters}}">{{field.parameters}}</a>
+{{/when}}
