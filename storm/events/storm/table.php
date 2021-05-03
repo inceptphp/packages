@@ -41,35 +41,25 @@ $this('event')->on('storm-insert', function (
 
   //----------------------------//
   // 3. Validate Data
-  $errors = [];
   //we need at least a table
   if (!trim($table)) {
-    $errors['table'] = 'Table is required';
+    $response->invalidate('table', 'Table is required');
   }
 
   if (empty($rows)) {
-    $errors['rows'] = 'Empty rows';
+    $response->invalidate('rows', 'Empty rows');
   } else {
     //all rows should be an array (hash)
     foreach ($rows as $row) {
       if (!is_array($row)) {
-        $errors['rows'] = 'One or more rows are invalid';
+        $response->invalidate('rows', 'One or more rows are invalid');
         break;
-      }
-
-      foreach ($row as $value) {
-        if (!is_scalar($value) && !isset($value['value'], $value['bind'])) {
-          $errors['rows'] = 'One or more rows are invalid';
-          break;
-        }
       }
     }
   }
 
-  if (!empty($errors)) {
-    return $response
-      ->setError(true, 'Invalid Parameters')
-      ->setValidation($errors);
+  if (!$response->isValid()) {
+    return $response->setError(true, 'Invalid Parameters');
   }
 
   //----------------------------//
