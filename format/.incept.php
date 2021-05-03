@@ -20,64 +20,64 @@ $this
 
 //register formats
 
-FormatterRegistry::register(Incept\Package\Formatter\String\Lowercase::class);
+FormatterRegistry::register(Incept\Package\Format\String\Lowercase::class);
 
-FormatterRegistry::register(Incept\Package\Formatter\String\Uppercase::class);
+FormatterRegistry::register(Incept\Package\Format\String\Uppercase::class);
 
-FormatterRegistry::register(Incept\Package\Formatter\String\Capitalize::class);
+FormatterRegistry::register(Incept\Package\Format\String\Capitalize::class);
 
-FormatterRegistry::register(Incept\Package\Formatter\String\CharLength::class);
+FormatterRegistry::register(Incept\Package\Format\String\CharLength::class);
 
-FormatterRegistry::register(Incept\Package\Formatter\String\WordLength::class);
+FormatterRegistry::register(Incept\Package\Format\String\WordLength::class);
 
-FormatterRegistry::register(Incept\Package\Formatter\Number\Number::class);
+FormatterRegistry::register(Incept\Package\Format\Number\Number::class);
 
-FormatterRegistry::register(Incept\Package\Formatter\Number\Price::class);
+FormatterRegistry::register(Incept\Package\Format\Number\Price::class);
 
-FormatterRegistry::register(Incept\Package\Formatter\Number\YesNo::class);
+FormatterRegistry::register(Incept\Package\Format\Number\YesNo::class);
 
-FormatterRegistry::register(Incept\Package\Formatter\Number\Rating::class);
+FormatterRegistry::register(Incept\Package\Format\Number\Rating::class);
 
-FormatterRegistry::register(Incept\Package\Formatter\Date\Date::class);
+FormatterRegistry::register(Incept\Package\Format\Date\Date::class);
 
-FormatterRegistry::register(Incept\Package\Formatter\Date\Relative::class);
+FormatterRegistry::register(Incept\Package\Format\Date\Relative::class);
 
-FormatterRegistry::register(Incept\Package\Formatter\Date\RelativeShort::class);
+FormatterRegistry::register(Incept\Package\Format\Date\RelativeShort::class);
 
-FormatterRegistry::register(Incept\Package\Formatter\Html\EscapeHtml::class);
+FormatterRegistry::register(Incept\Package\Format\Html\EscapeHtml::class);
 
-FormatterRegistry::register(Incept\Package\Formatter\Html\StripHtml::class);
+FormatterRegistry::register(Incept\Package\Format\Html\StripHtml::class);
 
-FormatterRegistry::register(Incept\Package\Formatter\Html\Markdown::class);
+FormatterRegistry::register(Incept\Package\Format\Html\Markdown::class);
 
-FormatterRegistry::register(Incept\Package\Formatter\Html\Link::class);
+FormatterRegistry::register(Incept\Package\Format\Html\Link::class);
 
-FormatterRegistry::register(Incept\Package\Formatter\Html\Image::class);
+FormatterRegistry::register(Incept\Package\Format\Html\Image::class);
 
-FormatterRegistry::register(Incept\Package\Formatter\Html\Email::class);
+FormatterRegistry::register(Incept\Package\Format\Html\Email::class);
 
-FormatterRegistry::register(Incept\Package\Formatter\Html\Phone::class);
+FormatterRegistry::register(Incept\Package\Format\Html\Phone::class);
 
-FormatterRegistry::register(Incept\Package\Formatter\Json\SpaceSeparated::class);
+FormatterRegistry::register(Incept\Package\Format\Json\SpaceSeparated::class);
 
-FormatterRegistry::register(Incept\Package\Formatter\Json\CommaSeparated::class);
+FormatterRegistry::register(Incept\Package\Format\Json\CommaSeparated::class);
 
-FormatterRegistry::register(Incept\Package\Formatter\Json\LineSeparated::class);
+FormatterRegistry::register(Incept\Package\Format\Json\LineSeparated::class);
 
-FormatterRegistry::register(Incept\Package\Formatter\Json\OrderedList::class);
+FormatterRegistry::register(Incept\Package\Format\Json\OrderedList::class);
 
-FormatterRegistry::register(Incept\Package\Formatter\Json\UnorderedList::class);
+FormatterRegistry::register(Incept\Package\Format\Json\UnorderedList::class);
 
-FormatterRegistry::register(Incept\Package\Formatter\Json\TagList::class);
+FormatterRegistry::register(Incept\Package\Format\Json\TagList::class);
 
-FormatterRegistry::register(Incept\Package\Formatter\Json\Meta::class);
+FormatterRegistry::register(Incept\Package\Format\Json\Meta::class);
 
-FormatterRegistry::register(Incept\Package\Formatter\Json\Table::class);
+FormatterRegistry::register(Incept\Package\Format\Json\Table::class);
 
-FormatterRegistry::register(Incept\Package\Formatter\Json\Carousel::class);
+FormatterRegistry::register(Incept\Package\Format\Json\Carousel::class);
 
-FormatterRegistry::register(Incept\Package\Formatter\Json\Json::class);
+FormatterRegistry::register(Incept\Package\Format\Json\Json::class);
 
-FormatterRegistry::register(Incept\Package\Formatter\Custom\Custom::class);
+FormatterRegistry::register(Incept\Package\Format\Custom\Custom::class);
 
-FormatterRegistry::register(Incept\Package\Formatter\Custom\Formula::class);
+FormatterRegistry::register(Incept\Package\Format\Custom\Formula::class);
