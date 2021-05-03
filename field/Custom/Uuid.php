@@ -12,6 +12,7 @@ use Incept\Framework\Field\AbstractField;
 use Incept\Framework\Field\FieldInterface;
 use Incept\Framework\Field\FieldRegistry;
 use Incept\Framework\Field\FieldTypes;
+use Incept\Framework\Fieldset\FieldsetTypes;
 use Incept\Framework\Format\FormatTypes;
 
 /**
@@ -66,7 +67,8 @@ class Uuid extends AbstractField implements FieldInterface
    * @const array TYPES List of possible data types
    */
   const TYPES = [
-    FieldTypes::TYPE_STRING
+    FieldTypes::TYPE_STRING,
+    FieldsetTypes::TYPE_UNIQUE
   ];
 
   /**

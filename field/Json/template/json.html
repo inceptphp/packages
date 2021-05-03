@@ -1,5 +1,5 @@
 <textarea
-  class="form-control hidden system-form-control"
+  class="form-control hidden system-form-control d-none"
   data-do="code-editor"
   data-mode="json"
   {{#if name}}
@@ -8,4 +8,4 @@
   {{#each config.attributes}}
     {{@key}}="{{this}}"
   {{/each}}
->{{{jsonify value 1}}}</textarea>
+>{{#if value}}{{{jsonify value 1}}}{{/if}}</textarea>
