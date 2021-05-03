@@ -6,7 +6,7 @@
  * distributed with this package.
  */
 
-namespace Incept\Package\Formatter\Custom;
+namespace Incept\Package\Format\Custom;
 
 use Incept\Framework\Field\FieldRegistry;
 

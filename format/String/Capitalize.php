@@ -6,7 +6,7 @@
  * distributed with this package.
  */
 
-namespace Incept\Package\Formatter\String;
+namespace Incept\Package\Format\String;
 
 use Incept\Framework\Format\AbstractFormatter;
 use Incept\Framework\Format\FormatterInterface;

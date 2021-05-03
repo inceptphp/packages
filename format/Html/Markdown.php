@@ -6,11 +6,13 @@
  * distributed with this package.
  */
 
-namespace Incept\Package\Formatter\Html;
+namespace Incept\Package\Format\Html;
 
 use Incept\Framework\Format\AbstractFormatter;
 use Incept\Framework\Format\FormatterInterface;
 use Incept\Framework\Format\FormatTypes;
+
+use Parsedown;
 
 /**
  * Markdown Format
@@ -46,8 +48,8 @@ class Markdown extends AbstractFormatter implements FormatterInterface
    * @return ?string
    */
   public function format(
-    $value = null, 
-    string $name = null, 
+    $value = null,
+    string $name = null,
     array $row = []
   ): ?string
   {

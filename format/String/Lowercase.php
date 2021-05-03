@@ -6,7 +6,7 @@
  * distributed with this package.
  */
 
-namespace Incept\Package\Formatter\String;
+namespace Incept\Package\Format\String;
 
 use Incept\Framework\Format\AbstractFormatter;
 use Incept\Framework\Format\FormatterInterface;
@@ -46,11 +46,10 @@ class Lowercase extends AbstractFormatter implements FormatterInterface
    * @return ?string
    */
   public function format(
-    $value = null, 
-    string $name = null, 
+    $value = null,
+    string $name = null,
     array $row = []
-  ): ?string
-  {
+  ): ?string {
     return strtolower($value);
   }
 }

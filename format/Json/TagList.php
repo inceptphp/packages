@@ -6,7 +6,7 @@
  * distributed with this package.
  */
 
-namespace Incept\Package\Formatter\Json;
+namespace Incept\Package\Format\Json;
 
 use Incept\Framework\Format\AbstractFormatter;
 use Incept\Framework\Format\FormatterInterface;

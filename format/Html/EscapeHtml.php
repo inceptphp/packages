@@ -6,7 +6,7 @@
  * distributed with this package.
  */
 
-namespace Incept\Package\Formatter\Html;
+namespace Incept\Package\Format\Html;
 
 use Incept\Framework\Format\AbstractFormatter;
 use Incept\Framework\Format\FormatterInterface;

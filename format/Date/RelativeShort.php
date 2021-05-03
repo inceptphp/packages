@@ -6,7 +6,7 @@
  * distributed with this package.
  */
 
-namespace Incept\Package\Formatter\Date;
+namespace Incept\Package\Format\Date;
 
 use Incept\Framework\Field\FieldRegistry;
 
