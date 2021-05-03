@@ -43,14 +43,21 @@ class HandlebarsPackage extends HandlebarsHandler
    *
    * @param *string $name
    * @param *string $helper
+   * @param bool    $ifNotSet
    *
    * @return HandlebarsPackage
    */
   public function registerHelperFromFile(
     string $name,
-    string $helper
-  ): HandlebarsPackage
-  {
+    string $helper,
+    bool $ifNotSet = false
+  ): HandlebarsPackage {
+    //if it exists and not override
+    if ($ifNotSet && $this->registerHelper($name)) {
+      // then dont override
+      return $this;
+    }
+
     if (!file_exists($helper)) {
       throw HandlebarsException::forFileNotFound($helper);
     }
@@ -63,14 +70,21 @@ class HandlebarsPackage extends HandlebarsHandler
    *
    * @param *string $name
    * @param *string $partial
+   * @param bool    $ifNotSet
    *
    * @return HandlebarsPackage
    */
   public function registerPartialFromFile(
     string $name,
-    string $partial
-  ): HandlebarsPackage
-  {
+    string $partial,
+    bool $ifNotSet = false
+  ): HandlebarsPackage {
+    //if it exists and not override
+    if ($ifNotSet && $this->getPartial($name)) {
+      // then dont override
+      return $this;
+    }
+
     if (!file_exists($partial)) {
       throw HandlebarsException::forFileNotFound($partial);
     }
@@ -83,14 +97,21 @@ class HandlebarsPackage extends HandlebarsHandler
    *
    * @param *string $name
    * @param string  $extension
+   * @param bool    $ifNotSet
    *
    * @return HandlebarsPackage
    */
   public function registerPartialFromFolder(
     string $name,
-    string $extension = 'html'
-  ): HandlebarsPackage
-  {
+    string $extension = 'html',
+    bool $ifNotSet = false
+  ): HandlebarsPackage {
+    //if it exists and not override
+    if ($ifNotSet && $this->getPartial($name)) {
+      // then dont override
+      return $this;
+    }
+
     if (!$this->path || !is_dir($this->path)) {
       throw HandlebarsException::forFolderNotSet($partial);
     }
