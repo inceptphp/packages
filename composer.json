@@ -14,7 +14,8 @@
     "phpugph/storm": "~1.0.0",
     "swiftmailer/swiftmailer": "~6.2.7",
     "dejan7/httpquest": "~0.3.0",
-    "robthree/twofactorauth": "~1.8.0"
+    "robthree/twofactorauth": "~1.8.0",
+    "erusev/parsedown": "1.7.1"
   },
   "autoload": {
     "psr-4": {

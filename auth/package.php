@@ -177,4 +177,9 @@ $this('event')->on('inceptphp/packages/auth-populate', function (
       $emitter->call('auth-create', $payload);
     }
   }
+
+  $terminal = $this('terminal');
+  $terminal->info('Created Login');
+  $terminal->info(' - Username: admin');
+  $terminal->info(' - Password: admin');
 });
