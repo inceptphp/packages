@@ -322,7 +322,7 @@ $this('http')->post('/admin/spa/system/schema/field/save', function(
 
   //----------------------------//
   // 2. Process Data
-  $template = dirname(__DIR__) . '/template/fieldset';
+  $template = dirname(__DIR__) . '/template/schema';
   if (is_dir($response->get('page', 'template_root'))) {
     $template = $response->get('page', 'template_root');
   }
