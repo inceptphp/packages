@@ -198,33 +198,33 @@ $this('event')->on('inceptphp/packages/api-populate', function (
           $menu[] = $item;
           if ($item['path'] !== 'menu-admin') {
             continue;
-          }echo 'pass';
+          }
 
           $menu[] = [
             'icon' => 'fas fa-code',
             'path' => 'menu-api',
             'label' => 'API',
             'submenu' => [
-                [
-                  'path' => '/admin/system/object/app/search',
-                  'label' => 'Applications'
-                ],
-                [
-                  'path' => '/admin/system/object/session/search',
-                  'label' => 'Sessions'
-                ],
-                [
-                  'path' => '/admin/system/object/scope/search',
-                  'label' => 'Scopes'
-                ],
-                [
-                  'path' => '/admin/system/object/rest/search',
-                  'label' => 'REST Calls'
-                ],
-                [
-                  'path' => '/admin/system/object/webhook/search',
-                  'label' => 'Webhooks'
-                ]
+              [
+                'path' => '/admin/system/object/app/search',
+                'label' => 'Applications'
+              ],
+              [
+                'path' => '/admin/system/object/session/search',
+                'label' => 'Sessions'
+              ],
+              [
+                'path' => '/admin/system/object/scope/search',
+                'label' => 'Scopes'
+              ],
+              [
+                'path' => '/admin/system/object/rest/search',
+                'label' => 'REST Calls'
+              ],
+              [
+                'path' => '/admin/system/object/webhook/search',
+                'label' => 'Webhooks'
+              ]
             ]
           ];
         }
