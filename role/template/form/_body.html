@@ -1,0 +1,39 @@
+<section class="view-body with-foot-1 schema-detail">
+  <!-- START: Tabs -->
+  {{> form_tabs}}
+  <!-- END: Tabs -->
+  <!-- START: Panes -->
+  <div class="tab-content{{#if schema.fieldsets.length}} m-2{{/if}}">
+    <!-- START: Content Pane -->
+    <div
+      class="tab-pane fade active show"
+      id="model-form-information-{{uuid}}"
+      role="tabpanel"
+    >
+      {{> form_information}}
+    </div>
+    <!-- END: Content Pane -->
+    <!-- START: Permissions Pane -->
+    <div
+      class="tab-pane fade show"
+      id="model-form-permissions-{{uuid}}"
+      role="tabpanel"
+    >
+      {{> form_permissions}}
+    </div>
+    <!-- END: Permissions Pane -->
+    <!-- START: Admin Menu Pane -->
+    <div
+      class="tab-pane fade show"
+      id="model-form-menu-{{uuid}}"
+      role="tabpanel"
+    >
+      {{> form_menu}}
+    </div>
+    <!-- END: Admin Menu Pane -->
+    {{#each schema.fieldsets}}
+      {{> form_fieldset}}
+    {{/each}}
+  </div>
+  <!-- END: Panes -->
+</section>

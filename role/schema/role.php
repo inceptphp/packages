@@ -147,12 +147,12 @@ return [
       'role_admin_menu' => json_encode([
         [
           'label' => 'Dashboard',
-          'icon' => 'fa-tachometer-alt',
+          'icon' => 'fas fa-tachometer-alt',
           'path' => '/admin'
         ],
         [
           'label' => 'Admin',
-          'icon' => 'fa-coffee',
+          'icon' => 'fas fa-coffee',
           'path' => 'menu-admin',
           'submenu' => [
             [
@@ -171,7 +171,7 @@ return [
         ],
         [
           'label' => 'System',
-          'icon' => 'fa-server',
+          'icon' => 'fas fa-server',
           'path' => 'menu-system',
           'submenu' => [
             [
@@ -186,7 +186,7 @@ return [
         ],
         [
           'label' => 'Configuration',
-          'icon' => 'fa-cogs',
+          'icon' => 'fas fa-cogs',
           'path' => 'menu-configuration',
           'submenu' => [
             [
@@ -236,12 +236,12 @@ return [
       'role_admin_menu' => json_encode([
         [
           'label' => 'Dashboard',
-          'icon' => 'fa-tachometer-alt',
+          'icon' => 'fas fa-tachometer-alt',
           'path' => '/admin'
         ],
         [
           'label' => 'Admin',
-          'icon' => 'fa-coffee',
+          'icon' => 'fas fa-coffee',
           'path' => 'menu-admin',
           'submenu' => [
             [
@@ -260,7 +260,7 @@ return [
         ],
         [
           'label' => 'Configuration',
-          'icon' => 'fa-cogs',
+          'icon' => 'fas fa-cogs',
           'path' => 'menu-configuration',
           'submenu' => [
             [
