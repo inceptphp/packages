@@ -94,6 +94,13 @@
   margin-top: -3px;
 }
 
+.layout-panel .panel-sidebar-left .nav {
+  display: block;
+  height: 100%;
+  overflow: auto;
+  width: 100%;
+}
+
 .layout-panel .panel-sidebar-left .nav-link .nav-right {
   color: #FFFFFF;
   float: right;
