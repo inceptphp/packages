@@ -10,42 +10,6 @@ use UGComponents\IO\Request\RequestInterface;
 use UGComponents\IO\Response\ResponseInterface;
 
 /**
- * Forwards the supplier script to the DMZ
- *
- * @param RequestInterface $request
- * @param ResponseInterface $response
- */
-$this('http')->get('/scripts/app.js', function(
-  RequestInterface $request,
-  ResponseInterface $response
-) {
-  //get the asset path
-  $assetPath = dirname(__DIR__) . '/assets';
-  //set content type
-  $response->addHeader('Content-Type', 'text/javascript');
-  //get the file and set to content
-  $response->setContent(file_get_contents($assetPath . '/script.js'));
-});
-
-/**
- * Forwards the supplier styles to the DMZ
- *
- * @param RequestInterface $request
- * @param ResponseInterface $response
- */
-$this('http')->get('/styles/app.css', function(
-  RequestInterface $request,
-  ResponseInterface $response
-) {
-  //get the asset path
-  $assetPath = dirname(__DIR__) . '/assets';
-  //set content type
-  $response->addHeader('Content-Type', 'text/css');
-  //get the file and set to content
-  $response->setContent(file_get_contents($assetPath . '/style.css'));
-});
-
-/**
  * Forwards the supplier styles to the DMZ
  *
  * @param RequestInterface $request
