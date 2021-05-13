@@ -136,7 +136,7 @@ return [
       'searchable' => 0,
       'filterable' => 0,
       'sortable' => 1
-    ],
+    ]
   ],
   'relations' => []
 ];
