@@ -50,6 +50,10 @@ class Table extends Json
    */
   public function prepare($value = null, string $name = null, array $row = [])
   {
+    if (is_null($value)) {
+      return null;
+    }
+
     return json_encode($value);
   }
 

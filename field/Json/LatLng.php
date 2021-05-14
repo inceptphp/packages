@@ -38,6 +38,10 @@ class LatLng extends TextList
    */
   public function prepare($value = null, string $name = null, array $row = [])
   {
+    if (is_null($value)) {
+      return null;
+    }
+
     if (!is_numeric($value[0])) {
       $value[0] = 0;
     }

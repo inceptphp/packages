@@ -89,7 +89,7 @@ class File extends AbstractField implements FieldInterface
    */
   public function prepare($value = null, string $name = null, array $row = [])
   {
-    $file = incept('event')->method('file-upload', [ 'data' => $value ]);
+    $file = incept('event')->call('file-upload', [ 'data' => $value ]);
 
     if (!isset($file['data'])) {
       return $value;

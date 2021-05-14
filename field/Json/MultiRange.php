@@ -38,6 +38,10 @@ class MultiRange extends TextList
    */
   public function prepare($value = null, string $name = null, array $row = [])
   {
+    if (is_null($value) || (is_string($value) && !strlen($value))) {
+      return null;
+    }
+
     return json_encode(explode(';', $value));
   }
 

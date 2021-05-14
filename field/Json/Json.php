@@ -60,6 +60,24 @@ class Json extends AbstractField implements FieldInterface
   ];
 
   /**
+   * Prepares the value for some sort of insertion
+   *
+   * @param ?mixed  $value
+   * @param ?string $name  name of the column in the row
+   * @param ?array  $row   the row submitted with the value
+   *
+   * @return ?scalar
+   */
+  public function prepare($value = null, string $name = null, array $row = [])
+  {
+    if (is_null($value) || (is_string($value) && !strlen($value))) {
+      return null;
+    }
+
+    return json_encode($value);
+  }
+
+  /**
    * Renders the field for object forms
    *
    * @param ?mixed  $value
