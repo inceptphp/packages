@@ -13,6 +13,10 @@
 .form-mobile .form-group-textarea,
 .form-mobile .form-group-markdown,
 .form-mobile .form-group-wysiwyg,
+.form-mobile .form-group-image,
+.form-mobile .form-group-file,
+.form-mobile .form-group-imagelist,
+.form-mobile .form-group-filelist,
 .form-mobile .form-group-fieldset,
 .form-mobile .form-group.no-flex {
   border-width: 0;
@@ -24,6 +28,10 @@
 .form-mobile .form-group-textarea .control-label,
 .form-mobile .form-group-markdown .control-label,
 .form-mobile .form-group-wysiwyg .control-label,
+.form-mobile .form-group-image .control-label,
+.form-mobile .form-group-file .control-label,
+.form-mobile .form-group-imagelist .control-label,
+.form-mobile .form-group-filelist .control-label,
 .form-mobile .form-group-fieldset .control-label,
 .form-mobile .form-group.no-flex .control-label {
   margin-bottom: 5px;
@@ -231,7 +239,8 @@
   width: 100% !important;
 }
 
-.form-mobile .select2-container--default .select2-selection--single, .form-mobile .select2-container--default .select2-selection--multiple {
+.form-mobile .select2-container--default .select2-selection--single,
+.form-mobile .select2-container--default .select2-selection--multiple {
   border-width: 0 !important;
 }
 

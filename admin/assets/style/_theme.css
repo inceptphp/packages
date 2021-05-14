@@ -500,3 +500,15 @@ a:visited {
 .form-mobile .ace-tm .ace_gutter-active-line {
   background-color: #000000;
 }
+
+.form-mobile .ace-tm .ace_meta.ace_tag {
+  color: #F43A80;
+}
+
+.form-mobile .ace-tm .ace_cursor {
+  color: #929AAD;
+}
+
+.form-mobile .ace_content {
+  background-color: #000000;
+}

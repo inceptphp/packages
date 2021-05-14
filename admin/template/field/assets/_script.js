@@ -50,11 +50,13 @@ jQuery(($) => {
     ['string', 'number', 'date', 'html', 'json', 'custom'].forEach(function(type) {
       if(formats.indexOf(type) === -1) {
         var list = $('select.field-list optgroup.filter-group-' + type, form).hide();
+        $('option', list).hide();
         if($('option:selected', list).length) {
           list.parent().val('none').trigger('change');
         }
 
         var detail = $('select.field-detail optgroup.filter-group-' + type, form).hide();
+        $('option', detail).hide();
         if($('option:selected', detail).length) {
           detail.parent().val('none').trigger('change');
         }
@@ -240,8 +242,8 @@ jQuery(($) => {
     };
 
     target.resetFormState = function () {
-      $('select.field-list optgroup', target).show();
-      $('select.field-detail optgroup', target).show();
+      $('select.field-list optgroup', target).show().find('option').show();
+      $('select.field-detail optgroup', target).show().find('option').show();
       $('input.field-searchable', target).attr('disabled', false);
       $('input.field-filterable', target).attr('disabled', false);
       $('input.field-sortable', target).attr('disabled', false);

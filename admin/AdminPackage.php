@@ -98,12 +98,19 @@ class AdminPackage
       return;
     }
 
+    //if there's already content
+    if ($response->hasContent()) {
+      return;
+    }
+
     //get the path
     $path = $request->getPath('string');
     //if not an admin path
     if ($path !== '/admin' && strpos($path, '/admin/') !== 0) {
       return;
     }
+
+    $debug = strpos($path, '/admin/spa/') === false ? 'page': 'spa';
 
     //if it was a call for an actual file
     if (preg_match('/\.[a-zA-Z0-9]{1,4}$/', $path)) {
@@ -114,7 +121,7 @@ class AdminPackage
     $type = $response->getHeaders('Content-Type');
     if (strpos($type, 'html') === false) {
       //don't make it pretty
-      return $this->errorDebug($request, $response, $error);
+      return $this->errorDebug($request, $response, $error, $debug);
     }
 
     //get the code
@@ -135,7 +142,7 @@ class AdminPackage
       || $code !== 500
     ) {
       //don't make it pretty
-      return $this->errorDebug($request, $response, $error);
+      return $this->errorDebug($request, $response, $error, $debug);
     }
 
     //okay make it pretty...
@@ -290,14 +297,16 @@ class AdminPackage
    *
    * @param *RequestInterface  $request
    * @param *ResponseInterface $response
-   * @param *Throwable          $error
+   * @param *Throwable         $error
+   * @param *string            $mode
    *
    * @return bool
    */
   protected function errorDebug(
     RequestInterface $request,
     ResponseInterface $response,
-    Throwable $error
+    Throwable $error,
+    string $mode = 'page'
   ) {
     //load some packages
     $host = $this->handler->package('host');
@@ -435,18 +444,32 @@ class AdminPackage
       $data['stack'][] = $trace;
     }
 
+    $handlebars->registerHelper('plus', function($x, $y) {
+      return $x + $y;
+    });
+
+    $handlebars->registerHelper('nolines', function($string) {
+      $string = preg_replace('/\s+/is', ' ', $string);
+      $string = str_replace('Array ( ', 'Array(', $string);
+      return str_replace('  ', ' ', $string);
+    });
+
     //set the template root
     $template = __DIR__ . '/template';
 
     $body = $handlebars
       ->setTemplateFolder($template)
-      ->renderFromFolder('error', $data);
+      ->renderFromFolder('debug/' . $mode, $data);
 
     //set content
     $response
       ->set('page', 'title', $language->translate('Oops...'))
       ->set('page', 'class', 'page-error')
       ->setContent($body);
+
+    if ($mode === 'spa') {
+      return;
+    }
 
     //render page
     $this->render($request, $response, 'blank');

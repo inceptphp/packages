@@ -1,0 +1,41 @@
+{{_ 'Oh No! Error Found'}}
+
+{{class}}: {{{message}}}
+{{file}}:{{line}}
+{{#request}}
+Stage Data:
+{{{jsonify stage 1}}}
+
+SESSION Data:
+{{{jsonify session 1}}}
+
+POST Data:
+{{{jsonify post 1}}}
+
+GET Data:
+{{{jsonify get 1}}}
+{{/request}}
+Stack Trace:
+{{~#each stack}}
+#{{step}} - {{file}}:{{line}}
+{{#if class~}}
+  {{~class~}}{{#if function}}->{{function}}{{/if~}}
+{{else}}
+  {{~#if function}}
+    {{~function~}}
+  {{/if~}}
+{{/if~}}
+(
+  {{~#if args.length~}}
+    {{~#each args~}}
+      {{~#if @last}}{{{nolines this}}}{{else}}{{{nolines this}}}, {{/if~}}
+    {{~/each~}}
+  {{~/if~}}
+);
+
+{{#if snippet.length}}
+{{~#each snippet}}
+{{~plus ../start @index}} {{#when @key '==' ../line}}--> {{{this}}}{{else}}{{{this}}}{{/when}}
+{{~/each~}}
+{{/if~}}
+{{/each}}

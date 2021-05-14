@@ -147,6 +147,8 @@ $this('event')->on('inceptphp/packages/api-populate', function (
   RequestInterface $request,
   ResponseInterface $response
 ) {
+  //get emitter
+  $emitter = $this('event');
   //scan through each file
   foreach (scandir(__DIR__ . '/schema') as $file) {
     //if it's not a php file
@@ -166,8 +168,6 @@ $this('event')->on('inceptphp/packages/api-populate', function (
       continue;
     }
 
-    //get emitter
-    $emitter = $this('event');
     foreach($data['fixtures'] as $fixture) {
       $payload = $request
         ->clone(true)
@@ -175,6 +175,65 @@ $this('event')->on('inceptphp/packages/api-populate', function (
         ->setStage('schema', $data['name']);
 
       $emitter->call('system-object-create', $payload);
+    }
+  }
+
+  if ($this->isPackage('inceptphp/packages/role')) {
+    $role = $emitter->call('system-object-role-detail', [
+      'role_slug' => 'developer'
+    ]);
+
+    if (isset($role['role_admin_menu'])) {
+      $exists = false;
+      foreach ($role['role_admin_menu'] as $item) {
+        if ($item['path'] === 'menu-api') {
+          $exists = true;
+          break;
+        }
+      }
+
+      if (!$exists) {
+        $menu = [];
+        foreach ($role['role_admin_menu'] as $item) {
+          $menu[] = $item;
+          if ($item['path'] !== 'menu-admin') {
+            continue;
+          }
+
+          $menu[] = [
+            'icon' => 'fas fa-code',
+            'path' => 'menu-api',
+            'label' => 'API',
+            'submenu' => [
+              [
+                'path' => '/admin/system/object/app/search',
+                'label' => 'Applications'
+              ],
+              [
+                'path' => '/admin/system/object/session/search',
+                'label' => 'Sessions'
+              ],
+              [
+                'path' => '/admin/system/object/scope/search',
+                'label' => 'Scopes'
+              ],
+              [
+                'path' => '/admin/system/object/rest/search',
+                'label' => 'REST Calls'
+              ],
+              [
+                'path' => '/admin/system/object/webhook/search',
+                'label' => 'Webhooks'
+              ]
+            ]
+          ];
+        }
+
+        $emitter->call('system-object-role-update', [
+          'role_id' => $role['role_id'],
+          'role_admin_menu' => json_encode($menu, JSON_PRETTY_PRINT)
+        ]);
+      }
     }
   }
 });

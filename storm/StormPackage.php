@@ -140,11 +140,11 @@ class StormPackage
           && is_numeric($field['field']['attributes'][$attribute])
         ) {
           $numbers = explode('.', (string) $field['field']['attributes'][$attribute]);
-          if (strlen($numbers[0]) > $length[0]) {
+          if (isset($numbers[0]) && strlen($numbers[0]) > $length[0]) {
             $length[0] = strlen($numbers[0]);
           }
 
-          if (strlen($numbers[1]) > $length[1]) {
+          if (isset($numbers[1]) && strlen($numbers[1]) > $length[1]) {
             $length[1] = strlen($numbers[1]);
           }
         }
@@ -160,6 +160,11 @@ class StormPackage
         } else {
           unset($length[1]);
         }
+      }
+
+      //SQL Requirement: M must be >= D
+      if (isset($length[1]) && $length[1] > $length[0]) {
+        $length[0] = $length[1];
       }
 
       if (count($length) == 2) {

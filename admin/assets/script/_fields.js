@@ -1342,44 +1342,43 @@
    * Code Editor - Ace
    */
   $(window).on('code-editor-init', function(e, target) {
-    $.require.load(
-      'components/ace-editor-builds/src/ace.js',
-      function() {
-        target = $(target);
+    $.require.load('components/ace-editor-builds/src/ace.js', function() {
+      target = $(target);
 
-        var mode = target.attr('data-mode');
-        var width = target.attr('data-height') || 0;
-        var height = target.attr('data-height') || 500;
+      var mode = target.attr('data-mode');
+      var width = target.attr('data-height') || 0;
+      var height = target.attr('data-height') || 500;
 
-        var container = $('<section>')
-          .addClass('form-control')
-          .addClass('code-editor-container');
+      var container = $('<section>')
+        .addClass('form-control')
+        .addClass('code-editor-container');
 
-        if(width) {
-          container.width(width);
-        }
-
-        if(height) {
-          container.height(height);
-        }
-
-        target.after(container);
-
-        var editor = ace.edit(container[0]);
-
-        if(mode) {
-          // set mode
-          editor.getSession().setMode('ace/mode/' + mode);
-        }
-
-        // set editor default value
-        editor.setValue(target.val());
-
-        target.closest('form').submit(function() {
-          target.val(editor.getValue());
-        });
+      if(width) {
+        container.width(width);
       }
-    );
+
+      if(height) {
+        container.height(height);
+      }
+
+      target.after(container);
+
+      var editor = ace.edit(container[0]);
+
+      if(mode) {
+        // set mode
+        editor.getSession().setMode('ace/mode/' + mode);
+      }
+
+      // set editor default value
+      editor.setValue(target.val());
+
+      target.closest('form').submit(function() {
+        target.val(editor.getValue());
+      });
+
+      target.hide();
+    });
   });
 
   /**

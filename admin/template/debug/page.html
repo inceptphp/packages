@@ -1,0 +1,168 @@
+<style>
+  li.L0, li.L1, li.L2, li.L3,
+  li.L5, li.L6, li.L7, li.L8 {
+    list-style-type: decimal !important;
+  }
+
+  li.L1, li.L3, li.L5, li.L7, li.L9 {
+    background: transparent;
+  }
+
+  .highlighted {
+    display: block;
+    background: #FFF0C0;
+  }
+
+  .nav-pills {
+    border-right: 1px solid #EEEEEE;
+  }
+
+  .nav-pills .nav-link.active,
+  .nav-pills .show > .nav-link {
+    color: #343434;
+    background-color: #FFF0C0;
+  }
+
+  .nav-pills .nav-link {
+    border-bottom: 1px solid #EEEEEE;
+    color: #343434;
+    direction: rtl;
+    overflow: hidden;
+    text-align: left;
+    text-overflow: ellipsis;
+    width: 100%;
+    white-space: nowrap;
+  }
+</style>
+<div class="page-error-wrapper">
+  <div class="row">
+    <div class="col-4">
+      <div class="menu-error nav flex-column nav-pills">
+        <a class="nav-link active" data-toggle="pill" href="#current">
+          <strong>{{class}}</strong>
+        </a>
+        {{#each stack}}
+          <a class="nav-link" data-toggle="pill" href="#stack-{{@index}}">
+            <strong>#{{step}}</strong>
+            <br />
+            <span class="text-primary">
+              {{#if class}}
+                {{class}}{{#if function}}->{{function}}{{/if}}
+              {{else}}
+                {{#if function}}
+                  {{function}}
+                {{/if}}
+              {{/if}}
+            </span>
+            <br />
+            <strong>{{short_file}}:{{line}}</strong>
+          </a>
+        {{/each}}
+      </div>
+    </div>
+    <div class="col-8">
+      <div class="py-3">
+        <div class="float-right">
+          {{date 'now' 'F d, Y g:ia'}}
+        </div>
+        <h1 class="text-uppercase">{{_ 'Oh No! Error Found'}}</h1>
+        <p><strong>{{class}}</strong> {{message}}</p>
+        <p><strong>{{file}}</strong>:{{line}}</p>
+        <hr />
+      </div>
+      <div class="tab-content">
+        <div id="current" class="tab-pane fade show active">
+          {{#request}}
+            <h5 class="mb-2">Stage Data</h5>
+            {{#if stage.length}}
+              <textarea
+                class="d-none"
+                data-do="code-editor"
+                data-mode="json"
+                data-height="250"
+              >{{{jsonify stage 1}}}</textarea>
+            {{else}}
+              <em>{{_ 'No Data Found'}}</em>
+            {{/if}}
+            <h5 class="mt-4 mb-2">Session Data</h5>
+            {{#if session.length}}
+              <textarea
+                class="d-none"
+                data-do="code-editor"
+                data-mode="json"
+                data-height="250"
+              >{{{jsonify session 1}}}</textarea>
+            {{else}}
+              <em>{{_ 'No Data Found'}}</em>
+            {{/if}}
+            <h5 class="mt-4 mb-2">POST Data</h5>
+            {{#if post.length}}
+              <textarea
+                class="d-none"
+                data-do="code-editor"
+                data-mode="json"
+                data-height="250"
+              >{{{jsonify post 1}}}</textarea>
+            {{else}}
+              <em>{{_ 'No Data Found'}}</em>
+            {{/if}}
+            <h5 class="mt-4 mb-2">GET Data</h5>
+            {{#if get.length}}
+              <textarea
+                class="d-none"
+                data-do="code-editor"
+                data-mode="json"
+                data-height="250"
+              >{{{jsonify get 1}}}</textarea>
+            {{else}}
+              <em>{{_ 'No Data Found'}}</em>
+            {{/if}}
+          {{/request}}
+        </div>
+        {{#each stack}}
+          <div id="stack-{{@index}}" class="tab-pane fade show">
+            <h5>
+              <strong>#{{step}}</strong>
+              <span class="text-primary">
+                {{#if class}}
+                  {{class}}{{#if function}}->{{function}}{{/if}}
+                {{else}}
+                  {{#if function}}
+                    {{function}}
+                  {{/if}}
+                {{/if}}
+              </span>
+            </h5>
+            <code data-do="prettify" class="prettyprint lang-php">
+              {{#if class}}
+                {{class~}}{{#if function}}->{{function}}{{/if~}}
+              {{else}}
+                {{#if function}}
+                  {{function~}}
+                {{/if~}}
+              {{/if~}}
+              (
+                {{~#if args.length}}
+                  {{~#each args~}}
+                    {{~#if @last}}{{this}}{{else}}{{this}}, {{/if~}}
+                  {{~/each~}}
+                {{~/if~}}
+              );
+            </code>
+            <h5 class="mt-4">{{_ 'Snippet'}}</h5>
+            <div class="py-2">
+              <strong>{{file}}</strong>:{{line}}
+            </div>
+            {{#if snippet.length}}
+              <pre data-do="prettify" class="prettyprint lang-php linenums:{{start}}">
+{{~#each snippet}}
+{{~#when @key '==' ../line}}<span class="highlighted">{{this}}</span>{{else}}{{this}}{{/when~}}
+{{/each~}}
+              </pre>
+            {{/if}}
+          </div>
+        {{/each}}
+      </div>
+    </div>
+  </div>
+</div>
