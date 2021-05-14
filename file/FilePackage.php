@@ -89,21 +89,21 @@ class FilePackage
     $file = sprintf('/%s.%s', md5(uniqid()), $extension);
 
     //if not folder
-    if (!is_dir($this->upload . $path)) {
+    if (!is_dir($this->folder . $path)) {
       //make one
-      mkdir($folder, 077);
+      mkdir($this->folder . $path, 077);
     }
 
     //data:mime;base64,data
     $base64 = substr($data, strpos($data, ',') + 1);
-    file_put_contents($this->upload . $path . $file, base64_decode($base64));
+    file_put_contents($this->folder . $path . $file, base64_decode($base64));
 
     $host = null;
     if (isset($_SERVER['HTTP_HOST'])) {
-      $host = $this('host')->name();
+      $host = $this->handler->package('host')->name();
     }
 
-    return $host . $this->uri . $destination;
+    return $host . $this->uri . $path . $file;
   }
 
   /**
