@@ -36,9 +36,10 @@ $this('http')->get('/auth/signout', function (
   ]);
 
   //redirect
-  $redirect = $request->getStage('redirect_uri')
-    ?? $config->get('settings', 'home')
-    ?? '/';
+  $redirect = $config->get('settings', 'home') ?? '/';
+  if ($request->getStage('redirect_uri')) {
+    $redirect = $request->getStage('redirect_uri');
+  }
 
   $http->redirect($redirect);
 });

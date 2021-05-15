@@ -39,7 +39,10 @@ $this('http')->get('/auth/sso/signin/oauth2/:name', function (
   );
 
   //determine redirect
-  $redirect = $request->getStage('redirect_uri') ?? '/auth/signin';
+  $redirect = '/auth/signin';
+  if ($request->getStage('redirect_uri')) {
+    $redirect = $request->getStage('redirect_uri');
+  }
 
   //----------------------------//
   // 2. Prepare Data
