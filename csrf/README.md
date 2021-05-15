@@ -1,12 +1,12 @@
-# Fields
+# CSRF
 
-An extra set of fields used when defining a schema.
+[CSRF](https://owasp.org/www-community/attacks/csrf) protection
 
 ## Install
 
 If you already installed Incept, you may not need to install this because it
 should be already included.
 
-```bash
-$ bin/incept inceptphp/packages/field install
+```
+$ bin/incept inceptphp/packages/csrf install
 ```
