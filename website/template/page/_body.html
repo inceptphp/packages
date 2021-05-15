@@ -1,0 +1,48 @@
+<section class="view-body with-foot-1 schema-detail">
+  <!-- START: Tabs -->
+  {{> form_tabs}}
+  <!-- END: Tabs -->
+  <!-- START: Panes -->
+  <div class="tab-content{{#if schema.fieldsets.length}} m-2{{/if}}">
+    <!-- START: Content Pane -->
+    <div
+      class="tab-pane fade active show"
+      id="model-form-information-{{uuid}}"
+      role="tabpanel"
+    >
+      {{> form_information}}
+    </div>
+    <!-- END: Content Pane -->
+    <!-- START: SEO Pane -->
+    <div
+      class="tab-pane fade"
+      id="model-form-seo-{{uuid}}"
+      role="tabpanel"
+    >
+      {{> form_seo}}
+    </div>
+    <!-- END: SEO Pane -->
+    <!-- START: Events Pane -->
+    <div
+      class="tab-pane fade"
+      id="model-form-event-{{uuid}}"
+      role="tabpanel"
+    >
+      {{> form_event}}
+    </div>
+    <!-- END: Events Pane -->
+    <!-- START: Template Pane -->
+    <div
+      class="tab-pane fade"
+      id="model-form-template-{{uuid}}"
+      role="tabpanel"
+    >
+      {{> form_template}}
+    </div>
+    <!-- END: Template Pane -->
+    {{#each schema.fieldsets}}
+      {{> form_fieldset}}
+    {{/each}}
+  </div>
+  <!-- END: Panes -->
+</section>

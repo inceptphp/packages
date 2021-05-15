@@ -6,6 +6,7 @@
  * distributed with this package.
  */
 
+require_once __DIR__ . '/controller/block.php';
 require_once __DIR__ . '/controller/page.php';
 require_once __DIR__ . '/controller/post.php';
 require_once __DIR__ . '/events.php';
