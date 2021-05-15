@@ -32,9 +32,10 @@ $this('http')->get('/auth/2fa', function (
   //----------------------------//
   // 2. Setup Overrides
   //determine redirect
-  $redirect = $request->getStage('redirect_uri')
-    ?? $config->get('settings', 'home')
-    ?? '/';
+  $redirect = $config->get('settings', 'home') ?? '/';
+  if ($request->getStage('redirect_uri')) {
+    $redirect = $request->getStage('redirect_uri');
+  }
 
   //----------------------------//
   // 3. Security Checks
@@ -139,9 +140,10 @@ $this('http')->post('/auth/2fa', function (
   $route = $request->getStage('route') ?? '/auth/2fa';
 
   //determine redirect
-  $redirect = $request->getStage('redirect_uri')
-    ?? $config->get('settings', 'home')
-    ?? '/';
+  $redirect = $config->get('settings', 'home') ?? '/';
+  if ($request->getStage('redirect_uri')) {
+    $redirect = $request->getStage('redirect_uri');
+  }
 
   //----------------------------//
   // 3. Security Checks
@@ -234,9 +236,10 @@ $this('http')->get('/auth/signin/2fa', function (
   //----------------------------//
   // 2. Setup Overrides
   //determine redirect
-  $redirect = $request->getStage('redirect_uri')
-    ?? $config->get('settings', 'home')
-    ?? '/';
+  $redirect = $config->get('settings', 'home') ?? '/';
+  if ($request->getStage('redirect_uri')) {
+    $redirect = $request->getStage('redirect_uri');
+  }
 
   //----------------------------//
   // 3. Security Check
@@ -319,9 +322,10 @@ $this('http')->post('/auth/signin/2fa', function (
   $route = $request->getStage('route') ?? '/auth/signin/2fa';
 
   //determine redirect
-  $redirect = $request->getStage('redirect_uri')
-    ?? $config->get('settings', 'home')
-    ?? '/';
+  $redirect = $config->get('settings', 'home') ?? '/';
+  if ($request->getStage('redirect_uri')) {
+    $redirect = $request->getStage('redirect_uri');
+  }
 
   //----------------------------//
   // 3. Security Checks

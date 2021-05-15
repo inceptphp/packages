@@ -1,12 +1,12 @@
-# Fields
+# Queue
 
-An extra set of fields used when defining a schema.
+ActiveMQ prototcol integration
 
 ## Install
 
 If you already installed Incept, you may not need to install this because it
 should be already included.
 
-```bash
-$ bin/incept inceptphp/packages/field install
+```
+$ bin/incept inceptphp/packages/queue install
 ```

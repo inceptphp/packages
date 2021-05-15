@@ -1,12 +1,12 @@
-# Fields
+# SMS
 
-An extra set of fields used when defining a schema.
+Email integration
 
 ## Install
 
 If you already installed Incept, you may not need to install this because it
 should be already included.
 
-```bash
-$ bin/incept inceptphp/packages/field install
+```
+$ bin/incept inceptphp/packages/email install
 ```

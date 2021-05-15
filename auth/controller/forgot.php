@@ -38,9 +38,10 @@ $this('http')->get('/auth/forgot', function (
   //----------------------------//
   // 2. Setup Overrides
   //determine redirect
-  $redirect = $request->getStage('redirect_uri')
-    ?? $config->get('settings', 'home')
-    ?? '/';
+  $redirect = $config->get('settings', 'home') ?? '/';
+  if ($request->getStage('redirect_uri')) {
+    $redirect = $request->getStage('redirect_uri');
+  }
 
   //----------------------------//
   // 3. Security Check
@@ -128,7 +129,10 @@ $this('http')->post('/auth/forgot', function (
   $route = $request->getStage('route') ??'/auth/forgot';
 
   //determine redirect
-  $redirect = $request->getStage('redirect_uri') ?? '/auth/forgot';
+  $redirect = '/auth/forgot';
+  if ($request->getStage('redirect_uri')) {
+    $redirect = $request->getStage('redirect_uri');
+  }
 
   //----------------------------//
   // 3. Security Checks
@@ -287,7 +291,10 @@ $this('http')->post('/auth/forgot/:type/otp/:auth_id/:hash', function(
     $hash
   );
   //determine redirect
-  $redirect = $request->getStage('redirect_uri') ?? '/auth/signin';
+  $redirect = '/auth/signin';
+  if ($request->getStage('redirect_uri')) {
+    $redirect = $request->getStage('redirect_uri');
+  }
 
   //----------------------------//
   // 4. Prepare Data
@@ -366,9 +373,10 @@ $this('http')->get('/auth/forgot/recover/:auth_id/:hash/:otp', function (
   //----------------------------//
   // 2. Setup Overrides
   //determine redirect
-  $redirect = $request->getStage('redirect_uri')
-    ?? $config->get('settings', 'home')
-    ?? '/';
+  $redirect = $config->get('settings', 'home') ?? '/';
+  if ($request->getStage('redirect_uri')) {
+    $redirect = $request->getStage('redirect_uri');
+  }
 
   //----------------------------//
   // 3. Security Check
@@ -483,9 +491,10 @@ $this('http')->post('/auth/forgot/recover/:auth_id/:hash/:otp', function (
   );
 
   //determine redirect
-  $redirect = $request->getStage('redirect_uri')
-    ?? $config->get('settings', 'home')
-    ?? '/';
+  $redirect = $config->get('settings', 'home') ?? '/';
+  if ($request->getStage('redirect_uri')) {
+    $redirect = $request->getStage('redirect_uri');
+  }
 
   //----------------------------//
   // 4. Validate Data

@@ -31,9 +31,10 @@ $this('http')->get('/auth/signin', function (
   //----------------------------//
   // 2. Setup Overrides
   //determine redirect
-  $redirect = $request->getStage('redirect_uri')
-    ?? $config->get('settings', 'home')
-    ?? '/';
+  $redirect = $config->get('settings', 'home') ?? '/';
+  if ($request->getStage('redirect_uri')) {
+    $redirect = $request->getStage('redirect_uri');
+  }
 
   //----------------------------//
   // 3. Security Check
@@ -132,9 +133,10 @@ $this('http')->post('/auth/signin', function (
   $route = $request->getStage('route') ?? '/auth/signin';
 
   //determine redirect
-  $redirect = $request->getStage('redirect_uri')
-    ?? $config->get('settings', 'home')
-    ?? '/';
+  $redirect = $config->get('settings', 'home') ?? '/';
+  if ($request->getStage('redirect_uri')) {
+    $redirect = $request->getStage('redirect_uri');
+  }
 
   //----------------------------//
   // 3. Security Checks

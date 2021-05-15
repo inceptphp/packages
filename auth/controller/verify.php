@@ -37,9 +37,10 @@ $this('http')->get('/auth/verify', function (
   //----------------------------//
   // 2. Setup Overrides
   //determine redirect
-  $redirect = $request->getStage('redirect_uri')
-    ?? $config->get('settings', 'home')
-    ?? '/';
+  $redirect = $config->get('settings', 'home') ?? '/';
+  if ($request->getStage('redirect_uri')) {
+    $redirect = $request->getStage('redirect_uri');
+  }
 
   //----------------------------//
   // 3. Security Check
@@ -132,7 +133,10 @@ $this('http')->post('/auth/verify', function (
   $route = $request->getStage('route') ??'/auth/verify';
 
   //determine redirect
-  $redirect = $request->getStage('redirect_uri') ?? '/auth/verify';
+  $redirect = '/auth/verify';
+  if ($request->getStage('redirect_uri')) {
+    $redirect = $request->getStage('redirect_uri');
+  }
 
   //----------------------------//
   // 3. Security Checks
@@ -275,9 +279,10 @@ $this('http')->get('/auth/verify/:type/otp/:auth_id/:hash', function(
   //----------------------------//
   // 3. Setup Overrides
   //determine redirect
-  $redirect = $request->getStage('redirect_uri')
-    ?? $config->get('settings', 'home')
-    ?? '/';
+  $redirect = $config->get('settings', 'home') ?? '/';
+  if ($request->getStage('redirect_uri')) {
+    $redirect = $request->getStage('redirect_uri');
+  }
 
   //----------------------------//
   // 4. Security Check
@@ -381,7 +386,10 @@ $this('http')->post('/auth/verify/:type/otp/:auth_id/:hash', function(
     $hash
   );
   //determine redirect
-  $redirect = $request->getStage('redirect_uri') ?? '/auth/signin';
+  $redirect = '/auth/signin';
+  if ($request->getStage('redirect_uri')) {
+    $redirect = $request->getStage('redirect_uri');
+  }
 
   //----------------------------//
   // 3. Prepare Data

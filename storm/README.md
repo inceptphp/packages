@@ -1,16 +1,11 @@
-# Incept Storm
+# Storm
 
-Integrates storm as an Incept Package
-
-## Requires
-
- - [inceptphp/package](https://github.com/inceptphp/package)
- - [inceptphp/storm](https://github.com/inceptphp/storm)
+Integrates [Storm](https://github.com/phpugph/storm) as an Incept Package
 
 ## Install
 
 ```bash
-composer install inceptphp/incept-storm
+$ bin/incept inceptphp/packages/valid storm
 ```
 
 Once installed set up a PDO package.
@@ -28,5 +23,34 @@ Then you are all set.
 incept('event')->emit('storm-insert', ...);
 ```
 
-More information can be found in the [Storm](https://github.com/inceptphp/storm)
-library.
+## Usage
+
+### Creating a Table
+
+```php
+incept('event')->emit('storm-create', [
+  'table' => 'article',
+  'primary' => 'article_title',
+  'columns' => [
+    'article_title' => ['type' => 'VARCHAR', 'length' => 255],
+    'article_detail' => ['type' => 'TEXT', 'null' => true],
+    'article_active' => ['type' => 'INT', 'length' => 10, 'default' => 1, 'attribute' => 'unsigned'],
+    'article_created' => ['type' => 'DATE', 'required' => true],
+    'article_updated' => ['type' => 'DATE', 'required' => true],
+  ]
+]);
+```
+
+```php
+incept('event')->emit('storm-alter', [
+  'table' => 'article',
+  'primary' => 'article_title',
+  'columns' => [
+    'article_title' => ['type' => 'VARCHAR', 'length' => 255],
+    'article_detail' => ['type' => 'TEXT', 'null' => true],
+    'article_active' => ['type' => 'INT', 'length' => 10, 'default' => 1, 'attribute' => 'unsigned'],
+    'article_created' => ['type' => 'DATE', 'required' => true],
+    'article_updated' => ['type' => 'DATE', 'required' => true],
+  ]
+]);
+```

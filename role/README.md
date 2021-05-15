@@ -1,6 +1,6 @@
-# Admin Dashboard
+# Role
 
-Builtin Admin Dashboard to manage your project using graphical interfaces.
+Roles and permission integration, building on top of the `auth` package.
 
 ## Install
 
@@ -9,4 +9,5 @@ should be already included.
 
 ```
 $ bin/incept inceptphp/packages/auth install
+$ bin/incept inceptphp/packages/auth populate
 ```

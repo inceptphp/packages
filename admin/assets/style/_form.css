@@ -17,6 +17,7 @@
 .form-mobile .form-group-file,
 .form-mobile .form-group-imagelist,
 .form-mobile .form-group-filelist,
+.form-mobile .form-group-meta,
 .form-mobile .form-group-fieldset,
 .form-mobile .form-group.no-flex {
   border-width: 0;
@@ -32,6 +33,7 @@
 .form-mobile .form-group-file .control-label,
 .form-mobile .form-group-imagelist .control-label,
 .form-mobile .form-group-filelist .control-label,
+.form-mobile .form-group-meta .control-label,
 .form-mobile .form-group-fieldset .control-label,
 .form-mobile .form-group.no-flex .control-label {
   margin-bottom: 5px;
@@ -40,8 +42,7 @@
 .form-mobile .form-group-code > .form-field,
 .form-mobile .form-group-textarea > .form-field,
 .form-mobile .form-group-rawjson > .form-field,
-.form-mobile .form-group-markdown > .form-field,
-.form-mobile .form-group-wysiwyg > .form-field {
+.form-mobile .form-group-markdown > .form-field{
   border: 1px solid #CED4DA;
 }
 
@@ -49,13 +50,26 @@
 .form-mobile .form-group-textarea .form-control,
 .form-mobile .form-group-rawjson .form-control,
 .form-mobile .form-group-markdown .form-control,
-.form-mobile .form-group-wysiwyg .form-control {
+.form-mobile .form-group-wysiwyg .form-control,
+.form-mobile .form-group-meta .form-control {
   text-align: left;
+}
+
+.form-mobile .form-group-wysiwyg .form-control {
+  background-color: #272C36;
+}
+
+.form-mobile .form-group-switch > .form-field {
+  text-align: right;
 }
 
 .form-mobile .form-group-fieldset {
   margin: 0;
   padding: 0;
+}
+
+.form-mobile .form-group-meta .field-row {
+  border: 1px solid #272C36;
 }
 
 .form-mobile .form-group-fieldset .fieldset-row {

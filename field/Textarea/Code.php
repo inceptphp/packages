@@ -19,7 +19,6 @@ use Incept\Framework\Field\FieldInterface;
  */
 class Code extends Textarea
 {
-
   /**
    * @const string NAME Config name
    */

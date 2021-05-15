@@ -1,6 +1,6 @@
-# Admin Dashboard
+# Auth
 
-Builtin Admin Dashboard to manage your project using graphical interfaces.
+Authentication support
 
 ## Install
 
@@ -9,4 +9,5 @@ should be already included.
 
 ```
 $ bin/incept inceptphp/packages/auth install
+$ bin/incept inceptphp/packages/auth populate
 ```
