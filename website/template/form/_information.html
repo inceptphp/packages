@@ -1,0 +1,158 @@
+{{#each relations}}
+  <div class="form-group">
+    <label class="control-label">{{singular}}</label>
+    <div class="form-field">
+      <input
+        autocomplete="off"
+        class="form-control suggestion-label-{{name}} system-form-control"
+        name="__{{name}}"
+        placeholder="{{_ 'Enter %s' singular}}"
+        type="text"
+        value="{{{compile suggestion ../item}}}"
+      />
+      <input
+        class="suggestion-value-{{name}}"
+        name="{{primary2}}"
+        type="hidden"
+        value="{{scope ../item primary2}}"
+      />
+      <div
+        class="input-suggestion d-none"
+        data-do="suggestion-field"
+        data-format="{{./suggestion}}"
+        data-target-label="input.suggestion-label-{{name}}"
+        data-target-value="input.suggestion-value-{{name}}"
+        data-url="/admin/system/object/{{name}}/search?q={QUERY}&render=false"
+        data-value="{{primary}}"
+      ></div>
+    </div>
+  </div>
+{{/each}}
+{{#each schema.fields}}
+  {{#when field.type '!==' 'fieldset'}}
+    {{#notin 'page_image,page_summary,page_tags,page_layout,page_content_type,page_template,page_event,page_parameters' @key}}
+      {{#field name=@key row=../item schema=../schema.name}}
+        <div class="form-group form-group-{{type}}">
+          <label class="control-label">{{label}}</label>
+          <div class="form-field">
+            {{{control}}}
+          </div>
+        </div>
+      {{/field}}
+    {{/notin}}
+  {{/when}}
+{{/each}}
+
+<a
+  data-do="accordian-toggle"
+  data-on="click"
+  data-toggle="collapse"
+  data-target="#seo-options"
+  class="collapsed d-block mt-4 ml-2"
+  aria-expanded="false"
+>
+  <span>SEO</span>
+  <i class="fas fa-caret-down"></i>
+</a>
+
+<div id="seo-options" class="collapse show mt-2 ml-3">
+  {{#field name='page_image' row=item schema=schema.name}}
+    <div class="form-group form-group-{{type}}">
+      <label class="control-label">{{label}}</label>
+      <div class="form-field">
+        {{{control}}}
+      </div>
+    </div>
+  {{/field}}
+
+  {{#field name='page_summary' row=item schema=schema.name}}
+    <div class="form-group form-group-{{type}}">
+      <label class="control-label">{{label}}</label>
+      <div class="form-field">
+        {{{control}}}
+      </div>
+    </div>
+  {{/field}}
+
+  {{#field name='page_tags' row=item schema=schema.name}}
+    <div class="form-group form-group-{{type}}">
+      <label class="control-label">{{label}}</label>
+      <div class="form-field">
+        {{{control}}}
+      </div>
+    </div>
+  {{/field}}
+</div>
+
+<a
+  data-do="accordian-toggle"
+  data-on="click"
+  data-toggle="collapse"
+  data-target="#event-options"
+  class="collapsed d-block mt-4 ml-2"
+  aria-expanded="false"
+>
+  <span>Events</span>
+  <i class="fas fa-caret-down"></i>
+</a>
+
+<div id="event-options" class="collapse mt-2 ml-3">
+  {{#field name='page_event' row=item schema=schema.name}}
+    <div class="form-group form-group-{{type}}">
+      <label class="control-label">{{label}}</label>
+      <div class="form-field">
+        {{{control}}}
+      </div>
+    </div>
+  {{/field}}
+
+  {{#field name='page_parameters' row=item schema=schema.name}}
+    <div class="form-group form-group-{{type}}">
+      <label class="control-label">{{label}}</label>
+      <div class="form-field">
+        {{{control}}}
+      </div>
+    </div>
+  {{/field}}
+</div>
+
+<a
+  data-do="accordian-toggle"
+  data-on="click"
+  data-toggle="collapse"
+  data-target="#template-options"
+  class="collapsed d-block mt-4 ml-2"
+  aria-expanded="false"
+>
+  <span>Template</span>
+  <i class="fas fa-caret-down"></i>
+</a>
+
+<div id="template-options" class="collapse mt-2 ml-3">
+  {{#field name='page_layout' row=item schema=schema.name}}
+    <div class="form-group form-group-{{type}}">
+      <label class="control-label">{{label}}</label>
+      <div class="form-field">
+        {{{control}}}
+      </div>
+    </div>
+  {{/field}}
+
+  {{#field name='page_content_type' row=item schema=schema.name}}
+    <div class="form-group form-group-{{type}}">
+      <label class="control-label">{{label}}</label>
+      <div class="form-field">
+        {{{control}}}
+      </div>
+    </div>
+  {{/field}}
+
+  {{#field name='page_template' row=item schema=schema.name}}
+    <div class="form-group form-group-{{type}}">
+      <label class="control-label">{{label}}</label>
+      <div class="form-field">
+        {{{control}}}
+      </div>
+    </div>
+  {{/field}}
+</div>
