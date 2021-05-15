@@ -64,6 +64,7 @@ $this('http')->post('/admin/settings', function(
   $settings = $this('config')->get('settings');
 
   $settings['name'] = $request->getStage('name');
+  $settings['logo'] = $request->getStage('logo');
   $settings['email'] = $request->getStage('email');
 
   $settings['timezone'] = $request->getStage('timezone');
