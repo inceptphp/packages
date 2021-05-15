@@ -429,9 +429,13 @@ $this('handlebars')
    * @return string
    */
   ->registerHelper('date', function (
-    string|int $time,
+    string|int $time = null,
     string $format
   ): string {
+    if (!$time) {
+      return '';
+    }
+
     return date($format, strtotime($time));
   })
 
@@ -1116,7 +1120,7 @@ $this('handlebars')
     array $variables
   ): string {
     $template = incept('handlebars')->compile($template);
-    return $template($variables);
+    return trim($template($variables));
   })
 
   /**
