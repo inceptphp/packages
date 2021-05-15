@@ -13,6 +13,8 @@ use Incept\Framework\Field\FieldInterface;
 use Incept\Framework\Field\FieldTypes;
 use Incept\Framework\Format\FormatTypes;
 
+use Throwable;
+
 /**
  * Raw JSON Field
  *
@@ -72,6 +74,12 @@ class Json extends AbstractField implements FieldInterface
   {
     if (is_null($value) || (is_string($value) && !strlen($value))) {
       return null;
+    }
+
+    if (is_string($value)) {
+      try {
+        $value = json_decode($value, true);
+      } catch (Throwable $e) {}
     }
 
     return json_encode($value);
