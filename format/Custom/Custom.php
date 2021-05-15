@@ -48,17 +48,14 @@ class Custom extends AbstractFormatter implements FormatterInterface
    * @return ?string
    */
   public function format(
-    $value = null, 
-    string $name = null, 
+    $value = null,
+    string $name = null,
     array $row = []
   ): ?string
   {
     $template = incept('handlebars')->compile($this->parameters[0]);
 
-    return $template([
-      'row' => $row,
-      'value' => $value
-    ]);
+    return $template($row);
   }
 
   /**
