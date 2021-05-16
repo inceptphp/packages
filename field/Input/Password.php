@@ -77,7 +77,7 @@ class Password extends Text
     }
 
     $template = incept('handlebars')->compile(
-      file_get_contents(__DIR__ . '/template/field/password.html')
+      file_get_contents(__DIR__ . '/template/password.html')
     );
     return $template($data);
   }

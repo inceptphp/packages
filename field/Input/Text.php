@@ -8,6 +8,8 @@
 
 namespace Incept\Package\Field\Input;
 
+use Incept\Framework\Field\Input;
+
 /**
  * Text Field
  *

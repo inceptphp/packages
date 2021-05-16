@@ -20,8 +20,6 @@ $this
 
 //register fields
 
-FieldRegistry::register(Incept\Package\Field\Input\Input::class);
-
 FieldRegistry::register(Incept\Package\Field\Input\Text::class);
 
 FieldRegistry::register(Incept\Package\Field\Input\Color::class);
