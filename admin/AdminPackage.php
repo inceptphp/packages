@@ -30,6 +30,21 @@ class AdminPackage
   use PackageTrait;
 
   /**
+   * @const string ROOT_PATH
+   */
+  const ROOT_PATH = '/admin';
+
+  /**
+   * @const string ROOT_SPA
+   */
+  const ROOT_SPA = '/admin/spa';
+
+  /**
+   * @const string XML_TEMPLATE
+   */
+  const XML_TEMPLATE = "<?xml version=\"1.0\"?>\n<%s></%s>";
+
+  /**
    * @var *PackageHandler $handler
    */
   protected $handler;
@@ -106,11 +121,13 @@ class AdminPackage
     //get the path
     $path = $request->getPath('string');
     //if not an admin path
-    if ($path !== '/admin' && strpos($path, '/admin/') !== 0) {
+    if ($path !== static::ROOT_PATH
+      && strpos($path, static::ROOT_PATH . '/') !== 0
+    ) {
       return;
     }
 
-    $debug = strpos($path, '/admin/spa/') === false ? 'page': 'spa';
+    $debug = strpos($path, static::ROOT_SPA . '/') === false ? 'page': 'spa';
 
     //if it was a call for an actual file
     if (preg_match('/\.[a-zA-Z0-9]{1,4}$/', $path)) {
@@ -265,7 +282,10 @@ class AdminPackage
       $error->getTraceAsString()
     );
 
-    ['request' => $request, 'response' => $response] = $this->handler->makePayload();
+    [
+      'request' => $request,
+      'response' => $response
+    ] = $this->handler->makePayload();
 
     //set to
     $request->setStage('to', $to);
@@ -642,10 +662,10 @@ class AdminPackage
     $template = __DIR__ . '/template';
 
     $page = $handlebars
-      ->registerPartialFromFile('head', $template . '/_head.html')
-      ->registerPartialFromFile('left', $template . '/_left.html')
-      ->registerPartialFromFile('right', $template . '/_right.html')
-      ->registerPartialFromFile('flash', $template . '/_flash.html')
+      ->registerPartialFromFile('head', "$template/_head.html", true)
+      ->registerPartialFromFile('left', "$template/_left.html", true)
+      ->registerPartialFromFile('right', "$template/_right.html", true)
+      ->registerPartialFromFile('flash', "$template/_flash.html", true)
       ->renderFromFile(sprintf('%s/_%s.html', $template, $layout), $data);
 
     $response->setContent($page);
@@ -724,7 +744,7 @@ class AdminPackage
   public function rowsToXml(array $rows, string $root): SimpleXMLElement
   {
     //set up the xml template
-    $root = sprintf("<?xml version=\"1.0\"?>\n<%s></%s>", $root, $root);
+    $root = sprintf(static::XML_TEMPLATE, $root, $root);
 
     //get the contents
     return $this->toXml($rows, new SimpleXMLElement($root))->asXML();

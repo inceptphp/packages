@@ -40,7 +40,7 @@ class QueuePackage
    */
   public function __construct(Framework $handler)
   {
-  $this->handler = $handler;
+    $this->handler = $handler;
   }
 
   /**

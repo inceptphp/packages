@@ -23,6 +23,16 @@ class FilePackage
   use PackageTrait;
 
   /**
+   * @const string DEFAULT_MIME
+   */
+  const DEFAULT_MIME = 'application/octet-stream';
+
+  /**
+   * @const string DEFAULT_EXTENSION
+   */
+  const DEFAULT_EXTENSION = 'unknown';
+
+  /**
    * @var array $extensions static list of mime to extensions
    */
   public static $extensions = [];
@@ -114,7 +124,7 @@ class FilePackage
    */
   public function getExtensionFromData($data)
   {
-    $extension = 'unknown';
+    $extension = static::DEFAULT_EXTENSION;
 
     $mime = $this->getMimeFromData($data);
     if (isset(self::$extensions[$mime])) {
@@ -132,7 +142,7 @@ class FilePackage
    */
   public function getExtensionFromLink($link)
   {
-    $extension = 'unknown';
+    $extension = static::DEFAULT_EXTENSION;
 
     $path = explode('/', $link);
     $file = array_pop($path);
@@ -153,8 +163,6 @@ class FilePackage
    */
   public function getMimeFromData($data)
   {
-    $mime  = 'application/octet-stream';
-
     $data = urldecode($data);
     //data:mime;base64,data
     $data = substr($data, 5);
@@ -171,7 +179,7 @@ class FilePackage
    */
   public function getMimeFromLink($link)
   {
-    $mime  = 'application/octet-stream';
+    $mime  = static::DEFAULT_MIME;
     $extension = $this->getExtensionFromLink($link);
 
     //find out the extension
