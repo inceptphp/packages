@@ -1,9 +1,10 @@
 {
-  "name": "Incept Profile Package",
-  "description": "Manage user profiles with Incept",
+  "name": "Incept Authentication Package",
+  "description": "Manages authenitcations and account security",
   "author": "The Incept Team",
   "website": "https://www.incept.asia/",
   "image": "https://www.incept.asia/images/logo/incept-logo-square-1.png",
-  "path": "inceptphp/packages/profile",
+  "path": "inceptphp/packages/auth",
+  "settings": "/admin/auth/settings",
   "version": "0.0.0"
 }
