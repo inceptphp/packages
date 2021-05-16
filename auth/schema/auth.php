@@ -6,7 +6,7 @@ return [
   'group' => 'Users',
   'icon' => 'fas fa-key',
   'detail' => 'Manages Authentications',
-  'suggestion' => '{{auth_slug}}',
+  'suggestion' => '{{profile_first_name}} {{profile_last_name}}',
   'fields' => [
     [
       'label' => 'Username',
@@ -115,7 +115,12 @@ return [
     [
       'label' => 'Role',
       'name' => 'role',
-      'field' =>  [ 'type' => 'text' ],
+      'field' =>  [
+        'type' => 'text',
+        'attributes' => [
+          'placeholder' => 'eg. guest, admin'
+        ]
+      ],
       'validation' => [],
       'list' => [ 'format' => 'none' ],
       'detail' => [ 'format' => 'none' ],
