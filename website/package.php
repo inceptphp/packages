@@ -95,7 +95,7 @@ $this('event')->on('inceptphp/packages/website-install', function (
   //just do the default installer
   $this('event')->emit('inceptphp/packages-install', $request, $response);
 
-  $response->setResults('recommended', 'website', 'bin/incept inceptphp/packages/role populate');
+  $response->setResults('recommended', 'website', 'bin/incept inceptphp/packages/website populate');
 });
 
 /**
