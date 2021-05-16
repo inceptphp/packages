@@ -1,6 +1,19 @@
 # SMS
 
-SMS integration abstract. Before expecting this working you need to define an `sms-send` event.
+SMS integration abstract.
+
+## Install
+
+If you already installed Incept, you may not need to install this because it
+should be already included.
+
+```
+$ bin/incept inceptphp/packages/sms install
+```
+
+## Usage
+
+Before expecting this working you need to define an `sms-send` event.
 
 ```php
 $this('event')->on('sms-send', function ($req, $res) {
@@ -11,11 +24,13 @@ $this('event')->on('sms-send', function ($req, $res) {
 });
 ```
 
-## Install
+Send a one time pin
 
-If you already installed Incept, you may not need to install this because it
-should be already included.
+```php
+incept('event')->call('sms-otp-send', [
+  'to' => '+14105552424'
+], $res);
 
-```
-$ bin/incept inceptphp/packages/sms install
+$pincode = $res->getResults('otp');
+//save pincode to session ...
 ```

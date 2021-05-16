@@ -8,6 +8,7 @@
 
 namespace Incept\Package\Field\Input;
 
+use Incept\Framework\Field\Input;
 use Incept\Framework\Format\FormatTypes;
 
 /**

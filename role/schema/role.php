@@ -198,10 +198,6 @@ return [
               'path' => '/admin/language/search'
             ],
             [
-              'label' => 'Auth',
-              'path' => '/admin/auth/settings'
-            ],
-            [
               'label' => 'Settings',
               'path' => '/admin/settings'
             ]

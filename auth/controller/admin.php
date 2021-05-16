@@ -199,3 +199,63 @@ $this('http')->post('/admin/auth/settings', function (
 
   $http->redirect($redirect);
 });
+
+/**
+ * Check for profile on auth create
+ *
+ * @param RequestInterface $request
+ * @param ResponseInterface $response
+ */
+$this('http')->post('/admin/spa/system/object/auth/create', function (
+  RequestInterface $request,
+  ResponseInterface $response
+) {
+  //if profile id, or profile name
+  if (is_numeric($request->getStage('profile_id'))
+    || !trim($request->getStage('__profile'))
+  ) {
+    return;
+  }
+
+  //----------------------------//
+  // 1. Get Data
+  $name = $request->getStage('__profile');
+  if (strpos($name, '  ') !== false) {
+    [ $first, $last ] = explode('  ', $name, 2);
+  } else if (strpos($name, ' ') !== false) {
+    [ $first, $last ] = explode(' ', $name, 2);
+  } else {
+    $first = $name;
+    $last = ' ';
+  }
+
+  $data = [];
+  if (is_array($request->getStage())) {
+    $data = $request->getStage();
+  }
+
+  //----------------------------//
+  // 2. Validate Data
+  $auth = Schema::load('auth');
+  $errors = $auth->getErrors($data);
+
+  //if there are errors
+  if (!empty($errors)) {
+    //let the original route take care of this
+    return;
+  }
+
+  // trigger model create
+  $this('event')->call('system-object-profile-create', [
+    'profile_first_name' => $first,
+    'profile_last_name' => $last
+  ], $response);
+  //if there are errors
+  if ($response->isError()) {
+    //let the original route take care of this
+    return;
+  }
+
+  // set profile id
+  $request->setStage('profile_id', $response->getResults());
+}, 10);

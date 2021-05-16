@@ -44,7 +44,6 @@ incept('event')->emit('storm-create', [
 ```php
 incept('event')->emit('storm-alter', [
   'table' => 'article',
-  'primary' => 'article_title',
   'columns' => [
     'article_title' => ['type' => 'VARCHAR', 'length' => 255],
     'article_detail' => ['type' => 'TEXT', 'null' => true],

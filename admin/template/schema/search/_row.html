@@ -1,9 +1,10 @@
 <tr>
+  <td>&nbsp;</td>
   <td wrap-100>
     <a
       data-do="panel-mobile-open"
       data-on="click"
-      {{#if ../filter.active}}
+      {{#if ../../filter.active}}
         data-template="/admin/spa/system/schema/update/{{name}}"
       {{else}}
         data-template="/admin/spa/system/schema/restore/{{name}}"

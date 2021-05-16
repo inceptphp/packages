@@ -8,11 +8,10 @@
 
 namespace Incept\Package\Field\Date;
 
+use Incept\Framework\Field\Input;
 use Incept\Framework\Field\FieldTypes;
 use Incept\Framework\Field\FieldInterface;
 use Incept\Framework\Format\FormatTypes;
-
-use Incept\Package\Field\Input\Input;
 
 /**
  * Datetime Field

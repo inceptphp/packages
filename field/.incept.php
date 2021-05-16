@@ -20,8 +20,6 @@ $this
 
 //register fields
 
-FieldRegistry::register(Incept\Package\Field\Input\Input::class);
-
 FieldRegistry::register(Incept\Package\Field\Input\Text::class);
 
 FieldRegistry::register(Incept\Package\Field\Input\Color::class);
@@ -101,8 +99,6 @@ FieldRegistry::register(Incept\Package\Field\Json\TextList::class);
 FieldRegistry::register(Incept\Package\Field\Json\TextareaList::class);
 
 FieldRegistry::register(Incept\Package\Field\Json\Meta::class);
-
-FieldRegistry::register(Incept\Package\Field\Json\Table::class);
 
 FieldRegistry::register(Incept\Package\Field\Json\MultiRange::class);
 

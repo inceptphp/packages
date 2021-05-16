@@ -24,9 +24,21 @@ $this('http')->get('/admin/package/search', function(
 ) {
   //----------------------------//
   // 1. Prepare Data
-  $data['rows'] = $this('config')->get('packages');
+  $data = $request->getStage();
 
-  foreach ($data['rows'] as $name => $row) {
+  if (!isset($data['filter'])) {
+    $data['filter'] = 'all';
+  }
+
+  $rows = $this('config')->get('packages');
+
+  foreach ($rows as $name => $row) {
+    if (($data['filter'] === 'default' && strpos($name, 'inceptphp/') !== 0)
+      || ($data['filter'] === 'custom' && strpos($name, 'inceptphp/') === 0)
+    ) {
+      continue;
+    }
+
     //get the real path
     if ($row['active']) {
       $path = $this($name)->getPackagePath();
@@ -43,27 +55,39 @@ $this('http')->get('/admin/package/search', function(
       }
     }
 
-    //if no path
-    if (!$path) {
-      //skip
+    //if path
+    if ($path) {
+      //make the file name
+      $file = sprintf('%s/.incept.json', $path);
+      //if file does not exists
+      if (!file_exists($file)) {
+        //try another file name
+        $file = sprintf('%s/composer.json', $path);
+      }
+
+      //if file exists
+      if (file_exists($file)) {
+        //parse the file
+        $info = json_decode(file_get_contents($file), true);
+        //add to rows
+        $rows[$name]['info'] = $info;
+
+        if (isset($rows[$name]['info']['settings'])) {
+          $rows[$name]['info']['open'] = strpos(
+            $rows[$name]['info']['settings'],
+            '/admin/spa/'
+          ) === 0;
+        }
+      }
+    }
+
+    if ($data['filter'] === 'settings'
+      && !isset($rows[$name]['info']['settings'])
+    ) {
       continue;
     }
 
-    //make the file name
-    $file = sprintf('%s/.incept.json', $path);
-    //if file does not exists
-    if (!file_exists($file)) {
-      //try another file name
-      $file = sprintf('%s/composer.json', $path);
-    }
-
-    //if file exists
-    if (file_exists($file)) {
-      //parse the file
-      $info = json_decode(file_get_contents($file), true);
-      //add to rows
-      $data['rows'][$name]['info'] = $info;
-    }
+    $data['rows'][$name] = $rows[$name];
   }
 
   //----------------------------//
@@ -79,6 +103,7 @@ $this('http')->get('/admin/package/search', function(
     ->setTemplateFolder($template)
     ->registerPartialFromFolder('search_head', 'html', true)
     ->registerPartialFromFolder('search_row', 'html', true)
+    ->registerPartialFromFolder('search_tabs', 'html', true)
     ->renderFromFolder('search', $data);
 
   //set content

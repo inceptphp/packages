@@ -28,15 +28,25 @@
     </div>
   </div>
   {{> search_tabs}}
-  {{#if rows.length}}
+  {{#if groups.length}}
     <form class="table-form table-scroll">
       <table class="table table-striped">
         <thead>
           {{> search_head}}
         </thead>
         <tbody>
-          {{#each rows}}
-            {{> search_row}}
+          {{#each groups}}
+            <tr class="group">
+              <td class="text-right">
+                <i class="fas fa-caret-down"></i>
+              </td>
+              <td colspan="2">
+                <strong>{{@key}}</strong>
+              </td>
+            </tr>
+            {{#each this}}
+              {{> search_row}}
+            {{/each}}
           {{/each}}
         </tbody>
       </table>

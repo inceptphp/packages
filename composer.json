@@ -19,7 +19,27 @@
   },
   "autoload": {
     "psr-4": {
-      "Incept\\Package\\": "/"
+      "Incept\\Package\\": "/",
+      "Incept\\Package\\Admin\\": "admin/",
+      "Incept\\Package\\Api\\": "api/",
+      "Incept\\Package\\Auth\\": "auth/",
+      "Incept\\Package\\Captcha\\": "captcha/",
+      "Incept\\Package\\Csrf\\": "csrf/",
+      "Incept\\Package\\Developer\\": "developer/",
+      "Incept\\Package\\Email\\": "email/",
+      "Incept\\Package\\Field\\": "field/",
+      "Incept\\Package\\File\\": "file/",
+      "Incept\\Package\\Format\\": "format/",
+      "Incept\\Package\\Handlebars\\": "handlebars/",
+      "Incept\\Package\\History\\": "history/",
+      "Incept\\Package\\Install\\": "install/",
+      "Incept\\Package\\Profile\\": "profile/",
+      "Incept\\Package\\Queue\\": "queue/",
+      "Incept\\Package\\Role\\": "role/",
+      "Incept\\Package\\Sms\\": "sms/",
+      "Incept\\Package\\Storm\\": "storm/",
+      "Incept\\Package\\Valid\\": "valid/",
+      "Incept\\Package\\Website\\": "website/"
     }
   }
 }

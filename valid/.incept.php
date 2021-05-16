@@ -18,15 +18,12 @@ $this
   ->mapPackageMethods($this('resolver')->resolve(ValidPackage::class, $this));
 
 //register validators
-ValidatorRegistry::register(Incept\Package\Valid\General\Required::class);
 
 ValidatorRegistry::register(Incept\Package\Valid\General\NotEmpty::class);
 
 ValidatorRegistry::register(Incept\Package\Valid\General\NotEqual::class);
 
 ValidatorRegistry::register(Incept\Package\Valid\General\ValidOption::class);
-
-ValidatorRegistry::register(Incept\Package\Valid\General\Unique::class);
 
 ValidatorRegistry::register(Incept\Package\Valid\Number\ValidNumber::class);
 
@@ -77,5 +74,3 @@ ValidatorRegistry::register(Incept\Package\Valid\Type\ValidUrl::class);
 ValidatorRegistry::register(Incept\Package\Valid\Type\ValidHex::class);
 
 ValidatorRegistry::register(Incept\Package\Valid\Type\ValidCC::class);
-
-ValidatorRegistry::register(Incept\Package\Valid\Custom\ValidExpression::class);

@@ -8,10 +8,9 @@
 
 namespace Incept\Package\Field\Number;
 
+use Incept\Framework\Field\Input;
 use Incept\Framework\Field\FieldTypes;
 use Incept\Framework\Format\FormatTypes;
-
-use Incept\Package\Field\Input\Input;
 
 /**
  * Number Field

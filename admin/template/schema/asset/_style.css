@@ -2,6 +2,12 @@ body.dragging, body.dragging * {
   cursor: move !important;
 }
 
+.table-form .table tbody .group td {
+  background-color: #242931;
+  padding-bottom: 15px;
+  padding-top: 15px;
+}
+
 .table-sortable tr {
   position: relative;
 }
