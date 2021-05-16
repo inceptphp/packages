@@ -290,6 +290,7 @@ $this('http')->get('/admin/spa/system/object/:schema/detail/:id', function (
     $data['relations'][$table]['uuid'] = $data['uuid'];
     $data['relations'][$table]['schema'] = $data['schema'];
 
+    //! 1:1 ?
     if (isset($data['item'][$name])) {
       $data['relations'][$table]['suggestion'] = $relation->getSuggestion(
         $data['item'][$name]
@@ -300,6 +301,9 @@ $this('http')->get('/admin/spa/system/object/:schema/detail/:id', function (
         $data['relations'][$table]['id'] = $data['item'][$name][$primary];
         $data['relations'][$table]['item'] = $data['item'][$name];
       }
+    //1:1 ?
+    } else if (isset($data['item'][$primary])) {
+      $data['relations'][$table]['id'] = $data['item'][$primary];
     }
   }
 
