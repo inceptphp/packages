@@ -1,0 +1,34 @@
+<ul class="nav nav-pills border-bottom pb-2 pt-2 mb-4" role="tablist">
+  <li class="nav-item">
+    <a
+      class="nav-link{{#when filter '===' 'all'}} active{{/when}}"
+      href="?filter=all"
+    >
+      {{_ 'All'}}
+    </a>
+  </li>
+  <li class="nav-item">
+    <a
+      class="nav-link{{#when filter '===' 'settings'}} active{{/when}}"
+      href="?filter=settings"
+    >
+      {{_ 'With Settings'}}
+    </a>
+  </li>
+  <li class="nav-item">
+    <a
+      class="nav-link{{#when filter '===' 'custom'}} active{{/when}}"
+      href="?filter=custom"
+    >
+      {{_ 'Custom'}}
+    </a>
+  </li>
+  <li class="nav-item">
+    <a
+      class="nav-link{{#when filter '===' 'default'}} active{{/when}}"
+      href="?filter=default"
+    >
+      {{_ 'Default'}}
+    </a>
+  </li>
+</ul>
