@@ -100,8 +100,6 @@ FieldRegistry::register(Incept\Package\Field\Json\TextareaList::class);
 
 FieldRegistry::register(Incept\Package\Field\Json\Meta::class);
 
-FieldRegistry::register(Incept\Package\Field\Json\Table::class);
-
 FieldRegistry::register(Incept\Package\Field\Json\MultiRange::class);
 
 FieldRegistry::register(Incept\Package\Field\Json\LatLng::class);
