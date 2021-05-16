@@ -44,5 +44,5 @@ $this('event')->on('server', function (
 
   $cwd = getcwd();
   $router = dirname(__DIR__) . '/router.php';
-  system('php -S ' . $host . ':' . $port . ' -t ' . $cwd . '/public ' . $router);
+  system(sprintf('php -S %s:%s -t %s/public %s', $host, $port, $cwd, $router));
 });
