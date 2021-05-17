@@ -10,12 +10,12 @@ use UGComponents\IO\Request\RequestInterface;
 use UGComponents\IO\Response\ResponseInterface;
 
 /**
- * $ incept inceptphp/packages/file ...
+ * $ incept inceptphp/packages/history ...
  *
  * @param RequestInterface $request
  * @param ResponseInterface $response
  */
-$this('event')->on('inceptphp/packages/file', function (
+$this('event')->on('inceptphp/packages/history', function (
   RequestInterface $request,
   ResponseInterface $response
 ) {
@@ -42,135 +42,90 @@ $this('event')->on('inceptphp/packages/file', function (
     $request->setStage($data);
   }
 
-  $name = 'inceptphp/packages/file';
+  $name = 'inceptphp/packages/history';
   $event = sprintf('%s-%s', $name, $event);
 
   $this('event')->emit($event, $request, $response);
 });
 
 /**
- * $ incept inceptphp/packages/file help
+ * $ incept inceptphp/packages/history help
  *
  * @param RequestInterface $request
  * @param ResponseInterface $response
  */
-$this('event')->on('inceptphp/packages/file-help', function (
+$this('event')->on('inceptphp/packages/history-help', function (
   RequestInterface $request,
   ResponseInterface $response
 ) {
   $this('terminal')
-    ->warning('Admin Commands:')
+    ->warning('history Commands:')
 
     ->output(PHP_EOL)
 
-    ->success('incept inceptphp/packages/file install')
+    ->success('incept inceptphp/packages/history install')
     ->info(' Installs this package')
 
     ->output(PHP_EOL)
 
-    ->success('incept inceptphp/packages/file update')
+    ->success('incept inceptphp/packages/history update')
     ->info(' Updates this package')
 
     ->output(PHP_EOL)
 
-    ->success('incept inceptphp/packages/file populate')
-    ->info(' Populates a dummy file.')
-
-    ->output(PHP_EOL)
-
-    ->success('incept inceptphp/packages/file uninstall')
+    ->success('incept inceptphp/packages/history uninstall')
     ->info(' Removes this package')
 
     ->output(PHP_EOL);
 });
 
 /**
- * $ incept inceptphp/packages/file install
+ * $ incept inceptphp/packages/history install
  *
  * @param RequestInterface $request
  * @param ResponseInterface $response
  */
-$this('event')->on('inceptphp/packages/file-install', function (
+$this('event')->on('inceptphp/packages/history-install', function (
   RequestInterface $request,
   ResponseInterface $response
 ) {
   $request
-    ->setStage('name', 'inceptphp/packages/file')
+    ->setStage('name', 'inceptphp/packages/history')
     ->setStage('install', __DIR__ . '/install');
   //just do the default installer
   $this('event')->emit('inceptphp/packages-install', $request, $response);
-
-  $response->setResults('recommended', 'file', 'bin/incept inceptphp/packages/file populate');
 });
 
 /**
- * $ incept inceptphp/packages/file update
+ * $ incept inceptphp/packages/history update
  *
  * @param RequestInterface $request
  * @param ResponseInterface $response
  */
-$this('event')->on('inceptphp/packages/file-update', function (
+$this('event')->on('inceptphp/packages/history-update', function (
   RequestInterface $request,
   ResponseInterface $response
 ) {
-  $request->setStage('name', 'inceptphp/packages/file');
+  $request
+    ->setStage('name', 'inceptphp/packages/history')
+    ->setStage('install', __DIR__ . '/install');
   //just do the default installer
   $this('event')->emit('inceptphp/packages-update', $request, $response);
 });
 
 /**
- * $ incept inceptphp/packages/file uninstall
+ * $ incept inceptphp/packages/history uninstall
  *
  * @param RequestInterface $request
  * @param ResponseInterface $response
  */
-$this('event')->on('inceptphp/packages/file-uninstall', function (
+$this('event')->on('inceptphp/packages/history-uninstall', function (
   RequestInterface $request,
   ResponseInterface $response
 ) {
-  $request->setStage('name', 'inceptphp/packages/file');
+  $request
+    ->setStage('name', 'inceptphp/packages/history')
+    ->setStage('schema', __DIR__ . '/schema');
   //just do the default installer
   $this('event')->emit('inceptphp/packages-uninstall', $request, $response);
-});
-
-/**
- * $ incept inceptphp/packages/auth populate
- *
- * @param RequestInterface $request
- * @param ResponseInterface $response
- */
-$this('event')->on('inceptphp/packages/file-populate', function (
-  RequestInterface $request,
-  ResponseInterface $response
-) {
-  //scan through each file
-  foreach (scandir(__DIR__ . '/schema') as $file) {
-    //if it's not a php file
-    if(substr($file, -4) !== '.php') {
-      //skip
-      continue;
-    }
-
-    //get the schema data
-    $data = include sprintf('%s/schema/%s', __DIR__, $file);
-
-    //if no name
-    if (!isset($data['name'], $data['fixtures'])
-      || !is_array($data['fixtures'])
-    ) {
-      //skip
-      continue;
-    }
-
-    //get emitter
-    $emitter = $this('event');
-    foreach($data['fixtures'] as $fixture) {
-      $payload = $request
-        ->clone(true)
-        ->setStage($fixture)
-        ->setStage('schema', $data['name']);
-
-      $emitter->call('system-object-create', $payload);
-    }
-  }
 });

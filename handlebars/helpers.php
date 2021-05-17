@@ -453,7 +453,8 @@ $this('handlebars')
   ): string {
     $timezone = incept('tz');
     $offset = $timezone->getOffset();
-    $relative = $timezone->toRelative(time() - $offset);
+    $now = $timezone->getTime() - $offset;
+    $relative = $timezone->toRelative(((-strtotime($date) + $now) + $now) + $offset);
 
     if ($mini === 1) {
       $relative = strtolower($relative);

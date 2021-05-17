@@ -24,7 +24,7 @@ $this('event')->on('post-category-search', function(
   $filter = [];
   $range = 50;
   $start = 0;
-  $order = [];
+  $sort = [];
 
   $data = $request->getStage();
 
@@ -40,8 +40,8 @@ $this('event')->on('post-category-search', function(
     $start = $data['start'];
   }
 
-  if (isset($data['order']) && is_array($data['order'])) {
-    $order = $data['order'];
+  if (isset($data['sort']) && is_array($data['sort'])) {
+    $sort = $data['sort'];
   }
 
   $search = $this('storm')
@@ -68,9 +68,9 @@ $this('event')->on('post-category-search', function(
   }
 
   //add sorting
-  foreach ($order as $sort => $direction) {
-    if (preg_match('/^[a-zA-Z0-9-_]+$/', $sort)) {
-      $search->addSort($sort, $direction);
+  foreach ($sort as $key => $direction) {
+    if (preg_match('/^[a-zA-Z0-9-_]+$/', $key)) {
+      $search->addSort($key, $direction);
       continue;
     }
   }
@@ -158,7 +158,7 @@ $this('event')->on('post-comment-search', function(
   $filter = [];
   $range = 50;
   $start = 0;
-  $order = [];
+  $sort = [];
 
   $data = $request->getStage();
 
@@ -174,8 +174,8 @@ $this('event')->on('post-comment-search', function(
     $start = $data['start'];
   }
 
-  if (isset($data['order']) && is_array($data['order'])) {
-    $order = $data['order'];
+  if (isset($data['sort']) && is_array($data['sort'])) {
+    $sort = $data['sort'];
   }
 
   $search = $this('storm')
@@ -204,9 +204,9 @@ $this('event')->on('post-comment-search', function(
   }
 
   //add sorting
-  foreach ($order as $sort => $direction) {
-    if (preg_match('/^[a-zA-Z0-9-_]+$/', $sort)) {
-      $search->addSort($sort, $direction);
+  foreach ($sort as $key => $direction) {
+    if (preg_match('/^[a-zA-Z0-9-_]+$/', $key)) {
+      $search->addSort($key, $direction);
       continue;
     }
   }

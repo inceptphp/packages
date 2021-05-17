@@ -1,0 +1,41 @@
+<tr>
+  <td class="table-bulk-checkbox freeze-left">
+    <label class="checkbox checkbox-1">
+      <input
+        type="checkbox"
+        name="{{schema.primary}}[]"
+        value="{{schema.id}}"
+      />
+      <span></span>
+    </label>
+  </td>
+  <td class="freeze-left-2">{{schema.id}}</td>
+  {{#noop relations.history_profile}}
+    <td nowrap>
+      <a
+        data-do="panel-mobile-open"
+        data-on="click"
+        data-template="/admin/spa/system/object/{{name}}/detail/{{scope ../this primary}}"
+        href="javascript:void(0)"
+      >
+        {{{compile suggestion ../this}}}
+      </a>
+    </td>
+  {{/noop}}
+  <td nowrap>
+    <a
+      data-do="panel-mobile-open"
+      data-on="click"
+      data-template="/admin/spa/system/object/{{schema.name}}/detail/{{schema.id}}"
+      href="javascript:void(0)"
+    >
+      {{history_action}} {{history_object}} #{{history_primary}}
+    </a>
+  </td>
+  <td nowrap>{{date history_created 'F d, Y g:iA'}}</td>
+  <td nowrap>
+    <a href="?{{query}}&filter[history_remote_address]={{history_remote_address}}">
+      {{history_remote_address}}
+    </a>
+  </td>
+</tr>

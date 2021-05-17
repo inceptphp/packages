@@ -1,0 +1,39 @@
+{{#when item.history_action '===' 'updated'}}
+  <table class="table">
+    <thead>
+      <th>{{_ 'Fields'}}</th>
+      <th>{{_ 'Before'}}</th>
+      <th>{{_ 'After'}}</th>
+    </thead>
+    <tbody>
+      {{#each changes}}
+        <tr>
+          <td nowrap>{{label}}</td>
+          {{#format ../item.history_object @key ../item.history_from 'detail'}}
+            <td nowrap>{{control}}</td>
+          {{else}}
+            <td nowrap>{{from}}</td>
+          {{/format}}
+          {{#format ../item.history_object @key  ../item.history_to 'detail'}}
+            <td nowrap>{{control}}</td>
+          {{else}}
+            <td nowrap>{{to}}</td>
+          {{/format}}
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+{{else}}
+  <table class="table">
+    <tbody>
+      {{#each schema.fields}}
+        {{#format ../schema.name @key ../item 'detail'}}
+          <tr>
+            <th nowrap>{{label}}</th>
+            <td>{{{control}}}</td>
+          </tr>
+        {{/format}}
+      {{/each}}
+    </tbody>
+  </table>
+{{/when}}

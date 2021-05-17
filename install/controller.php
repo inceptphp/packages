@@ -52,8 +52,8 @@ $this('http')->get('/install', function(
   $response->set('page', 'install_steps', $steps);
 
   $redirect = '/admin';
-  if (isset($steps[$data['step'] + 1]['path'])) {
-    $redirect = $steps[$data['step'] + 1]['path'];
+  if (isset($steps[$activeStep + 1]['path'])) {
+    $redirect = $steps[$activeStep + 1]['path'];
   }
 
   $folders = [

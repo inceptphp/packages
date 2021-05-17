@@ -650,12 +650,22 @@ class AdminPackage
       $response->removeSession('flash');
     }
 
+    //load history
+    $history = $this->handler->package('event')->call('system-collection-history-search', [
+      'range' => 5,
+      'total' => 0,
+      'sort' => [
+        'history_created' => 'DESC'
+      ]
+    ])['rows'];
+
     $data = [
       'page' => $response->get('page'),
       'results' => $response->getResults(),
       'content' => $response->getContent(),
       'i18n' => $request->getSession('i18n'),
       'host' => $host->all(),
+      'history' => $history,
       'menu' => $menu
     ];
 

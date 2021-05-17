@@ -14,9 +14,9 @@
   {{#admin_thead name}}
     <th class="freeze-top{{#if is_id}} freeze-left-2{{/if}}" nowrap>
       {{#if sortable}}
-          <a href="?{{sorturl 'order' name}}">
+          <a href="?{{sorturl 'sort' name}}">
             {{label}}
-            {{{sortcaret 'order' name}}}
+            {{{sortcaret 'sort' name}}}
           </a>
       {{else}}
         {{label}}

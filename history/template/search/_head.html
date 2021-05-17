@@ -1,0 +1,24 @@
+<tr>
+  <th class="table-bulk-checkbox freeze-top freeze-left">
+    <label class="checkbox checkbox-1">
+      <input
+        data-do="table-checkall"
+        data-table="#table-form-{{../schema.name}}-{{../uuid}} tbody"
+        data-toggle-hide="#search-form-{{../schema.name}}-{{../uuid}}"
+        data-toggle-show="#bulk-actions-{{../schema.name}}-{{../uuid}}"
+        type="checkbox"
+      />
+      <span></span>
+    </label>
+  </th>
+  <th class="freeze-top freeze-left-2">{{_ 'ID'}}</th>
+  <th class="freeze-top">{{_ 'Who'}}</th>
+  <th class="freeze-top">{{_ 'What'}}</th>
+  <th class="freeze-top" nowrap>
+    <a href="?{{sorturl 'sort' 'history_created'}}">
+      {{_ 'When'}}
+      {{{sortcaret 'sort' 'history_created'}}}
+    </a>
+  </th>
+  <th class="freeze-top">{{_ 'Where'}}</th>
+</tr>
