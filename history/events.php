@@ -54,7 +54,7 @@ $this('event')->on('system-object-create', function (
   $this('event')->call('system-object-history-create', [
     'history_action' => 'created',
     'history_object' => $name,
-    'history_primary' => $results->getResults(),
+    'history_primary' => $response->getResults(),
     'history_to' => $detail,
     'profile_id' => $profile
   ]);
