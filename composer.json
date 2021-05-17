@@ -10,7 +10,7 @@
     "php-coveralls/php-coveralls": "~2.4.3"
   },
   "require": {
-    "inceptphp/framework": "~0.1.0",
+    "inceptphp/framework": "~0.1.3",
     "phpugph/storm": "~1.0.0",
     "swiftmailer/swiftmailer": "~6.2.7",
     "dejan7/httpquest": "~0.3.0",
