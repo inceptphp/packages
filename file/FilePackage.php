@@ -43,9 +43,9 @@ class FilePackage
   protected $handler;
 
   /**
-   * @var *string $upload
+   * @var *string $folder
    */
-  protected $upload;
+  protected $folder;
 
   /**
    * @var *string $uri
