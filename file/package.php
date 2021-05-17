@@ -73,6 +73,11 @@ $this('event')->on('inceptphp/packages/file-help', function (
 
     ->output(PHP_EOL)
 
+    ->success('incept inceptphp/packages/file populate')
+    ->info(' Populates a dummy file.')
+
+    ->output(PHP_EOL)
+
     ->success('incept inceptphp/packages/file uninstall')
     ->info(' Removes this package')
 
@@ -89,9 +94,13 @@ $this('event')->on('inceptphp/packages/file-install', function (
   RequestInterface $request,
   ResponseInterface $response
 ) {
-  $request->setStage('name', 'inceptphp/packages/file');
+  $request
+    ->setStage('name', 'inceptphp/packages/file')
+    ->setStage('install', __DIR__ . '/install');
   //just do the default installer
   $this('event')->emit('inceptphp/packages-install', $request, $response);
+
+  $response->setResults('recommended', 'file', 'bin/incept inceptphp/packages/file populate');
 });
 
 /**
@@ -122,4 +131,46 @@ $this('event')->on('inceptphp/packages/file-uninstall', function (
   $request->setStage('name', 'inceptphp/packages/file');
   //just do the default installer
   $this('event')->emit('inceptphp/packages-uninstall', $request, $response);
+});
+
+/**
+ * $ incept inceptphp/packages/auth populate
+ *
+ * @param RequestInterface $request
+ * @param ResponseInterface $response
+ */
+$this('event')->on('inceptphp/packages/file-populate', function (
+  RequestInterface $request,
+  ResponseInterface $response
+) {
+  //scan through each file
+  foreach (scandir(__DIR__ . '/schema') as $file) {
+    //if it's not a php file
+    if(substr($file, -4) !== '.php') {
+      //skip
+      continue;
+    }
+
+    //get the schema data
+    $data = include sprintf('%s/schema/%s', __DIR__, $file);
+
+    //if no name
+    if (!isset($data['name'], $data['fixtures'])
+      || !is_array($data['fixtures'])
+    ) {
+      //skip
+      continue;
+    }
+
+    //get emitter
+    $emitter = $this('event');
+    foreach($data['fixtures'] as $fixture) {
+      $payload = $request
+        ->clone(true)
+        ->setStage($fixture)
+        ->setStage('schema', $data['name']);
+
+      $emitter->call('system-object-create', $payload);
+    }
+  }
 });

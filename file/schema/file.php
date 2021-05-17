@@ -113,4 +113,11 @@ return [
     ]
   ],
   'suggestion' => '{{file_id}} - {{file_name}}',
+  'fixtures' => [
+    [
+      'file_name' => 'lifestyle.jpg',
+      'file_description' => 'This is Lifestyle',
+      'file_data' => 'https://image.freepik.com/free-photo/healthy-lifestyle-background-with-alarm-clock-jump-rope_1428-1424.jpg'
+    ]
+  ]
 ];
