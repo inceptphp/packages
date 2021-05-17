@@ -132,11 +132,11 @@ $this('handlebars')
 
       foreach ($relations as $table => $relation) {
         $name = $relation->getName();
-        $primary = $relation->getPrimaryName();
+        $primary2 = $relation->getPrimaryName();
 
         $row['relations'][$table] = $relation->get();
         //pass the following for scope convenience
-        $row['relations'][$table]['primary'] = $primary;
+        $row['relations'][$table]['primary'] = $primary2;
         $row['relations'][$table]['schema'] = $row['schema'];
 
         if (isset($row['item'][$name])) {
@@ -144,7 +144,7 @@ $this('handlebars')
             $row['item'][$name]
           );
 
-          $row['relations'][$table]['id'] = $data['item'][$name][$primary];
+          $row['relations'][$table]['id'] = $data['item'][$name][$primary2];
           $row['relations'][$table]['item'] = $row['item'][$name];
         }
       }
