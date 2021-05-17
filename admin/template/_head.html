@@ -16,8 +16,45 @@
     </ul>
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0"></ul>
     <ul class="navbar-nav">
+      {{#if history.length}}
+        <li class="nav-item dropdown nav-history">
+          <a
+            class="nav-link dropdown-toggle"
+            href="javascript:void(0)"
+            role="button" data-toggle="dropdown"
+          >
+            <i class="fas fa-bell fa-fw"></i>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right">
+            {{#each history}}
+              <a
+                class="dropdown-item"
+                data-do="panel-mobile-open"
+                data-on="click"
+                data-template="/admin/spa/system/object/history/detail/{{history_id}}"
+                href="javascript:void(0)"
+              >
+                <em class="text-muted">{{relative history_created 0}}</em>
+                <p>{{profile_first_name}} {{profile_last_name}} {{history_action}} {{history_object}} #{{history_primary}}</p>
+              </a>
+            {{/each}}
+            <div class="dropdown-divider"></div>
+            <a
+              class="dropdown-item"
+              href="/admin/system/object/history/search?sort[history_created]=DESC"
+            >
+              {{_ 'See All'}}
+            </a>
+          </div>
+        </li>
+      {{/if}}
       <li class="nav-item dropdown nav-profile">
-        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+        <a
+          class="nav-link dropdown-toggle"
+          href="javascript:void(0)"
+          role="button"
+          data-toggle="dropdown"
+        >
           {{#request 'session' 'me'}}
             {{_ 'Welcome %s %s' profile_first_name profile_last_name}}
           {{/request}}
