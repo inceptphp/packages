@@ -105,9 +105,15 @@
   <!-- END: Body -->
   <!-- START: Foot -->
   <footer class="view-foot">
-    <button class="btn btn-secondary btn-block">
-      <i class="fas fa-check"></i> {{_ 'Publish'}}
-    </button>
+    {{#if item.disabled}}
+      <button type button disabled class="btn btn-default btn-block">
+        <i class="fas fa-lock"></i> {{_ 'Disabled'}}
+      </button>
+    {{else}}
+      <button class="btn btn-secondary btn-block">
+        <i class="fas fa-check"></i> {{_ 'Publish'}}
+      </button>
+    {{/if}}
     {{#when mode '===' 'update'}}
       <div class="row mt-1">
         <div class="col">
@@ -121,18 +127,19 @@
             <i class="fas fa-copy"></i> {{_ 'Copy'}}
           </button>
         </div>
-
-        <div class="col">
-          <button
-            class="btn btn-outline-danger btn-block text-small"
-            data-do="panel-mobile-forward"
-            data-on="click"
-            data-template="/admin/spa/system/schema/remove/{{item.name}}"
-            type="button"
-          >
-            <i class="fas fa-times"></i> {{_ 'Remove'}}
-          </button>
-        </div>
+        {{#unless item.disabled}}
+          <div class="col">
+            <button
+              class="btn btn-outline-danger btn-block text-small"
+              data-do="panel-mobile-forward"
+              data-on="click"
+              data-template="/admin/spa/system/schema/remove/{{item.name}}"
+              type="button"
+            >
+              <i class="fas fa-times"></i> {{_ 'Remove'}}
+            </button>
+          </div>
+        {{/unless}}
       </div>
     {{/when}}
   </footer>

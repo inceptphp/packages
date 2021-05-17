@@ -1,15 +1,17 @@
 <div class="tab-fixed">
   <div class="tab-head">
-    <a
-      class="btn btn-outline-secondary btn-block"
-      data-do="panel-mobile-forward"
-      data-on="click"
-      data-method="post"
-      data-template="/admin/spa/system/schema/field"
-      href="javascript:void(0)"
-    >
-      <i class="fas fa-plus"></i> {{_ 'Add Field'}}
-    </a>
+    {{#unless item.disabled}}
+      <a
+        class="btn btn-outline-secondary btn-block"
+        data-do="panel-mobile-forward"
+        data-on="click"
+        data-method="post"
+        data-template="/admin/spa/system/schema/field"
+        href="javascript:void(0)"
+      >
+        <i class="fas fa-plus"></i> {{_ 'Add Field'}}
+      </a>
+    {{/unless}}
   </div>
   <div class="tab-body">
     <table
