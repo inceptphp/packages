@@ -1,0 +1,27 @@
+<footer class="view-foot">
+  <button
+    class="btn btn-secondary btn-block text-small"
+    data-do="panel-mobile-forward"
+    data-on="click"
+    data-template="/admin/spa/system/object/{{item.history_object}}/detail/{{item.history_primary}}"
+    type="button"
+  >
+    <i class="fas fa-edit"></i> {{_ 'View %s' item.history_object}}
+  </button>
+  {{#when item.history_action '===' 'updated'}}
+    <div class="row mt-1">
+      <div class="col">
+        <button
+          class="btn btn-outline-primary btn-block text-small"
+          data-do="panel-mobile-forward"
+          data-on="click"
+          data-template="/admin/spa/system/object/history/revert/{{schema.id}}"
+          type="button"
+        >
+          <i class="fas fa-redo"></i>
+          {{_ 'Revert'}}
+        </button>
+      </div>
+    </div>
+  {{/when}}
+</footer>

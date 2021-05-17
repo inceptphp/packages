@@ -1,0 +1,32 @@
+<section class="view-body no-scroll{{#when item.history_action '===' 'updated'}} with-foot-2{{else}} with-foot-1{{/when}} schema-detail">
+  {{> detail_relation_detail}}
+  <!-- START: Tabs -->
+  {{> detail_tabs}}
+  <!-- END: Tabs -->
+  <!-- START: Panes -->
+  <div class="tab-content m-2">
+    <!-- START: Information Pane -->
+    <div
+      class="tab-pane fade active show"
+      id="model-{{schema.name}}-info-{{uuid}}"
+      role="tabpanel"
+    >
+      {{> detail_information}}
+    </div>
+    <!-- END: Information Pane -->
+    {{#if relations.length}}
+      {{#each relations}}
+        {{#when many '>' 1}}
+          <div
+            class="tab-pane fade"
+            id="model-{{name}}-relation-{{uuid}}"
+            role="tabpanel"
+          >
+            {{> detail_relation_search}}
+          </div>
+        {{/when}}
+      {{/each}}
+    {{/if}}
+  </div>
+  <!-- END: Panes -->
+</section>
