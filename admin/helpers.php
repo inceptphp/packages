@@ -139,7 +139,9 @@ $this('handlebars')
         $row['relations'][$table]['primary'] = $primary2;
         $row['relations'][$table]['schema'] = $row['schema'];
 
-        if (isset($row['item'][$name])) {
+        if ($row['item'][$primary2]) {
+          $row['relations'][$table]['id'] = $row['item'][$primary2];
+        } else if (isset($row['item'][$name])) {
           $row['relations'][$table]['suggestion'] = $relation->getSuggestion(
             $row['item'][$name]
           );
