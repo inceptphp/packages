@@ -529,8 +529,6 @@ $this('http')->get('/admin/spa/system/object/:schema/create/:id', function (
   RequestInterface $request,
   ResponseInterface $response
 ) {
-  //----------------------------//
-  // 1. Prepare Data
   //load the schema
   try {
     $schema = Schema::load($request->getStage('schema'));
@@ -539,56 +537,13 @@ $this('http')->get('/admin/spa/system/object/:schema/create/:id', function (
     return $this('admin')->invalid($response);
   }
 
-  $data = $request->getStage();
-
-  //also pass the schema to the template
-  $data['schema'] = $schema->get();
-  $data['schema']['fields'] = $schema->getFields();
-  $data['schema']['primary'] = $primary = $schema->getPrimaryName();
-  $data['schema']['restorable'] = $schema->isRestorable();
-
-  //split fields and fieldsets
-  foreach ($data['schema']['fields'] as $key => $field) {
-    if ($field['field']['type'] !== 'fieldset'
-      || !isset($field['field']['parameters'][0])
-    ) {
-      continue;
-    }
-
-    //it's a fieldset, remove it from the field list
-    unset($data['schema']['fields'][$key]);
-    //add it to the fieldset
-    $data['schema']['fieldsets'][$key] = $field;
-    $data['schema']['fieldsets'][$key]['fieldset'] = Fieldset::load(
-      $field['field']['parameters'][0]
-    )->get();
-  }
-
-  //set relation schemas 1:1
-  $relations = $schema->getRelations(1);
-  foreach ($relations as $table => $relation) {
-    $data['relations'][$table] = $relation->get();
-    $data['relations'][$table]['primary'] = $relation->getPrimaryName();
-  }
-
-  //add relation schemas 0:1
-  $relations = $schema->getRelations(0);
-  foreach ($relations as $table => $relation) {
-    $data['relations'][$table] = $relation->get();
-    $data['relations'][$table]['primary'] = $relation->getPrimaryName();
-  }
-
   //table_id, 1 for example
   $id = $request->getStage('id');
+  $primary = $schema->getPrimaryName();
   $request->setStage($primary, $id);
 
   //get the original table row
   $this('event')->emit('system-object-detail', $request, $response);
-
-  //if we only want the raw data
-  if ($request->getStage('render') === 'false') {
-    return;
-  }
 
   //can we view ?
   if ($response->isError()) {
@@ -596,30 +551,15 @@ $this('http')->get('/admin/spa/system/object/:schema/create/:id', function (
   }
 
   //set the item
-  $data['item'] = $response->getResults();
+  $request->setStage('item', $response->getResults());
+  //determine route
+  $route = sprintf(
+    '/admin/spa/system/object/%s/create',
+    $request->getStage('schema')
+  );
 
-  //----------------------------//
-  // 2. Render Template
-  //set the action
-  $data['action'] = 'create';
-
-  $template = dirname(__DIR__) . '/template/object';
-  if (is_dir($response->get('page', 'template_root'))) {
-    $template = $response->get('page', 'template_root');
-  }
-
-  $body = $this('handlebars')
-    ->setTemplateFolder($template)
-    ->registerPartialFromFolder('form_body', 'html', true)
-    ->registerPartialFromFolder('form_fieldset', 'html', true)
-    ->registerPartialFromFolder('form_foot', 'html', true)
-    ->registerPartialFromFolder('form_head', 'html', true)
-    ->registerPartialFromFolder('form_information', 'html', true)
-    ->registerPartialFromFolder('form_tabs', 'html', true)
-    ->renderFromFolder('form', $data);
-
-  //set content
-  $response->setContent($body);
+  //route to the original create route
+  $this('http')->routeTo('get', $route, $request, $response);
 });
 
 /**
