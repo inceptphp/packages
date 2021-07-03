@@ -80,7 +80,7 @@ class FileList extends AbstractField implements FieldInterface
       return json_encode($value);
     }
 
-    return json_encode($file['data']);
+    return json_encode($files['data']);
   }
 
   /**
