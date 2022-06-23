@@ -211,7 +211,7 @@ $this('event')->on('system-store-create', function (
     } else if (!isset($field['default'])
       || (
         !is_numeric($field['default'])
-        && !trim($field['default'])
+        && !trim((string) $field['default'])
       )
     ) {
       $columns[$name]['null'] = true;
@@ -224,7 +224,7 @@ $this('event')->on('system-store-create', function (
     }
 
     if (isset($field['default'])) {
-      if (is_numeric($field['default']) || trim($field['default'])) {
+      if (is_numeric($field['default']) || trim((string) $field['default'])) {
         $columns[$name]['default'] = $field['default'];
       } else if (is_bool($field['default'])) {
         $columns[$name]['default'] = $field['default'] ? 1: 0;

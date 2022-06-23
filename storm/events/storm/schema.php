@@ -36,7 +36,7 @@ $this('event')->on('storm-alter', function (
   // 2. Validate Data
   $errors = [];
   //we need at least a table
-  if (!trim($table)) {
+  if (!trim((string) $table)) {
     $errors['table'] = 'Table is required';
   }
 
@@ -225,7 +225,7 @@ $this('event')->on('storm-create', function (
   // 2. Validate Data
   $errors = [];
   //we need at least a table
-  if (!trim($table)) {
+  if (!trim((string) $table)) {
     $errors['table'] = 'Table is required';
   }
 
@@ -255,7 +255,7 @@ $this('event')->on('storm-create', function (
   $query = $resource->getCreateQuery($table);
 
   foreach ($primary as $column) {
-    if (!trim($column)) {
+    if (!trim((string) $column)) {
       continue;
     }
 
@@ -363,7 +363,7 @@ $this('event')->on('storm-drop', function (
   // 2. Validate Data
   $errors = [];
   //we need at least a table
-  if (!trim($table)) {
+  if (!trim((string) $table)) {
     $errors['table'] = 'Table is required';
   }
 
@@ -414,11 +414,11 @@ $this('event')->on('storm-rename', function (
   // 2. Validate Data
   $errors = [];
   //we need at least a table
-  if (!trim($table)) {
+  if (!trim((string) $table)) {
     $errors['table'] = 'Table is required';
   }
 
-  if (!trim($name)) {
+  if (!trim((string) $name)) {
     $errors['name'] = 'Name is required';
   }
 

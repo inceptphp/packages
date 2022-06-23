@@ -110,7 +110,7 @@ $this('http')->get('/admin/spa/language/create', function (
       //loop through the keys found
       foreach ($keys as $key) {
         //if blank key
-        if (!trim($key)) {
+        if (!trim((string) $key)) {
           //skip
           continue;
         }
@@ -172,7 +172,7 @@ $this('http')->post('/admin/spa/language/create', function (
 
   //----------------------------//
   // 2. Validate Data
-  if (!isset($data['filename']) || !trim($data['filename'])) {
+  if (!isset($data['filename']) || !trim((string) $data['filename'])) {
     return $response->setError(true, 'Language code is required');
   }
 
@@ -322,7 +322,7 @@ $this('http')->post('/admin/spa/language/update/:filename', function (
 
   //----------------------------//
   // 2. Validate Data
-  if (!isset($data['filename']) || !trim($data['filename'])) {
+  if (!isset($data['filename']) || !trim((string) $data['filename'])) {
     return $response->setError(true, 'Language code is required');
   }
 

@@ -21,7 +21,7 @@ use HTTPQuest\ContentTypes;
  * @param ResponseInterface $response
  */
 return function(RequestInterface $request, ResponseInterface $response) {
-  if (!trim($request->get('body'))) {
+  if (!trim((string) $request->get('body'))) {
     return;
   }
 

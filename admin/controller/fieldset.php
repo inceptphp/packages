@@ -180,7 +180,7 @@ $this('http')->post('/admin/spa/system/fieldset/create', function (
   $data = $request->getPost();
 
   //if detail has no value make it null
-  if (isset($data['detail']) && !trim($data['detail'])) {
+  if (isset($data['detail']) && !trim((string) $data['detail'])) {
     $data['detail'] = null;
   }
 
@@ -496,7 +496,7 @@ $this('http')->post('/admin/spa/system/fieldset/import', function(
   //get the content
   $fieldset = $request->getStage('fieldset');
   //get the type
-  $type = substr($fieldset, 5, strpos($fieldset, ';base64') - 5);
+  $type = substr($fieldset, 5, strpos((string) $fieldset, ';base64') - 5);
 
   //invalid file?
   if ($type !== 'application/json' && $type !== 'application/zip') {
@@ -505,7 +505,7 @@ $this('http')->post('/admin/spa/system/fieldset/import', function(
 
   //decode the content
   $content = base64_decode(
-    substr($fieldset, strpos($fieldset, ';base64,') + 8)
+    substr($fieldset, strpos((string) $fieldset, ';base64,') + 8)
   );
 
   //json file?
@@ -587,7 +587,7 @@ $this('http')->post('/admin/spa/system/fieldset/import', function(
 
     //root or not under fieldset?
     if ($filename === 'fieldset/'
-      || strpos($filename, 'fieldset/') === false
+      || strpos((string) $filename, 'fieldset/') === false
     ) {
       continue;
     }
@@ -868,7 +868,7 @@ $this('http')->post('/admin/spa/system/fieldset/update/:name', function (
   $data = $request->getPost();
 
   //if detail has no value make it null
-  if (isset($data['detail']) && !trim($data['detail'])) {
+  if (isset($data['detail']) && !trim((string) $data['detail'])) {
     $data['detail'] = null;
   }
 

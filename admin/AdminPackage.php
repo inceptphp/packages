@@ -122,12 +122,12 @@ class AdminPackage
     $path = $request->getPath('string');
     //if not an admin path
     if ($path !== static::ROOT_PATH
-      && strpos($path, static::ROOT_PATH . '/') !== 0
+      && strpos((string) $path, static::ROOT_PATH . '/') !== 0
     ) {
       return;
     }
 
-    $debug = strpos($path, static::ROOT_SPA . '/') === false ? 'page': 'spa';
+    $debug = strpos((string) $path, static::ROOT_SPA . '/') === false ? 'page': 'spa';
 
     //if it was a call for an actual file
     if (preg_match('/\.[a-zA-Z0-9]{1,4}$/', $path)) {
@@ -136,7 +136,7 @@ class AdminPackage
 
     //if this is not an html page
     $type = $response->getHeaders('Content-Type');
-    if (strpos($type, 'html') === false) {
+    if (strpos((string) $type, 'html') === false) {
       //don't make it pretty
       return $this->errorDebug($request, $response, $error, $debug);
     }
@@ -346,7 +346,7 @@ class AdminPackage
 
     //shorten file
     $data['short_file'] = basename($data['file']);
-    if (strpos($data['file'], INCEPT_CWD) === 0) {
+    if (strpos((string) $data['file'], INCEPT_CWD) === 0) {
       $data['short_file'] = substr($data['file'], strlen(INCEPT_CWD));
     }
 
@@ -373,7 +373,7 @@ class AdminPackage
 
       //shorten file
       $trace['short_file'] = basename($trace['file']);
-      if (strpos($data['file'], INCEPT_CWD) === 0) {
+      if (strpos((string) $data['file'], INCEPT_CWD) === 0) {
         $trace['short_file'] = substr($trace['file'], strlen(INCEPT_CWD) + 1);
       }
 

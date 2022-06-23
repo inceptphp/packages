@@ -55,7 +55,7 @@ $this('http')->get('/admin/system/schema/search', function (
   if (isset($data['rows']) && is_array($data['rows'])) {
     foreach ($data['rows'] as $row) {
       $group = 'Custom';
-      if (isset($row['group']) && trim($row['group'])) {
+      if (isset($row['group']) && trim((string) $row['group'])) {
       $group = $row['group'];
       }
 
@@ -201,7 +201,7 @@ $this('http')->post('/admin/spa/system/schema/create', function (
   $data = $request->getPost();
 
   //if detail has no value make it null
-  if (isset($data['detail']) && !trim($data['detail'])) {
+  if (isset($data['detail']) && !trim((string) $data['detail'])) {
     $data['detail'] = null;
   }
 
@@ -890,7 +890,7 @@ $this('http')->post('/admin/spa/system/schema/update/:name', function (
   $data = $request->getPost();
 
   //if detail has no value make it null
-  if (isset($data['detail']) && !trim($data['detail'])) {
+  if (isset($data['detail']) && !trim((string) $data['detail'])) {
     $data['detail'] = null;
   }
 

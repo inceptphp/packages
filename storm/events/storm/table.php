@@ -42,7 +42,7 @@ $this('event')->on('storm-insert', function (
   //----------------------------//
   // 3. Validate Data
   //we need at least a table
-  if (!trim($table)) {
+  if (!trim((string) $table)) {
     $response->invalidate('table', 'Table is required');
   }
 
@@ -132,7 +132,7 @@ $this('event')->on('storm-delete', function (
   // 3. Validate Data
   $errors = [];
   //we need at least a table
-  if (!trim($table)) {
+  if (!trim((string) $table)) {
     $errors['table'] = 'Table is required';
   }
 
@@ -250,7 +250,7 @@ $this('event')->on('storm-search', function (
   // 3. Validate Data
   $errors = [];
   //we need at least a table
-  if (!trim($table)) {
+  if (!trim((string) $table)) {
     $errors['table'] = 'Table is required';
   }
 
@@ -380,7 +380,7 @@ $this('event')->on('storm-update', function (
   // 3. Validate Data
   $errors = [];
   //we need at least a table
-  if (!trim($table)) {
+  if (!trim((string) $table)) {
     $response->invalidate('table', 'Table is required');
   }
 
