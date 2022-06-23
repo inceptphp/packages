@@ -44,7 +44,7 @@ return function (RequestInterface $request, ResponseInterface $response) {
   $home = $this('config')->get('settings', 'home') ?? '/';
 
   //at least allow the home page
-  if (!trim($request->getPath('string'))
+  if (!trim((string) $request->getPath('string'))
     || $request->getPath('string') === $home
   ) {
     return true;

@@ -269,27 +269,27 @@ $this('http')->get('/install/database', function(
   //if theres a host
   if (isset($config['host'])) {
     $host = explode(':', $config['host']);
-    if (isset($host[0]) && trim($host[0])) {
+    if (isset($host[0]) && trim((string) $host[0])) {
       $data['host'] = $host[0];
     }
 
-    if (isset($host[1]) && trim($host[1])) {
+    if (isset($host[1]) && trim((string) $host[1])) {
       $data['port'] = $host[1];
     }
   }
 
   //if theres a name
-  if (isset($config['name']) && trim($config['name'])) {
+  if (isset($config['name']) && trim((string) $config['name'])) {
     $data['name'] = $config['name'];
   }
 
   //if theres a user
-  if (isset($config['user']) && trim($config['user'])) {
+  if (isset($config['user']) && trim((string) $config['user'])) {
     $data['user'] = $config['user'];
   }
 
   //if theres a pass
-  if (isset($config['pass']) && trim($config['pass'])) {
+  if (isset($config['pass']) && trim((string) $config['pass'])) {
     $data['pass'] = $config['pass'];
   }
 

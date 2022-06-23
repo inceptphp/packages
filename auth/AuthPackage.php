@@ -136,7 +136,7 @@ class AuthPackage
     $slug = preg_replace('~[^-\w\+]+~', '', $slug);
 
     // trim
-    $slug = trim($slug, '-');
+    $slug = trim((string) $slug, '-');
 
     // remove duplicate -
     $slug = preg_replace('~-+~', '-', $slug);

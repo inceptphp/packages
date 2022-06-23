@@ -389,7 +389,7 @@ $this('handlebars')
         continue;
       }
 
-      if (!trim($abbreviation['timezone_id'])) {
+      if (!trim((string) $abbreviation['timezone_id'])) {
         continue;
       }
 
@@ -1121,7 +1121,7 @@ $this('handlebars')
     array $variables
   ): string {
     $template = incept('handlebars')->compile($template);
-    return trim($template($variables));
+    return trim((string) $template($variables));
   })
 
   /**
