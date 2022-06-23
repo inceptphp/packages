@@ -297,7 +297,7 @@ $this('http')->get('/admin/spa/system/object/:schema/detail/:id', function (
       );
       if ($relation->getMany() > 1) {
         $data['relations'][$table]['rows'] = $data['item'][$name];
-      } else {
+      } else if (isset($data['item'][$name][$primary])) {
         $data['relations'][$table]['id'] = $data['item'][$name][$primary];
         $data['relations'][$table]['item'] = $data['item'][$name];
       }
