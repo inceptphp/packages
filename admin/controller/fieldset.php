@@ -53,7 +53,7 @@ $this('http')->get('/admin/system/fieldset/search', function (
   $data['title'] = $this('lang')->translate('Fieldsets');
 
   $template = dirname(__DIR__) . '/template/fieldset';
-  if (is_dir($response->get('page', 'template_root'))) {
+  if (is_dir($response->get('page', 'template_root') ?? '')) {
     $template = $response->get('page', 'template_root');
   }
 
@@ -113,7 +113,7 @@ $this('http')->get('/admin/spa/system/fieldset/create', function(
   //----------------------------//
   // 2. Render Template
   $template = dirname(__DIR__) . '/template/fieldset';
-  if (is_dir($response->get('page', 'template_root'))) {
+  if (is_dir($response->get('page', 'template_root') ?? '')) {
     $template = $response->get('page', 'template_root');
   }
 
@@ -180,7 +180,7 @@ $this('http')->post('/admin/spa/system/fieldset/create', function (
   $data = $request->getPost();
 
   //if detail has no value make it null
-  if (isset($data['detail']) && !trim((string) $data['detail'])) {
+  if (isset($data['detail']) && !trim($data['detail'])) {
     $data['detail'] = null;
   }
 
@@ -238,7 +238,7 @@ $this('http')->post('/admin/spa/system/fieldset/field', function(
   //----------------------------//
   // 2. Render Template
   $template = dirname(__DIR__) . '/template/fieldset';
-  if (is_dir($response->get('page', 'template_root'))) {
+  if (is_dir($response->get('page', 'template_root') ?? '')) {
     $template = $response->get('page', 'template_root');
   }
 
@@ -302,7 +302,7 @@ $this('http')->post('/admin/spa/system/fieldset/field/save', function(
   //----------------------------//
   // 2. Process Data
   $template = dirname(__DIR__) . '/template/fieldset';
-  if (is_dir($response->get('page', 'template_root'))) {
+  if (is_dir($response->get('page', 'template_root') ?? '')) {
     $template = $response->get('page', 'template_root');
   }
 
@@ -469,7 +469,7 @@ $this('http')->get('/admin/spa/system/fieldset/import', function(
   //----------------------------//
   // 2. Render Template
   $template = dirname(__DIR__) . '/template/fieldset';
-  if (is_dir($response->get('page', 'template_root'))) {
+  if (is_dir($response->get('page', 'template_root') ?? '')) {
     $template = $response->get('page', 'template_root');
   }
 
@@ -496,7 +496,7 @@ $this('http')->post('/admin/spa/system/fieldset/import', function(
   //get the content
   $fieldset = $request->getStage('fieldset');
   //get the type
-  $type = substr($fieldset, 5, strpos((string) $fieldset, ';base64') - 5);
+  $type = substr($fieldset, 5, strpos($fieldset, ';base64') - 5);
 
   //invalid file?
   if ($type !== 'application/json' && $type !== 'application/zip') {
@@ -505,7 +505,7 @@ $this('http')->post('/admin/spa/system/fieldset/import', function(
 
   //decode the content
   $content = base64_decode(
-    substr($fieldset, strpos((string) $fieldset, ';base64,') + 8)
+    substr($fieldset, strpos($fieldset, ';base64,') + 8)
   );
 
   //json file?
@@ -587,7 +587,7 @@ $this('http')->post('/admin/spa/system/fieldset/import', function(
 
     //root or not under fieldset?
     if ($filename === 'fieldset/'
-      || strpos((string) $filename, 'fieldset/') === false
+      || strpos($filename, 'fieldset/') === false
     ) {
       continue;
     }
@@ -682,7 +682,7 @@ $this('http')->get('/admin/spa/system/fieldset/remove/:name', function(
   //----------------------------//
   // 2. Render Template
   $template = dirname(__DIR__) . '/template/fieldset';
-  if (is_dir($response->get('page', 'template_root'))) {
+  if (is_dir($response->get('page', 'template_root') ?? '')) {
     $template = $response->get('page', 'template_root');
   }
 
@@ -755,7 +755,7 @@ $this('http')->get('/admin/spa/system/fieldset/restore/:name', function(
   //----------------------------//
   // 2. Render Template
   $template = dirname(__DIR__) . '/template/fieldset';
-  if (is_dir($response->get('page', 'template_root'))) {
+  if (is_dir($response->get('page', 'template_root') ?? '')) {
     $template = $response->get('page', 'template_root');
   }
 
@@ -838,7 +838,7 @@ $this('http')->get('/admin/spa/system/fieldset/update/:name', function(
   //----------------------------//
   // 2. Render Template
   $template = dirname(__DIR__) . '/template/fieldset';
-  if (is_dir($response->get('page', 'template_root'))) {
+  if (is_dir($response->get('page', 'template_root') ?? '')) {
     $template = $response->get('page', 'template_root');
   }
 
@@ -868,7 +868,7 @@ $this('http')->post('/admin/spa/system/fieldset/update/:name', function (
   $data = $request->getPost();
 
   //if detail has no value make it null
-  if (isset($data['detail']) && !trim((string) $data['detail'])) {
+  if (isset($data['detail']) && !trim($data['detail'])) {
     $data['detail'] = null;
   }
 

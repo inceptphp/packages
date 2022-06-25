@@ -56,7 +56,7 @@ $this('http')->get('/admin/spa/system/collection/:schema/remove', function (
   //----------------------------//
   // 2. Render Template
   $template = dirname(__DIR__) . '/template/collection';
-  if (is_dir($response->get('page', 'template_root'))) {
+  if (is_dir($response->get('page', 'template_root') ?? '')) {
     $template = $response->get('page', 'template_root');
   }
 
@@ -136,7 +136,7 @@ $this('http')->get('/admin/spa/system/collection/:schema/restore', function (
   //----------------------------//
   // 2. Render Template
   $template = dirname(__DIR__) . '/template/collection';
-  if (is_dir($response->get('page', 'template_root'))) {
+  if (is_dir($response->get('page', 'template_root') ?? '')) {
     $template = $response->get('page', 'template_root');
   }
 
@@ -230,7 +230,7 @@ $this('http')->get('/admin/spa/system/collection/:schema1/:id/unlink/:schema2', 
   //----------------------------//
   // 2. Render Template
   $template = dirname(__DIR__) . '/template/collection';
-  if (is_dir($response->get('page', 'template_root'))) {
+  if (is_dir($response->get('page', 'template_root') ?? '')) {
     $template = $response->get('page', 'template_root');
   }
 
@@ -373,7 +373,7 @@ $this('http')->get('/admin/spa/system/collection/:schema/update', function (
   //----------------------------//
   // 2. Render Template
   $template = dirname(__DIR__) . '/template/object';
-  if (is_dir($response->get('page', 'template_root'))) {
+  if (is_dir($response->get('page', 'template_root') ?? '')) {
     $template = $response->get('page', 'template_root');
   }
 
@@ -571,7 +571,7 @@ $this('http')->get('/admin/spa/system/collection/:schema/export', function (
   $data['title'] = $schema->getPlural('plural');
 
   $template = dirname(__DIR__) . '/template/collection';
-  if (is_dir($response->get('page', 'template_root'))) {
+  if (is_dir($response->get('page', 'template_root') ?? '')) {
     $template = $response->get('page', 'template_root');
   }
 

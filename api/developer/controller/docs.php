@@ -33,7 +33,7 @@ $this('http')->get('/developer/docs', function (
   //----------------------------//
   // 3. Render Template
   $template = dirname(__DIR__) . '/template';
-  if (is_dir($response->get('page', 'template_root'))) {
+  if (is_dir($response->get('page', 'template_root') ?? '')) {
     $template = $response->get('page', 'template_root');
   }
 
@@ -103,7 +103,7 @@ $this('http')->get('/developer/docs/calls', function (
   //----------------------------//
   // 4. Render Template
   $template = dirname(__DIR__) . '/template';
-  if (is_dir($response->get('page', 'template_root'))) {
+  if (is_dir($response->get('page', 'template_root') ?? '')) {
     $template = $response->get('page', 'template_root');
   }
 
@@ -178,7 +178,7 @@ $this('http')->get('/developer/docs/calls/:rest_id', function (
   //----------------------------//
   // 4. Render Template
   $template = dirname(__DIR__) . '/template';
-  if (is_dir($response->get('page', 'template_root'))) {
+  if (is_dir($response->get('page', 'template_root') ?? '')) {
     $template = $response->get('page', 'template_root');
   }
 
@@ -252,7 +252,7 @@ $this('http')->get('/developer/docs/scopes', function (
   //----------------------------//
   // 4. Render Template
   $template = dirname(__DIR__) . '/template';
-  if (is_dir($response->get('page', 'template_root'))) {
+  if (is_dir($response->get('page', 'template_root') ?? '')) {
     $template = $response->get('page', 'template_root');
   }
 
@@ -326,7 +326,7 @@ $this('http')->get('/developer/docs/scopes/:scope_slug', function (
   //----------------------------//
   // 4. Render Template
   $template = dirname(__DIR__) . '/template';
-  if (is_dir($response->get('page', 'template_root'))) {
+  if (is_dir($response->get('page', 'template_root') ?? '')) {
     $template = $response->get('page', 'template_root');
   }
 
@@ -400,7 +400,7 @@ $this('http')->get('/developer/docs/webhooks', function (
   //----------------------------//
   // 4. Render Template
   $template = dirname(__DIR__) . '/template';
-  if (is_dir($response->get('page', 'template_root'))) {
+  if (is_dir($response->get('page', 'template_root') ?? '')) {
     $template = $response->get('page', 'template_root');
   }
 
@@ -474,7 +474,7 @@ $this('http')->get('/developer/docs/webhooks/:webhook_id', function (
   //----------------------------//
   // 4. Render Template
   $template = dirname(__DIR__) . '/template';
-  if (is_dir($response->get('page', 'template_root'))) {
+  if (is_dir($response->get('page', 'template_root') ?? '')) {
     $template = $response->get('page', 'template_root');
   }
 
@@ -552,7 +552,7 @@ $this('http')->get('/developer/docs/schema/:name', function (
   //----------------------------//
   // 4. Render Template
   $template = dirname(__DIR__) . '/template';
-  if (is_dir($response->get('page', 'template_root'))) {
+  if (is_dir($response->get('page', 'template_root') ?? '')) {
     $template = $response->get('page', 'template_root');
   }
 

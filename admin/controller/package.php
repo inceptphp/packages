@@ -33,8 +33,8 @@ $this('http')->get('/admin/package/search', function(
   $rows = $this('config')->get('packages');
 
   foreach ($rows as $name => $row) {
-    if (($data['filter'] === 'default' && strpos((string) $name, 'inceptphp/') !== 0)
-      || ($data['filter'] === 'custom' && strpos((string) $name, 'inceptphp/') === 0)
+    if (($data['filter'] === 'default' && strpos($name, 'inceptphp/') !== 0)
+      || ($data['filter'] === 'custom' && strpos($name, 'inceptphp/') === 0)
     ) {
       continue;
     }
@@ -45,11 +45,11 @@ $this('http')->get('/admin/package/search', function(
     } else {
       $path = null;
       //if it starts with / like /foo/bar
-      if (strpos((string) $name, '/') === 0) {
+      if (strpos($name, '/') === 0) {
         //it's a root package
         $path = INCEPT_CWD . $name;
       //if theres a slash like foo/bar
-      } else if (strpos((string) $name, '/') !== false) {
+      } else if (strpos($name, '/') !== false) {
         //it's vendor package
         $path = sprintf('%s/vendor/%s', INCEPT_CWD, $name);
       }
@@ -95,7 +95,7 @@ $this('http')->get('/admin/package/search', function(
   $data['title'] = $this('lang')->translate('Packages');
 
   $template = dirname(__DIR__) . '/template/package';
-  if (is_dir($response->get('page', 'template_root'))) {
+  if (is_dir($response->get('page', 'template_root') ?? '')) {
     $template = $response->get('page', 'template_root');
   }
 
@@ -152,11 +152,11 @@ $this('http')->get('/admin/spa/package/enable/**', function (
   } else {
     $path = null;
     //if it starts with / like /foo/bar
-    if (strpos((string) $name, '/') === 0) {
+    if (strpos($name, '/') === 0) {
       //it's a root package
       $path = INCEPT_CWD . $name;
     //if theres a slash like foo/bar
-    } else if (strpos((string) $name, '/') !== false) {
+    } else if (strpos($name, '/') !== false) {
       //it's vendor package
       $path = sprintf('%s/vendor/%s', INCEPT_CWD, $name);
     }
@@ -208,7 +208,7 @@ $this('http')->get('/admin/spa/package/enable/**', function (
   //----------------------------//
   // 2. Render Template
   $template = dirname(__DIR__) . '/template/object';
-  if (is_dir($response->get('page', 'template_root'))) {
+  if (is_dir($response->get('page', 'template_root') ?? '')) {
     $template = $response->get('page', 'template_root');
   }
 
@@ -273,11 +273,11 @@ $this('http')->get('/admin/spa/package/disable/**', function (
   } else {
     $path = null;
     //if it starts with / like /foo/bar
-    if (strpos((string) $name, '/') === 0) {
+    if (strpos($name, '/') === 0) {
       //it's a root package
       $path = INCEPT_CWD . $name;
     //if theres a slash like foo/bar
-    } else if (strpos((string) $name, '/') !== false) {
+    } else if (strpos($name, '/') !== false) {
       //it's vendor package
       $path = sprintf('%s/vendor/%s', INCEPT_CWD, $name);
     }
@@ -329,7 +329,7 @@ $this('http')->get('/admin/spa/package/disable/**', function (
   //----------------------------//
   // 2. Render Template
   $template = dirname(__DIR__) . '/template/object';
-  if (is_dir($response->get('page', 'template_root'))) {
+  if (is_dir($response->get('page', 'template_root') ?? '')) {
     $template = $response->get('page', 'template_root');
   }
 
@@ -394,11 +394,11 @@ $this('http')->get('/admin/spa/package/uninstall/**', function (
   } else {
     $path = null;
     //if it starts with / like /foo/bar
-    if (strpos((string) $name, '/') === 0) {
+    if (strpos($name, '/') === 0) {
       //it's a root package
       $path = INCEPT_CWD . $name;
     //if theres a slash like foo/bar
-    } else if (strpos((string) $name, '/') !== false) {
+    } else if (strpos($name, '/') !== false) {
       //it's vendor package
       $path = sprintf('%s/vendor/%s', INCEPT_CWD, $name);
     }
@@ -450,7 +450,7 @@ $this('http')->get('/admin/spa/package/uninstall/**', function (
   //----------------------------//
   // 2. Render Template
   $template = dirname(__DIR__) . '/template/object';
-  if (is_dir($response->get('page', 'template_root'))) {
+  if (is_dir($response->get('page', 'template_root') ?? '')) {
     $template = $response->get('page', 'template_root');
   }
 

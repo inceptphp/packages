@@ -67,7 +67,7 @@ $this('http')->get('/admin/auth/settings', function (
   //----------------------------//
   // 3. Render Template
   $template = dirname(__DIR__) . '/template/admin';
-  if (is_dir($response->get('page', 'template_root'))) {
+  if (is_dir($response->get('page', 'template_root') ?? '')) {
     $template = $response->get('page', 'template_root');
   }
 
@@ -120,7 +120,7 @@ $this('http')->post('/admin/auth/settings', function (
   //----------------------------//
   // 3. Validate Data
   foreach ($data['services'] as $i => $service) {
-    if (!isset($service['name']) || !trim((string) $service['name'])) {
+    if (!isset($service['name']) || !trim($service['name'])) {
       $response->invalidate('service', $i, 'name', 'Name is required');
     }
 
@@ -128,23 +128,23 @@ $this('http')->post('/admin/auth/settings', function (
       $response->invalidate('service', $i, 'active', 'Active is required');
     }
 
-    if (!isset($service['client_id']) || !trim((string) $service['client_id'])) {
+    if (!isset($service['client_id']) || !trim($service['client_id'])) {
       $response->invalidate('service', $i, 'client_id', 'Client ID is required');
     }
 
-    if (!isset($service['client_secret']) || !trim((string) $service['client_secret'])) {
+    if (!isset($service['client_secret']) || !trim($service['client_secret'])) {
       $response->invalidate('service', $i, 'client_secret', 'Client Secret is required');
     }
 
-    if (!isset($service['url_authorize']) || !trim((string) $service['url_authorize'])) {
+    if (!isset($service['url_authorize']) || !trim($service['url_authorize'])) {
       $response->invalidate('service', $i, 'url_authorize', 'Authorize URL is required');
     }
 
-    if (!isset($service['url_access_token']) || !trim((string) $service['url_access_token'])) {
+    if (!isset($service['url_access_token']) || !trim($service['url_access_token'])) {
       $response->invalidate('service', $i, 'url_access_token', 'Access Token URL is required');
     }
 
-    if (!isset($service['url_resource']) || !trim((string) $service['url_resource'])) {
+    if (!isset($service['url_resource']) || !trim($service['url_resource'])) {
       $response->invalidate('service', $i, 'url_resource', 'Resource URL is required');
     }
   }
@@ -212,7 +212,7 @@ $this('http')->post('/admin/spa/system/object/auth/create', function (
 ) {
   //if profile id, or profile name
   if (is_numeric($request->getStage('profile_id'))
-    || !trim((string) $request->getStage('__profile'))
+    || !trim($request->getStage('__profile'))
   ) {
     return;
   }

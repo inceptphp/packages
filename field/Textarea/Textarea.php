@@ -101,7 +101,7 @@ class Textarea extends AbstractField implements FieldInterface
       file_get_contents(__DIR__ . '/template/field/textarea.html')
     );
 
-    $value = str_replace('</textarea>', '<\/textarea>', $value);
+    $value = str_replace('</textarea>', '<\/textarea>', $value ?? '');
 
     return $template([
       'name' => $this->name,

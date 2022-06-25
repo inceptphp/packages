@@ -50,6 +50,6 @@ class Lowercase extends AbstractFormatter implements FormatterInterface
     string $name = null,
     array $row = []
   ): ?string {
-    return strtolower($value);
+    return strtolower($value ?? '');
   }
 }

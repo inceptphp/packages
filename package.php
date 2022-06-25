@@ -261,7 +261,7 @@ $this('event')->on('inceptphp/packages-uninstall', function (
     //scan through each file in the schema folder
     foreach (scandir($schema) as $file) {
       //if it's not a php file
-      if(substr((string) $file, -4) !== '.php') {
+      if(substr($file, -4) !== '.php') {
         //skip
         continue;
       }

@@ -53,7 +53,7 @@ class CharLength extends AbstractFormatter implements FormatterInterface
     array $row = []
   ): ?string
   {
-    return substr($value, 0, $this->parameters[0]);
+    return substr($value ?? '', 0, $this->parameters[0] ?? '');
   }
 
   /**

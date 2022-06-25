@@ -55,7 +55,7 @@ $this('http')->get('/admin/system/schema/search', function (
   if (isset($data['rows']) && is_array($data['rows'])) {
     foreach ($data['rows'] as $row) {
       $group = 'Custom';
-      if (isset($row['group']) && trim((string) $row['group'])) {
+      if (isset($row['group']) && trim($row['group'])) {
       $group = $row['group'];
       }
 
@@ -71,7 +71,7 @@ $this('http')->get('/admin/system/schema/search', function (
   $data['title'] = $this('lang')->translate('Schemas');
 
   $template = dirname(__DIR__) . '/template/schema';
-  if (is_dir($response->get('page', 'template_root'))) {
+  if (is_dir($response->get('page', 'template_root') ?? '')) {
     $template = $response->get('page', 'template_root');
   }
 
@@ -133,7 +133,7 @@ $this('http')->get('/admin/spa/system/schema/create', function(
   //----------------------------//
   // 2. Render Template
   $template = dirname(__DIR__) . '/template/schema';
-  if (is_dir($response->get('page', 'template_root'))) {
+  if (is_dir($response->get('page', 'template_root') ?? '')) {
     $template = $response->get('page', 'template_root');
   }
 
@@ -201,7 +201,7 @@ $this('http')->post('/admin/spa/system/schema/create', function (
   $data = $request->getPost();
 
   //if detail has no value make it null
-  if (isset($data['detail']) && !trim((string) $data['detail'])) {
+  if (isset($data['detail']) && !trim($data['detail'])) {
     $data['detail'] = null;
   }
 
@@ -259,7 +259,7 @@ $this('http')->post('/admin/spa/system/schema/field', function(
   //----------------------------//
   // 2. Render Template
   $template = dirname(__DIR__) . '/template/schema';
-  if (is_dir($response->get('page', 'template_root'))) {
+  if (is_dir($response->get('page', 'template_root') ?? '')) {
     $template = $response->get('page', 'template_root');
   }
 
@@ -323,7 +323,7 @@ $this('http')->post('/admin/spa/system/schema/field/save', function(
   //----------------------------//
   // 2. Process Data
   $template = dirname(__DIR__) . '/template/schema';
-  if (is_dir($response->get('page', 'template_root'))) {
+  if (is_dir($response->get('page', 'template_root') ?? '')) {
     $template = $response->get('page', 'template_root');
   }
 
@@ -490,7 +490,7 @@ $this('http')->get('/admin/spa/system/schema/import', function(
   //----------------------------//
   // 2. Render Template
   $template = dirname(__DIR__) . '/template/schema';
-  if (is_dir($response->get('page', 'template_root'))) {
+  if (is_dir($response->get('page', 'template_root') ?? '')) {
     $template = $response->get('page', 'template_root');
   }
 
@@ -703,7 +703,7 @@ $this('http')->get('/admin/spa/system/schema/remove/:name', function(
   //----------------------------//
   // 2. Render Template
   $template = dirname(__DIR__) . '/template/schema';
-  if (is_dir($response->get('page', 'template_root'))) {
+  if (is_dir($response->get('page', 'template_root') ?? '')) {
     $template = $response->get('page', 'template_root');
   }
 
@@ -776,7 +776,7 @@ $this('http')->get('/admin/spa/system/schema/restore/:name', function(
   //----------------------------//
   // 2. Render Template
   $template = dirname(__DIR__) . '/template/schema';
-  if (is_dir($response->get('page', 'template_root'))) {
+  if (is_dir($response->get('page', 'template_root') ?? '')) {
     $template = $response->get('page', 'template_root');
   }
 
@@ -859,7 +859,7 @@ $this('http')->get('/admin/spa/system/schema/update/:name', function(
   //----------------------------//
   // 2. Render Template
   $template = dirname(__DIR__) . '/template/schema';
-  if (is_dir($response->get('page', 'template_root'))) {
+  if (is_dir($response->get('page', 'template_root') ?? '')) {
     $template = $response->get('page', 'template_root');
   }
 
@@ -890,7 +890,7 @@ $this('http')->post('/admin/spa/system/schema/update/:name', function (
   $data = $request->getPost();
 
   //if detail has no value make it null
-  if (isset($data['detail']) && !trim((string) $data['detail'])) {
+  if (isset($data['detail']) && !trim($data['detail'])) {
     $data['detail'] = null;
   }
 

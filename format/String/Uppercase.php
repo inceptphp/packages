@@ -51,6 +51,6 @@ class Uppercase extends AbstractFormatter implements FormatterInterface
     array $row = []
   ): ?string
   {
-    return strtoupper($value);
+    return strtoupper($value ?? '');
   }
 }

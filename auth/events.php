@@ -95,7 +95,7 @@ $this('event')->on('auth-detail', function (
 
   //----------------------------//
   // 2. Validate Data
-  if (!isset($data['auth_slug']) || !trim((string) $data['auth_slug'])) {
+  if (!isset($data['auth_slug']) || !trim($data['auth_slug'])) {
     $response->invalidate('auth_slug', 'Cannot be empty');
   }
 

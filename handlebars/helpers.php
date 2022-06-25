@@ -367,7 +367,7 @@ $this('handlebars')
       }
     }
 
-    return incept('lang')->translate((string) $key, ...$args);
+    return incept('lang')->translate($key, ...$args);
   })
 
   /**
@@ -389,7 +389,7 @@ $this('handlebars')
         continue;
       }
 
-      if (!trim((string) $abbreviation['timezone_id'])) {
+      if (!trim($abbreviation['timezone_id'] ?? '')) {
         continue;
       }
 
@@ -1121,7 +1121,7 @@ $this('handlebars')
     array $variables
   ): string {
     $template = incept('handlebars')->compile($template);
-    return trim((string) $template($variables));
+    return trim($template($variables));
   })
 
   /**

@@ -20,7 +20,7 @@ return function(RequestInterface $request, ResponseInterface $response) {
   $http = $this('http');
   $emitter = $this('event');
 
-  $path = $request->getPath('string');
+  $path = (string) $request->getPath('string');
   //normalize the pat
   if (substr($path, -1) !== '/') {
     $path .= '/';

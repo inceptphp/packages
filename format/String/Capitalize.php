@@ -51,6 +51,6 @@ class Capitalize extends AbstractFormatter implements FormatterInterface
     array $row = []
   ): ?string
   {
-    return ucwords($value);
+    return ucwords($value ?? '');
   }
 }
