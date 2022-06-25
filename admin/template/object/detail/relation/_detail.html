@@ -2,20 +2,22 @@
   <table class="table">
     <tbody>
       {{#each relations}}
-        {{#when many '==' 1}}
-          <tr>
-            <th nowrap>{{singular}}</th>
-            <td>
-              <a
-                data-do="panel-mobile-forward"
-                data-on="click"
-                data-template="/admin/spa/system/object/{{name}}/detail/{{id}}"
-                href="javascript:void(0)"
-              >
-                {{{compile suggestion ../item}}}
-              </a>
-            </td>
-          </tr>
+        {{#when many '<' 2}}
+          {{#if id}}
+            <tr>
+              <th nowrap>{{singular}}</th>
+              <td>
+                <a
+                  data-do="panel-mobile-forward"
+                  data-on="click"
+                  data-template="/admin/spa/system/object/{{name}}/detail/{{id}}"
+                  href="javascript:void(0)"
+                >
+                  {{{compile suggestion ../item}}}
+                </a>
+              </td>
+            </tr>
+          {{/if}}
         {{/when}}
       {{/each}}
     </tbody>
