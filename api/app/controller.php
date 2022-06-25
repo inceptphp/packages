@@ -80,7 +80,7 @@ $this('http')->get('/admin/spa/system/object/app/refresh/:app_id', function (
   //----------------------------//
   // 2. Render Template
   $template = __DIR__ . '/template';
-  if (is_dir($response->get('page', 'template_root'))) {
+  if (is_dir($response->get('page', 'template_root') ?? '')) {
     $template = $response->get('page', 'template_root');
   }
 

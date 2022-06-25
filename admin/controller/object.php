@@ -90,7 +90,7 @@ $this('http')->get('/admin/system/object/:schema/search', function (
   $data['title'] = $schema->getPlural('plural');
 
   $template = dirname(__DIR__) . '/template/object';
-  if (is_dir($response->get('page', 'template_root'))) {
+  if (is_dir($response->get('page', 'template_root') ?? '')) {
     $template = $response->get('page', 'template_root');
   }
 
@@ -310,7 +310,7 @@ $this('http')->get('/admin/spa/system/object/:schema/detail/:id', function (
   //----------------------------//
   // 2. Render Template
   $template = dirname(__DIR__) . '/template/object';
-  if (is_dir($response->get('page', 'template_root'))) {
+  if (is_dir($response->get('page', 'template_root') ?? '')) {
     $template = $response->get('page', 'template_root');
   }
 
@@ -500,7 +500,7 @@ $this('http')->get('/admin/spa/system/object/:schema/create', function (
   //----------------------------//
   // 2. Render Template
   $template = dirname(__DIR__) . '/template/object';
-  if (is_dir($response->get('page', 'template_root'))) {
+  if (is_dir((string) $response->get('page', 'template_root') ?? '')) {
     $template = $response->get('page', 'template_root');
   }
 
@@ -796,7 +796,7 @@ $this('http')->get('/admin/spa/system/object/:schema/remove/:id', function (
   //----------------------------//
   // 2. Render Template
   $template = dirname(__DIR__) . '/template/object';
-  if (is_dir($response->get('page', 'template_root'))) {
+  if (is_dir($response->get('page', 'template_root') ?? '')) {
     $template = $response->get('page', 'template_root');
   }
 
@@ -910,7 +910,7 @@ $this('http')->get('/admin/spa/system/object/:schema/restore/:id', function (
   //----------------------------//
   // 2. Render Template
   $template = dirname(__DIR__) . '/template/object';
-  if (is_dir($response->get('page', 'template_root'))) {
+  if (is_dir($response->get('page', 'template_root') ?? '')) {
     $template = $response->get('page', 'template_root');
   }
 
@@ -1060,7 +1060,7 @@ $this('http')->get('/admin/spa/system/object/:schema/update/:id', function (
   }
 
   $template = dirname(__DIR__) . '/template/object';
-  if (is_dir($response->get('page', 'template_root'))) {
+  if (is_dir($response->get('page', 'template_root') ?? '')) {
     $template = $response->get('page', 'template_root');
   }
 
@@ -1186,7 +1186,7 @@ $this('http')->get('/admin/spa/system/object/:schema1/:id/link/:schema2', functi
   }
 
   $template = dirname(__DIR__) . '/template/object';
-  if (is_dir($response->get('page', 'template_root'))) {
+  if (is_dir($response->get('page', 'template_root') ?? '')) {
     $template = $response->get('page', 'template_root');
   }
 
@@ -1359,7 +1359,7 @@ $this('http')->get('/admin/spa/system/object/:schema1/:id1/unlink/:schema2/:id2'
   //----------------------------//
   // 2. Render Template
   $template = dirname(__DIR__) . '/template/object';
-  if (is_dir($response->get('page', 'template_root'))) {
+  if (is_dir($response->get('page', 'template_root') ?? '')) {
     $template = $response->get('page', 'template_root');
   }
 

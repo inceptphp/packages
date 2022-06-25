@@ -81,7 +81,7 @@ $this('http')->get('/install', function(
   //----------------------------//
   // 2. Render Template
   $template = __DIR__ . '/template';
-  if (is_dir($response->get('page', 'template_root'))) {
+  if (is_dir($response->get('page', 'template_root') ?? '')) {
     $template = $response->get('page', 'template_root');
   }
 
@@ -189,7 +189,7 @@ $this('http')->post('/install', function(
   //----------------------------//
   // 3. Render Template
   $template = __DIR__ . '/template';
-  if (is_dir($response->get('page', 'template_root'))) {
+  if (is_dir($response->get('page', 'template_root') ?? '')) {
     $template = $response->get('page', 'template_root');
   }
 
@@ -269,34 +269,34 @@ $this('http')->get('/install/database', function(
   //if theres a host
   if (isset($config['host'])) {
     $host = explode(':', $config['host']);
-    if (isset($host[0]) && trim((string) $host[0])) {
+    if (isset($host[0]) && trim($host[0])) {
       $data['host'] = $host[0];
     }
 
-    if (isset($host[1]) && trim((string) $host[1])) {
+    if (isset($host[1]) && trim($host[1])) {
       $data['port'] = $host[1];
     }
   }
 
   //if theres a name
-  if (isset($config['name']) && trim((string) $config['name'])) {
+  if (isset($config['name']) && trim($config['name'])) {
     $data['name'] = $config['name'];
   }
 
   //if theres a user
-  if (isset($config['user']) && trim((string) $config['user'])) {
+  if (isset($config['user']) && trim($config['user'])) {
     $data['user'] = $config['user'];
   }
 
   //if theres a pass
-  if (isset($config['pass']) && trim((string) $config['pass'])) {
+  if (isset($config['pass']) && trim($config['pass'])) {
     $data['pass'] = $config['pass'];
   }
 
   //----------------------------//
   // 2. Render Template
   $template = __DIR__ . '/template';
-  if (is_dir($response->get('page', 'template_root'))) {
+  if (is_dir($response->get('page', 'template_root') ?? '')) {
     $template = $response->get('page', 'template_root');
   }
 
@@ -419,7 +419,7 @@ $this('http')->get('/install/settings', function(
   //----------------------------//
   // 2. Render Template
   $template = __DIR__ . '/template';
-  if (is_dir($response->get('page', 'template_root'))) {
+  if (is_dir($response->get('page', 'template_root') ?? '')) {
     $template = $response->get('page', 'template_root');
   }
 

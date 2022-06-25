@@ -525,8 +525,7 @@
       //INITITALIZERS
       var initTag = function (filter) {
           $('a.remove', filter).click(function () {
-              console.log(filter[0])
-              filter.remove();
+            filter.remove();
           });
 
           $('a.move-up', filter).click(function () {
@@ -1558,7 +1557,6 @@
         });
 
         if ($(target).data('use-select2')) {
-          console.log(target)
           $(target).select2();
         }
       }

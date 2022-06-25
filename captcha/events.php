@@ -26,9 +26,9 @@ $this('event')->on('captcha-load', function (
   //if no config
   if (!$config
     || !isset($config['token'], $config['secret'], $config['host'])
-    || !trim((string) $config['token'])
-    || !trim((string) $config['secret'])
-    || !trim((string) $config['host'])
+    || !trim($config['token'])
+    || !trim($config['secret'])
+    || !trim($config['host'])
     || $config['host'] === '<GOOGLE CAPTCHA HOST>'
     || $config['token'] === '<GOOGLE CAPTCHA TOKEN>'
     || $config['secret'] === '<GOOGLE CAPTCHA SECRET>'
@@ -58,9 +58,9 @@ $this('event')->on('captcha-validate', function (
   //if no config
   if (!$config
     || !isset($config['token'], $config['secret'], $config['host'])
-    || !trim((string) $config['token'])
-    || !trim((string) $config['secret'])
-    || !trim((string) $config['host'])
+    || !trim($config['token'])
+    || !trim($config['secret'])
+    || !trim($config['host'])
     || $config['host'] === '<GOOGLE CAPTCHA HOST>'
     || $config['token'] === '<GOOGLE CAPTCHA TOKEN>'
     || $config['secret'] === '<GOOGLE CAPTCHA SECRET>'

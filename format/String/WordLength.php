@@ -54,10 +54,10 @@ class WordLength extends AbstractFormatter implements FormatterInterface
   ): ?string
   {
     $length = $this->parameters[0];
-    if (str_word_count($value, 0) > $length) {
-      $words = str_word_count($value, 2);
+    if (str_word_count($value ?? '', 0) > $length) {
+      $words = str_word_count($value ?? '', 2);
       $position = array_keys($words);
-      $value = substr($value, 0, $position[$length]);
+      $value = substr($value ?? '', 0, $position[$length]);
     }
 
     return $value;

@@ -94,7 +94,7 @@ $this('http')->get('/auth/2fa', function (
   //----------------------------//
   // 5. Render Template
   $template = dirname(__DIR__) . '/template';
-  if (is_dir($response->get('page', 'template_root'))) {
+  if (is_dir($response->get('page', 'template_root') ?? '')) {
     $template = $response->get('page', 'template_root');
   }
 
@@ -276,7 +276,7 @@ $this('http')->get('/auth/signin/2fa', function (
   //----------------------------//
   // 5. Render Template
   $template = dirname(__DIR__) . '/template';
-  if (is_dir($response->get('page', 'template_root'))) {
+  if (is_dir($response->get('page', 'template_root') ?? '')) {
     $template = $response->get('page', 'template_root');
   }
 

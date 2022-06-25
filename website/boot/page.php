@@ -69,7 +69,7 @@ return function(RequestInterface $request, ResponseInterface $response) {
       }
 
       //trigger page event
-      if (trim($page['page_event'])) {
+      if (trim($page['page_event'] ?? '')) {
         //make a payload
         $payload = $this->makePayload();
         if ($page['page_parameters']) {
