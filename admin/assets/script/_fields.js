@@ -720,7 +720,7 @@
     };
 
     //append meta template
-    $('a.field-add', target).click(function() {
+    $('a.row-add', target).click(function() {
       var index = $('tbody tr', target).length;
       var row = $(template)
         .data('index', index)
