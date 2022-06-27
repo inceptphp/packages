@@ -145,6 +145,7 @@ class StormPackage
           }
 
           if (isset($numbers[1]) && strlen($numbers[1]) > $length[1]) {
+            $length[0] += strlen($numbers[1]);
             $length[1] = strlen($numbers[1]);
           }
         }
