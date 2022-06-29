@@ -10,7 +10,7 @@
     "squizlabs/php_codesniffer": "3.7.1"
   },
   "require": {
-    "inceptphp/framework": "0.1.9",
+    "inceptphp/framework": "0.1.10",
     "phpugph/storm": "1.0.3",
     "swiftmailer/swiftmailer": "6.2.7",
     "dejan7/httpquest": "0.3.0",
