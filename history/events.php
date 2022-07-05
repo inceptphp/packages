@@ -45,16 +45,13 @@ $this('event')->on('system-object-create', function (
   //get the primary name
   $primary = $schema->getPrimaryName();
   //get the detail
-  $detail = $this('event')->call('system-object-detail', [
-    'schema' => $name,
-    $primary => $response->getResults()
-  ]);
+  $detail = $response->getResults();
 
   //create the history
   $this('event')->call('system-object-history-create', [
     'history_action' => 'created',
     'history_object' => $name,
-    'history_primary' => $response->getResults(),
+    'history_primary' => $detail[$primary],
     'history_to' => $detail,
     'profile_id' => $profile
   ]);
